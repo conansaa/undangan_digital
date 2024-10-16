@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateEventOwnerDetailsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('parents_name')->nullable(); // Menggunakan TEXT untuk textarea
             $table->string('owner_photo')->nullable();
             $table->string('social_media')->nullable();
-            $table->unsignedTinyInteger('gender_id');
+            $table->unsignedBigInteger('gender_id');
             $table->timestamps();
 
             // Foreign key relation to gender table
