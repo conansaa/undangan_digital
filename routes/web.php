@@ -1,12 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\WeddingController;
 use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\GoogleSheetsController;
 
-Route::get('/', [CommentController::class, 'index']);
+// Route::get('/cover', [WeddingController::class, 'showCover']);
 
-Route::resource('comments', CommentController::class);
-
-Route::get('/invitation', [InvitationController::class, 'showInvitation']);
+Route::get('/invitation', [InvitationController::class, 'cover']);
+Route::get('/invitation/detail', [InvitationController::class, 'detail'])->name('invitation.detail');
+Route::post('/invitation/detail', [InvitationController::class, 'storeComment']);
