@@ -37,7 +37,7 @@
 <body>
     <div class="container">
         <h1>Undangan Pernikahan</h1>
-        <h2>{{ $groom->name }} & {{ $bride->name }}</h2>
+        <h2>{{ $event_owner_details->owner_name }} & {{ $event_owner_details->owner_name }}</h2>
         <div class="date">
             Tanggal: {{ $eventDetail->date->format('d F Y') }}
         </div>

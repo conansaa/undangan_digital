@@ -1,12 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\WeddingController;
-use App\Http\Controllers\InvitationController;
-use App\Http\Controllers\GoogleSheetsController;
+use App\Http\Controllers\RsvpController;
 
-// Route::get('/cover', [WeddingController::class, 'showCover']);
+Route::get('/rsvp', [RsvpController::class, 'index'])->name('rsvp.index');
+Route::post('/rsvp', [RsvpController::class, 'store'])->name('rsvp.store');
 
-Route::get('/invitation', [InvitationController::class, 'cover']);
-Route::get('/invitation/detail', [InvitationController::class, 'detail'])->name('invitation.detail');
-Route::post('/invitation/detail', [InvitationController::class, 'storeComment']);
+
+
