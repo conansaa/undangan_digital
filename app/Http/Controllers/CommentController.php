@@ -1,82 +1,99 @@
 <?php
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
+use App\Models\Comments;
 use Illuminate\Http\Request;
-use Google\Client;
-use Google\Service\Sheets;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'message' => 'required|string',
-        ]);
-
-        // Simpan komentar ke database
-        Comment::create($request->all());
-
-        // Periksa apakah checkbox untuk mengirim ke Google Sheets dicentang
-        if ($request->input('submit_to_google_sheets')) {
-            $spreadsheetUrl = $this->sendToGoogleSheets($request->input('name'), $request->input('message'));
-            return redirect()->route('comments.index')->with(['success' => 'Komentar berhasil ditambahkan!', 'spreadsheetUrl' => $spreadsheetUrl]);
-        }
-
-        return redirect()->route('comments.index')->with('success', 'Komentar berhasil ditambahkan!');
-    }
-
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $comments = Comment::orderBy('name', 'asc')->get();  
-        return view('comments.index', compact('comments'));
+        // Mengambil semua data komentar
+        $comments = Comments::all();
+        return response()->json($comments, 200);
     }
 
-    protected function sendToGoogleSheets($name, $message)
-{
-    // Tambahkan log untuk memeriksa apakah fungsi dipanggil
-    Log::info('sendToGoogleSheets called with:', ['name' => $name, 'message' => $message]);
-
-    // Inisialisasi Google Client
-    $client = new Client();
-    $client->setAuthConfig(storage_path('app/google/client_secret_554317454352-h19fgrhnrqppmmrmrvs123179k5pott9.apps.googleusercontent.com.json'));
-    $client->addScope(Sheets::SPREADSHEETS);
-
-    // Buat layanan Sheets
-    $service = new Sheets($client);
-
-    // Ganti dengan ID Spreadsheet yang sudah ada
-    $spreadsheetId = 'your_spreadsheet_id'; // Ganti dengan ID spreadsheet Anda
-    $range = 'Sheet1!A:B';
-
-    // Data yang akan ditambahkan ke Google Sheets
-    $values = [
-        [$name, $message]
-    ];
-
-    $body = new \Google\Service\Sheets\ValueRange([
-        'values' => $values
-    ]);
-
-    try {
-        // Tambahkan data ke spreadsheet
-        $result = $service->spreadsheets_values->append($spreadsheetId, $range, $body, [
-            'valueInputOption' => 'RAW'
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'rsvp_id' => 'required|integer|exists:rsvp,id', // Validasi rsvp_id harus ada di tabel rsvp
+            'comment' => 'required|string|max:500',
         ]);
 
-        // Log jika data berhasil ditambahkan
-        Log::info('Data sent to Google Sheets: ', (array) $result); // Cukup konversi objek menjadi array
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
 
-        // Tampilkan URL Spreadsheet ke pengguna
-        return 'https://docs.google.com/spreadsheets/d/' . $spreadsheetId . '/edit';
-    } catch (\Exception $e) {
-        // Log error jika terjadi masalah
-        Log::error('Error creating or sending data to Google Sheets: ' . $e->getMessage());
-        return null; // Kembalikan null jika ada error
+        // Menyimpan data komentar baru
+        $comment = Comments::create($request->all());
+        return response()->json($comment, 201);
     }
-}
 
+    /**
+     * Display the specified resource.
+     */
+    public function show($id)
+    {
+        // Menemukan komentar berdasarkan ID
+        $comment = Comments::find($id);
 
+        // Jika data tidak ditemukan, kembalikan 404
+        if (!$comment) {
+            return response()->json(['message' => 'Comment not found'], 404);
+        }
+
+        return response()->json($comment, 200);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, $id)
+    {
+        // Menemukan komentar berdasarkan ID
+        $comment = Comments::find($id);
+
+        if (!$comment) {
+            return response()->json(['message' => 'Comment not found'], 404);
+        }
+
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'rsvp_id' => 'sometimes|required|integer|exists:rsvp,id',
+            'comment' => 'sometimes|required|string|max:500',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 400);
+        }
+
+        // Update data komentar
+        $comment->update($request->all());
+        return response()->json($comment, 200);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id)
+    {
+        // Menemukan komentar berdasarkan ID
+        $comment = Comments::find($id);
+
+        if (!$comment) {
+            return response()->json(['message' => 'Comment not found'], 404);
+        }
+
+        // Hapus data komentar
+        $comment->delete();
+        return response()->json(['message' => 'Comment deleted successfully'], 200);
+    }
 }
