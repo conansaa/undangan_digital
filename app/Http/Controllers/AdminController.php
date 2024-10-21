@@ -48,24 +48,25 @@ class AdminController extends Controller
     {
         $eventReportCount = EventReports::select('counter')->get();
         $eventTypeCount = EventTypeRef::count();
-        // Di sini kamu bisa mengambil data yang diperlukan untuk dashboard
-        return view('admin.index', compact('eventReportCount', 'eventTypeCount')); // Pastikan untuk membuat file ini di views/admin/
+        return view('admin.index', compact('eventReportCount', 'eventTypeCount')); 
     }
 
     public function showEventOwners()
     {
         $eventOwner = EventOwnerDetails::all();
-        // Di sini kamu bisa mengambil data yang diperlukan untuk dashboard
-        return view('admin.eventowner.eventowner', compact('eventOwner')); // Pastikan untuk membuat file ini di views/admin/
+        return view('admin.eventowner.eventowner', compact('eventOwner')); 
+    }
+
+    public function showEvents()
+    {
+        $eventDetail = EventDetails::all();
+        return view('admin.eventdetail.eventdetail', compact('eventDetail')); 
     }
 
     public function showEventReportDetails()
     {
-    // Ambil data dari tabel event_report_details
-    $eventReportDetails = EventReportDetails::all();
-
-    // Kirimkan data ke view
-    return view('admin.index', compact('eventReportDetails'));
+        $eventReportDetails = EventReportDetails::all();
+        return view('admin.eventreportdetail.eventreportdetail', compact('eventReportDetails'));
     }
 
     public function showGenders()
@@ -74,5 +75,41 @@ class AdminController extends Controller
         $genders = GenderRef::all();
         // Kirimkan data ke view
         return view('admin.genderref.genderlist', compact('genders'));
+    }
+
+    public function showTimelines()
+    {
+        $timelines = Timelines::all();
+        return view('admin.timeline.timeline', compact('timelines')); 
+    }
+
+    public function showRsvps()
+    {
+        $rsvps = Rsvp::all();
+        return view('admin.rsvp.rsvp', compact('rsvps')); 
+    }
+
+    public function showComments()
+    {
+        $comments = Comments::all();
+        return view('admin.comment.comment', compact('comments')); 
+    }
+
+    public function showGifts()
+    {
+        $gifts = Gifts::all();
+        return view('admin.gift.gift', compact('gifts')); 
+    }
+
+    public function showSections()
+    {
+        $sections = SectionRef::all();
+        return view('admin.section.section', compact('sections')); 
+    }
+
+    public function showGalleries()
+    {
+        $galleries = Gallery::all();
+        return view('admin.gallery.gallery', compact('galleries')); 
     }
 }

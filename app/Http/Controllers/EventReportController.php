@@ -15,7 +15,7 @@ class EventReportController extends Controller
     {
         // Mengambil semua data event report
         $eventReports = EventReports::all();
-        return response()->json($eventReports, 200);
+        return view('admin.eventreport.eventreport', compact('eventReports'));
     }
 
     /**

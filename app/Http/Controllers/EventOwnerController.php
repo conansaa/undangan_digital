@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventOwnerDetails;
+use App\Models\GenderRef;
 use Illuminate\Http\Request;
+use App\Models\EventOwnerDetails;
 
 class EventOwnerController extends Controller
 {
@@ -20,20 +21,35 @@ class EventOwnerController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+
+    public function create()
+    {
+        $genders = GenderRef::all(); // Ambil data gender dari tabel referensi
+        return view('admin.eventowner.create', compact('genders')); // Sesuaikan dengan nama view kamu
+    }
+    
     public function store(Request $request)
     {
         // Validate input
         $request->validate([
             'owner_name' => 'required|string|max:255',
             'parents_name' => 'nullable|string',
-            'owner_photo' => 'nullable|string|max:255',
+            'owner_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'social_media' => 'nullable|string|max:255',
             'gender_id' => 'required|integer|exists:gender_ref,id', // Validasi gender_id sesuai dengan tabel referensi gender
         ]);
 
+        // Handle file upload
+        if ($request->hasFile('owner_photo')) {
+            $file = $request->file('owner_photo');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('uploads/owner_photos'), $filename);
+            $request->merge(['owner_photo' => $filename]);
+        }
+
         // Menyimpan data pemilik acara
-        $owner = EventOwnerDetails::create($request->all());
-        return response()->json($owner, 201);
+        EventOwnerDetails::create($request->all());
+        return redirect('/owners')->with('success', 'Data berhasil ditambahkan!');
     }
 
     /**

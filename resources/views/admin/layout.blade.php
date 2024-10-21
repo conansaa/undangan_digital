@@ -9,7 +9,7 @@
 
     <div class="row m-0" style="min-height: 100vh">
         <div class="col-2 bg-info text-white shadow d-none d-lg-block">
-            <div class="py-4">
+            <div class="py-2">
                 <ul class="fw-bold p-2">
                     <li class="list-unstyled opacity-75 mb-3" style="font-size: 12px">PAGES</li>
 
@@ -21,16 +21,20 @@
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-user-tie me-2"></i> Event Owners</li>
                     </a>
     
-                    <a href="/events" class="text-decoration-none text-white">
+                    <a href="/event" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-calendar-day me-2"></i> Event Details</li>
                     </a>
     
-                    <a href="/event-types" class="text-decoration-none text-white">
+                    <a href="/event-type" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-tags me-2"></i> Event Types</li>
                     </a>
 
                     <a href="/event-reports" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-clipboard-list me-2"></i> Event Reports</li>
+                    </a>
+
+                    <a href="/event-reports-detail" class="text-decoration-none text-white">
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-clipboard-list me-2"></i> Event Reports Detail</li>
                     </a>
 
                     <a href="/genders" class="text-decoration-none text-white">
@@ -51,6 +55,10 @@
     
                     <a href="/gifts" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-gift me-2"></i> Gifts</li>
+                    </a>
+
+                    <a href="/sections" class="text-decoration-none text-white">
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-gift me-2"></i> Sections</li>
                     </a>
     
                     <a href="/galleries" class="text-decoration-none text-white">

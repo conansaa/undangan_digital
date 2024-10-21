@@ -11,8 +11,8 @@
         <h5 class="col-12 col-lg-6 fw-bold">Data Pemilik Acara</h5>
         <div class="col-12 col-lg-6 d-flex justify-content-end">
             <div class="me-2">
-                <a href="/eventowner/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
-                <a href="/eventowner/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
+                <a href="/owner/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
+                <a href="/owner/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
             </div>
         </div>
     </div>
@@ -33,9 +33,9 @@
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
                     <td scope="col">
-                        <a type="button" class="fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#detailOwner{{ $owner->id }}">{{ $owner->name }}</a>
+                        <a type="button" class="fw-bold text-decoration-none" data-bs-toggle="modal" data-bs-target="#detailOwner{{ $owner->id }}">{{ $owner->owner_name }}</a>
                     </td>
-                    <td scope="col">{{ $owner->parent_name }}</td>
+                    <td scope="col">{{ $owner->parents_name }}</td>
                     <td scope="col">
                         @if (empty($owner->profile))
                             <span class="text-secondary">Tidak ada foto</span>
