@@ -12,7 +12,7 @@ class EventTypeRef extends Model
     protected $table = 'event_type_ref';
 
     protected $fillable = [
-        'name',
+        'nama',
     ];
 
     // Relasi dengan tabel EventDetails

@@ -28,26 +28,26 @@ class EventTypeController extends Controller
         ]);
 
         EventTypeRef::create($validatedData);
-        return redirect('eventtype.eventtype')->with('success', 'Tipe acara berhasil ditambahkan');
+        return redirect('/event-type')->with('success', 'Tipe acara berhasil ditambahkan');
     }
 
     // Menampilkan form untuk mengedit event type
     public function edit($id)
     {
         $eventType = EventTypeRef::findOrFail($id);
-        return view('eventtype.edit', compact('eventType'));
+        return view('admin.eventtype.edit', compact('eventType'));
     }
 
     // Mengupdate event type di database
     public function update(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
         ]);
 
         $eventType = EventTypeRef::findOrFail($id);
         $eventType->update($validatedData);
-        return redirect()->route('eventtype.index')->with('success', 'Tipe acara berhasil diupdate');
+        return redirect('/event-type')->with('success', 'Tipe acara berhasil diupdate');
     }
 
     // Menghapus event type
@@ -55,6 +55,6 @@ class EventTypeController extends Controller
     {
         $eventType = EventTypeRef::findOrFail($id);
         $eventType->delete();
-        return redirect()->route('eventtype.index')->with('success', 'Tipe acara berhasil dihapus');
+        return redirect('/event-type')->with('success', 'Tipe acara berhasil dihapus');
     }
 }

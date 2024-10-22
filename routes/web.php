@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\SectionController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RsvpController;
 use App\Http\Controllers\AdminController;
@@ -37,7 +39,7 @@ Route::get('/event-type/create', [EventTypeController::class, 'create'])->name('
 Route::post('/event-type/create', [EventTypeController::class, 'store'])->name('eventtype.store');
 Route::get('/event-types/edit/{id}', [EventTypeController::class, 'edit'])->name('eventtype.edit');
 Route::put('/event-types/edit/{id}', [EventTypeController::class, 'update'])->name('eventtype.update');
-Route::delete('/event-type/{id}', [EventTypeController::class, 'destroy'])->name('eventtype.destroy');
+Route::get('/event-type/delete/{id}', [EventTypeController::class, 'destroy'])->name('eventtype.destroy');
 
 
 // Route::get('/event-reports', [AdminController::class, 'showEventReports']);
@@ -59,7 +61,14 @@ Route::get('/comments', [AdminController::class, 'showComments']);
 Route::get('/gifts', [AdminController::class, 'showGifts']);
 
 Route::get('/sections', [AdminController::class, 'showSections']);
+Route::get('/section/create', [SectionController::class, 'create'])->name('section.create');
+Route::post('/section/create', [SectionController::class, 'store'])->name('section.store');
+Route::get('/section/edit/{id}', [SectionController::class, 'edit'])->name('section.edit');
+Route::put('/section/edit/{id}', [SectionController::class, 'update'])->name('section.update');
+Route::get('/section/delete/{id}', [SectionController::class, 'destroy'])->name('section.destroy');
 
 Route::get('/galleries', [AdminController::class, 'showGalleries']);
 
-
+Route::get('/users', [UserController::class, 'index']);
+Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+Route::post('/user/create', [UserController::class, 'store'])->name('user.store');

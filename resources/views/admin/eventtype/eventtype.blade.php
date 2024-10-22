@@ -28,7 +28,7 @@
             @foreach ($eventTypes as $type)
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    <td scope="col">{{ $type->name }}</td>
+                    <td scope="col">{{ $type->nama }}</td>
                     <td scope="col" class="text-center">
                         <a href="/event-types/edit/{{ $type->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
                         <a href="/event-type/delete/{{ $type->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
@@ -46,7 +46,7 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Nama Tipe Acara</div>
-                                    <div class="col-6">{{ $type->name }}</div>
+                                    <div class="col-6">{{ $type->nama }}</div>
                                 </div>
                             </div>
                         </div>

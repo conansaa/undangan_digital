@@ -15,7 +15,7 @@ class UserController extends Controller
     {
         // Fetch all users
         $users = User::all();
-        return view('users.index', compact('users'));
+        return view('admin.user.user', compact('users'));
     }
 
     /**
@@ -23,7 +23,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        return view('admin.user.create');
     }
 
     /**
@@ -35,7 +35,6 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
         ]);
 
         // Hash the password before storing
