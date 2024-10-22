@@ -17,6 +17,11 @@ class EventController extends Controller
         return response()->json($events, 200);
     }
 
+    public function create()
+    {
+        return view('admin.eventtype.create');
+    }
+
     /**
      * Store a newly created resource in storage.
      */

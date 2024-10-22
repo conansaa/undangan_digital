@@ -15,26 +15,29 @@ Route::get('/index', [AdminController::class, 'showDashboard']);
 // Route::get('/admin/data', [AdminController::class, 'getAllData']);
 Route::get('/genders', [AdminController::class, 'showGenders']);
 
-Route::get('/owners', [AdminController::class, 'showEventOwners']);
+Route::get('/owners', [EventOwnerController::class, 'index']);
 Route::get('/owner/create', [EventOwnerController::class, 'create']);
 Route::post('/owner/create', [EventOwnerController::class, 'store']);
+Route::get('/owners/delete/{id}', [EventOwnerController::class, 'destroy']);
+Route::get('/owners/edit/{id}', [EventOwnerController::class, 'edit']);
+Route::put('/owners/edit/{id}', [EventOwnerController::class, 'update']);
 // Route::post('/owners', [EventOwnerController::class, 'store']);
 
 // Route::get('/event', [EventController::class, 'index'])->name('event.index');
 Route::get('/event', [AdminController::class, 'showEvents']);
 Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
-Route::post('/event', [EventController::class, 'store'])->name('event.store');
+Route::post('/event/create', [EventController::class, 'store'])->name('event.store');
 Route::get('/event/edit/{id}', [EventController::class, 'edit'])->name('event.edit');
 Route::post('/event/update/{id}', [EventController::class, 'update'])->name('event.update');
 Route::get('/event/delete/{id}', [EventController::class, 'destroy'])->name('event.delete');
 
 // Route::get('/event-types', [AdminController::class, 'showEventTypes']);
 Route::get('/event-type', [EventTypeController::class, 'index'])->name('eventtype.index');
-Route::get('/eventtype/create', [EventTypeController::class, 'create'])->name('eventtype.create');
-Route::post('/event-type', [EventTypeController::class, 'store'])->name('eventtype.store');
-Route::get('/eventtype/edit/{id}', [EventTypeController::class, 'edit'])->name('eventtype.edit');
-Route::put('/eventtype/{id}', [EventTypeController::class, 'update'])->name('eventtype.update');
-Route::delete('/eventtype/{id}', [EventTypeController::class, 'destroy'])->name('eventtype.destroy');
+Route::get('/event-type/create', [EventTypeController::class, 'create'])->name('eventtype.create');
+Route::post('/event-type/create', [EventTypeController::class, 'store'])->name('eventtype.store');
+Route::get('/event-types/edit/{id}', [EventTypeController::class, 'edit'])->name('eventtype.edit');
+Route::put('/event-types/edit/{id}', [EventTypeController::class, 'update'])->name('eventtype.update');
+Route::delete('/event-type/{id}', [EventTypeController::class, 'destroy'])->name('eventtype.destroy');
 
 
 // Route::get('/event-reports', [AdminController::class, 'showEventReports']);

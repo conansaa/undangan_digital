@@ -11,8 +11,8 @@
         <h5 class="col-12 col-lg-6 fw-bold">Data Tipe Acara</h5>
         <div class="col-12 col-lg-6 d-flex justify-content-end">
             <div class="me-2">
-                <a href="/eventtype/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
-                <a href="/eventtype/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
+                <a href="/event-type/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
+                <a href="/event-type/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
             </div>
         </div>
     </div>
@@ -30,8 +30,8 @@
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
                     <td scope="col">{{ $type->name }}</td>
                     <td scope="col" class="text-center">
-                        <a href="/eventtype/edit/{{ $type->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
-                        <a href="/eventtype/delete/{{ $type->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
+                        <a href="/event-types/edit/{{ $type->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
+                        <a href="/event-type/delete/{{ $type->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
                     </td>
                 </tr>
 

@@ -17,18 +17,18 @@ class EventTypeController extends Controller
     // Menampilkan form untuk menambah event type
     public function create()
     {
-        return view('eventtype.create');
+        return view('admin.eventtype.create');
     }
 
     // Menyimpan event type ke database
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
+            'nama' => 'required|string|max:255',
         ]);
 
         EventTypeRef::create($validatedData);
-        return redirect()->route('eventtype.index')->with('success', 'Tipe acara berhasil ditambahkan');
+        return redirect('eventtype.eventtype')->with('success', 'Tipe acara berhasil ditambahkan');
     }
 
     // Menampilkan form untuk mengedit event type
