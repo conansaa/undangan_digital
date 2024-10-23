@@ -23,6 +23,8 @@
                 <th scope="col">Nama</th>
                 <th scope="col">Email</th>
                 <th scope="col">Email Verified</th>
+                <th scope="col">Password</th>
+                <th scope="col">Token</th>
                 <th scope="col" class="text-center">Aksi</th>
             </tr>
         </thead>
@@ -33,6 +35,8 @@
                     <td scope="col">{{ $user->name }}</td>
                     <td scope="col">{{ $user->email }}</td>
                     <td scope="col">{{ $user->email_verified_at ? \Carbon\Carbon::parse($user->email_verified_at)->format('d M Y H:i') : '-' }}</td>
+                    <td scope="col">{{ \Illuminate\Support\Str::limit($user->password, 10, '...') }}</td>
+                    <td scope="col">{{ $user->remember_token ?? '-' }}</td>
                     <td scope="col" class="text-center">
                         <a href="/user/edit/{{ $user->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
                         <a href="/user/delete/{{ $user->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
@@ -59,6 +63,14 @@
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Email Verified</div>
                                     <div class="col-6">{{ $user->email_verified_at ? \Carbon\Carbon::parse($user->email_verified_at)->format('d M Y H:i') : '-' }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 col-md-4 label fw-bold mb-3">Password</div>
+                                    <div class="col-6">{{ \Illuminate\Support\Str::limit($user->password, 20, '...') }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 col-md-4 label fw-bold mb-3">Token</div>
+                                    <div class="col-6">{{ $user->remember_token ?? '-' }}</div>
                                 </div>
                             </div>
                         </div>

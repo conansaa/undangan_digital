@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -35,17 +36,21 @@ class UserController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed', // Validate password and confirmation
         ]);
 
         // Hash the password before storing
         $validatedData['password'] = Hash::make($validatedData['password']);
 
+        // Generate remember_token
+        $validatedData['remember_token'] = Str::random(10);
+
         // Create a new user
         User::create($validatedData);
 
-        return redirect()->route('users.index')
-                         ->with('success', 'User created successfully.');
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
+
 
     /**
      * Display the specified user.
@@ -64,7 +69,7 @@ class UserController extends Controller
     {
         // Fetch a specific user by ID for editing
         $user = User::findOrFail($id);
-        return view('users.edit', compact('user'));
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -85,13 +90,14 @@ class UserController extends Controller
         // Check if password was provided, hash if necessary
         if ($request->filled('password')) {
             $validatedData['password'] = Hash::make($validatedData['password']);
+        } else {
+            unset($validatedData['password']); // Jangan update password jika tidak diisi
         }
 
         // Update user data
         $user->update($validatedData);
 
-        return redirect()->route('users.index')
-                         ->with('success', 'User updated successfully.');
+        return redirect('/users')->with('success', 'User updated successfully.');
     }
 
     /**
@@ -103,7 +109,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
 
-        return redirect()->route('users.index')
-                         ->with('success', 'User deleted successfully.');
+        return redirect('/users')->with('success', 'User deleted successfully.');
     }
 }
