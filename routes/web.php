@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\EventReportDetailController;
 use App\Http\Controllers\SectionController;
+use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RsvpController;
@@ -26,11 +28,11 @@ Route::put('/owners/edit/{id}', [EventOwnerController::class, 'update']);
 // Route::post('/owners', [EventOwnerController::class, 'store']);
 
 // Route::get('/event', [EventController::class, 'index'])->name('event.index');
-Route::get('/event', [AdminController::class, 'showEvents']);
+Route::get('/event', [EventController::class, 'index']);
 Route::get('/event/create', [EventController::class, 'create'])->name('event.create');
 Route::post('/event/create', [EventController::class, 'store'])->name('event.store');
 Route::get('/event/edit/{id}', [EventController::class, 'edit'])->name('event.edit');
-Route::post('/event/update/{id}', [EventController::class, 'update'])->name('event.update');
+Route::put('/event/edit/{id}', [EventController::class, 'update'])->name('event.update');
 Route::get('/event/delete/{id}', [EventController::class, 'destroy'])->name('event.delete');
 
 // Route::get('/event-types', [AdminController::class, 'showEventTypes']);
@@ -45,14 +47,19 @@ Route::get('/event-type/delete/{id}', [EventTypeController::class, 'destroy'])->
 // Route::get('/event-reports', [AdminController::class, 'showEventReports']);
 Route::get('/event-reports', [EventReportController::class, 'index'])->name('eventreport.index');
 Route::get('/eventreport/create', [EventReportController::class, 'create'])->name('eventreport.create');
-Route::post('/event-reports', [EventReportController::class, 'store'])->name('eventreport.store');
+Route::post('/eventreport/create', [EventReportController::class, 'store'])->name('eventreport.store');
 Route::get('/eventreport/edit/{id}', [EventReportController::class, 'edit'])->name('eventreport.edit');
-Route::put('/eventreport/{id}', [EventReportController::class, 'update'])->name('eventreport.update');
-Route::delete('/eventreport/{id}', [EventReportController::class, 'destroy'])->name('eventreport.destroy');
+Route::put('/eventreport/edit/{id}', [EventReportController::class, 'update'])->name('eventreport.update');
+Route::get('/eventreport/delete/{id}', [EventReportController::class, 'destroy'])->name('eventreport.destroy');
 
-Route::get('/event-reports-detail', [AdminController::class, 'showEventReportDetails']);
+Route::get('/event-reports-detail', [EventReportDetailController::class, 'index']);
 
-Route::get('/timelines', [AdminController::class, 'showTimelines']);
+Route::get('/timelines', [TimelineController::class, 'index']);
+Route::get('/timeline/create', [TimelineController::class, 'create'])->name('timeline.create');
+Route::post('/timeline/create', [TimelineController::class, 'store']);
+Route::get('/timeline/edit/{id}', [TimelineController::class, 'edit'])->name('timeline.edit');
+Route::put('/timeline/edit/{id}', [TimelineController::class, 'update'])->name('timeline.update');
+Route::get('/timeline/delete/{id}', [TimelineController::class, 'destroy'])->name('timeline.destroy');
 
 Route::get('/rsvps', [AdminController::class, 'showRsvps']);
 

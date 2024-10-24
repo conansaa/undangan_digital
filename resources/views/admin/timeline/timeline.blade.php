@@ -11,8 +11,8 @@
         <h5 class="col-12 col-lg-6 fw-bold">Data Timeline Acara</h5>
         <div class="col-12 col-lg-6 d-flex justify-content-end">
             <div class="me-2">
-                <a href="/eventtimeline/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
-                <a href="/eventtimeline/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
+                <a href="/timeline/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
+                <a href="/timeline/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
             </div>
         </div>
     </div>
@@ -32,7 +32,7 @@
             @foreach ($timelines as $timeline)
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    <td scope="col">{{ $timeline->eventDetail->event_id }}</td> <!-- Menggunakan relasi ke tabel event_detail -->
+                    <td scope="col">{{ $timeline->eventDetail['event_name'] }}</td> <!-- Menggunakan relasi ke tabel event_detail -->
                     <td scope="col">{{ $timeline->title }}</td>
                     <td scope="col">{{ \Carbon\Carbon::parse($timeline->date)->format('d M Y') }}</td> <!-- Mengonversi tanggal menjadi format yang lebih mudah dibaca -->
                     <td scope="col">{{ Str::limit($timeline->description, 50) }}</td> <!-- Membatasi deskripsi agar tidak terlalu panjang -->
@@ -40,8 +40,8 @@
                         <img src="{{ asset('storage/' . $timeline->photo) }}" alt="Foto Event" class="img-thumbnail" style="max-width: 100px;">
                     </td>
                     <td scope="col" class="text-center">
-                        <a href="/eventtimeline/edit/{{ $timeline->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
-                        <a href="/eventtimeline/delete/{{ $timeline->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
+                        <a href="/timeline/edit/{{ $timeline->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
+                        <a href="/timeline/delete/{{ $timeline->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
                     </td>
                 </tr>
 

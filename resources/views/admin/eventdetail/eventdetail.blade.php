@@ -31,12 +31,12 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($eventDetail as $event)
+            @foreach ($events as $event)
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
                     <td scope="col">{{ $event->user->name }}</td>
                     <td scope="col">{{ $event->event_name }}</td>
-                    <td scope="col">{{ $event->event_type->name }}</td> <!-- Menggunakan relasi ke tabel event_type_ref -->
+                    <td scope="col">{{ $event->eventType->nama }}</td> <!-- Menggunakan relasi ke tabel event_type_ref -->
                     <td scope="col">{{ \Carbon\Carbon::parse($event->event_date)->format('d M Y') }}</td>
                     <td scope="col">{{ \Carbon\Carbon::parse($event->event_time)->format('H:i') }}</td>
                     <td scope="col">{{ $event->location }}</td>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Tipe Event</div>
-                                    <div class="col-6">{{ $event->event_type->name }}</div>
+                                    <div class="col-6">{{ $event->eventType->nama }}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Tanggal</div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventDetails;
 use App\Models\Timelines;
 use Illuminate\Http\Request;
 
@@ -12,9 +13,15 @@ class TimelineController extends Controller
      */
     public function index()
     {
-        // Mengambil semua data timeline
         $timelines = Timelines::all();
-        return response()->json($timelines, 200);
+        // $eventDetail = EventDetails::all();
+        return view('admin.timeline.timeline', compact('timelines'));
+    }
+
+    public function create()
+    {
+        $eventDetails = EventDetails::all(); // Ambil data gender dari tabel referensi
+        return view('admin.timeline.create', compact('eventDetails')); // Sesuaikan dengan nama view kamu
     }
 
     /**
@@ -22,9 +29,35 @@ class TimelineController extends Controller
      */
     public function store(Request $request)
     {
-        // Membuat data timeline baru
-        $timeline = Timelines::create($request->all());
-        return response()->json($timeline, 201);
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'event_id' => 'required|exists:event_details,id',
+            'title' => 'required|string|max:255',
+            'date' => 'required|date',
+            'description' => 'nullable|string',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the max size as needed
+        ]);
+
+        // Handle the file upload if a photo is provided
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = $file->hashName(); // Generate a unique filename
+            $path = $file->storeAs('timelines', $filename, 'public'); // Store the file in the 'public/timelines' directory
+        } else {
+            $path = null; // No file uploaded
+        }
+
+        // Create a new timeline entry in the database
+        Timelines::create([
+            'event_id' => $validatedData['event_id'],
+            'title' => $validatedData['title'],
+            'date' => $validatedData['date'],
+            'description' => $validatedData['description'],
+            'photo' => $path, // Save the path of the uploaded photo
+        ]);
+
+        // Redirect back to the timeline list with a success message
+        return redirect('/timelines')->with('success', 'Timeline has been created successfully.');
     }
 
     /**

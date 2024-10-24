@@ -33,6 +33,11 @@ class EventDetails extends Model
         return $this->belongsTo(EventTypeRef::class, 'event_type_id');
     }
 
+    public function eventReports()
+    {
+        return $this->belongsTo(EventReports::class, 'event_report_id'); 
+    }
+
     // Relasi dengan tabel EventReportDetails
     public function reportDetails()
     {

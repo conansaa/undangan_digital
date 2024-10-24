@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\EventDetails;
+use App\Models\EventTypeRef;
 use Illuminate\Http\Request;
 
 class EventController extends Controller
@@ -13,13 +15,17 @@ class EventController extends Controller
     public function index()
     {
         // Mengambil semua data event
-        $events = EventDetails::all();
-        return response()->json($events, 200);
+        $events = EventDetails::with('user', 'eventType')->get();
+        // $users = User::select('name')->get();
+        // $eventTypes = EventTypeRef::select('nama')->get();
+        return view('admin.eventdetail.eventdetail', compact('events'));
     }
 
     public function create()
     {
-        return view('admin.eventtype.create');
+        $users = User::all();
+        $eventTypes = EventTypeRef::all();
+        return view('admin.eventdetail.create', compact('users', 'eventTypes'));
     }
 
     /**
@@ -39,8 +45,8 @@ class EventController extends Controller
         ]);
 
         // Menyimpan data event baru
-        $event = EventDetails::create($validatedData);
-        return response()->json($event, 201);
+        EventDetails::create($validatedData);
+        return redirect('/event')->with('success', 'Tipe acara berhasil ditambahkan');
     }
 
     /**
@@ -58,6 +64,20 @@ class EventController extends Controller
 
         return response()->json($event, 200);
     }
+
+    public function edit($id)
+    {
+        // Mengambil data event berdasarkan ID
+        $event = EventDetails::findOrFail($id);
+        
+        // Mengambil data pengguna dan tipe event untuk dropdown
+        $users = User::all();
+        $eventTypes = EventTypeRef::all();
+
+        // Menampilkan halaman edit dengan data yang diambil
+        return view('admin.eventdetail.edit', compact('event', 'users', 'eventTypes'));
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -84,7 +104,7 @@ class EventController extends Controller
 
         // Update data event
         $event->update($validatedData);
-        return response()->json($event, 200);
+        return redirect('/event')->with('success', 'Event berhasil diperbarui!');
     }
 
     /**
@@ -101,6 +121,6 @@ class EventController extends Controller
 
         // Hapus data event
         $event->delete();
-        return response()->json(['message' => 'Event deleted successfully'], 200);
+        return redirect('/event')->with('success', 'Data Berhasil Dihapus!!');
     }
 }

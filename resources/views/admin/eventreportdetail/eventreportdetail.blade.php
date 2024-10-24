@@ -19,11 +19,11 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($eventReportDetails as $detail)
+            @foreach ($reportDetails as $detail)
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    <td scope="col">{{ $detail->eventDetail->event_id }}</td> <!-- Mengambil event_id dari relasi tabel event_detail -->
-                    <td scope="col">{{ $detail->eventReport->id }}</td> <!-- Mengambil event_report_id dari relasi tabel event_report -->
+                    <td scope="col">{{ $detail->eventDetails ? $detail->eventDetails->event_id : 'N/A' }}</td> <!-- Mengambil event_id dari relasi tabel event_detail -->
+                    <td scope="col">{{ $detail->eventReports ? $detail->eventReports->id : 'N/A' }}</td> <!-- Mengambil event_report_id dari relasi tabel event_report -->
                 </tr>
 
                 <!-- Modal Detail Event Report Detail -->
@@ -37,11 +37,11 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Event ID</div>
-                                    <div class="col-6">{{ $detail->eventDetail->event_id }}</div>
+                                    <div class="col-6">{{ $detail->eventDetails->event_id }}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Laporan Event ID</div>
-                                    <div class="col-6">{{ $detail->eventReport->id }}</div>
+                                    <div class="col-6">{{ $detail->eventReports->id }}</div>
                                 </div>
                             </div>
                         </div>

@@ -31,7 +31,7 @@
             @foreach ($eventReports as $report)
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    <td scope="col">{{ $report->eventType->name }}</td> <!-- Menggunakan relasi ke tabel event_type_ref -->
+                    <td scope="col">{{ $report->eventType->nama }}</td> <!-- Menggunakan relasi ke tabel event_type_ref -->
                     <td scope="col">{{ \Carbon\Carbon::createFromFormat('m', $report->month)->format('F') }}</td> <!-- Mengonversi bulan menjadi nama bulan -->
                     <td scope="col">{{ $report->year }}</td>
                     <td scope="col">{{ $report->counter }}</td>
