@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\EventReportDetailController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\GiftController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\UserController;
@@ -65,7 +67,12 @@ Route::get('/rsvps', [AdminController::class, 'showRsvps']);
 
 Route::get('/comments', [AdminController::class, 'showComments']);
 
-Route::get('/gifts', [AdminController::class, 'showGifts']);
+Route::get('/gifts', [GiftController::class, 'index']);
+Route::get('/gift/create', [GiftController::class, 'create'])->name('gift.create');
+Route::post('/gift/create', [GiftController::class, 'store'])->name('gift.store');
+Route::get('/gift/edit/{id}', [GiftController::class, 'edit'])->name('gift.edit');
+Route::put('/gift/edit/{id}', [GiftController::class, 'update'])->name('gift.update');
+Route::get('/gift/delete/{id}', [GiftController::class, 'destroy'])->name('gift.destroy');
 
 Route::get('/sections', [AdminController::class, 'showSections']);
 Route::get('/section/create', [SectionController::class, 'create'])->name('section.create');
@@ -74,7 +81,12 @@ Route::get('/section/edit/{id}', [SectionController::class, 'edit'])->name('sect
 Route::put('/section/edit/{id}', [SectionController::class, 'update'])->name('section.update');
 Route::get('/section/delete/{id}', [SectionController::class, 'destroy'])->name('section.destroy');
 
-Route::get('/galleries', [AdminController::class, 'showGalleries']);
+Route::get('/galleries', [GalleryController::class, 'index']);
+Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
+Route::post('/gallery/create', [GalleryController::class, 'store'])->name('gallery.store');
+Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit'])->name('gallery.edit');
+Route::put('/gallery/edit/{id}', [GalleryController::class, 'update'])->name('gallery.update');
+Route::get('/gallery/delete/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 
 Route::get('/users', [UserController::class, 'index']);
 Route::get('/user/create', [UserController::class, 'create'])->name('user.create');

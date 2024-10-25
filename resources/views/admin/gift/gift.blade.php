@@ -11,8 +11,8 @@
         <h5 class="col-12 col-lg-6 fw-bold">Data Hadiah</h5>
         <div class="col-12 col-lg-6 d-flex justify-content-end">
             <div class="me-2">
-                <a href="/gifts/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
-                <a href="/gifts/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
+                <a href="/gift/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
+                <a href="/gift/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
             </div>
         </div>
     </div>
@@ -36,8 +36,8 @@
                     <td scope="col">{{ $gift->account_number }}</td>
                     <td scope="col">{{ $gift->notes }}</td>
                     <td scope="col" class="text-center">
-                        <a href="/gifts/edit/{{ $gift->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
-                        <a href="/gifts/delete/{{ $gift->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
+                        <a href="/gift/edit/{{ $gift->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
+                        <a href="/gift/delete/{{ $gift->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
                     </td>
                 </tr>
 

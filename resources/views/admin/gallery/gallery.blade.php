@@ -32,7 +32,7 @@
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
                     <td scope="col">{{ $gallery->event_id }}</td>
-                    <td scope="col">{{ $gallery->section->name }}</td> <!-- Menggunakan relasi ke tabel section ref -->
+                    <td scope="col">{{ $gallery->section_id }}</td> <!-- Menggunakan relasi ke tabel section ref -->
                     <td scope="col"><img src="{{ asset('storage/'.$gallery->photo) }}" alt="Foto Galeri" style="max-width: 150px;"></td>
                     <td scope="col">{{ $gallery->description }}</td>
                     <td scope="col" class="text-center">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Section ID</div>
-                                    <div class="col-6">{{ $gallery->section->name }}</div> <!-- Relasi ke Section -->
+                                    <div class="col-6">{{ $gallery->section_id }}</div> <!-- Relasi ke Section -->
                                 </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Foto</div>

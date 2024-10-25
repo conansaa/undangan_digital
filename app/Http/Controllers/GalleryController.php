@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Gallery;
+use App\Models\SectionRef;
+use App\Models\EventDetails;
+use Illuminate\Http\Request;
 
 class GalleryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($event_id)
+    public function index()
     {
         // Fetch all gallery items for a specific event
-        $galleryItems = Gallery::where('event_id', $event_id)->get();
-        return view('gallery.index', compact('galleryItems'));
+        $galleries = Gallery::all();
+        return view('admin.gallery.gallery', compact('galleries'));
     }
 
     /**
@@ -22,7 +24,9 @@ class GalleryController extends Controller
      */
     public function create()
     {
-        return view('gallery.create');
+        $events = EventDetails::all(); // Mendapatkan semua data event untuk dropdown
+        $sections = SectionRef::all();
+        return view('admin.gallery.create', compact('events', 'sections'));
     }
 
     /**
@@ -30,19 +34,31 @@ class GalleryController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate input
-        $validatedData = $request->validate([
-            'event_id' => 'required|integer|exists:event_details,id',
-            'section_id' => 'required|integer|exists:section_ref,id',
-            'photo' => 'required|string|max:255',  // Assuming this is a file path or URL
+        $request->validate([
+            'event_id' => 'required|exists:event_details,id',
+            'section_id' => 'required|exists:section_ref,id',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'description' => 'nullable|string',
         ]);
 
-        // Store gallery item
-        Gallery::create($validatedData);
+        // Upload photo
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = $file->hashName(); // Generate a unique filename
+            $path = $file->storeAs('galleries', $filename, 'public');
+        } else {
+            $path = null; // No file uploaded
+        }
 
-        return redirect()->route('gallery.index', $validatedData['event_id'])
-                         ->with('success', 'Gallery item created successfully.');
+        // Simpan data gallery
+        Gallery::create([
+            'event_id' => $request->event_id,
+            'section_id' => $request->section_id,
+            'photo' => $path,
+            'description' => $request->description,
+        ]);
+
+        return redirect('/galleries')->with('success', 'Galeri berhasil ditambahkan!');
     }
 
     /**
@@ -60,9 +76,11 @@ class GalleryController extends Controller
      */
     public function edit($id)
     {
-        // Fetch gallery item by ID for editing
-        $galleryItem = Gallery::findOrFail($id);
-        return view('gallery.edit', compact('galleryItem'));
+        $gallery = Gallery::findOrFail($id);
+        $events = EventDetails::all(); // Asumsikan EventDetail adalah model untuk tabel event details
+        $sections = SectionRef::all(); // Asumsikan SectionRef adalah model untuk tabel section_ref
+
+        return view('admin.gallery.edit', compact('gallery', 'events', 'sections'));
     }
 
     /**
@@ -70,19 +88,33 @@ class GalleryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validate input
-        $validatedData = $request->validate([
-            'section_id' => 'required|integer|exists:section_ref,id',
-            'photo' => 'required|string|max:255',
-            'description' => 'nullable|string',
+        $request->validate([
+            'event_id' => 'required|exists:event_details,id',
+            'section_id' => 'required|exists:section_ref,id',
+            'description' => 'required|string|max:255',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
-
-        // Update gallery item
-        $galleryItem = Gallery::findOrFail($id);
-        $galleryItem->update($validatedData);
-
-        return redirect()->route('gallery.index', $galleryItem->event_id)
-                         ->with('success', 'Gallery item updated successfully.');
+    
+        $gallery = Gallery::findOrFail($id);
+        $gallery->event_id = $request->event_id;
+        $gallery->section_id = $request->section_id;
+        $gallery->description = $request->description;
+    
+        // Cek dan hapus foto lama jika ada foto baru diunggah
+        if ($request->hasFile('photo')) {
+            if ($gallery->photo && file_exists(public_path('storage/' . $gallery->photo))) {
+                unlink(public_path('storage/' . $gallery->photo));
+            }
+    
+            // Simpan foto baru
+            $fileName = time() . '_' . $request->file('photo')->getClientOriginalName();
+            $request->file('photo')->move(public_path('gallery_photos'), $fileName);
+            $gallery->photo = $fileName;
+        }
+    
+        $gallery->save();
+    
+        return redirect('/galleries')->with('success', 'Data Gallery berhasil diubah.');
     }
 
     /**
@@ -92,10 +124,8 @@ class GalleryController extends Controller
     {
         // Find the gallery item by ID and delete it
         $galleryItem = Gallery::findOrFail($id);
-        $event_id = $galleryItem->event_id; // Store event_id for redirect
         $galleryItem->delete();
 
-        return redirect()->route('gallery.index', $event_id)
-                         ->with('success', 'Gallery item deleted successfully.');
+        return redirect('/galleries')->with('success', 'Gallery item deleted successfully.');
     }
 }

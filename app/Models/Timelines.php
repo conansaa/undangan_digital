@@ -22,6 +22,6 @@ class Timelines extends Model
     // Relasi dengan tabel EventDetail
     public function event()
     {
-        return $this->belongsTo(EventDetails::class, 'event_id');
+        return $this->belongsTo(EventDetails::class, 'id');
     }
 }

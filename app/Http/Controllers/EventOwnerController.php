@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\GenderRef;
 use Illuminate\Http\Request;
 use App\Models\EventOwnerDetails;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class EventOwnerController extends Controller
@@ -43,17 +44,17 @@ class EventOwnerController extends Controller
         if ($request->hasFile('owner_photo')) {
             $file = $request->file('owner_photo');
             $filename = $file->hashName();
-            $file->storeAs('owner_photos', $filename, 'public');
+            $path = $file->storeAs('owner_photos', $filename, 'public');
 
         } else {
-            $filename = null; // Atau nilai default jika tidak ada file diunggah
+            $path = null; // Atau nilai default jika tidak ada file diunggah
         }
 
         // Menyimpan data pemilik acara dengan nama file foto
         EventOwnerDetails::create([
             'owner_name' => $request->owner_name,
             'parents_name' => $request->parents_name,
-            'owner_photo' => $filename, // Simpan nama file di database
+            'owner_photo' => $path, // Simpan nama file di database
             'social_media' => $request->social_media,
             'gender_id' => $request->gender_id,
         ]);
@@ -87,39 +88,46 @@ class EventOwnerController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // Validasi input
         $request->validate([
-            'owner_name' => 'required|string|max:255',
-            'parents_name' => 'required|string|max:255',
-            'social_media' => 'nullable|string|max:255',
-            'gender' => 'required|exists:refgender,id',
-            'owner_photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'owner_name' => 'required|max:255',
+            'parents_name' => 'required|max:255',
+            'social_media' => 'nullable|max:255',
+            'gender' => 'required|exists:gender_ref,id', // ID gender harus valid
+            'owner_photo' => 'image|mimes:jpeg,png,jpg|max:2048' // Optional jika tidak mengubah foto
         ]);
 
+        // Ambil data owner berdasarkan ID
         $owner = EventOwnerDetails::findOrFail($id);
 
-        // Handle file upload if there is a new photo
-        if ($request->hasFile('owner_photo')) {
-            // Delete old photo if exists
-            if ($owner->owner_photo && Storage::exists('public/storage/owner_photos/' . $owner->owner_photo)) {
-                Storage::delete('public/storage/owner_photos/' . $owner->owner_photo);
-            }
-
-            // Store the new photo
-            $photoPath = $request->file('owner_photo')->store('public/storage/owner_photos/');
-            $owner->owner_photo = basename($photoPath);
-        }
-
-        // Update other fields
+        // Update data owner
         $owner->owner_name = $request->owner_name;
         $owner->parents_name = $request->parents_name;
         $owner->social_media = $request->social_media;
         $owner->gender_id = $request->gender;
 
-        // Save the updated data
+        // Cek apakah ada file foto yang di-upload
+        if ($request->hasFile('owner_photo')) {
+            // Simpan file foto baru ke folder 'owner_photos'
+            $photoName = time() . '_' . $request->file('owner_photo')->getClientOriginalName();
+            $request->file('owner_photo')->move(public_path('owner_photos'), $photoName);
+
+            // Hapus foto lama jika ada
+            if ($owner->owner_photo) {
+                File::delete(public_path('storage/' . $owner->owner_photo));
+            }
+
+            // Simpan nama file foto yang baru
+            $owner->owner_photo = $photoName;
+        }
+
+        // Simpan perubahan ke database
         $owner->save();
 
-        return redirect('/owners')->with('success', 'Data pemilik acara berhasil diperbarui!');
+        // Redirect ke halaman daftar owner dengan pesan sukses
+        return redirect('/owners')->with('success', 'Data pemilik acara berhasil diperbarui.');
     }
+
 
     /**
      * Remove the specified resource from storage.

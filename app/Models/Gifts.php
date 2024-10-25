@@ -21,6 +21,6 @@ class Gifts extends Model
     // Relasi dengan tabel EventDetails
     public function event()
     {
-        return $this->belongsTo(EventDetails::class, 'event_id');
+        return $this->belongsTo(EventDetails::class, 'id');
     }
 }

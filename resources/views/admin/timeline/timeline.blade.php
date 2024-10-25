@@ -32,7 +32,7 @@
             @foreach ($timelines as $timeline)
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    <td scope="col">{{ $timeline->eventDetail['event_name'] }}</td> <!-- Menggunakan relasi ke tabel event_detail -->
+                    <td scope="col">{{ $timeline->event_id }}</td> <!-- Menggunakan relasi ke tabel event_detail -->
                     <td scope="col">{{ $timeline->title }}</td>
                     <td scope="col">{{ \Carbon\Carbon::parse($timeline->date)->format('d M Y') }}</td> <!-- Mengonversi tanggal menjadi format yang lebih mudah dibaca -->
                     <td scope="col">{{ Str::limit($timeline->description, 50) }}</td> <!-- Membatasi deskripsi agar tidak terlalu panjang -->
@@ -56,7 +56,7 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Event ID</div>
-                                    <div class="col-6">{{ $timeline->eventDetail->event_id }}</div>
+                                    <div class="col-6">{{ $timeline->event_id }}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Judul</div>

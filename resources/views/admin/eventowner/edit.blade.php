@@ -65,7 +65,7 @@
             @enderror
             @if ($owner->owner_photo)
                 <div class="mt-2">
-                    <img src="{{ asset('owner_photos/' . $owner->owner_photo) }}" alt="Foto {{ $owner->owner_name }}" style="width: 100px; height: 100px;">
+                    <img src="{{ asset('storage/' . $owner->owner_photo) }}" alt="Foto {{ $owner->owner_name }}" style="width: 100px; height: 100px;">
                 </div>
             @endif
         </div>

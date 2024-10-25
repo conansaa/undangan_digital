@@ -40,7 +40,7 @@
                         @if (empty($owner->owner_photo))
                             <span class="text-secondary">Tidak ada foto</span>
                         @else
-                            <img src="{{ asset('owner_photos/' . $owner->owner_photo) }}" alt="{{ $owner->owner_name }}" style="width: 50px; height: 50px; background-size: cover">
+                            <img src="{{ asset('storage/' . $owner->owner_photo) }}" alt="{{ $owner->owner_name }}" style="width: 50px; background-size: cover">
                         @endif
                     </td>
                     <td scope="col">{{ $owner->social_media }}</td>
