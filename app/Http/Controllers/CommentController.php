@@ -29,12 +29,13 @@ class CommentController extends Controller
         ]);
 
         if ($validator->fails()) {
-            return response()->json($validator->errors(), 400);
+            return redirect()->back()->withErrors($validator)->withInput();
         }
 
         // Menyimpan data komentar baru
-        $comment = Comments::create($request->all());
-        return response()->json($comment, 201);
+        Comments::create($request->all());
+
+        return redirect()->route('rsvp.index')->with('success', 'Komentar berhasil dikirim!');
     }
 
     /**
