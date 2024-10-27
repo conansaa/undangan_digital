@@ -33,9 +33,12 @@
             <div id="minutes"></div>
             <div id="seconds"></div>
         </div>
+        <div id="reminder-button">
+            <button onclick="downloadCalendarEvent()">Set Reminder in Calendar</button>
+        </div>
     @endif
 
-    <h1>Konfirmasi Kehadiran RSVP</h1>
+    <h1>Kehadiran</h1>
 
     @if (session('success'))
         <p style="color: green;">{{ session('success') }}</p>
@@ -46,15 +49,20 @@
         <input type="hidden" name="event_id" value="1"><br>
         <input type="text" name="name" placeholder="Nama" required value="{{ old('name', session('new_data')['name'] ?? '') }}"><br>
         <input type="text" name="phone_number" placeholder="Nomor Telepon" required value="{{ old('phone_number', session('new_data')['phone_number'] ?? '') }}"><br>
-
-        <select name="confirmation" id="confirmation" required>
-            <option value="">Pilih Konfirmasi</option>
-            <option value="yes" {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Hadir') ? 'selected' : '' }}>Hadir</option>
-            <option value="no" {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Tidak Hadir') ? 'selected' : '' }}>Tidak Hadir</option>
+    
+        <label>
+            <input type="radio" name="confirmation" value="yes" {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Hadir') ? 'checked' : '' }} required> Hadir
+        </label>
+        <label>
+            <input type="radio" name="confirmation" value="no" {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Tidak Hadir') ? 'checked' : '' }} required> Tidak Hadir
+        </label><br>
+    
+        <select name="total_guest" id="total_guest" required>
+            <option value="">Pilih Jumlah Tamu</option>
+            <option value="1" {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '1' ? 'selected' : '' }}>1</option>
+            <option value="2" {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '2' ? 'selected' : '' }}>2</option>
         </select><br>
-
-        <input type="number" name="total_guest" id="total_guest" placeholder="Jumlah Tamu" required value="{{ old('total_guest', session('new_data')['total_guest'] ?? '') }}" min="0"><br>
-
+    
         @if (session('phone_exists'))
             <p style="color: red;">{{ session('message') }}</p>
             <h3>Data Lama:</h3>
@@ -70,6 +78,7 @@
             <button type="submit">Kirim</button>
         @endif
     </form>
+    
 
     <h2>Daftar Kehadiran</h2>
     <ul>
@@ -124,25 +133,64 @@
                     document.getElementById("countdown").innerHTML = "Acara Telah Dimulai!";
                 }
             }, 1000);
+
+            function downloadCalendarEvent() {
+                var eventDateTime = "{{ $event->event_date }}";
+                var eventTitle = "Pernikahan";
+                var eventDescription = "Acara Pernikahan yang Dinantikan";
+                var location = "Lokasi Pernikahan"; // Replace with actual location if available
+
+                var icsFileContent = `
+                    BEGIN:VCALENDAR
+                    VERSION:2.0
+                    BEGIN:VEVENT
+                    SUMMARY:Shinta's Wedding
+                    DTSTART:20241030T160800Z
+                    DTEND:20241031T160800Z
+                    DTSTAMP:20241026T160902Z
+                    UID:1729958942139-ShintasWedding
+                    DESCRIPTION:
+                    LOCATION:Blater
+                    ORGANIZER:Shinta's Family
+                    STATUS:TENTATIVE
+                    PRIORITY:1
+                    END:VEVENT
+                    END:VCALENDAR
+
+                `;
+
+                var blob = new Blob([icsFileContent.trim()], { type: 'text/calendar' });
+                var link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'reminder.ics';
+                link.click();
+            }
         </script>
     @endif
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const confirmationSelect = document.getElementById('confirmation');
+            const confirmationRadios = document.getElementsByName('confirmation');
             const totalGuestInput = document.getElementById('total_guest');
 
             function updateTotalGuestInput() {
-                if (confirmationSelect.value === 'no') {
+                const isAttending = Array.from(confirmationRadios).some(radio => radio.checked && radio.value === 'yes');
+                
+                if (!isAttending) {
                     totalGuestInput.value = 0;
-                    totalGuestInput.disabled = true;
+                    totalGuestInput.removeAttribute('required'); 
+                    totalGuestInput.style.display = 'none';
                 } else {
-                    totalGuestInput.disabled = false;
+                    totalGuestInput.setAttribute('required', 'required'); 
+                    totalGuestInput.style.display = 'block';
                 }
             }
 
             updateTotalGuestInput();
-            confirmationSelect.addEventListener('change', updateTotalGuestInput);
+
+            confirmationRadios.forEach(radio => {
+                radio.addEventListener('change', updateTotalGuestInput);
+            });
         });
     </script>
 </body>
