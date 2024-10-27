@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\EventReportDetailController;
-use App\Http\Controllers\GalleryController;
-use App\Http\Controllers\GiftController;
-use App\Http\Controllers\SectionController;
-use App\Http\Controllers\TimelineController;
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GiftController;
 use App\Http\Controllers\RsvpController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\SectionController;
+use App\Http\Controllers\CommentController1;
+use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\EventTypeController;
 use App\Http\Controllers\EventOwnerController;
 use App\Http\Controllers\EventReportController;
+use App\Http\Controllers\EventReportDetailController;
 
 Route::get('/rsvp', [RsvpController::class, 'index'])->name('rsvp.index');
 Route::post('/rsvp', [RsvpController::class, 'store'])->name('rsvp.store');
@@ -33,7 +34,13 @@ Route::get('/events', [AdminController::class, 'showEvents']);
 Route::get('/event-reports', [AdminController::class, 'showEventReports']);
 Route::get('/timelines', [AdminController::class, 'showTimelines']);
 Route::get('/rsvps', [AdminController::class, 'showRsvps']);
+
 Route::get('/comments', [AdminController::class, 'showComments']);
+Route::get('/comment/create', [CommentController::class, 'create'])->name('comment.create');
+Route::post('/comment/create', [CommentController::class, 'store'])->name('comment.store');
+Route::get('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
+Route::put('/comment/edit/{id}', [CommentController::class, 'update'])->name('comment.update');
+Route::get('/comment/delete/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
 Route::get('/gifts', [GiftController::class, 'index']);
 Route::get('/gift/create', [GiftController::class, 'create'])->name('gift.create');
