@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Rsvp;
 use App\Models\Comments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -36,6 +37,43 @@ class CommentController extends Controller
         Comments::create($request->all());
 
         return redirect()->route('rsvp.index')->with('success', 'Komentar berhasil dikirim!');
+    }
+
+    public function views()
+    {
+        $comments = Comments::all();
+        return view('admin.comment.comment', compact('comments'));
+    }
+
+    public function create()
+    {
+        $rsvps = Rsvp::all(); 
+        return view('admin.comment.create', compact('rsvps')); // Sesuaikan dengan nama view kamu
+    }
+
+    public function storedata(Request $request)
+    {
+        // Validasi input
+        $validator = Validator::make($request->all(), [
+            'rsvp_id' => 'required|integer|exists:rsvp,id', // Validasi rsvp_id harus ada di tabel rsvp
+            'comment' => 'required|string|max:500',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Menyimpan data komentar baru
+        Comments::create($request->all());
+
+        return redirect('/comments')->with('success', 'Komentar berhasil dikirim!');
+    }
+
+    public function edit($id)
+    {
+        $comment = Comments::findOrFail($id);
+        $rsvps = Rsvp::all();
+        return view('admin.comment.edit', compact('comment','rsvps'));
     }
 
     /**
@@ -78,7 +116,7 @@ class CommentController extends Controller
 
         // Update data komentar
         $comment->update($request->all());
-        return response()->json($comment, 200);
+        return redirect('/comments')->with('success', 'Komentar berhasil diperbarui.');
     }
 
     /**
@@ -95,6 +133,6 @@ class CommentController extends Controller
 
         // Hapus data komentar
         $comment->delete();
-        return response()->json(['message' => 'Comment deleted successfully'], 200);
+        return redirect('/comments')->with('success', 'Data Berhasil Dihapus!!');
     }
 }

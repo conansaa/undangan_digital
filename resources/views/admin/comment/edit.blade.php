@@ -9,7 +9,7 @@
     <div class="mb-3">
         <a href="/comments" class="btn btn-sm btn-outline-danger fw-bold me-2">Kembali</a>
     </div>
-    <form action="/comments/edit/{{ $comment->id }}" method="post">
+    <form action="/comment/edit/{{ $comment->id }}" method="post">
         @csrf
         @method("put")
         
@@ -29,21 +29,11 @@
                 </div>
             @enderror
         </div>
-        
-        <div class="mb-3">
-            <label for="nama_tamu" class="form-label fw-bold">Nama Tamu</label>
-            <input type="text" value="{{ old('nama_tamu', $comment->nama_tamu) }}" name="nama_tamu" class="bg-white form-control @error('nama_tamu') is-invalid @enderror" placeholder="Masukkan Nama Tamu">
-            @error('nama_tamu')
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
 
         <div class="mb-3">
-            <label for="komentar" class="form-label fw-bold">Komentar</label>
-            <textarea name="komentar" class="bg-white form-control @error('komentar') is-invalid @enderror" rows="3" placeholder="Masukkan Komentar">{{ old('komentar', $comment->komentar) }}</textarea>
-            @error('komentar')
+            <label for="comment" class="form-label fw-bold">Komentar</label>
+            <textarea name="comment" class="bg-white form-control @error('comment') is-invalid @enderror" rows="3" placeholder="Masukkan Komentar">{{ old('comment', $comment->comment) }}</textarea>
+            @error('comment')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
                 </div>

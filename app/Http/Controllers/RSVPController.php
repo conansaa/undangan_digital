@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventDetails;
 use App\Models\Rsvp;
 use App\Models\Comments;
 use Illuminate\Http\Request;
@@ -25,6 +26,115 @@ class RsvpController extends Controller
         }
         return view('RSVP & Comment.rsvp', compact('rsvps', 'event', 'comments'));
 
+    }
+
+    public function views()
+    {
+        $rsvps = Rsvp::all();
+        return view('admin.rsvp.rsvp', compact('rsvps'));
+    }
+
+    public function create()
+    {
+        $eventDetails = EventDetails::all(); 
+        return view('admin.rsvp.create', compact('eventDetails')); // Sesuaikan dengan nama view kamu
+    }
+
+    public function storedata(Request $request)
+    {
+        // Ubah total_guest jika konfirmasi adalah 'Tidak Hadir'
+        if ($request->confirmation === 'no') {
+            $request->merge(['total_guest' => 0]);
+        }
+
+        $confirmationValue = $request->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir';
+        $request->merge(['confirmation' => $confirmationValue]);
+
+        // Validasi input
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:15',
+            'confirmation' => 'required|string',
+            'total_guest' => [
+                'required_if:confirmation,yes',
+                'integer',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->confirmation === 'yes' && $value < 1) {
+                        $fail('Jumlah tamu harus lebih dari 0 jika Anda hadir.');
+                    }
+                }
+            ],
+            'event_id' => 'required|exists:event_details,id',
+        ]);
+
+        // Cek apakah nomor telepon sudah ada
+        $existingRsvp = Rsvp::where('phone_number', $request->phone_number)
+                            ->where('event_id', $request->event_id)
+                            ->first();
+
+        if ($existingRsvp) {
+            // Simpan data baru ke session jika user setuju mengedit
+            session([
+                'new_data' => $request->all(),
+                'existing_rsvp' => $existingRsvp,
+                'phone_exists' => true,
+                'message' => 'Nomor telepon sudah terdaftar. Apakah Anda ingin memperbarui data lama?',
+            ]);
+
+            return redirect()->route('rsvp.index');
+        }
+
+        // Jika nomor telepon belum ada, simpan data baru
+        $newRsvp = Rsvp::create($request->all());
+        session()->forget(['new_data', 'existing_rsvp', 'phone_exists', 'message']);
+        // Store rsvp_id in session
+        session(['rsvp_id' => $newRsvp->id]);
+
+        // Redirect to the RSVP view with a success message
+        return redirect('/rsvps')->with('success', 'RSVP berhasil disimpan!');
+    }
+
+    public function edit($id)
+    {
+        // Ambil data timeline berdasarkan id
+        $rsvp = Rsvp::findOrFail($id);
+        
+        // Ambil semua event details untuk dropdown event_id
+        $events = EventDetails::all();
+
+        // Kirim data ke view
+        return view('admin.rsvp.edit', compact('rsvp', 'events'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'event_id' => 'required|exists:event_details,id',
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|string',
+            'confirmation' => 'required|string',
+            'total_guest' => [
+                'required_if:confirmation,Hadir',
+                'integer',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->confirmation === 'Hadir' && $value < 1) {
+                        $fail('Jumlah tamu harus lebih dari 0 jika Anda hadir.');
+                    }
+                }
+            ],
+        ]);
+
+        $rsvp = Rsvp::findOrFail($id);
+
+        $rsvp->event_id = $request->event_id;
+        $rsvp->name = $request->name;
+        $rsvp->phone_number = $request->phone_number;
+        $rsvp->confirmation = $request->confirmation;
+        $rsvp->total_guest = $request->total_guest;
+
+        $rsvp->save();
+
+        return redirect('/rsvps')->with('success', 'Reservasi berhasil diperbarui.');
     }
 
     /**
@@ -118,6 +228,8 @@ class RsvpController extends Controller
         return response()->json($rsvp, 200);
     }
 
+
+
     /**
      * Remove the specified resource from storage.
      */
@@ -132,6 +244,6 @@ class RsvpController extends Controller
 
         // Delete RSVP
         $rsvp->delete();
-        return response()->json(['message' => 'RSVP deleted successfully'], 200);
+        return redirect('/rsvps')->with('success', 'Data Berhasil Dihapus!!');
     }
 }
