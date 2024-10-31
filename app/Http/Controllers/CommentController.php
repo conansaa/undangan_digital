@@ -23,20 +23,21 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input
         $validator = Validator::make($request->all(), [
-            'rsvp_id' => 'required|integer|exists:rsvp,id', // Validasi rsvp_id harus ada di tabel rsvp
+            'rsvp_id' => 'required|integer|exists:rsvp,id',
             'comment' => 'required|string|max:500',
         ]);
 
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator)->withInput();
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        // Menyimpan data komentar baru
-        Comments::create($request->all());
+        $comment = Comments::create($request->all());
 
-        return redirect()->route('rsvp.index')->with('success', 'Komentar berhasil dikirim!');
+        return response()->json([
+            'comment' => $comment->comment,
+            'rsvp_name' => $comment->rsvp->name 
+        ], 201);
     }
 
     public function views()
@@ -92,9 +93,6 @@ class CommentController extends Controller
         return response()->json($comment, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $id)
     {
         // Menemukan komentar berdasarkan ID
