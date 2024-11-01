@@ -133,8 +133,8 @@ class RsvpController extends Controller
         $rsvp->total_guest = $request->total_guest;
 
         $rsvp->save();
+        return redirect()->route('rsvp.index', ['#rsvp'])->with('success', 'Reservasi berhasil diperbarui.');
 
-        return redirect('/rsvps')->with('success', 'Reservasi berhasil diperbarui.');
     }
 
     /**
@@ -202,7 +202,7 @@ class RsvpController extends Controller
         if ($newData && $existingRsvp) {
             $existingRsvp->update($newData);
             session()->forget(['new_data', 'existing_rsvp', 'phone_exists', 'message']);
-            return redirect()->route('rsvp.index')->with('success', 'Data berhasil diperbarui!');
+            return redirect()->route('rsvp.index', ['#rsvp'])->with('success', 'Data berhasil diperbarui!');
         }
 
         return redirect()->route('rsvp.index')->with('error', 'Terjadi kesalahan dalam memperbarui data.');
@@ -211,7 +211,7 @@ class RsvpController extends Controller
     public function cancelUpdate()
     {
         session()->forget(['new_data', 'existing_rsvp', 'phone_exists', 'message']);
-        return redirect()->route('rsvp.index');
+        return redirect()->route('rsvp.index', ['#rsvp']);
     }
     /**
      * Display the specified resource.

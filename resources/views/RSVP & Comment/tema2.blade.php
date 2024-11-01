@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Invitation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700&display=swap"
+        rel="stylesheet">
+   <style>
+            body {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #000;
+            position: relative;
+        }
+        .section1 {
+            background: linear-gradient(to bottom, rgba(128, 128, 128, 1) -10%, rgba(128, 128, 128, 0)37%), 
+            linear-gradient(to top, rgba(128, 128, 128, 1) -10%, rgba(128, 128, 128, 0) 25%),
+            url({{ asset('images/177A8372.jpg') }}) no-repeat center 35%;
+            /* Mengatur gambar tetap di tengah */
+            background-size: 100% ;
+            /* Membuat gambar mengisi seluruh area dan tetap proporsional */
+            background-attachment: fixed;
+            /* Membuat gambar tetap saat halaman di-scroll */
+            color: #000;
+        }
+
+        .section .button {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 7px 20px;
+            border-radius: 25px;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            border: none;
+            cursor: pointer;
+            margin-top: -5px;
+            animation: pulse 4s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                /* Ukuran normal */
+            }
+
+            50% {
+                transform: scale(1.1);
+                /* Membesar di tengah animasi */
+            }
+
+            100% {
+                transform: scale(1);
+                /* Kembali ke ukuran normal */
+            }
+        }
+
+        .section .button i {
+            margin-left: 8px;
+        }
+
+        .wedding-from {
+            font-size: 1.4em;
+            
+        }
+
+        .wedding-from {
+            font-size: 1.3em;
+            color: white;
+            margin-top: -15px;
+            font-weight: 700;
+
+        }
+
+        .wedding-ket {
+            color: white;
+            margin-top: -1em;
+            font-weight: 300;
+        }
+
+        .wedding-date {
+            color: white;
+            margin-bottom: 80px;
+            margin-top: -30px;
+            font-weight: 500;
+           
+        }
+
+        .wedding-title {
+            font-family: 'Great Vibes', cursive;
+            color:white;
+            margin-top: 10px;
+            font-size: 3.5em;
+            font-weight: 200;
+            font-weight: bold;
+            word-spacing: 10px;
+        }
+
+        .wedding-judul {
+            color: white;
+            margin-top: -10px;
+            font-weight: bold;
+        }
+
+        .wedding-to {
+            color: white;
+            margin-top: 23em;
+            
+        }
+
+        @media (max-width: 768px) {
+            body {
+                margin: 0;
+                font-family: 'Playfair Display', serif;
+                background-color: #f0f0f0;
+                color: #333;
+            }
+
+            .section {
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                color: #000;
+                position: relative;
+            }
+            .section1 {
+                background: linear-gradient(to bottom, rgba(128, 128, 128, 1) -5%, rgba(128, 128, 128, 0)40%), 
+                  linear-gradient(to top, rgba(128, 128, 128, 1) -1%, rgba(128, 128, 128, 0) 30%),
+                url({{ asset('images/77A8372.jpg') }}) no-repeat center center;
+            /* Mengatur gambar tetap di tengah */
+            background-size: 55em;
+            /* Membuat gambar mengisi seluruh area dan tetap proporsional */
+            background-attachment: fixed;
+            /* Membuat gambar tetap saat halaman di-scroll */
+            color: #000;
+            }
+
+
+            .section .button {
+                background-color: #ffffff;
+                color: #000000;
+                padding: 7px 20px;
+                border-radius: 25px;
+                font-size: 13px;
+                display: inline-flex;
+                align-items: center;
+                border: none;
+                cursor: pointer;
+                margin-top: -5px;
+                animation: pulse 4s infinite;
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                    /* Ukuran normal */
+                }
+
+                50% {
+                    transform: scale(1.1);
+                    /* Membesar di tengah animasi */
+                }
+
+                100% {
+                    transform: scale(1);
+                    /* Kembali ke ukuran normal */
+                }
+            }
+
+            .section .button i {
+                margin-left: 8px;
+            }
+
+            .wedding-from {
+                font-size: 1.4em;
+            }
+
+            .wedding-from {
+                font-size: 1.3em;
+                color: white;
+                margin-top: -15px;
+                font-weight: 700;
+
+            }
+
+            .wedding-ket {
+                color: rgb(255, 255, 255);
+                margin-top: -15em;
+                font-weight: 300;
+                font-size: 13px;
+                font-weight: bold;
+            }
+
+            .wedding-date {
+                color: white;
+                margin-bottom: 80px;
+                margin-top: -30px;
+                font-weight: 500;
+            }
+
+            .wedding-title {
+                font-family: 'Great Vibes', cursive;
+                color: white;
+                margin-top: 10px;
+                font-size: 3.5em;
+                font-weight: 200;
+            }
+
+            .wedding-judul {
+                color: white;
+                margin-top: -10px;
+                font-weight: bold;
+            }
+
+            .wedding-to {
+                color: white;
+            }
+        }
+
+        /* Media queries untuk layar lebih kecil lagi (mobile) */
+        @media (max-width: 450px) {
+            body {
+                margin: 0;
+                font-family: 'Playfair Display', serif;
+                background-color: #f0f0f0;
+                color: #333;
+            }
+
+            .section {
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                color: #000;
+                position: relative;
+            }
+            .section1 {
+                background: linear-gradient(to bottom, rgba(128, 128, 128, 1) -5%, rgba(128, 128, 128, 0)30%), 
+                  linear-gradient(to top, rgba(128, 128, 128, 1) -1%, rgba(128, 128, 128, 0) 30%),
+                url({{ asset('images/177A8372.jpg') }}) no-repeat center center;
+            /* Mengatur gambar tetap di tengah */
+            background-size: 55em;
+            /* Membuat gambar mengisi seluruh area dan tetap proporsional */
+            background-attachment: fixed;
+            /* Membuat gambar tetap saat halaman di-scroll */
+            color: #000;
+            }
+
+            .section .button {
+                background-color: #ffffff;
+                color: #000000;
+                padding: 5px 12px;
+                border-radius: 25px;
+                font-size: 8px;
+                display: inline-flex;
+                align-items: center;
+                border: none;
+                cursor: pointer;
+                animation: pulse 4s infinite;
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                    /* Ukuran normal */
+                }
+
+                50% {
+                    transform: scale(1.1);
+                    /* Membesar di tengah animasi */
+                }
+
+                100% {
+                    transform: scale(1);
+                    /* Kembali ke ukuran normal */
+                }
+            }
+
+            .section .button i {
+                margin-left: 5px;
+            }
+
+
+            .wedding-from {
+                font-size: 1.4em;
+            }
+
+            .wedding-from {
+                font-size: 1em;
+                color: white;
+                margin-top: -8px;
+                font-weight: 550;
+                margin-bottom: 5px;
+            }
+
+            .wedding-ket {
+                color: rgb(255, 255, 255);
+                margin-top: -15em;
+                font-weight: 300;
+                font-size: 13px;
+                font-weight: bold;
+            }
+
+            .wedding-date {
+                color: rgb(255, 255, 255);
+                margin-bottom: 80px;
+                margin-top: -30px;
+                font-weight: 500;
+                font-size: 13px;
+                font-weight: bold;
+            }
+
+            .wedding-title {
+                font-family: 'Great Vibes', cursive;
+                color: rgb(255, 255, 255);
+                margin-top: 10px;
+                font-size: 2.5em;
+                font-weight: 200;
+                word-spacing: 10px;
+                font-weight: bold;
+            }
+
+            .wedding-judul {
+                color: rgb(255, 255, 255);
+                margin-top: -10px;
+                font-weight: bold;
+            }
+
+            .wedding-to {
+                color: rgb(255, 255, 255);
+                font-size: 11px;
+                margin-top: 35em;
+            }
+        }
+        @media (max-width: 380px) {
+            body {
+                margin: 0;
+                font-family: 'Playfair Display', serif;
+                background-color: #f0f0f0;
+                color: #333;
+            }
+
+            .section {
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                color: #000;
+                position: relative;
+            }
+            
+            .section1 {
+                background: linear-gradient(to bottom, rgba(128, 128, 128, 1) -1%, rgba(128, 128, 128, 0)30%), 
+                linear-gradient(to top, rgba(128, 128, 128, 1) -1%, rgba(128, 128, 128, 0) 30%),
+                url({{ asset('images/177A8372.jpg') }}) no-repeat center center;
+            /* Mengatur gambar tetap di tengah */
+            background-size: 40em;
+            /* Membuat gambar mengisi seluruh area dan tetap proporsional */
+            background-attachment: fixed;
+            /* Membuat gambar tetap saat halaman di-scroll */
+            color: #000;
+            }
+
+            .section .button {
+                background-color: #ffffff;
+                color: #000000;
+                padding: 5px 12px;
+                border-radius: 25px;
+                font-size: 8px;
+                display: inline-flex;
+                align-items: center;
+                border: none;
+                cursor: pointer;
+                animation: pulse 4s infinite;
+            }
+
+            @keyframes pulse {
+                0% {
+                    transform: scale(1);
+                    /* Ukuran normal */
+                }
+
+                50% {
+                    transform: scale(1.1);
+                    /* Membesar di tengah animasi */
+                }
+
+                100% {
+                    transform: scale(1);
+                    /* Kembali ke ukuran normal */
+                }
+            }
+
+            .section .button i {
+                margin-left: 5px;
+            }
+
+
+            .wedding-from {
+                font-size: 1.4em;
+            }
+
+            .wedding-from {
+                font-size: 1em;
+                color: white;
+                margin-top: -10px;
+                font-weight: 550;
+                margin-bottom: 5px;
+            }
+
+            .wedding-ket {
+                color: rgb(255, 255, 255);
+                margin-top: -12em;
+                font-weight: 300;
+                font-size: 13px;
+                font-weight: bold;
+            }
+
+            .wedding-date {
+                color: rgb(255, 255, 255);
+                margin-bottom: 80px;
+                margin-top: -30px;
+                font-weight: 500;
+                font-size: 11px;
+                font-weight: bold;
+            }
+
+            .wedding-title {
+                font-family: 'Great Vibes', cursive;
+                color: rgb(255, 255, 255);
+                margin-top: 10px;
+                font-size: 2.3em;
+                font-weight: 200;
+                word-spacing: 10px;
+                font-weight: bold;
+            }
+
+            .wedding-judul {
+                color: white;
+                margin-top: -10px;
+                font-weight: bold;
+            }
+
+            .wedding-to {
+                color: white;
+                font-size: 11px;
+                margin-top: 25em;
+            }
+        }
+   
+   </style>
+</head>
+<body>
+    <div class="section section1">
+        <div class="content">
+            <p class="wedding-ket">We invite you to the wedding of</p>
+            <h1 class="wedding-title">Shinta & Irfan</h1>
+            <p class="wedding-date">Akad - 27 Desember 2024 <br>
+                Resepsi - 28 Desember 2024
+                </p>
+            <p class="wedding-to">Kepada Yth</p>
+            <h2 class="wedding-from">Sinta Dewi</h2>
+            <button class="button" onclick="window.location.href='{{ route('rsvp.index') }}';">Open the Invitation <i
+                class="fas fa-envelope"></i></button>
+        </div>
+
+
+       
+    </div>
+
+    </body>
