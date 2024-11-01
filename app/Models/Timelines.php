@@ -22,6 +22,12 @@ class Timelines extends Model
     // Relasi dengan tabel EventDetail
     public function event()
     {
-        return $this->belongsTo(EventDetails::class, 'id');
+        return $this->belongsTo(EventDetails::class, 'event_id');
+    }
+
+    public function getImagePathAttribute()
+    {
+        if ($this->photo) return 'storage/' . $this->photo;
+        else return null;
     }
 }

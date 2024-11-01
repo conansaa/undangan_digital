@@ -24,7 +24,7 @@ class EventDetails extends Model
     // Relasi dengan tabel User
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     // Relasi dengan tabel EventTypeRef

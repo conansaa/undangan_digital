@@ -35,7 +35,7 @@ class EventOwnerController extends Controller
         $request->validate([
             'owner_name' => 'required|string|max:255',
             'parents_name' => 'nullable|string',
-            'owner_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'owner_photo' => 'nullable|image|mimes:jpeg,png,jpg',
             'social_media' => 'nullable|string|max:255',
             'gender_id' => 'required|integer|exists:gender_ref,id', // Validasi gender_id sesuai dengan tabel referensi gender
         ]);
@@ -94,7 +94,7 @@ class EventOwnerController extends Controller
             'parents_name' => 'required|max:255',
             'social_media' => 'nullable|max:255',
             'gender' => 'required|exists:gender_ref,id', // ID gender harus valid
-            'owner_photo' => 'image|mimes:jpeg,png,jpg|max:2048' // Optional jika tidak mengubah foto
+            'owner_photo' => 'image|mimes:jpeg,png,jpg' // Optional jika tidak mengubah foto
         ]);
 
         // Ambil data owner berdasarkan ID

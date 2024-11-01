@@ -18,43 +18,35 @@
                     </a>
 
                     <a href="/owners" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-user-tie me-2"></i> Event Owners</li>
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-user-tie me-2"></i> Pemilik Acara</li>
                     </a>
     
                     <a href="/event" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-calendar-day me-2"></i> Event Details</li>
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-calendar-day me-2"></i> Detail Acara</li>
                     </a>
     
                     <a href="/event-type" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-tags me-2"></i> Event Types</li>
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-tags me-2"></i> Tipe Acara</li>
                     </a>
 
                     <a href="/event-reports" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-clipboard-list me-2"></i> Event Reports</li>
-                    </a>
-
-                    <a href="/event-reports-detail" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-file-alt me-2"></i> Event Reports Detail</li>
-                    </a>
-
-                    <a href="/genders" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-venus-mars me-2"></i> Gender References</li>
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-clipboard-list me-2"></i> Laporan Acara</li>
                     </a>
     
                     <a href="/timelines" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-clock me-2"></i> Timelines</li>
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-clock me-2"></i> Timeline Acara</li>
                     </a>
     
                     <a href="/rsvps" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-user-check me-2"></i> RSVPs</li>
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-user-check me-2"></i> Daftar Reservasi</li>
                     </a>
     
                     <a href="/comments" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-comments me-2"></i> Comments</li>
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-comments me-2"></i> Daftar Ucapan</li>
                     </a>
     
                     <a href="/gifts" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-gift me-2"></i> Gifts</li>
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-gift me-2"></i> Hadiah</li>
                     </a>
 
                     <a href="/sections" class="text-decoration-none text-white">
@@ -62,7 +54,7 @@
                     </a>
     
                     <a href="/galleries" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-images me-2"></i> Galleries</li>
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-images me-2"></i> Galeri Foto</li>
                     </a>
 
                     <a href="/users" class="text-decoration-none text-white">

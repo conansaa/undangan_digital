@@ -31,6 +31,15 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="password" class="form-label fw-bold">Password</label>
+            <input type="password" name="password" class="bg-white form-control @error('password') is-invalid @enderror" placeholder="Masukkan Password">
+            @error('password')
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <button name="submit" type="submit" class="btn btn-info text-white" onclick="return confirm('Apakah anda yakin ingin menambahkan data tersebut?')">Submit</button>
         </div>
     </form>    

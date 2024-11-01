@@ -20,7 +20,7 @@
         <thead>
             <tr>
                 <th scope="col" class="text-center">No</th>
-                <th scope="col">Event ID</th>
+                <th scope="col">Nama Acara</th>
                 <th scope="col">Nama</th>
                 <th scope="col">Nomor Rekening</th>
                 <th scope="col">Catatan</th>
@@ -51,7 +51,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Event ID</div>
+                                    <div class="col-5 col-md-4 label fw-bold mb-3">Nama Acara</div>
                                     <div class="col-6">{{ $gift->event_id }}</div>
                                 </div>
                                 <div class="row">

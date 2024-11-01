@@ -15,12 +15,16 @@
         <!-- Nama Pengguna -->
         <div class="mb-3">
             <label for="user_id" class="form-label fw-bold">Nama Pengguna</label>
-            <select class="form-select bg-white" aria-label="Default select example" name="user_id">
-                <option value="">Pilih Pengguna</option>
-                @foreach($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                @endforeach
-            </select>
+            <div class="d-flex">
+                <select class="form-select bg-white me-2" aria-label="Default select example" name="user_id">
+                    <option value="">Pilih Pengguna</option>
+                    @foreach($users as $user)
+                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                    @endforeach
+                </select>
+                <!-- Tombol Tambah Pengguna -->
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#tambahPenggunaModal">Tambah Pengguna</button>
+            </div>
             @error('user_id')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
@@ -104,6 +108,39 @@
             <button name="submit" type="submit" class="btn btn-info text-white" onclick="return confirm('Apakah anda yakin ingin menambahkan data tersebut?')">Submit</button>
         </div>
     </form>    
+</div>
+
+<!-- Modal Tambah Pengguna -->
+<div class="modal fade" id="tambahPenggunaModal" tabindex="-1" aria-labelledby="tambahPenggunaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tambahPenggunaModalLabel">Tambah Pengguna</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('user.store') }}" method="post">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 @endsection

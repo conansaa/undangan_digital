@@ -26,7 +26,7 @@ class EventReports extends Model
 
     public function eventDetails()
     {
-        return $this->hasMany(EventDetails::class, 'event_report_id'); 
+        return $this->belongsTo(EventDetails::class, 'id'); 
     }
 
     // Relasi dengan tabel EventReportDetails

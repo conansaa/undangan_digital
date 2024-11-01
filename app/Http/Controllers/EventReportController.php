@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventDetails;
 use App\Models\EventReports;
-use App\Models\EventReportDetails;
 use App\Models\EventTypeRef;
 use Illuminate\Http\Request;
+use App\Models\EventReportDetails;
 
 class EventReportController extends Controller
 {
@@ -15,8 +16,10 @@ class EventReportController extends Controller
     public function index()
     {
         // Mengambil semua data event report
-        $eventReports = EventReports::all();
-        return view('admin.eventreport.eventreport', compact('eventReports'));
+        $eventReports = EventReports::with('eventType')->get();
+        // dd($eventReports);
+        $eventDetails = EventDetails::all();
+        return view('admin.eventreport.eventreport', compact('eventReports', 'eventDetails'));
     }
 
     public function create()

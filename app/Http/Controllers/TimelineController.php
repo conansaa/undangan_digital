@@ -147,6 +147,8 @@ class TimelineController extends Controller
             return response()->json(['message' => 'Timeline not found'], 404);
         }
 
+        if (File::exists($timeline->ImagePath)) File::delete($timeline->ImagePath);
+
         // Hapus data
         $timeline->delete();
         return redirect('/timelines')->with('success', 'Data Berhasil Dihapus!!');

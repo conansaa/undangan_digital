@@ -15,11 +15,9 @@
         <div class="mb-3">
             <label for="event_id" class="form-label fw-bold">Event ID</label>
             <select class="form-select bg-white" name="event_id">
-                <option selected value="{{ $timeline->event->id }}">
-                    {{ $timeline->event->id }}
-                </option>
+                
                 @foreach($events as $event)
-                    <option value="{{ $event->id }}">{{ $event->event_name }}</option>
+                    <option value="{{ $event->id }}" {{ $event->id == $timeline->event_id ? 'selected' : '' }}>{{ $event->event_name }}</option>
                 @endforeach
             </select>
             @error('event_id')

@@ -34,9 +34,10 @@ class UserController extends Controller
     {
         // Validate input
         $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed', // Validate password and confirmation
+            'name' => 'required|string|max:100',
+            'email' => 'required|string|email|max:100|unique:users',
+            'password' => 'required|string|min:8|max:128',
+            'email_verified_at' => now(),
         ]);
 
         // Hash the password before storing
@@ -48,7 +49,7 @@ class UserController extends Controller
         // Create a new user
         User::create($validatedData);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect('/users')->with('success', 'User created successfully.');
     }
 
 

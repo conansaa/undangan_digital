@@ -13,7 +13,7 @@ class AdminController extends Controller
     {
         $eventReportCount = EventReports::select('counter')->get();
         $eventTypeCount = EventTypeRef::count();
-        return view('admin.index', compact('eventReportCount', 'eventTypeCount')); 
+        return view('admin.dashboard', compact('eventReportCount', 'eventTypeCount')); 
     }
 
     public function showGenders()

@@ -21,8 +21,8 @@
             <tr>
                 <th scope="col" class="text-center">No</th>
                 <th scope="col">Nama Pengguna</th>
-                <th scope="col">Nama Event</th>
-                <th scope="col">Tipe Event</th>
+                <th scope="col">Nama Acara</th>
+                <th scope="col">Tipe Acara</th>
                 <th scope="col">Tanggal</th>
                 <th scope="col">Waktu</th>
                 <th scope="col">Lokasi</th>
@@ -61,11 +61,11 @@
                                     <div class="col-6">{{ $event->user->name }}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Nama Event</div>
+                                    <div class="col-5 col-md-4 label fw-bold mb-3">Nama Acara</div>
                                     <div class="col-6">{{ $event->event_name }}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Tipe Event</div>
+                                    <div class="col-5 col-md-4 label fw-bold mb-3">Tipe Acara</div>
                                     <div class="col-6">{{ $event->eventType->nama }}</div>
                                 </div>
                                 <div class="row">

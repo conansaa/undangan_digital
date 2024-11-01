@@ -1,7 +1,7 @@
-// resources/js/app.js
-import 'bootstrap';
-import '../css/app.css';
+import './bootstrap';
 
-// resources/js/app.js
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+
+Alpine.start();
