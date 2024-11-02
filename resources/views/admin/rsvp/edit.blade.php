@@ -14,10 +14,10 @@
         @method("put")
 
         <div class="mb-3">
-            <label for="event_id" class="form-label fw-bold">Event ID</label>
+            <label for="event_id" class="form-label fw-bold">Nama Acara</label>
             <select class="form-select bg-white @error('event_id') is-invalid @enderror" name="event_id">
                 <option selected value="{{ $rsvp->event_id }}">
-                    {{ $rsvp->event_id }}
+                    {{ $rsvp->event->event_name }}
                 </option>
                 @foreach($events as $event)
                     <option value="{{ $event->id }}">{{ $event->event_name }}</option>

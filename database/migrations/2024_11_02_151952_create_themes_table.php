@@ -4,21 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGiftsTable extends Migration
+return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('gifts', function (Blueprint $table) {
+        Schema::create('themes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('event_id');
             $table->string('name');
-            $table->enum('category', ['Uang', 'Barang']);
-            $table->text('notes')->nullable();
+            $table->text('description')->nullable();
+            $table->integer('max_images');
             $table->timestamps();
 
             $table->foreign('event_id')->references('id')->on('event_details')->onDelete('cascade');
@@ -27,11 +25,9 @@ class CreateGiftsTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
-        Schema::dropIfExists('gifts');
+        Schema::dropIfExists('themes');
     }
-}
+};

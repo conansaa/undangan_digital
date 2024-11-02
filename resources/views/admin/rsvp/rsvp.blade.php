@@ -10,10 +10,10 @@
     <div class="row justify-content-between mb-3">
         <h5 class="col-12 col-lg-6 fw-bold">Data RSVP Acara</h5>
         <div class="col-12 col-lg-6 d-flex justify-content-end">
-            {{-- <div class="me-2">
+            <div class="me-2">
                 <a href="/rsvps/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
                 <a href="/rsvps/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
-            </div> --}}
+            </div>
         </div>
     </div>
     <table class="table table-bordered">
@@ -25,22 +25,22 @@
                 <th scope="col">No. Telp</th>
                 <th scope="col">Konfirmasi</th>
                 <th scope="col">Total Guest</th>
-                {{-- <th scope="col" class="text-center">Aksi</th> --}}
+                <th scope="col" class="text-center">Aksi</th>
             </tr>
         </thead>
         <tbody>
             @foreach ($rsvps as $rsvp)
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    <td scope="col">{{ $rsvp->event->event_name }}</td> <!-- Menggunakan relasi ke tabel event_detail -->
+                    <td scope="col">{{ $rsvp->event->event_name }}</td> 
                     <td scope="col">{{ $rsvp->name }}</td>
                     <td scope="col">{{ $rsvp->phone_number }}</td>
-                    <td scope="col">{{ $rsvp->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir' }}</td> <!-- Menggunakan status konfirmasi (boolean) -->
+                    <td scope="col">{{ $rsvp->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir' }}</td> 
                     <td scope="col">{{ $rsvp->total_guest }}</td>
-                    {{-- <td scope="col" class="text-center">
+                    <td scope="col" class="text-center">
                         <a href="/rsvps/edit/{{ $rsvp->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
                         <a href="/rsvps/delete/{{ $rsvp->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
-                    </td> --}}
+                    </td>
                 </tr>
 
                 <!-- Modal Detail RSVP -->

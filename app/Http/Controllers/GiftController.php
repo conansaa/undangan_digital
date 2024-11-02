@@ -29,7 +29,7 @@ class GiftController extends Controller
         $request->validate([
             'event_id' => 'required|exists:event_details,id', // pastikan event_id ada di tabel event_details
             'name' => 'required|string|max:255',
-            'account_number' => 'required|string|max:255',
+            'category' => 'required|in:Uang,Barang',
             'notes' => 'nullable|string',
         ]);
 
@@ -37,7 +37,7 @@ class GiftController extends Controller
         Gifts::create([
             'event_id' => $request->event_id,
             'name' => $request->name,
-            'account_number' => $request->account_number,
+            'category' => $request->category,
             'notes' => $request->notes,
         ]);
 
@@ -59,7 +59,7 @@ class GiftController extends Controller
         $request->validate([
             'event_id' => 'required|exists:event_details,id',
             'name' => 'required|string|max:255',
-            'account_number' => 'required|string|max:255',
+            'category' => 'required|in:Uang,Barang',
             'notes' => 'nullable|string',
         ]);
 
@@ -68,7 +68,7 @@ class GiftController extends Controller
         $gift->update([
             'event_id' => $request->event_id,
             'name' => $request->name,
-            'account_number' => $request->account_number,
+            'category' => $request->category,
             'notes' => $request->notes,
         ]);
 

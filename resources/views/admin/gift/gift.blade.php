@@ -22,7 +22,7 @@
                 <th scope="col" class="text-center">No</th>
                 <th scope="col">Nama Acara</th>
                 <th scope="col">Nama</th>
-                <th scope="col">Nomor Rekening</th>
+                <th scope="col">Kategori</th>
                 <th scope="col">Catatan</th>
                 <th scope="col" class="text-center">Aksi</th>
             </tr>
@@ -31,9 +31,9 @@
             @foreach ($gifts as $gift)
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    <td scope="col">{{ $gift->event_id }}</td>
+                    <td scope="col">{{ $gift->event->event_name }}</td>
                     <td scope="col">{{ $gift->name }}</td>
-                    <td scope="col">{{ $gift->account_number }}</td>
+                    <td scope="col">{{ $gift->category }}</td>
                     <td scope="col">{{ $gift->notes }}</td>
                     <td scope="col" class="text-center">
                         <a href="/gift/edit/{{ $gift->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
@@ -52,14 +52,14 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Nama Acara</div>
-                                    <div class="col-6">{{ $gift->event_id }}</div>
+                                    <div class="col-6">{{ $gift->event->event_name }}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Nama</div>
                                     <div class="col-6">{{ $gift->name }}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Nomor Rekening</div>
+                                    <div class="col-5 col-md-4 label fw-bold mb-3">Kategori</div>
                                     <div class="col-6">{{ $gift->account_number }}</div>
                                 </div>
                                 <div class="row">
