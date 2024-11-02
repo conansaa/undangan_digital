@@ -30,6 +30,11 @@ Route::post('/rsvp', [RsvpController::class, 'store'])->name('rsvp.store');
 Route::get('/rsvp/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
 Route::post('/rsvp/confirm-update', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
 Route::post('/rsvp/cancel-update', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
+Route::post('/clear-modal-session', function () {
+    session()->forget('show_modal');
+    return response()->json(['success' => true]);
+});
+
 
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::get('/comment', [CommentController::class, 'index'])->name('comment.index');

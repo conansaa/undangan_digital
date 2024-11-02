@@ -1,0 +1,3447 @@
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background-color: #f0f0f0;
+}
+
+
+.container {
+  text-align: center;
+  padding: 30px;
+  background: url('../images/bg 5.png') no-repeat center center / cover;
+  height: 120em;
+  margin-top: 0px;
+}
+
+.section {
+  height: 120vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.wedding-ket {
+  color: white;
+  font-weight: 300;
+  font-size: 25px;
+  margin-bottom: 10px;
+}
+
+.card1 img {
+  display: block;
+  /* Mengubah gambar menjadi elemen blok */
+  margin: 1.5em auto 1.5em;
+  /* Margin atas 5em, margin bawah 5px, dan margin kiri/kanan otomatis */
+  width: 6em;
+}
+
+.wedding-title {
+  font-family: 'Great Vibes', cursive;
+  color: white;
+  font-size: 3.5em;
+  font-weight: 550;
+  font-weight: bold;
+  
+}
+
+.wedding-date {
+  color: white;
+  font-size: 1.2em;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  padding-top: 30px;
+  text-align: center;
+  z-index: 1;
+}
+
+.slideshow-container {
+  position: relative;
+  max-width: 1%;
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Modal Background */
+.modal {
+  display: none;
+  /* Tersembunyi secara default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Transparansi latar belakang */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 400%;
+  max-width: 450px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+  /* Animasi fade-in */
+}
+
+.modal-content p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.modal-content h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.modal-image {
+  width: 100px;
+  /* Ukuran gambar */
+  height: auto;
+  margin-bottom: -10px;
+  /* Jarak bawah gambar */
+  border-radius: 50%;
+  margin-top: -10px;
+  /* Jika ingin gambar berbentuk lingkaran */
+}
+
+/* Close Button */
+.close-btn {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-btn:hover,
+.close-btn:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.card1 p {
+  margin: 0;
+  /* Menghilangkan margin default pada paragraf */
+  font-size: 1em;
+  /* Ukuran font */
+  line-height: 2em;
+  color: rgb(65, 65, 65);
+  text-align: center;
+  /* Memusatkan teks */
+  padding: 0 5em;
+}
+
+.title-and {
+  font-size: 35px;
+  font-family: 'Playfair Display', serif;
+  color: #000000;
+  margin-bottom: 55px;
+  margin-top: 50px;
+}
+
+/* Slideshow styles */
+.slideshow-container {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.mySlides {
+  position: relative;
+  /* Pastikan elemen memiliki posisi relatif */
+}
+
+.mySlides img {
+  width: 100%;
+  height: 150em;
+  object-fit: cover;
+  object-position: center 90%;
+  margin-top: 10em;
+  /* Atur margin sesuai kebutuhan */
+}
+
+/* Tambahkan gradien di atas gambar */
+.mySlides::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(128, 128, 128, 1) 20%, rgba(128, 128, 128, 0) 45%), linear-gradient(to top, rgba(128, 128, 128, 1) 38%, rgba(128, 128, 128, 0) 50%);
+  z-index: 1;
+  /* Pastikan gradien di atas gambar */
+  pointer-events: none;
+  /* Agar klik tidak terhalang gradien */
+}
+
+.card1 {
+  background-color: rgba(128, 128, 128, 1);
+  /* Warna latar belakang putih */
+  border: 1px solid #ccc;
+  /* Border abu-abu */
+  border-radius: 10px;
+  /* Sudut melengkung */
+  padding: 10;
+  justify-content: center;
+  background-color: rgb(255, 255, 255);
+  /* Bayangan lembut */
+  width: 70em;
+  height: 18em;
+  justify-content: center;
+  /* Memusatkan secara horizontal */
+  align-items: center;
+  display: block;
+}
+
+.card2 {
+  background-color: rgba(128, 128, 128, 1);
+  height: 25em;
+  justify-content: center;
+  /* Memusatkan secara horizontal */
+  align-items: center;
+  display: flex;
+}
+
+.h2 {
+  font-size: 90px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 100;
+  margin-bottom: 10px;
+  margin-left: -50px;
+  margin-top: 35px;
+}
+
+.wedding-date {
+  font-size: 1.2em;
+  margin-top: 10px;
+  color: #fff;
+}
+
+.section h2 {
+  font-size: 30px;
+  font-family: 'Judson', serif;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.section h1 {
+  font-size: 70px;
+  font-family: 'Great Vibes', cursive;
+  font-weight: 400;
+  margin-bottom: 10px;
+  line-height: 1.2;
+  font-weight: bold;
+  word-spacing: 15px;
+}
+
+.section .names {
+  font-family: 'Great Vibes', cursive;
+  font-size: 40px;
+}
+
+.section .date {
+  font-size: 25px;
+  font-style: italic;
+  margin-top: 20px;
+}
+
+.gallery-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 40px;
+  display: block;
+  margin-left: 90px;
+  text-align: center;
+}
+
+.section .button i {
+  margin-left: 8px;
+}
+
+.section2 {
+  background: url('../images/3.png') no-repeat center center/cover;
+  color: #fff;
+}
+
+.section2 h2 {
+  margin-top: 20px;
+  font-size: 35px;
+  font-family: 'Judson', serif;
+}
+
+.section2 h1 {
+  font-size: 70px;
+  font-family: 'Julius Sans One', sans-serif;
+  margin-top: 500px;
+}
+
+.section2 .names {
+  font-size: 50px;
+  font-family: 'Great Vibes', cursive;
+}
+
+
+.container5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 20px;
+  text-align: center;
+  padding: 30px;
+  background: url('../images/bg1.png') no-repeat center center / cover;
+  height: fit-content;
+  height: 103em;
+}
+
+.title {
+  font-size: 40px;
+  font-family: 'Playfair Display', serif;
+  color: #000000;
+  margin-bottom: 60px;
+  margin-top: 1em;
+}
+
+.title1 {
+  font-size: 40px;
+  font-family: 'Playfair Display', serif;
+  color: #bdbdbd;
+  margin-bottom: 10px;
+}
+
+.profiles {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 100px;
+  margin-bottom: 25px;
+}
+
+.profiles .social-icons {
+  margin-bottom: 25px;
+}
+
+.profile-img {
+  width: 19%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.bride-img,
+.groom-img {
+  opacity: 0;
+  /* Mulai dengan transparan */
+  animation-duration: 3s;
+  /* Durasi animasi */
+  animation-fill-mode: forwards;
+  /* Mempertahankan posisi akhir animasi */
+}
+
+.bride-img.animate {
+  animation: slideInLeft 3s ease forwards;
+  /* Menjalankan animasi slideInLeft */
+}
+
+.groom-img.animate {
+  animation: slideInRight 3s ease forwards;
+  /* Menjalankan animasi slideInRight */
+}
+
+@keyframes slideInLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.name {
+  font-family: 'Great Vibes', cursive;
+  margin: 10px 0;
+  font-size: 30px !important;
+}
+
+.profile h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+.profile p {
+  font-size: 16px;
+  color: #777;
+}
+
+.social-icons {
+  margin-top: 20px;
+}
+
+.social-icons img {
+  width: 30px;
+  margin: 0 10px;
+}
+
+.container1 {
+  text-align: center;
+  padding: 10px;
+  background: url('../images/bg2.png') no-repeat center center / cover;
+  height: 1290px;
+  margin-top: -30px;
+}
+
+.event-section {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.event-card {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  width: 500px;
+  text-align: center;
+  margin-top: 5em;
+  margin-bottom: -2em;
+}
+
+.event-card h2 {
+  font-size: 36px;
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+}
+
+.event-card p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.event-card strong {
+  font-size: 24px;
+}
+
+.event-card .button {
+  background-color: #fff;
+  color: #333;
+  padding: 3px 15px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  border: none;
+  margin-top: 20px;
+  animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.event-card .button:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+.event-card .icon {
+  width: 90px;
+  margin-bottom: 20px;
+}
+
+.event-card .icons {
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.akad-nikah .icon {
+  width: 90px;
+  margin-bottom: 5px;
+}
+
+.akad-nikah h2 {
+  font-size: 40px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 100;
+  margin-bottom: 10px;
+  opacity: 0;
+  /* Mulai dengan transparan */
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.5);
+    /* Mulai dari kecil */
+  }
+
+  100% {
+    transform: scale(1);
+    /* Ukuran normal di akhir */
+  }
+}
+
+.akad-nikah .akad-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px;
+  display: block;
+  margin-left: 70px;
+  opacity: 0;
+  /* Mulai dengan transparan */
+}
+
+.akad-nikah h2.animate,
+.akad-nikah .akad-text.animate {
+  animation: scaleUp 1.5s ease-in-out forwards;
+  /* Hanya sekali, dengan forwards */
+  opacity: 1;
+  /* Menjadi terlihat */
+}
+
+.akad-nikah p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.akad-nikah p:nth-of-type(1) {
+  margin-top: 40px;
+}
+
+.akad-nikah p:nth-of-type(3) {
+  margin-top: 45px;
+}
+
+.akad-nikah p:nth-of-type(4) {
+  margin-top: 10px;
+}
+
+.resepsi .icon {
+  width: 170px;
+  margin-bottom: 5px;
+}
+
+.resepsi h2 {
+  font-size: 40px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 100;
+  margin-bottom: 10px;
+  opacity: 0;
+  /* Mulai dengan transparan */
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.5);
+    /* Mulai dari kecil */
+  }
+
+  100% {
+    transform: scale(1);
+    /* Ukuran normal di akhir */
+  }
+}
+
+.resepsi .akad-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px;
+  display: block;
+  margin-left: 70px;
+  opacity: 0;
+  /* Mulai dengan transparan */
+}
+
+.resepsi h2.animate,
+.resepsi .akad-text.animate {
+  animation: scaleUp 1.5s ease-in-out forwards;
+  /* Hanya sekali, dengan forwards */
+  opacity: 1;
+  /* Menjadi terlihat */
+}
+
+.resepsi p {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.resepsi p:nth-of-type(1) {
+  margin-top: 40px;
+}
+
+.resepsi p:nth-of-type(3) {
+  margin-top: 45px;
+}
+
+.resepsi p:nth-of-type(4) {
+  margin-top: 10px;
+}
+
+.container2 {
+  background: url('../images/bg 3.png') no-repeat center center/cover;
+  color: #fff;
+  padding: 40px;
+  margin-top:-1em;
+}
+
+.countdown-content {
+  text-align: center;
+  font-family: 'Playfair Display', serif;
+}
+
+.countdown-content h2 {
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+#countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 40px;
+  font-size: 30px;
+  font-family: 'Playfair Display', serif;
+}
+
+.countdown-box {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.countdown-box span {
+  display: block;
+}
+
+.countdown-box .label {
+  font-size: 18px;
+  text-transform: uppercase;
+}
+
+.reminder-button {
+  background-color: #fff;
+  color: #333;
+  padding: 7px 15px;
+  border-radius: 5px;
+  border: none;
+  margin-top: 40px;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 13px;
+  animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.reminder-button:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+.reminder-button i {
+  margin-right: 10px;
+}
+
+.divider {
+  width: 13%;
+  border: 1px solid #fff;
+  opacity: 0.5;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+
+.screen-prewed {
+  height: 50em;
+  width: 98.9vw;
+  object-fit: cover;
+  overflow: hidden;
+  object-position: 0% 55%;
+ 
+}
+
+/* adding css */
+.screen-prewed1-img {
+  height: 50em;
+  width: 98.9vw;
+  object-fit: cover;
+  overflow: hidden;
+  object-position: 0% 50%;
+}
+.rsvp-section {
+  padding: 40px 15px;
+  text-align: center;
+  margin-bottom: -1px;
+  background: url('../images/bg4.png') no-repeat center center / cover;
+  height: 950px;
+}
+
+.rsvp-container {
+  max-width: 900px;
+  height: 670px;
+  margin: 0 auto;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin-top: 65px;
+  padding: 0px 20px;
+}
+
+.rsvp-section h2 {
+  font-family: 'YourFont', serif;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.rsvp-container p {
+  font-family: 'YourFont', serif;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.rsvp-container input,
+.rsvp-container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.attendance-options label {
+  font-size: 16px;
+}
+
+.rsvp-submit {
+  margin-top: 15px;
+  display: flex;
+  justify-content: end;
+}
+
+.rspv-btn {
+  background-color: #333;
+  color: #fff;
+  font-size: 12px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  animation: pulse 4s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.rsvp-btn:hover {
+  background-color: #555;
+}
+
+.custom-select {
+  width: 45px;
+  font-size: 17px;
+}
+
+.gift-section {
+  padding: 50px 0;
+  background: url('../images/bg 3.png') no-repeat center center/cover;
+  color: #fff;
+  text-align: center;
+}
+
+.gift-container h2 {
+  font-family: 'YourFont', serif;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.gift-container p {
+  font-family: 'YourFont', serif;
+  font-size: 23px;
+  margin-bottom: 20px;
+}
+
+.reminder-button:hover {
+  background-color: #555;
+  color: #fff;
+}
+
+.gift-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.gift-buttons .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  /* Warna teks tombol */
+  transition: background-color 0.3s;
+  /* Transisi untuk hover */
+  animation: pulse 4s infinite;
+  /* Tambahkan efek animasi */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    /* Ukuran normal */
+  }
+
+  50% {
+    transform: scale(1.1);
+    /* Membesar di tengah animasi */
+  }
+
+  100% {
+    transform: scale(1);
+    /* Kembali ke ukuran normal */
+  }
+}
+
+.gift-buttons .button:hover {
+  background-color: #555;
+  /* Warna latar belakang saat hover */
+  color: #fff;
+  /* Warna teks saat hover */
+}
+
+.gift-buttons img.kado-icon {
+  width: 15px;
+  /* Ukuran ikon Kado */
+  height: 15px;
+  /* Tinggi ikon Kado */
+  margin-right: 8px;
+  /* Jarak antara ikon dan teks */
+}
+
+.gift-buttons img.bank-icon {
+  width: 15px;
+  /* Ukuran ikon Bank */
+  height: 15px;
+  /* Tinggi ikon Bank */
+  margin-right: 8px;
+  /* Jarak antara ikon dan teks */
+}
+
+.message-section {
+  background-color: #f9f9f9;
+  padding: 50px 0;
+  text-align: center;
+}
+
+.message-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #e0e0e0;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.message-container h2 {
+  font-family: 'YourFont', serif;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.message-container textarea,
+.message-container input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.message-submit {
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.message-submit:hover {
+  background-color: #555;
+}
+
+.rsvp-container-rsvp h2 {
+  font-size: 40px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 100;
+  margin-bottom: 10px;
+}
+
+.rsvp-title {
+  font-size: 1px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 100;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.rsvp .icon {
+  width: 250px;
+  margin-bottom: -20px;
+  margin-top: -70px;
+}
+
+.audio-icon-wrapper {
+  width: 4rem;
+  height: 4rem;
+  font-size: 4rem;
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2rem;
+  cursor: pointer;
+  color: white;
+  opacity: 0.5;
+  mix-blend-mode: difference;
+  animation: rotating 4s linear infinite;
+  transform-origin: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+}
+
+.audio-icon-wrapper {
+  width: 4rem;
+  height: 4rem;
+  font-size: 4rem;
+  position: fixed;
+  bottom: 2.5rem;
+  right: 2rem;
+  cursor: pointer;
+  color: white;
+  opacity: 0.5;
+  mix-blend-mode: difference;
+  animation: rotating 4s linear infinite;
+  transform-origin: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+}
+
+@keyframes rotating {
+  from {
+    transform: 0;
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rsvp h2 {
+  font-size: 40px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 100;
+  margin-bottom: 10px;
+  opacity: 0;
+}
+
+@keyframes scaleUp {
+  0% {
+    transform: scale(0.5);
+    /* Mulai dari kecil */
+    opacity: 0;
+  }
+
+  60% {
+    transform: scale(1.1);
+    /* Membesar sedikit untuk efek dinamis */
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1);
+    /* Ukuran normal di akhir */
+    opacity: 1;
+  }
+}
+
+.rsvp .rsvp-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px;
+  display: block;
+  margin-left: 70px;
+  opacity: 0;
+}
+
+.rsvp h2.animate,
+.rsvp .rsvp-text.animate {
+  animation: scaleUp 1.5s ease-in-out forwards;
+  /* Sama seperti animasi pada Akad Nikah */
+  opacity: 1;
+  /* Menjadi terlihat */
+}
+
+.rsvp p {
+  font-size: 20px;
+  margin: 1px 0;
+  margin-top: 40px;
+  margin-bottom: 1px;
+}
+
+.rsvp-container form label1 {
+  display: block;
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 40px;
+}
+
+.rsvp-container p {
+  text-align: left;
+  font-size: 18px;
+  margin-top: 15px;
+}
+
+.rsvp-container form label {
+  display: block;
+  text-align: left;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.divider1 {
+  width: 100%;
+  border: 1px solid #1c1c1c;
+  opacity: 0.5;
+  margin-left: 2px;
+  margin-top: 1px;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+input[type='text'] {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #1c1c1c;
+  opacity: 0.5;
+  padding: 8px 0;
+  background-color: transparent;
+  font-size: 16px;
+  margin-top: 1px;
+}
+
+select.custom-select {
+  width: 6%;
+  border: none;
+  border-bottom: 1px solid #1c1c1c;
+  opacity: 0.5;
+  padding: 8px 0;
+  background-color: transparent;
+  font-size: 16px;
+  margin-top: 1px;
+}
+
+input[type='text']:focus,
+select.custom-select:focus {
+  outline: none;
+  border-bottom: 1px solid #333;
+  opacity: 1;
+}
+
+.rsvp-section .p {
+  font-size: 20px;
+}
+
+.attendance-options {
+  text-align: left;
+  margin-top: -10px;
+}
+
+.attendance-items {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 1px;
+  margin-top: -20px;
+  flex-wrap: nowrap;
+  margin-top: -10px;
+}
+
+.attendance-item {
+  display: flex;
+  align-items: center;
+  margin-right: 50px;
+  /* Adjust to control space between items */
+}
+
+.attendance-item label {
+  margin-left: 30px;
+  /* Space between radio button and label text */
+  white-space: nowrap;
+  /* Prevents the label text from wrapping */
+}
+
+.attendance-item input[type='radio'] {
+  margin-right: -20px;
+  transform: scale(0.8);
+}
+
+.no-bold {
+  margin-left: 10px;
+  font-size: 20px;
+  font-weight: normal;
+}
+
+.photo-gallery {
+  display: flex;
+  justify-content: space-evenly;
+  gap: 5px;
+}
+
+.photo-item {
+  margin: 30px;
+}
+
+.photo-item img {
+  width: 100%;
+  height: auto;
+}
+
+.gift h2 {
+  font-size: 40px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 100;
+  margin-bottom: 10px;
+}
+
+.gift .gift-text {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px;
+  display: block;
+  margin-left: 120px;
+  margin-bottom: 40px;
+}
+
+.gift .icon {
+  width: 80px;
+  margin-bottom: -1px;
+  margin-top: -30px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.rsvp-section1 {
+  background-color: #1c1c1c;
+  color: white;
+  text-align: center;
+  font-family: 'Times New Roman', serif;
+  margin-bottom: 60px;
+  margin-top: -10px;
+  margin-left: -30px;
+  margin-right: -30px;
+}
+
+.quote {
+  margin-bottom: 10px;
+  color: #cfcfcf;
+  font-size: 18px;
+  padding: 30px 0px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-gap: 10px;
+  margin: 0 auto;
+}
+
+.photo1 img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.photo2 img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.photo3 img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.photo4 img {
+  width: 100%;
+  height: 450px;
+  object-fit: cover;
+}
+
+.photo1 img,
+.photo2 img,
+.photo3 img,
+.photo4 img {
+  border-radius: 8px;
+  filter: grayscale(100%);
+}
+
+.thank {
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.thanks {
+  font-family: 'Great Vibes', cursive;
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+h2 {
+  font-family: 'Times New Roman', serif;
+  font-size: 20px;
+  font-weight: lighter;
+}
+
+.comment-section {
+  max-width: 900px;
+  margin: 30px auto;
+  background-color: #efefef;
+  border-radius: 10px;
+  margin-top: 65px;
+  padding: 0px 20px;
+  border-radius: 10px;
+  text-align: center;
+  justify-content: center;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.icon1 {
+  width: 130px;
+  height: 130px;
+  margin-bottom: 2px;
+  margin-top: -85px;
+}
+
+.section-title {
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+textarea,
+input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+button1 {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button1:hover {
+  background-color: #333;
+}
+
+.messages {
+  margin-top: 20px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.message {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../images/lingkaran.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.2;
+  z-index: 1;
+  animation: moveBackground 20s linear infinite;
+}
+
+@keyframes moveBackground {
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 100% 100%;
+  }
+}
+
+.timeline {
+  list-style: none;
+  padding: 1.4rem 0;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  width: 1px;
+  background-color: #ffffff;
+  left: 50%;
+}
+
+.timeline li {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+.timeline li::before,
+.timeline li::after {
+  content: '';
+  display: table;
+}
+
+.timeline li::after {
+  clear: both;
+}
+
+.timeline li .timeline-image {
+  width: 160px;
+  height: 160px;
+  background-color: #000000;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.timeline li .timeline-panel {
+  width: 40%;
+  float: left;
+  border: 1px solid #000000;
+  padding: 2rem;
+  position: relative;
+  border-radius: 8px;
+  background-color: #000000;
+}
+
+.timeline li .timeline-panel::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  border-top: 15px solid transparent;
+  border-left: 15px solid #000000;
+  border-right: 0 solid #000000;
+  border-bottom: 15px solid transparent;
+  top: 80px;
+  right: -15px;
+}
+
+.timeline li .timeline-panel::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  border-top: 14px solid transparent;
+  border-left: 14px solid #000000;
+  border-right: 0 solid #000000;
+  border-bottom: 14px solid transparent;
+  top: 81px;
+  right: -13px;
+}
+
+.timeline li.timeline-inverted .timeline-panel {
+  float: right;
+}
+
+.timeline li.timeline-inverted .timeline-panel::before {
+  border-left-width: 0;
+  border-right-width: 15px;
+  left: -15px;
+  right: auto;
+}
+
+.timeline li.timeline-inverted .timeline-panel::after {
+  border-left-width: 0;
+  border-right-width: 14px;
+  left: -13px;
+  right: auto;
+}
+
+ /* Footer */
+    .footer {
+    background-color: #000;
+    width: 100%; /* Ubah lebar menjadi 100% */
+    color: #fff;
+    text-align: center;
+    /* Menambahkan padding agar konten lebih rapi */
+    margin: 0; /* Menghapus margin agar lebar footer memenuhi layar */
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar keseluruhan */
+}
+
+
+.footer .small-text {
+  font-size: 12px;
+  /* Smaller text for 'Made With By' */
+  color: #666;
+  /* Lighter color for this part */
+}
+
+.footer-logo {
+  margin-top: 10px;
+  /* Space between text and logo */
+  width: 80px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.footer p {
+  color: #666;
+  font-size: 12px;
+  margin-bottom: -10px;
+}
+
+.thank {
+  text-align: center;
+  padding: 20px 0;
+  margin-top: -10px;
+  margin-bottom: 5px;
+  /* Sesuaikan warna latar */
+}
+
+.thank .thanks {
+  font-size: 14px;
+  /* Ukuran teks lebih kecil */
+  margin-bottom: 5px;
+  font-style: italic;
+  color: #333;
+  margin-bottom: -5px;
+  /* Sesuaikan warna teks */
+}
+
+.thank h2 {
+  font-size: 15px;
+  /* Ukuran lebih kecil */
+  font-weight: bold;
+  color: #000;
+  /* Sesuaikan warna teks */
+  margin-top: 0;
+}
+
+ /* Footer */
+    .footer {
+    background-color: #000;
+    width: 100%; /* Ubah lebar menjadi 100% */
+    color: #fff;
+    text-align: center;
+    /* Menambahkan padding agar konten lebih rapi */
+    margin: 0; /* Menghapus margin agar lebar footer memenuhi layar */
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar keseluruhan */
+}
+
+
+.footer .small-text {
+  font-size: 14px;
+  color: #ccc;
+  /* Warna teks yang lebih terang */
+}
+
+.footer .logo {
+  margin-top: 6px;
+  width: 100px;
+  /* Ukuran logo lebih kecil */
+  height: auto;
+}
+
+.footer p {
+  font-size: -5px;
+  margin-top: 10px;
+  color: #cccccc;
+}
+
+.music-button {
+  padding: 10px 20px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  /* Make the button round */
+  cursor: pointer;
+  font-size: 20px;
+  position: fixed;
+  /* Use fixed positioning */
+  bottom: 150px;
+  /* Distance from the bottom (adjusted higher) */
+  right: 20px;
+  /* Distance from the right */
+  z-index: 1000;
+  /* Ensure the button stays on top of other elements */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+}
+
+.music-button:hover {
+  background-color: #555;
+}
+
+.story {
+  position: relative;
+  text-align: center;
+  background-color: #ccc;
+}
+
+.story h2 {
+  font-size: 40px;
+  font-family: 'Playfair Display', serif;
+  color: #000000;
+  margin-bottom: 30px;
+  font-weight: bold;
+  color: #333;
+  position: relative;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: linear-gradient(to right, #000000, #6d6c6c);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.story h2::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 4px;
+  background-color: #000000;
+  margin: 20px auto 0;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.story h2:hover::after {
+  width: 120px;
+}
+
+.story h2 {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1s forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.story p {
+  font-family: 'Times New Roman', serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #666;
+  margin-top: 20px;
+  max-width: 800px;
+  line-height: 1.8;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.2s forwards;
+}
+
+.timeline {
+  list-style: none;
+  padding: 1.4rem 0;
+  margin-top: 1rem;
+  position: relative;
+}
+
+.timeline::before {
+  content: '';
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  width: 1px;
+  background-color: #ccc;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.timeline li {
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+.timeline li::before,
+.timeline li::after {
+  content: '';
+  display: table;
+}
+
+.timeline li::after {
+  clear: both;
+}
+
+.timeline li .timeline-image {
+  width: 160px;
+  height: 160px;
+  background-color: #ccc;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  /* Tambahkan bayangan */
+  transition: transform 0.3s ease;
+  /* Efek hover */
+}
+
+.timeline li:hover .timeline-image {
+  transform: translateX(-50%) scale(1.05);
+  /* Perbesar saat di-hover */
+}
+
+.timeline li .timeline-panel {
+  width: 40%;
+  float: left;
+  border: 1px solid #ccc;
+  padding: 2rem;
+  position: relative;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  /* Tambahkan bayangan */
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.timeline li:hover .timeline-panel {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  /* Tambahkan shadow saat hover */
+  transform: translateY(-5px);
+  /* Mengangkat elemen saat di-hover */
+}
+
+.timeline li .timeline-panel::before {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  border-top: 15px solid transparent;
+  border-left: 15px solid #ccc;
+  border-right: 0 solid #ccc;
+  border-bottom: 15px solid transparent;
+  top: 80px;
+  right: -15px;
+}
+
+.timeline li .timeline-panel::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  border-top: 14px solid transparent;
+  border-left: 14px solid #fff;
+  border-right: 0 solid #fff;
+  border-bottom: 14px solid transparent;
+  top: 81px;
+  right: -13px;
+}
+
+.timeline li.timeline-inverted .timeline-panel {
+  float: right;
+}
+
+.timeline li.timeline-inverted .timeline-panel::before {
+  border-left-width: 0;
+  border-right-width: 15px;
+  left: -15px;
+  right: auto;
+}
+
+.timeline li.timeline-inverted .timeline-panel::after {
+  border-left-width: 0;
+  border-right-width: 14px;
+  left: -13px;
+  right: auto;
+}
+
+.timeline li .timeline-panel h4 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #333;
+  /* Warna teks yang lebih gelap */
+  margin-bottom: 1rem;
+}
+
+.timeline li .timeline-panel p {
+  font-size: 1rem;
+  color: #666;
+  /* Warna teks lebih lembut */
+  line-height: 1.6;
+}
+
+.icon5 {
+  width: 130px;
+  height: 130px;
+  margin-bottom: 2px;
+  margin-top: -85px;
+}
+
+.section-title {
+  font-size: 20px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 800px;
+  margin: auto;
+  align-items: flex-start;
+}
+
+.textarea {
+  width: 600%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  max-width: 800px;
+  height: 150px;
+}
+
+.input {
+  width: 600%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  max-width: 800px;
+  height: 40px;
+}
+
+.button5 {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  max-width: 100px;
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
+
+.button5:hover {
+  background-color: #333;
+}
+
+.messages {
+  margin-top: 20px;
+  max-height: 350px;
+  overflow-y: auto;
+  background-color: #f4f4f4;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: auto;
+}
+
+.message {
+  background-color: rgb(255, 255, 255);
+  padding: 15px 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  width: 100%;
+  height: auto;
+  word-wrap: break-word;
+  /* Agar teks panjang tetap berada dalam kolom */
+  width: 100%;
+  /* Lebar penuh dalam container */
+  position: relative;
+}
+
+.gallery-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 50px;
+  font-family: 'Playfair Display', serif;
+  font-weight: 100;
+  margin-bottom: 10px;
+  /* margin-left: -45px; */
+}
+
+@media (max-width: 768px) {
+  .card1 {
+    background-color: rgba(128, 128, 128, 1);
+    /* Warna latar belakang putih */
+    border: 1px solid #ccc;
+    /* Border abu-abu */
+    border-radius: 10px;
+    /* Sudut melengkung */
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    /* Bayangan lembut */
+    width: 40em;
+    height: 25em;
+    margin-top: 20em;
+    padding: 0em 0.01em;
+    position: relative;
+    top: -17em;
+  }
+
+  .profiles .social-icons {
+    margin-bottom: 25px;
+  }
+
+  .container5 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 20px;
+      text-align: center;
+      padding: 30px;
+      background: url('../images/bg1.png') no-repeat center center / cover;
+      height: fit-content;
+      height: 125em;
+    }
+
+  .profile-img {
+    width: 40%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  .rsvp-btn {
+    display: flex;
+  }
+
+  .rsvp-btn {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: pulse 4s infinite;
+    font-size: 9px;
+  }
+
+  .screen-prewed {
+    width: 100%;
+    height: 30em;
+    object-fit: cover;
+    object-position: center -27em;
+  }
+}
+
+@media (max-width: 480px) {
+  .mySlides {
+    position: relative;
+    /* Pastikan elemen memiliki posisi relatif */
+  }
+  
+.profile-img {
+  width: 40%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+  .container5 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 20px;
+      text-align: center;
+      padding: 30px;
+      background: url('../images/bg1.png') no-repeat center center / cover;
+      height: fit-content;
+      height: 95em;
+    }
+   
+.rspv-btn {
+  background-color: #333;
+  color: #fff;
+  font-size: 12px;
+  padding: 9px 13px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  animation: pulse 4s infinite;
+  margin-right: -15em
+}
+
+
+  .screen-prewed {
+      height: 25em;
+      width: 100vw;
+      object-fit: cover;
+      overflow: hidden;
+      object-position: 0% 80%;
+  }
+  
+    /* adding css */
+    .screen-prewed1-img {
+      height: 30em;
+      width: 98.9vw;
+      object-fit: cover;
+      overflow: hidden;
+      object-position: 0% 45%;
+    }
+
+  .mySlides img {
+    width: 100%;
+    height: 80em;
+    object-fit: cover;
+    object-position: center -15em;
+  }
+
+  /* Tambahkan gradien di atas gambar */
+  .mySlides::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(128, 128, 128, 1) 5%, rgba(128, 128, 128, 0) 30%), linear-gradient(to top, rgba(128, 128, 128, 1) 30%, rgba(128, 128, 128, 0) 60%);
+    z-index: 1;
+    /* Pastikan gradien di atas gambar */
+    pointer-events: none;
+    /* Agar klik tidak terhalang gradien */
+  }
+
+  .card1 p {
+    font-size: 11px;
+    /* Ukuran font */
+    line-height: 2em;
+    color: rgb(65, 65, 65);
+    text-align: center;
+    /* Memusatkan teks */
+  }
+
+  .card1 {
+    background-color: rgba(128, 128, 128, 1);
+    /* Warna latar belakang putih */
+    border: 1px solid #ccc;
+    /* Border abu-abu */
+    border-radius: 10px;
+    /* Sudut melengkung */
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    /* Bayangan lembut */
+    width: 20em;
+    height: 25em;
+    margin-top: 20em;
+    padding: 0em 0.01em;
+    position: relative;
+    top: -14em;
+    /* Geser elemen lebih ke atas */
+  }
+
+  .card2 {
+    background-color: rgba(128, 128, 128, 1);
+    height: 25em;
+    justify-content: center;
+    /* Memusatkan secara horizontal */
+    align-items: center;
+    display: flex;
+    margin-top: -10em;
+  }
+
+  .container {
+      text-align: center;
+      padding: 30px;
+      background: url('../images/bg 5.png') no-repeat center center / cover;
+      height: 80em;
+      margin-top: 0px;
+  }
+
+  .container2 {
+      background: url('../images/bg 3.png') no-repeat center center/cover;
+      width: 100%;
+      color: #fff;
+      margin-top: -1em; /* Mengatur margin-top ke -1em */
+      margin-left: 0; /* Menjaga agar tidak ada margin samping */
+      margin-right: 0; /* Menjaga agar tidak ada margin samping */
+      box-sizing: border-box;
+  }
+  
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 400%;
+    max-width: 300px;
+    max-height: 210px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease;
+    /* Animasi fade-in */
+  }
+
+  .modal-content p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    font-size: -1.5em !important;
+  }
+
+  .modal-content h2 {
+    text-align: center;
+    margin-top: 1em;
+    margin-right: -1.5em;
+    margin-bottom: -10em;
+  }
+
+  .modal-image {
+    width: 100px;
+    /* Ukuran gambar */
+    height: auto;
+    margin-bottom: -3em;
+    /* Jarak bawah gambar */
+    border-radius: 50%;
+    margin-top: -10px;
+    /* Jika ingin gambar berbentuk lingkaran */
+  }
+
+  .title {
+    font-size: 20px;
+    font-family: 'Playfair Display', serif;
+    color: #000000;
+    margin-bottom: 45px;
+    margin-top: 30px;
+  }
+
+  .title-and {
+    font-size: 25px;
+    font-family: 'Playfair Display', serif;
+    color: #000000;
+    margin-bottom: 40px;
+    margin-top: -40px;
+  }
+
+  .profile-img {
+    width: 60%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+  }
+
+  .name {
+    font-family: 'Great Vibes', cursive;
+    margin: 5px 0;
+    font-size: 25px !important;
+  }
+
+  .profile h2 {
+      font-size: 12px;
+      margin-bottom: 10px;
+      font-weight: bold;
+      color: #333;
+      text-align: center;
+  }
+
+  .profile p {
+    font-size: 10px;
+    color: #777;
+  }
+
+  .container1 {
+    text-align: center;
+    padding: 10px;
+    background: url('../images/bg 7.png') no-repeat center center / cover;
+    height: 970px;
+    margin-top: -30px;
+  }
+
+  .social-icons {
+    margin-top: 10px;
+  }
+
+  .social-icons img {
+    width: 15px;
+    margin: 0 5px;
+    margin-bottom: 50px;
+  }
+
+  .profile1 .h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    margin-right: 50px;
+  }
+
+  .profile1 p {
+    font-size: 10px;
+    color: #777;
+  }
+
+  .event-section {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  .event-card {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 240px;
+    text-align: center;
+    margin-bottom: -30px;
+  }
+
+  .event-card h2 {
+    font-size: 25px;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+
+  .event-card p {
+    font-size: 13px;
+    margin: 5px 0;
+  }
+
+  .event-card strong {
+    font-size: 18px;
+  }
+
+  .event-card .button {
+    background-color: #fff;
+    color: #333;
+    padding: 10px 1px;
+    border-radius: 5px;
+    font-size: 9px;
+    cursor: pointer;
+    border: none;
+    margin-top: 20px;
+    animation: pulse 4s infinite;
+    margin-bottom: 20px;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      /* Ukuran normal */
+    }
+
+    50% {
+      transform: scale(1.1);
+      /* Membesar di tengah animasi */
+    }
+
+    100% {
+      transform: scale(1);
+      /* Kembali ke ukuran normal */
+    }
+  }
+
+  .event-card .button:hover {
+    background-color: #555;
+    color: #fff;
+  }
+
+  .event-card .icon {
+    width: px;
+    margin-bottom: 20px;
+  }
+
+  .event-card .icons {
+    width: 200px;
+    margin-bottom: 20px;
+  }
+
+  .akad-nikah .icon {
+    width: 70px;
+    margin-bottom: 5px;
+  }
+
+  .akad-nikah h2 {
+    font-size: 30px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 100;
+    margin-bottom: 10px;
+    margin-left: -50px;
+    margin-top: -5px;
+  }
+
+  .akad-nikah .akad-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 25px;
+    display: block;
+    margin-left: 100px;
+  }
+
+  .akad-nikah p {
+    font-size: 11px;
+    margin: 1px 0;
+  }
+
+  .akad-nikah p:nth-of-type(1) {
+    margin-top: 20px;
+  }
+
+  .akad-nikah p:nth-of-type(3) {
+    margin-top: 25px;
+  }
+
+  .akad-nikah p:nth-of-type(4) {
+    margin-top: 7px;
+  }
+
+  .resepsi .icon {
+    width: 110px;
+    margin-bottom: 5px;
+  }
+
+  .resepsi h2 {
+    font-size: 30px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 100;
+    margin-bottom: 10px;
+    margin-left: -50px;
+  }
+
+  .resepsi .akad-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 25px;
+    display: block;
+    margin-left: 100px;
+  }
+
+  .resepsi p {
+    font-size: 11px;
+    margin: 1px 0;
+  }
+
+  .resepsi p:nth-of-type(1) {
+    margin-top: 20px;
+  }
+
+  .resepsi p:nth-of-type(3) {
+    margin-top: 25px;
+  }
+
+  .resepsi p:nth-of-type(4) {
+    margin-top: 7px;
+  }
+
+  .countdown-content h2 {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    margin-top: 5px;
+    margin-left: -5px;
+  }
+
+  #countdown {
+    display: flex;
+    justify-content: center;
+    gap: 0px;
+    font-size: 15px;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: -20px;
+    margin-left: 20px;
+  }
+
+  .countdown-box {
+    text-align: center;
+    margin-right: 20px;
+  }
+
+  .countdown-box span {
+    display: block;
+  }
+
+  .countdown-box .label {
+    font-size: 5px;
+    text-transform: uppercase;
+  }
+
+  .reminder-button {
+    background-color: #fff;
+    color: #333;
+    padding: 4px 10px;
+    border-radius: 3px;
+    border: none;
+    margin-top: 50px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 7px;
+    animation: pulse 4s infinite;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      /* Ukuran normal */
+    }
+
+    50% {
+      transform: scale(1.1);
+      /* Membesar di tengah animasi */
+    }
+
+    100% {
+      transform: scale(1);
+      /* Kembali ke ukuran normal */
+    }
+  }
+
+  .reminder-button:hover {
+    background-color: #555;
+    color: #fff;
+  }
+
+  .reminder-button i {
+    margin-right: 10px;
+  }
+
+  .rsvp-section {
+    text-align: center;
+    padding: 30px;
+    background: url('../images/bg 10.png') no-repeat center center / cover;
+    height: 720px;
+    margin-bottom: 15px;
+  }
+
+  .rsvp-container {
+    max-width: 300px;
+    height: 600px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 0px 20px;
+  }
+
+  .rsvp-section p {
+    font-size: 8px;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: -10px;
+    margin-bottom: -20px;
+  }
+
+  .rsvp-section h2 {
+    font-family: 'YourFont', serif;
+    font-size: 36px;
+    margin-bottom: 10px;
+  }
+
+  .rsvp-container p {
+    font-family: 'YourFont', serif;
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .rsvp-container input,
+  .rsvp-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .attendance-options label {
+    font-size: 16px;
+  }
+
+  .rsvp-submit {
+    justify-content: center;
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      /* Ukuran normal */
+    }
+
+    50% {
+      transform: scale(1.1);
+      /* Membesar di tengah animasi */
+    }
+
+    100% {
+      transform: scale(1);
+      /* Kembali ke ukuran normal */
+    }
+  }
+
+  .rsvp-btn:hover {
+    background-color: #555;
+  }
+
+  .rsvp-container-rsvp h2 {
+    font-size: 40px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 100;
+    margin-bottom: 10px;
+  }
+
+  .rsvp-title {
+    font-size: 1px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 100;
+    margin-bottom: 10px;
+    margin-left: -45px;
+    margin-top: 10px;
+  }
+
+  .rsvp .icon {
+    width: 150px;
+    margin-bottom: -3px;
+    margin-top: 20px;
+  }
+
+  .rsvp h2 {
+    font-size: 30px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 100;
+    margin-bottom: 10px;
+  }
+
+  .rsvp .rsvp-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 25px;
+    display: block;
+    margin-left: 90px;
+  }
+
+  .rsvp p {
+    font-size: 10px;
+    margin: 1px 0;
+    margin-top: 40px;
+    margin-bottom: 1px;
+  }
+
+  .rsvp-container p {
+    text-align: left;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-left: -45px;
+    margin-right: -50px;
+    margin-bottom: -20px;
+  }
+
+  .rsvp-container form label1 {
+    display: block;
+    text-align: left;
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: -15px;
+    margin-bottom: -3px;
+  }
+
+  .rsvp-section .p {
+    font-size: 20px;
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  input[type='text'] {
+    width: 110%;
+    border: none;
+    border-bottom: 1px solid #1c1c1c;
+    opacity: 0.5;
+    padding: 5px 0;
+    background-color: transparent;
+    font-size: 12px;
+    margin-top: -5px;
+    margin-left: -1.2em;
+  }
+
+  select.custom-select {
+    width: 16%;
+    border: none;
+    border-bottom: 1px solid #1c1c1c;
+    opacity: 0.5;
+    padding: 8px 0;
+    background-color: transparent;
+    font-size: 13px;
+    margin-top: 1px;
+  }
+
+  input[type='text']:focus,
+  select.custom-select:focus {
+    outline: none;
+    border-bottom: 1px solid #333;
+    opacity: 1;
+  }
+
+  .rsvp-container p {
+    text-align: left;
+    font-size: 10px;
+    margin-top: 15px;
+    margin-bottom: 1em;
+    margin-top: 3em;
+    line-height: 2em;
+  }
+
+  .custom-select {
+    width: 30px;
+    font-size: 10px;
+    margin-left: -15px;
+    margin-bottom: -15px;
+  }
+
+  .attendance-options {
+    text-align: left;
+    margin-top: -10px;
+    margin-bottom: -5px;
+  }
+
+  .attendance-items {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: -15px;
+    margin-top: -20px;
+    flex-wrap: nowrap;
+    margin-top: -10px;
+  }
+
+  .attendance-item {
+    display: flex;
+    align-items: center;
+    margin-right: 1em;
+
+    /* Adjust to control space between items */
+  }
+
+  .attendance-item label {
+    margin-left: 25px;
+    /* Space between radio button and label text */
+    white-space: nowrap;
+
+    /* Prevents the label text from wrapping */
+  }
+
+  .attendance-item input[type='radio'] {
+    margin-right: -20px;
+    transform: scale(0.8);
+  }
+
+  .no-bold {
+    margin-left: 10px;
+    font-size: 12px !important;
+  }
+
+  .gift-section {
+    background: url('../images/bg 12.png') no-repeat center center/cover;
+    background-size: 700%;
+    color: #fff;
+    padding: 50px;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .gift h2 {
+    font-size: 40px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 100;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+
+  .gift p {
+    font-size: 10px;
+    text-align: center;
+    margin-bottom: -10px;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: -1px;
+    margin-bottom: 10px;
+  }
+
+  .gift .gift-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 25px;
+    display: block;
+    margin-left: 85px;
+  }
+
+  .reminder-button:hover {
+    background-color: #555;
+    color: #fff;
+  }
+
+  .button-kado {
+    margin-left: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: -10px;
+    /* Spasi antar tombol */
+    border-radius: 5px;
+    /* Menambahkan radius untuk sudut tombol */
+    background-color: #fff;
+    /* Warna latar belakang tombol */
+    color: #333;
+    /* Warna teks tombol */
+    transition: background-color 0.3s;
+    /* Transisi untuk hover */
+    animation: pulse 4s infinite;
+    font-size: 7px;
+  }
+
+  .button-bank {
+    margin-left: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: -10px;
+    /* Spasi antar tombol */
+    border-radius: 5px;
+    /* Menambahkan radius untuk sudut tombol */
+    background-color: #fff;
+    /* Warna latar belakang tombol */
+    color: #333;
+    /* Warna teks tombol */
+    transition: background-color 0.3s;
+    /* Transisi untuk hover */
+    animation: pulse 4s infinite;
+    font-size: 7px;
+  }
+
+  .gift-buttons .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    border: none;
+    cursor: pointer;
+    margin-right: -10px;
+    /* Spasi antar tombol */
+    border-radius: 5px;
+    /* Menambahkan radius untuk sudut tombol */
+    background-color: #fff;
+    /* Warna latar belakang tombol */
+    color: #333;
+    /* Warna teks tombol */
+    transition: background-color 0.3s;
+    /* Transisi untuk hover */
+    animation: pulse 4s infinite;
+    font-size: 7px;
+
+    /* Tambahkan efek animasi */
+  }
+
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      /* Ukuran normal */
+    }
+
+    50% {
+      transform: scale(1.1);
+      /* Membesar di tengah animasi */
+    }
+
+    100% {
+      transform: scale(1);
+      /* Kembali ke ukuran normal */
+    }
+  }
+
+  .gift-buttons .button:hover {
+    background-color: #555;
+    /* Warna latar belakang saat hover */
+    color: #fff;
+    /* Warna teks saat hover */
+  }
+
+  .gift-buttons img.kado-icon {
+    width: 8px;
+    /* Ukuran ikon Kado */
+    height: 10px;
+    /* Tinggi ikon Kado */
+    margin-right: 5px;
+    /* Jarak antara ikon dan teks */
+  }
+
+  .gift .icon {
+    margin-top: -10px;
+  }
+
+  .gift-buttons img.bank-icon {
+    width: 8px;
+    /* Ukuran ikon Bank */
+    height: 10px;
+    /* Tinggi ikon Bank */
+    margin-right: px;
+    /* Jarak antara ikon dan teks */
+  }
+
+  .photo-gallery {
+  }
+
+  .photo-item {
+    margin: 2px;
+    justify-items: center;
+  }
+
+  .photo-item img {
+    width: 100%;
+
+    height: 110px;
+
+    max-width: 600px;
+    /* Set a max width to ensure all photos are of similar size */
+  }
+
+  .story {
+    position: relative;
+    text-align: center;
+  }
+
+  .thank {
+    text-align: center;
+    padding: 20px 0;
+    margin-top: -5px;
+    margin-bottom: 5px;
+    /* Sesuaikan warna latar */
+  }
+
+  .thank .thanks {
+    font-size: 14px;
+    /* Ukuran teks lebih kecil */
+    margin-bottom: 5px;
+    font-style: italic;
+    color: #333;
+    margin-bottom: -5px;
+    /* Sesuaikan warna teks */
+  }
+
+  .thank h2 {
+    font-size: 15px;
+    /* Ukuran lebih kecil */
+    font-weight: bold;
+    color: #000;
+    /* Sesuaikan warna teks */
+    margin-top: 0;
+  }
+
+ /* Footer */
+    .footer {
+    background-color: #000;
+    width: 100%; /* Ubah lebar menjadi 100% */
+    color: #fff;
+    text-align: center;
+    /* Menambahkan padding agar konten lebih rapi */
+    margin: 0; /* Menghapus margin agar lebar footer memenuhi layar */
+    box-sizing: border-box; /* Memastikan padding tidak menambah lebar keseluruhan */
+}
+
+  .footer .small-text {
+    font-size: 8px;
+    color: #ccc;
+    margin-top: -60px;
+    /* Warna teks yang lebih terang */
+  }
+
+  .footer .logo {
+    margin-top: 10px;
+    width: 50px;
+    /* Ukuran logo lebih kecil */
+    height: auto;
+  }
+
+  .footer p {
+    font-size: 15px !important;
+    margin-top: 10px;
+    color: #cccccc;
+  }
+
+  .story h2 {
+    font-size: 40px;
+    font-family: 'Playfair Display', serif;
+    color: #000000;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #333;
+    position: relative;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(to right, #000000, #6d6c6c);
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+  .story h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: #000000;
+    margin: 20px auto 0;
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .story h2:hover::after {
+    width: 120px;
+  }
+
+  .story h2 {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .story p {
+    font-family: 'Times New Roman', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: #666;
+    margin-top: 20px;
+    max-width: 800px;
+    line-height: 1.8;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 20px;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1.2s forwards;
+  }
+
+  .timeline {
+    list-style: none;
+    padding: 1.4rem 0;
+    margin-top: 1rem;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    width: 1px;
+    background-color: #ccc;
+    left: 50%;
+    transform: translateX(-50%);
+    height: ;
+  }
+
+  .timeline li {
+    margin-bottom: 2.5rem;
+    position: relative;
+  }
+
+  .timeline li::before,
+  .timeline li::after {
+    content: '';
+    display: table;
+  }
+
+  .timeline li::after {
+    clear: both;
+  }
+
+  .timeline li .timeline-image {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    /* Tambahkan bayangan */
+    transition: transform 0.3s ease;
+    /* Efek hover */
+  }
+
+  .timeline li:hover .timeline-image {
+    transform: translateX(-50%) scale(1.05);
+    /* Perbesar saat di-hover */
+  }
+
+  .timeline li .timeline-panel {
+    margin: 0 -15px;
+    width: 40%;
+    float: left;
+    border: 1px solid #ccc;
+    padding: 2rem;
+    position: relative;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    /* Tambahkan bayangan */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+
+  .timeline li:hover .timeline-panel {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    /* Tambahkan shadow saat hover */
+    transform: translateY(-5px);
+    /* Mengangkat elemen saat di-hover */
+  }
+
+  .timeline li .timeline-panel::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    border-top: 15px solid transparent;
+    border-left: 15px solid #ccc;
+    border-right: 0 solid #ccc;
+    border-bottom: 15px solid transparent;
+    top: 80px;
+    right: -15px;
+  }
+
+  .timeline li .timeline-panel::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    border-top: 14px solid transparent;
+    border-left: 14px solid #fff;
+    border-right: 0 solid #fff;
+    border-bottom: 14px solid transparent;
+    top: 81px;
+    right: -13px;
+  }
+
+  .timeline li.timeline-inverted .timeline-panel {
+    float: right;
+  }
+
+  .timeline li.timeline-inverted .timeline-panel::before {
+    border-left-width: 0;
+    border-right-width: 15px;
+    left: -15px;
+    right: auto;
+  }
+
+  .timeline li.timeline-inverted .timeline-panel::after {
+    border-left-width: 0;
+    border-right-width: 14px;
+    left: -13px;
+    right: auto;
+  }
+
+  .timeline li .timeline-panel h3 {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1rem;
+    margin-left: -20px;
+    margin-top: -10px;
+  }
+
+  .timeline li .timeline-panel span {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 1rem;
+    margin-left: -10px;
+    margin-top: -10px;
+    justify-content: left;
+    text-align: center;
+  }
+
+  .timeline li .timeline-panel p {
+    font-size: 10px;
+    color: #666;
+    /* Warna teks lebih lembut */
+    margin-right: -40px;
+    margin-left: -40px;
+    justify-content: left;
+    text-align: justify;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Playfair Display', serif;
+    background-color: #f0f0f0;
+  }
+
+  .section h1 {
+    font-size: 50px;
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    margin-bottom: 10px;
+    margin-top: 25px;
+    line-height: 1.2;
+  }
+
+  .divider {
+    width: 30%;
+    margin: 10px auto;
+    border: 1px solid #fff;
+    opacity: 0.5;
+  }
+
+  .gallery-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 100;
+    margin-bottom: 10px;
+    /* margin-left: -45px; */
+  }
+
+  .h2 {
+    font-size: 30px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 100;
+    margin-bottom: 10px;
+    margin-left: -50px;
+    margin-top: 35px;
+  }
+
+  .gallery-text {
+    font-family: 'Great Vibes', cursive;
+    font-size: 20px;
+    display: block;
+    margin-left: 90px;
+  }
+
+  .text {
+    font-size: 10px !important;
+  }
+
+  .small-title {
+    font-size: 40px !important;
+    font-weight: bold;
+    margin-right: -35px;
+  }
+
+  .app-container .form {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@media (max-width: 380px) {
+  .container {
+    text-align: center;
+    padding: 30px;
+    background: url('../images/bg 5.png') no-repeat center center / cover;
+    height: 75em;
+    margin-top: 0px;
+  }
+
+
+
+  .container5 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 20px;
+      text-align: center;
+      padding: 30px;
+      background: url('../images/bg1.png') no-repeat center center / cover;
+      height: fit-content;
+      height: 103em;
+    }
+
+  .container2 {
+    background: url('../images/bg 3.png') no-repeat center center/cover;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .container5 {
+    text-align: center;
+    padding: 30px;
+    background: url('../images/bg1.png') no-repeat center center / cover;
+  }
+}
+
+/* adding css */
+.screen-prewed1-img {
+  width: 100%;
+}
+
+.button-kado {
+  cursor: pointer;
+  color: #333;
+  padding: 10px 15px;
+  /* Warna teks tombol */
+  transition: background-color 0.3s;
+  /* Transisi untuk hover */
+  animation: pulse 4s infinite;
+  /* Tambahkan efek animasi */
+}
+
+.button-bank {
+  cursor: pointer;
+  color: #333;
+  padding: 10px 15px;
+  /* Warna teks tombol */
+  transition: background-color 0.3s;
+  /* Transisi untuk hover */
+  animation: pulse 4s infinite;
+  /* Tambahkan efek animasi */
+}
+
+/* gift Modal */
+
+#giftModal {
+  display: none;
+  /* Tersembunyi secara default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Transparansi latar belakang */
+}
+
+#giftModal .modal-content {
+  color: black;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 400%;
+  max-width: 450px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+  /* Animasi fade-in */
+}
+
+#giftModal .modal-content p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  font-size: 15px;
+}
+
+#giftModal modal-content h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (max-width: 480px) {
+  #giftModal .modal-content {
+    height: fit-content;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease;
+    /* Animasi fade-in */
+  }
+
+  .container {
+      text-align: center;
+      padding: 30px;
+      background: url('../images/bg 5.png') no-repeat center center / cover;
+      height: 70em;
+      margin-top: 0px;
+  }
+      
+.profile-img {
+  width: 40%;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+  #giftModal .modal-content p {
+    margin-top: 18px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    font-size: -1.5em !important;
+  }
+
+  #giftModal .modal-content h2 {
+    margin: auto;
+    margin-top: 30px;
+    font-size: 26px;
+  }
+}
+
+/* rekening Modal */
+#rekeningModal {
+  display: none;
+  /* Tersembunyi secara default */
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Transparansi latar belakang */
+}
+
+#rekeningModal .modal-content {
+  color: black;
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 400%;
+  max-width: 450px;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 0.3s ease;
+  /* Animasi fade-in */
+}
+
+#rekeningModal .modal-content p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+#rekeningModal modal-content h2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+@media (max-width: 480px) {
+  #rekeningModal .modal-content {
+    height: fit-content;
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+    max-width: 300px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease;
+    /* Animasi fade-in */
+  }
+
+  #rekeningModal .modal-content p {
+    margin-top: 18px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+    position: relative;
+    font-size: -1.5em !important;
+  }
+
+  #rekeningModal .modal-content h2 {
+    margin: auto;
+    margin-top: 30px;
+    font-size: 26px;
+  }
+}
