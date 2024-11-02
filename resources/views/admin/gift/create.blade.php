@@ -13,7 +13,7 @@
     <form action="/gift/create" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="event_id" class="form-label fw-bold">Event ID</label>
+            <label for="event_id" class="form-label fw-bold">Nama Acara</label>
             <select class="form-select bg-white" aria-label="Default select example" name="event_id">
                 <option value="">Pilih Event</option>
                 @foreach($events as $event)
@@ -31,9 +31,14 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="account_number" class="form-label fw-bold">Nomor Rekening</label>
-            <input type="text" value="{{ old('account_number') }}" name="account_number" class="bg-white form-control @error('account_number') is-invalid @enderror" placeholder="Masukkan Nomor Rekening">
-            @error('account_number')
+            <label for="category" class="form-label fw-bold">Kategori</label>
+            <select name="category" id="category" class="bg-white form-control @error('category') is-invalid @enderror">
+                <option value="">Pilih Kategori</option>
+                @foreach(App\Models\Gifts::CATEGORIES as $value => $label)
+                    <option value="{{ $value }}" {{ old('category') == $value ? 'selected' : '' }}>{{ $label }}</option>
+                @endforeach
+            </select>
+            @error('category')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
                 </div>

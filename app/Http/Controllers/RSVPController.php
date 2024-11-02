@@ -47,19 +47,20 @@ class RsvpController extends Controller
 
     public function storedata(Request $request)
     {
-        // Ubah total_guest jika konfirmasi adalah 'Tidak Hadir'
-        if ($request->confirmation === 'no') {
+        // Ensure confirmation is "yes" or "no" before insertion
+        $confirmationValue = $request->confirmation === 'yes' ? 'yes' : 'no';
+        $request->merge(['confirmation' => $confirmationValue]);
+
+        // Update total_guest if confirmation is "no"
+        if ($confirmationValue === 'no') {
             $request->merge(['total_guest' => 0]);
         }
 
-        $confirmationValue = $request->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir';
-        $request->merge(['confirmation' => $confirmationValue]);
-
-        // Validasi input
+        // Validation
         $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'required|string|max:15',
-            'confirmation' => 'required|string',
+            'confirmation' => 'required|in:yes,no',
             'total_guest' => [
                 'required_if:confirmation,yes',
                 'integer',
@@ -72,13 +73,12 @@ class RsvpController extends Controller
             'event_id' => 'required|exists:event_details,id',
         ]);
 
-        // Cek apakah nomor telepon sudah ada
+        // Check if the phone number already exists
         $existingRsvp = Rsvp::where('phone_number', $request->phone_number)
                             ->where('event_id', $request->event_id)
                             ->first();
 
         if ($existingRsvp) {
-            // Simpan data baru ke session jika user setuju mengedit
             session([
                 'new_data' => $request->all(),
                 'existing_rsvp' => $existingRsvp,
@@ -89,13 +89,11 @@ class RsvpController extends Controller
             return redirect()->route('rsvp.index');
         }
 
-        // Jika nomor telepon belum ada, simpan data baru
+        // Store new data if phone number is not in use
         $newRsvp = Rsvp::create($request->all());
         session()->forget(['new_data', 'existing_rsvp', 'phone_exists', 'message']);
-        // Store rsvp_id in session
         session(['rsvp_id' => $newRsvp->id]);
 
-        // Redirect to the RSVP view with a success message
         return redirect('/rsvps')->with('success', 'RSVP berhasil disimpan!');
     }
 
@@ -138,7 +136,7 @@ class RsvpController extends Controller
         $rsvp->total_guest = $request->total_guest;
 
         $rsvp->save();
-        return redirect()->route('rsvp.index', ['#rsvp'])->with('success', 'Reservasi berhasil diperbarui.');
+        return redirect('/rsvps')->with('success', 'Reservasi berhasil diperbarui.');
 
     }
 

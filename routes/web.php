@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ThemeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\RSVPController;
@@ -53,6 +54,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/genders', [AdminController::class, 'showGenders']);
 
     // Routes untuk Event Owner
+    Route::get('/themes', [ThemeController::class, 'index']);
+    Route::get('/themes/create', [ThemeController::class, 'create']);
+    Route::post('/themes/create', [ThemeController::class, 'store']);
+    Route::get('/themes/delete/{id}', [ThemeController::class, 'destroy']);
+    Route::get('/themes/edit/{id}', [ThemeController::class, 'edit']);
+    Route::put('/themes/edit/{id}', [ThemeController::class, 'update']);
+
+    // Routes untuk Event Owner
     Route::get('/owners', [EventOwnerController::class, 'index']);
     Route::get('/owner/create', [EventOwnerController::class, 'create']);
     Route::post('/owner/create', [EventOwnerController::class, 'store']);
@@ -96,11 +105,11 @@ Route::middleware('auth')->group(function () {
 
     // Routes untuk RSVP
     Route::get('/rsvps', [RsvpController::class, 'views']);
-    // Route::get('/rsvps/create', [RsvpController::class, 'create'])->name('rsvps.create');
-    // Route::post('/rsvps/create', [RsvpController::class, 'storedata'])->name('rsvps.storedata');
-    // Route::get('/rsvps/edit/{id}', [RsvpController::class, 'edit'])->name('rsvps.edit');
-    // Route::put('/rsvps/edit/{id}', [RsvpController::class, 'update'])->name('rsvps.update');
-    // Route::get('/rsvps/delete/{id}', [RsvpController::class, 'destroy'])->name('rsvps.destroy');
+    Route::get('/rsvps/create', [RsvpController::class, 'create'])->name('rsvps.create');
+    Route::post('/rsvps/create', [RsvpController::class, 'storedata'])->name('rsvps.storedata');
+    Route::get('/rsvps/edit/{id}', [RsvpController::class, 'edit'])->name('rsvps.edit');
+    Route::put('/rsvps/edit/{id}', [RsvpController::class, 'update'])->name('rsvps.update');
+    Route::get('/rsvps/delete/{id}', [RsvpController::class, 'destroy'])->name('rsvps.destroy');
 
     // Routes untuk Comment
     Route::get('/comments', [CommentController::class, 'views']);

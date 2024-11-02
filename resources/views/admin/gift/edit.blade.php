@@ -13,7 +13,7 @@
         @csrf
         @method("put")
         <div class="mb-3">
-            <label for="event_id" class="form-label fw-bold">Event ID</label>
+            <label for="event_id" class="form-label fw-bold">Nama Acara</label>
             <select class="form-select bg-white" name="event_id">
                 <option value="">Pilih Event</option>
                 @foreach($events as $event)
@@ -27,7 +27,7 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="name" class="form-label fw-bold">Nama Pemberi Hadiah</label>
+            <label for="name" class="form-label fw-bold">Nama</label>
             <input type="text" value="{{ $gift->name }}" name="name" class="bg-white form-control @error('name') is-invalid @enderror" placeholder="Masukkan Nama">
             @error('name')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
@@ -36,14 +36,19 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="account_number" class="form-label fw-bold">Nomor Rekening</label>
-            <input type="text" value="{{ $gift->account_number }}" name="account_number" class="bg-white form-control @error('account_number') is-invalid @enderror" placeholder="Masukkan Nomor Rekening">
-            @error('account_number')
+            <label for="category" class="form-label fw-bold">Kategori</label>
+            <select name="category" id="category" class="bg-white form-control @error('category') is-invalid @enderror">
+                <option value="">Pilih Kategori</option>
+                <option value="Uang" {{ $gift->category == 'Uang' ? 'selected' : '' }}>Uang</option>
+                <option value="Barang" {{ $gift->category == 'Barang' ? 'selected' : '' }}>Barang</option>
+            </select>
+            @error('category')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
                 </div>
             @enderror
         </div>
+        
         <div class="mb-3">
             <label for="notes" class="form-label fw-bold">Catatan</label>
             <textarea name="notes" class="bg-white form-control @error('notes') is-invalid @enderror" placeholder="Tambahkan Catatan">{{ $gift->notes }}</textarea>

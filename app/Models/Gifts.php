@@ -14,9 +14,20 @@ class Gifts extends Model
     protected $fillable = [
         'event_id',
         'name',
-        'account_number',
+        'category',
         'notes',
     ];
+
+    const CATEGORIES = [
+        'Uang' => 'Uang',
+        'Physical' => 'Physical',
+    ];
+    
+    // Optionally, create a method to get all categories
+    public static function getCategories()
+    {
+        return self::CATEGORIES;
+    }
 
     // Relasi dengan tabel EventDetails
     public function event()
