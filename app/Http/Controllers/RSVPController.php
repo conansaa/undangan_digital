@@ -24,7 +24,7 @@ class RsvpController extends Controller
         if (!$event) {
             return redirect()->back()->with('event_error', 'Event not found.');
         }
-        return view('RSVP & Comment.rsvp', compact('rsvps', 'event', 'comments'));
+        return view('RSVP_Comment.rsvp', compact('rsvps', 'event', 'comments'));
 
     }
 
@@ -33,6 +33,11 @@ class RsvpController extends Controller
         $rsvps = Rsvp::all();
         return view('admin.rsvp.rsvp', compact('rsvps'));
     }
+    public function invitation()
+    {
+        return view('RSVP_Comment.tema2');
+    }
+
 
     public function create()
     {
@@ -142,7 +147,6 @@ class RsvpController extends Controller
      */
     public function store(Request $request)
     {
-        // Ubah total_guest jika konfirmasi adalah 'Tidak Hadir'
         if ($request->confirmation === 'no') {
             $request->merge(['total_guest' => 0]);
         }
@@ -150,7 +154,6 @@ class RsvpController extends Controller
         $confirmationValue = $request->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir';
         $request->merge(['confirmation' => $confirmationValue]);
 
-        // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'required|string|max:15',
@@ -167,13 +170,11 @@ class RsvpController extends Controller
             'event_id' => 'required|exists:event_details,id',
         ]);
 
-        // Cek apakah nomor telepon sudah ada
         $existingRsvp = Rsvp::where('phone_number', $request->phone_number)
                             ->where('event_id', $request->event_id)
                             ->first();
 
         if ($existingRsvp) {
-            // Simpan data baru ke session jika user setuju mengedit
             session([
                 'new_data' => $request->all(),
                 'existing_rsvp' => $existingRsvp,
@@ -184,13 +185,10 @@ class RsvpController extends Controller
             return redirect()->route('rsvp.index');
         }
 
-        // Jika nomor telepon belum ada, simpan data baru
         $newRsvp = Rsvp::create($request->all());
         session()->forget(['new_data', 'existing_rsvp', 'phone_exists', 'message']);
-        // Store rsvp_id in session
         session(['rsvp_id' => $newRsvp->id]);
 
-        // Redirect to the RSVP view with a success message
         return redirect()->route('rsvp.index')->with('success', 'RSVP berhasil dikirim!');
     }
 
