@@ -241,10 +241,6 @@
                 modal.style.display = "none";
             }
         };
-    </script>
-    
-    
-    <script>
         document.addEventListener('DOMContentLoaded', function () {
             const confirmationRadios = document.getElementsByName('confirmation');
             const totalGuestInput = document.getElementById('total_guest');
@@ -262,7 +258,6 @@
                 }
             }
     
-            // Set default state to show total guest dropdown
             totalGuestInput.style.display = 'block';
     
             confirmationRadios.forEach(radio => {
