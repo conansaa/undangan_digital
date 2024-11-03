@@ -185,9 +185,9 @@ class RsvpController extends Controller
 
         $newRsvp = Rsvp::create($request->all());
         session()->forget(['new_data', 'existing_rsvp', 'phone_exists', 'message']);
-        session(['rsvp_id' => $newRsvp->id]);
+        session(['rsvp_id' => $newRsvp->id, 'success' => true]);
 
-        return redirect()->route('rsvp.index')->with('success', 'RSVP berhasil dikirim!');
+        return redirect()->route('rsvp.index');
     }
 
     public function confirmUpdate()

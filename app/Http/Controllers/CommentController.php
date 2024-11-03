@@ -14,8 +14,8 @@ class CommentController extends Controller
     public function index()
     {
         // Mengambil semua data komentar
-        $comments = Comments::all();
-        return response()->json($comments, 200);
+        $comments = Comments::orderBy('created_at', 'desc')->get();
+        return view('rsvp', compact('comments'));
     }
 
     /**
