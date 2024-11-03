@@ -36,7 +36,7 @@ class TimelineController extends Controller
             'title' => 'required|string|max:255',
             'date' => 'required|date',
             'description' => 'nullable|string',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Adjust the max size as needed
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:6048', // Adjust the max size as needed
         ]);
 
         // Handle the file upload if a photo is provided
@@ -101,7 +101,7 @@ class TimelineController extends Controller
             'title' => 'required|max:255',
             'date' => 'required|date',
             'description' => 'required',
-            'photo' => 'image|mimes:jpeg,png,jpg|max:2048', // optional jika mengubah foto
+            'photo' => 'image|mimes:jpeg,png,jpg|max:6048', // optional jika mengubah foto
         ]);
 
         // Ambil timeline berdasarkan id

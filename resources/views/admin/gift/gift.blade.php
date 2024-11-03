@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Kategori</div>
-                                    <div class="col-6">{{ $gift->account_number }}</div>
+                                    <div class="col-6">{{ $gift->category }}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Catatan</div>

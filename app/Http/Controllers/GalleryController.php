@@ -37,7 +37,7 @@ class GalleryController extends Controller
         $request->validate([
             'event_id' => 'required|exists:event_details,id',
             'section_id' => 'required|exists:section_ref,id',
-            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:6048',
             'description' => 'nullable|string',
         ]);
 
@@ -92,7 +92,7 @@ class GalleryController extends Controller
             'event_id' => 'required|exists:event_details,id',
             'section_id' => 'required|exists:section_ref,id',
             'description' => 'required|string|max:255',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:6048'
         ]);
     
         $gallery = Gallery::findOrFail($id);

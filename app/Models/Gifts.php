@@ -20,7 +20,7 @@ class Gifts extends Model
 
     const CATEGORIES = [
         'Uang' => 'Uang',
-        'Physical' => 'Physical',
+        'Barang' => 'Barang',
     ];
     
     // Optionally, create a method to get all categories
@@ -32,6 +32,6 @@ class Gifts extends Model
     // Relasi dengan tabel EventDetails
     public function event()
     {
-        return $this->belongsTo(EventDetails::class, 'id');
+        return $this->belongsTo(EventDetails::class, 'event_id');
     }
 }
