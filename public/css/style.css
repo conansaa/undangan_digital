@@ -80,7 +80,6 @@ body {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  /* Transparansi latar belakang */
 }
 
 /* Modal Content */
@@ -95,7 +94,6 @@ body {
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
   animation: fadeIn 0.3s ease;
-  /* Animasi fade-in */
 }
 
 .modal-content p {
@@ -126,6 +124,7 @@ body {
   margin-top: -10px;
   /* Jika ingin gambar berbentuk lingkaran */
 }
+
 
 /* Close Button */
 .close-btn {
@@ -2077,6 +2076,41 @@ button1:hover {
   cursor: pointer;
   animation: pulse 4s infinite;
   margin-right: -15em
+}
+.modal {
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+.modal-content h2 {
+  font-size: 25px !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center !important;
+  overflow: hidden;
+  position: relative;
+  margin-left: -1.5em;
+}
+
+.modal-content p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  top: -2em;
+  font-size: 10px !important;
 }
 
 

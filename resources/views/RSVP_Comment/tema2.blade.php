@@ -13,8 +13,8 @@
         <div class="content">
             <p class="wedding-ket">We invite you to the wedding of</p>
             <h1 class="wedding-title">Shinta & Irfan</h1>
-            <p class="wedding-date">Akad - 27 Desember 2024 <br>
-                Resepsi - 28 Desember 2024
+            <p class="wedding-date">{{$eventAkad->event_name}} - {{ \Carbon\Carbon::parse($eventAkad->event_date)->translatedFormat('j F Y') }} <br>
+                {{$eventResepsi->event_name}} - {{ \Carbon\Carbon::parse($eventResepsi->event_date)->translatedFormat('j F Y') }}
                 </p>
             <p class="wedding-to">Kepada Yth</p>
             <h2 class="wedding-from">Sinta Dewi</h2>
