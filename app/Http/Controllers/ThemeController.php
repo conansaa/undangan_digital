@@ -44,9 +44,7 @@ class ThemeController extends Controller
             'category' => $request->category,
             'color' => $request->color,
         ]);
-    
 
-        Theme::create($request->all());
         return redirect('/themes')->with('success', 'Theme created successfully!');
     }
 

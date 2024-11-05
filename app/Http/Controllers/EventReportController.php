@@ -39,6 +39,8 @@ class EventReportController extends Controller
             'month' => 'required|integer|min:1|max:12',
             'year' => 'required|integer|digits:4',
             'counter' => 'required|integer',
+            'progress_total' => 'required|integer',
+            'finish_total' => 'required|integer',
         ]);
 
         // Menyimpan data event report baru

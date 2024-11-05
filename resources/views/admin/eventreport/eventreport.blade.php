@@ -25,6 +25,8 @@
                 <th scope="col">Bulan</th>
                 <th scope="col">Tahun</th>
                 <th scope="col">Counter</th>
+                <th scope="col">Progres</th>
+                <th scope="col">Selesai</th>
                 <th scope="col" class="text-center">Aksi</th>
             </tr>
         </thead>
@@ -37,6 +39,8 @@
                     <td scope="col">{{ \Carbon\Carbon::createFromFormat('m', $report->month)->format('F') }}</td> <!-- Mengonversi bulan menjadi nama bulan -->
                     <td scope="col">{{ $report->year }}</td>
                     <td scope="col">{{ $report->counter }}</td>
+                    <td scope="col">{{ $report->progress_total }}</td>
+                    <td scope="col">{{ $report->finish_total }}</td>
                     <td scope="col" class="text-center">
                         <button type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#detailEventReport{{ $report->id }}">
                             <i class="fa-solid fa-eye"></i> <!-- Ikon View -->

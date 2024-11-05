@@ -16,6 +16,8 @@ class EventReports extends Model
         'month',
         'year',
         'counter',
+        'progress_total',
+        'finish_total',
     ];
 
     // Relasi dengan tabel RefEventType
