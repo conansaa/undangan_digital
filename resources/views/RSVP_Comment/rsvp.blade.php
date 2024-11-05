@@ -225,23 +225,20 @@
     </section>
     <script>
         function expandRSVP() {
-        const rsvpSection = document.querySelector('.rsvp-section');
-        const rsvpContainer = document.querySelector('.rsvp-container');
-        rsvpSection.classList.toggle('expanded');
-        rsvpContainer.classList.toggle('expanded');
-    }
+            const rsvpSection = document.querySelector('.rsvp-section');
+            const rsvpContainer = document.querySelector('.rsvp-container');
+            rsvpSection.classList.toggle('expanded');
+            rsvpContainer.classList.toggle('expanded');
+        }
 
-    // Check if phone_exists session is set to trigger expand
-    @if (session('phone_exists'))
-        document.addEventListener('DOMContentLoaded', function() {
-            expandRSVP();
-        });
-    @endif
+        @if (session('phone_exists'))
+            document.addEventListener('DOMContentLoaded', function() {
+                expandRSVP();
+            });
+        @endif
         window.onload = function() {
             @if (session('success'))
-                // Only display the modal if the session has a success message
                 document.getElementById("confirmationModal").style.display = "block";
-                // Clear the session variable to prevent the modal from appearing again on refresh
                 <?php session()->forget('success'); ?>
             @endif
         };
