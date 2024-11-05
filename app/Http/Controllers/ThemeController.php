@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Theme;
 use App\Models\EventDetails;
 use Illuminate\Http\Request;
+use Laravel\Prompts\Concerns\Themes;
 
 class ThemeController extends Controller
 {
@@ -22,11 +23,16 @@ class ThemeController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
+        
         $request->validate([
             'event_id' => 'required|exists:event_details,id',
             'name' => 'required|string|max:100',
             'description' => 'nullable|string',
             'max_images' => 'required|integer|min:1',
+            'tag' => 'nullable|string',
+            'category' => 'nullable|string', 
+            'color' => 'nullable|string',
         ]);
 
         Theme::create([
@@ -34,6 +40,9 @@ class ThemeController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'max_images' => $request->max_images,
+            'tag' => $request->tag,
+            'category' => $request->category,
+            'color' => $request->color,
         ]);
     
 
@@ -46,26 +55,58 @@ class ThemeController extends Controller
         return view('themes.show', compact('theme'));
     }
 
-    public function edit(Theme $theme)
+    public function edit($id)
     {
-        return view('themes.edit', compact('theme'));
+        // Ambil data tema berdasarkan id
+        $theme = Theme::findOrFail($id);
+        
+        // Ambil semua event details untuk dropdown event_id
+        $events = EventDetails::all();
+
+        // Kirim data ke view
+        return view('admin.theme.edit', compact('theme', 'events'));
     }
 
-    public function update(Request $request, Theme $theme)
+    public function update(Request $request, $id)
     {
+        // Validasi input
         $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'max_images' => 'required|integer|min:1',
+            'event_id' => 'required',
+            'name' => 'required|max:255',
+            'description' => 'required',
+            'max_images' => 'required|integer',
+            'tag' => 'required',
+            'category' => 'required',
+            'color' => 'required',
         ]);
 
-        $theme->update($request->all());
-        return redirect()->route('themes.index')->with('success', 'Theme updated successfully!');
+        // Ambil tema berdasarkan id
+        $theme = Theme::findOrFail($id);
+
+        // Update data tema
+        $theme->event_id = $request->event_id;
+        $theme->name = $request->name;
+        $theme->description = $request->description;
+        $theme->max_images = $request->max_images;
+        $theme->tag = $request->tag;
+        $theme->category = $request->category;
+        $theme->color = $request->color;
+
+        // Simpan perubahan ke database
+        $theme->save();
+
+        // Redirect ke halaman daftar tema dengan pesan sukses
+        return redirect('/themes')->with('success', 'Tema berhasil diperbarui.');
     }
 
-    public function destroy(Theme $theme)
+    public function destroy($id)
     {
+        $theme = Theme::find($id);
+
+        if (!$theme) {
+            return response()->json(['message' => 'Timeline not found'], 404);
+        }
         $theme->delete();
-        return redirect()->route('themes.index')->with('success', 'Theme deleted successfully!');
+        return redirect('/themes')->with('success', 'Theme deleted successfully!');
     }
 }

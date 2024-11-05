@@ -50,8 +50,8 @@ class EventDetails extends Model
         return $this->hasMany(Timelines::class, 'event_id');
     }
 
-    public function theme()
-{
-    return $this->belongsTo(Theme::class, 'theme_id');
-}
+    public function themes()
+    {
+        return $this->belongsTo(Theme::class, 'theme_id');
+    }
 }

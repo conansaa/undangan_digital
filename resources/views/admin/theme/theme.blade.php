@@ -24,6 +24,9 @@
                 <th scope="col">Nama Tema</th>
                 <th scope="col">Deskripsi</th>
                 <th scope="col">Maksimal Gambar</th>
+                <th scope="col">Tag</th>
+                <th scope="col">Kategori</th>
+                <th scope="col">Warna</th>
                 <th scope="col" class="text-center">Aksi</th>
             </tr>
         </thead>
@@ -35,6 +38,9 @@
                     <td scope="col">{{ $theme->name }}</td>
                     <td scope="col">{{ Str::limit($theme->description, 50) }}</td>
                     <td scope="col">{{ $theme->max_images }}</td>
+                    <td scope="col">{{ $theme->tag }}</td> 
+                    <td scope="col">{{ $theme->category }}</td> 
+                    <td scope="col"><span style="background-color: {{ $theme->color }}; padding: 2px 10px; border-radius: 5px;">{{ $theme->color }}</span></td>
                     <td scope="col" class="text-center">
                         <a href="/themes/edit/{{ $theme->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
                         <a href="/themes/delete/{{ $theme->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
@@ -65,6 +71,18 @@
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Maksimal Gambar</div>
                                     <div class="col-6">{{ $theme->max_images }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 col-md-4 label fw-bold mb-3">Tag</div>
+                                    <div class="col-6">{{ $theme->tag }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 col-md-4 label fw-bold mb-3">Kategori</div>
+                                    <div class="col-6">{{ $theme->category }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-5 col-md-4 label fw-bold mb-3">Warna</div>
+                                    <div class="col-6"><span style="background-color: {{ $theme->color }}; padding: 2px 10px; border-radius: 5px;">{{ $theme->color }}</span></div>
                                 </div>
                             </div>
                         </div>

@@ -10,10 +10,28 @@ class Theme extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description', 'max_images'];
+    protected $fillable = [
+        'event_id',
+        'name',
+        'description',
+        'max_images',
+        'tag',
+        'category',
+        'color',
+    ];
 
-    public function events()
+    public function event()
     {
-        return $this->hasMany(EventDetails::class, 'event_id');
+        return $this->belongsTo(EventDetails::class, 'event_id');
+    }
+
+    public function getTagsAttribute($value)
+    {
+        return explode(',', $value);
+    }
+
+    public function setTagsAttribute($value)
+    {
+        $this->attributes['tag'] = implode(',', $value);
     }
 }

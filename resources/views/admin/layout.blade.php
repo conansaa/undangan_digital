@@ -20,6 +20,11 @@
                     {{-- <a href="/owners" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-user-tie me-2"></i> Pemilik Acara</li>
                     </a> --}}
+
+                    <a href="/themes" class="text-decoration-none text-white">
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-palette me-2"></i> Tema</li>
+                    </a>
+                    
     
                     <a href="/event" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-calendar-day me-2"></i> Detail Acara</li>

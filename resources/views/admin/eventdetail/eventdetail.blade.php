@@ -94,14 +94,14 @@
     <!-- Box Container with spacing and link buttons -->
     <div class="row gy-3">
         <!-- Tema Box -->
-        <div class="col-md-6">
+        {{-- <div class="col-md-6">
             <div class="p-3 border rounded shadow-sm bg-light">
                 <div class="d-flex justify-content-between align-items-center">
                     <span class="fw-bold">Tema</span>
                     <a href="/themes" class="btn btn-link p-0 text-decoration-none">Lihat Detail</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Pemilik Acara Box -->
         <div class="col-md-6">

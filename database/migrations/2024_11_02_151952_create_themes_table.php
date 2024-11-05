@@ -17,6 +17,9 @@ return new class extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->integer('max_images');
+            $table->string('tag')->nullable(); 
+            $table->string('category')->nullable();
+            $table->string('color')->nullable(); 
             $table->timestamps();
 
             $table->foreign('event_id')->references('id')->on('event_details')->onDelete('cascade');
