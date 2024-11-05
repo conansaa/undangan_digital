@@ -750,6 +750,25 @@ body {
   background: url('../images/bg4.png') no-repeat center center / cover;
   height: 950px;
 }
+.rsvp-section,
+.rsvp-container {
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+.rsvp-section.expanded {
+  padding-bottom: 30px; /* Space at the bottom of rsvp-section */
+  min-height: 1200px; /* Adjust height for the rsvp-section */
+}
+
+.rsvp-container.expanded {
+  padding-bottom: 50px; /* Space at the bottom of rsvp-container */
+  min-height: 1000px; /* Adjust height for the rsvp-container */
+}
+
+#rsvp .rsvp-container ul {
+  list-style-type: none; /* Removes bullets */
+  padding-left: 0;       /* Removes left padding */
+}
 
 .rsvp-container {
   max-width: 900px;
@@ -789,7 +808,18 @@ body {
 .rsvp-submit {
   margin-top: 15px;
   display: flex;
+  gap: 10px;
   justify-content: end;
+}
+.button5 {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #202229; 
+  color: #fff;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  text-align: center;
 }
 
 .rspv-btn {
@@ -1940,6 +1970,21 @@ button1:hover {
   .profiles .social-icons {
     margin-bottom: 25px;
   }
+  .rsvp-section,
+      .rsvp-container {
+          transition: all 0.3s ease; /* Smooth transition */
+      }
+      
+      .rsvp-section.expanded {
+        padding-bottom: 30px; /* Space at the bottom of rsvp-section */
+        min-height: 1000px; /* Adjust height for the rsvp-section */
+      }
+      
+      .rsvp-container.expanded {
+        padding-bottom: 50px; /* Space at the bottom of rsvp-container */
+        min-height: 850px; /* Adjust height for the rsvp-container */
+      }
+
 
   .container5 {
       display: flex;
@@ -1987,6 +2032,22 @@ button1:hover {
     position: relative;
     /* Pastikan elemen memiliki posisi relatif */
   }
+  .rsvp-submit {
+    margin-top: 30px;
+    gap: 10px;
+    display: flex;
+    justify-content: end;
+  }
+  .button5 {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #202229; /* Matches your dark gray button color */
+    color: #fff;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
   
 .profile-img {
   width: 40%;

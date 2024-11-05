@@ -190,19 +190,30 @@ class RsvpController extends Controller
         return redirect()->route('rsvp.index');
     }
 
-    public function confirmUpdate()
+    public function confirmUpdate(Request $request)
     {
         $newData = session('new_data');
         $existingRsvp = session('existing_rsvp');
 
         if ($newData && $existingRsvp) {
-            $existingRsvp->update($newData);
+            $updatedData = [
+                'name' => $request->input('name', $newData['name']),
+                'phone_number' => $newData['phone_number'], 
+                'confirmation' => $request->input('confirmation', $newData['confirmation']),
+                'total_guest' => $request->input('total_guest', $newData['total_guest']),
+                'event_id' => $newData['event_id'], 
+            ];
+
+            $existingRsvp->update($updatedData);
+
             session()->forget(['new_data', 'existing_rsvp', 'phone_exists', 'message']);
+
             return redirect()->route('rsvp.index', ['#rsvp'])->with('success', 'Data berhasil diperbarui!');
         }
 
         return redirect()->route('rsvp.index')->with('error', 'Terjadi kesalahan dalam memperbarui data.');
     }
+
 
     public function cancelUpdate()
     {

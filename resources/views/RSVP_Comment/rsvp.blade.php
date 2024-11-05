@@ -201,8 +201,10 @@
                             <li>Konfirmasi: {{ session('existing_rsvp')->confirmation }}</li>
                             <li>Jumlah Tamu: {{ session('existing_rsvp')->total_guest }}</li>
                         </ul>
+                        <div class="rsvp-submit">
                         <button formaction="{{ route('rsvp.confirmUpdate') }}" formmethod="POST" class="button5">Edit Data</button>
                         <button formaction="{{ route('rsvp.cancelUpdate') }}" formmethod="POST" class="button5">Batalkan</button>
+                    </div>
                     @else
                         <div class="rsvp-submit">
                             <button type="submit" class="rspv-btn">Kirim</button>
@@ -222,6 +224,19 @@
         </div>
     </section>
     <script>
+        function expandRSVP() {
+        const rsvpSection = document.querySelector('.rsvp-section');
+        const rsvpContainer = document.querySelector('.rsvp-container');
+        rsvpSection.classList.toggle('expanded');
+        rsvpContainer.classList.toggle('expanded');
+    }
+
+    // Check if phone_exists session is set to trigger expand
+    @if (session('phone_exists'))
+        document.addEventListener('DOMContentLoaded', function() {
+            expandRSVP();
+        });
+    @endif
         window.onload = function() {
             @if (session('success'))
                 // Only display the modal if the session has a success message
