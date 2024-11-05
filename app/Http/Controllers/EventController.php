@@ -64,6 +64,16 @@ class EventController extends Controller
 
         return response()->json($event, 200);
     }
+    public function showTgl()
+    {
+        // Fetch the akad and resepsi events from the database
+        $akadEvent = EventDetails::find(2);
+        $resepsiEvent = EventDetails::find(1);
+
+        // Pass them to the view
+        return view('RSVP_Comment.rsvp', compact('akadEvent', 'resepsiEvent'));
+    }
+    
 
     public function edit($id)
     {

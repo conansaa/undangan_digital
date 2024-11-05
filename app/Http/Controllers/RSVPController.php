@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\EventDetails;
+use App\Models\EventOwnerDetails;
+use App\Models\Gifts;
+use App\Models\Timelines;
 use App\Models\Rsvp;
 use App\Models\Comments;
 use Illuminate\Http\Request;
@@ -19,12 +22,35 @@ class RsvpController extends Controller
         $comments = Comments::with('rsvp')->get(); // Include related RSVP data
 
         // Fetch event details
-        $event = DB::table('event_details')->where('id', 1)->first();
+        $eventResepsi = DB::table('event_details')->where('id', 1)->first();
+        $eventAkad = DB::table('event_details')->where('id', 2)->first();
 
-        if (!$event) {
+        $eventBride = DB::table('event_owner_details')->where('id', 1)->first();
+        $eventGroom = DB::table('event_owner_details')->where('id', 2)->first();
+
+        $giftBarang = DB::table('gifts')->where('id', 1)->first();
+        $giftTf = DB::table('gifts')->where('id', 2)->first();
+
+        $timelines = DB::table('timelines')->get();
+
+
+        if (!$eventAkad) {
             return redirect()->back()->with('event_error', 'Event not found.');
         }
-        return view('RSVP_Comment.rsvp', compact('rsvps', 'event', 'comments'));
+        if (!$eventResepsi) {
+            return redirect()->back()->with('event_error', 'Event not found.');
+        }
+        return view('RSVP_Comment.rsvp', compact(
+            'eventAkad',
+            'eventResepsi',
+            'eventBride',
+            'eventGroom', 
+            'rsvps',
+            'giftBarang',
+            'giftTf',
+            'timelines',
+            'comments'
+        ));
 
     }
 
@@ -35,7 +61,12 @@ class RsvpController extends Controller
     }
     public function invitation()
     {
-        return view('RSVP_Comment.tema2');
+        $eventResepsi = DB::table('event_details')->where('id', 1)->first();
+        $eventAkad = DB::table('event_details')->where('id', 2)->first();
+        return view('RSVP_Comment.tema2', compact(
+            'eventAkad',
+            'eventResepsi'
+        ));
     }
 
 
@@ -194,12 +225,19 @@ class RsvpController extends Controller
     {
         $newData = session('new_data');
         $existingRsvp = session('existing_rsvp');
+        $confirmation = $request->input('confirmation', $newData['confirmation']);
+
+        if ($confirmation === 'yes') {
+            $confirmation = 'Hadir';
+        } elseif ($confirmation === 'no') {
+            $confirmation = 'Tidak Hadir';
+        }
 
         if ($newData && $existingRsvp) {
             $updatedData = [
                 'name' => $request->input('name', $newData['name']),
                 'phone_number' => $newData['phone_number'], 
-                'confirmation' => $request->input('confirmation', $newData['confirmation']),
+                'confirmation' => $confirmation,
                 'total_guest' => $request->input('total_guest', $newData['total_guest']),
                 'event_id' => $newData['event_id'], 
             ];

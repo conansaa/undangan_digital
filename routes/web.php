@@ -40,6 +40,7 @@ Route::post('/clear-modal-session', function () {
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::get('/comment', [CommentController::class, 'index'])->name('comment.index');
 
+
 Route::get('/dashboard', [AdminController::class, 'showDashboard'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');

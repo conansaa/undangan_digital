@@ -19,8 +19,8 @@
             <div class="text-overlay">
                 <p class="wedding-ket">The wedding of</p>
                 <h1 class="wedding-title">Shinta & Irfan</h1>
-                <p class="wedding-date">Akad - 27 Desember 2024 <br>
-                    Resepsi - 28 Desember 2024
+                <p class="wedding-date">{{$eventAkad->event_name}} - {{ \Carbon\Carbon::parse($eventAkad->event_date)->translatedFormat('j F Y') }}<br>
+                    {{$eventResepsi->event_name}} - {{ \Carbon\Carbon::parse($eventResepsi->event_date)->translatedFormat('j F Y') }}
                 </p>
             </div>
 
@@ -53,8 +53,8 @@
             <div class="profile">
                 <img src="{{ asset('images/177A8539.jpg') }}" alt="Bride" class="profile-img bride-img">
                 <p class="name">Shinta</p>
-                <h2>Shinta Amalia Kusuma Wardhani</h2>
-                <p>Anak pertama dari 2 bersaudara dari<br>Bapak Ngimron Sholeh<br>& Ibu Sri Puji Astutik</p>
+                {!! $eventBride->owner_name !!}
+                <p>Anak pertama dari 2 bersaudara<br>{!! $eventBride->parents_name !!}</p>
                 <div class="social-icons">
                     <a href="https://www.instagram.com/shintaamaliaw/?utm_source=ig_web_button_share_sheet"><img
                             src="{{ asset('images/ig.png') }}" alt="Instagram"></a>
@@ -63,8 +63,8 @@
                 <div class="profile">
                     <img src="{{ asset('images/177A8676.jpg') }}" alt="Groom" class="profile-img groom-img">
                     <p class="name">Irfan</p>
-                    <h2>Muhammad Irfan Hilman</h2>
-                    <p>Anak pertama dari 5 bersaudara<br>Bapak Heri Sumekar<br>& Ibu Erlina Rokhmah</p>
+                    {!! $eventGroom->owner_name !!}
+                    <p>Anak pertama dari 5 bersaudara<br>{!! $eventGroom->parents_name !!}</p>
                     <div class="social-icons">
                         <a href="https://www.instagram.com/irfan224h/?utm_source=ig_web_button_share_sheet"><img
                                 src="{{ asset('images/ig.png') }}" alt="Instagram"></a>
@@ -80,11 +80,9 @@
             <div class="event-card akad-nikah">
                 <img src="{{ asset('images/ring.png') }}" alt="Wedding Rings" class="icon">
                 <h2>AKAD <span class="akad-text">Nikah</span></h2>
-                <p>27 Desember 2024</p>
-                <p><strong>08.00 - 10.00 WIB</strong></p>
-                <p>Tempat : Masjid Baitussalam </p>
-                <p>Dusun Kedungringin, RT/RW 003/002, Desa Temurejo, Kec. Bangorejo, Kab. Banyuwangi
-                </p>
+                <p>{{ \Carbon\Carbon::parse($eventAkad->event_date)->translatedFormat('j F Y') }}</p>
+                <p><strong>{{ \Carbon\Carbon::parse($eventAkad->event_time)->format('H:i') }} WIB</strong></p>
+                {!! $eventAkad->location !!}
                 <div style="text-align: center;">
                     <a href="https://maps.app.goo.gl/hbamQTbQYxax36jcA" target="_blank" style="text-decoration: none;">
                         <button class="button"
@@ -102,12 +100,9 @@
             <div class="event-card resepsi">
                 <img src="{{ asset('images/burung1.png') }}" alt="Bird Symbol" class="icon">
                 <h2>RESEPSI <span class="akad-text">Pernikahan</span></h2>
-                <p>28 Desember 2024</p>
-                <p><strong>10.00 - 16.00 WIB
-                    </strong></p> 
-                <p>Tempat : Kediaman Wanita</p>
-                <p>Dusun Kedungringin, RT/RW 003/002, Desa Temurejo, Kec. Bangorejo, Kab. Banyuwangi
-                </p>
+                <p>{{ \Carbon\Carbon::parse($eventResepsi->event_date)->translatedFormat('j F Y') }}</p>
+                <p><strong>{{ \Carbon\Carbon::parse($eventResepsi->event_time)->format('H:i') }} WIB</strong></p>
+                {!! $eventResepsi->location !!}
                 <div style="text-align: center;">
                     <a href="https://maps.app.goo.gl/hbamQTbQYxax36jcA" target="_blank" style="text-decoration: none;">
                         <button class="button"
@@ -329,17 +324,16 @@
         <div id="giftModal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeModalGift()">&times;</span>
-                <h2>Alamat</h2>
-                <p>Jl. Merak Kencana II Blok J2 No. 5 RT 4/RW 14, Rawabuntu, Serpong, Kota Tangerang Selatan</p>
+                {!! $giftBarang->name !!}
+                {!! $giftBarang->notes !!}
             </div>
         </div>
         <!-- Modal Pop-Up Rekening -->
         <div id="rekeningModal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeModalRekening()">&times;</span>
-                <h2>BCA</h2>
-                <p>4972154591</p>
-                <p>A.n Shinta Amalia Kusuma Wardhani</p>
+                {!! $giftTf->name !!}
+                {!! $giftTf->notes !!}
             </div>
         </div>        
     </section>
@@ -364,16 +358,16 @@
                             <div class="timeline-image" style="background-image: url({{ asset('images/177A8474.JPG') }});"></div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h3>Awal Bertemu</h3>
+                                    @php
+                                        $timeline = $timelines->firstWhere('id', 1);
+                                    @endphp
+                                    {!! $timeline->title !!}
                                 </div>
                                 <div class="timeline-body">
-                                    <p>Pada Maret 2023 pertama kali kami bertemu di sebuah kafe di kawasan Gading
-                                        Serpong. Saat itu, kami masih malu-malu namun sesudah pertemuan itu benih-benih
-                                        cinta perlahan mulai tumbuh. Karena kami saling jatuh cinta satu sama lain,
-                                        komunikasi dan pertemuan menjadi semakin intens. Hari demi hari kami lalui
-                                        bersama, sampai akhirnya kami pun memantapkan visi dan misi untuk menuju ke
-                                        jenjang yang lebih serius.
-                                    </p>
+                                @php
+                                    $timeline = $timelines->firstWhere('id', 1);
+                                @endphp
+                                {!! $timeline->description !!}
                                 </div>
                             </div>
                         </li>
@@ -381,14 +375,16 @@
                             <div class="timeline-image" style="background-image: url({{ asset('images/177A8402.JPG') }});"></div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h3>Tunangan</h3>
+                                    @php
+                                        $timeline = $timelines->firstWhere('id', 2);
+                                    @endphp
+                                    {!! $timeline->title !!}
                                 </div>
                                 <div class="timeline-body">
-                                    <p>Perjalanan kisah cinta kami berdua tidaklah seperti garis lurus. Ternyata
-                                        tidaklah mudah untuk saling memahami satu sama lain, dan membuat dua insan
-                                        menjadi satu. Namun atas kehendak dan kuasa-Nya, kami terus konsisten hingga
-                                        akhirnya pada Desember 2023 kami memberanikan diri untuk mendapat restu keluarga
-                                        melalui acara pertunangan.</p>
+                                @php
+                                    $timeline = $timelines->firstWhere('id', 2);
+                                @endphp
+                                {!! $timeline->description !!}
                                 </div>
                             </div>
                         </li>
@@ -397,14 +393,16 @@
                             <div class="timeline-image" style="background-image: url({{ asset('images/177A8329.JPG') }});"></div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
-                                    <h3>Menikah</h3>
+                                    @php
+                                        $timeline = $timelines->firstWhere('id', 3);
+                                    @endphp
+                                    {!! $timeline->title !!}
                                 </div>
                                 <div class="timeline-body">
-                                    <p>Hari yang sakral pun akhirnya tiba. Saatnya kami berdua untuk mengikat janji suci
-                                        untuk dapat hidup bersama selamanya. Ya, di bulan Desember ini kami akan segera
-                                        menikah. Mohon doa restunya supaya kami diberi kelancaran sampai ke pelaminan.
-                                        Kami pun tak sabar untuk menjalani kehidupan yang baru, yakni membentuk keluarga
-                                        yang sakinah mawaddah warahmah.</p>
+                                @php
+                                    $timeline = $timelines->firstWhere('id', 3);
+                                @endphp
+                                {!! $timeline->description !!}
                                 </div>
                             </div>
                         </li>
@@ -545,7 +543,7 @@
     </script>
 
     <script>
-        var eventDate = new Date("{{ $event->event_date }}").getTime();
+        var eventDate = new Date("{{ $eventResepsi->event_date }}").getTime();
         
         var countdownFunction = setInterval(function() {
             var now = new Date().getTime();
