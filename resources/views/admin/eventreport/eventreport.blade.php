@@ -47,9 +47,7 @@
                         </button>
                     </td>
                 </tr>
-            @endforeach
 
-            @foreach ($eventDetails as $detail)
                 <!-- Modal Detail Event Report -->
                 <div class="modal fade" id="detailEventReport{{ $report->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">

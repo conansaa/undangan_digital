@@ -33,6 +33,8 @@ class RsvpController extends Controller
 
         $timelines = DB::table('timelines')->get();
 
+        $gallery = DB::table('gallery')->get();
+
 
         if (!$eventAkad) {
             return redirect()->back()->with('event_error', 'Event not found.');
@@ -46,6 +48,7 @@ class RsvpController extends Controller
             'eventBride',
             'eventGroom', 
             'rsvps',
+            'gallery',
             'giftBarang',
             'giftTf',
             'timelines',
@@ -272,8 +275,6 @@ class RsvpController extends Controller
 
         return response()->json($rsvp, 200);
     }
-
-
 
     /**
      * Remove the specified resource from storage.
