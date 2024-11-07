@@ -11,8 +11,8 @@
         <h5 class="col-12 col-lg-6 fw-bold">Data RSVP Acara</h5>
         <div class="col-12 col-lg-6 d-flex justify-content-end">
             <div class="me-2">
-                <a href="/rsvps/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
-                <a href="/rsvps/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
+                <a href="createtamu" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
+                <a href="createtamu" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
             </div>
         </div>
     </div>

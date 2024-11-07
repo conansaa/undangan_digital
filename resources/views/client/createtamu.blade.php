@@ -1,10 +1,10 @@
-@extends('layout.app')
+@extends('admin.layout')
 
-@section('title', 'Undang Tamu')
+@section('title', 'Tambah RSVP')
 
-@section('judul', 'Undang Tamu')
+@section('judul', 'Tambah RSVP')
 
-@section('content')
+@section('konten_admin')
 
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="mb-3">

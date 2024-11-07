@@ -182,6 +182,21 @@ class RsvpController extends Controller
     /**
      * Store or update an RSVP in storage.
      */
+    public function storetamu(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'phone_number' => 'required|string|max:15',
+            'event_id' => 'required|exists:event_details,id',
+        ]);
+    
+        // Store the RSVP data in the database with only the validated fields
+        Rsvp::create($validatedData);
+    
+        // Redirect to the RSVP client page with a success message
+        return redirect()->route('rsvpclient')->with('success', 'Tamu berhasil ditambahkan');
+    }
+
     public function store(Request $request)
     {
         if ($request->confirmation === 'no') {
