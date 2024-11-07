@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\RSVPController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
@@ -25,8 +26,10 @@ use App\Http\Controllers\EventReportDetailController;
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+//cover
 Route::get('/invitation', [RsvpController::class, 'invitation'])->name('rsvp.invitation');
 
+//enduser
 Route::get('/rsvp', [RsvpController::class, 'index'])->name('rsvp.index');
 Route::post('/rsvp', [RsvpController::class, 'store'])->name('rsvp.store');
 Route::get('/rsvp/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
@@ -36,11 +39,13 @@ Route::post('/clear-modal-session', function () {
     session()->forget('show_modal');
     return response()->json(['success' => true]);
 });
-
-
 Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
 Route::get('/comment', [CommentController::class, 'index'])->name('comment.index');
 
+//client
+Route::get('/client', [ClientController::class, 'showDashboard'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
 
 Route::get('/dashboard', [AdminController::class, 'showDashboard'])
     ->middleware(['auth', 'verified'])
@@ -101,7 +106,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/event-reports-detail', [EventReportDetailController::class, 'index']);
 
     // Routes untuk Timeline
-    Route::get('/timelines', [TimelineController::class, 'index']);
+    Route::get('/timelines', [TimelineController::class, 'index'])->name('timelines.index');
     Route::get('/timeline/create', [TimelineController::class, 'create'])->name('timeline.create');
     Route::post('/timeline/create', [TimelineController::class, 'store']);
     Route::get('/timeline/edit/{id}', [TimelineController::class, 'edit'])->name('timeline.edit');
