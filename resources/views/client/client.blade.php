@@ -1,8 +1,11 @@
+@extends('layout.app')
+
 @section('title', 'Client')
 
 @section('judul', 'Selamat Datang!')
 
-@section('konten_client')
+@section('content')
+
     <style>
         .heading-with-margin {
             margin-bottom: 50px; /* Tambahkan jarak bawah yang diinginkan */
@@ -20,22 +23,26 @@
     <h5 class="heading-with-margin">Client Page diikatJanji</h5>
     <div class="row">
         <div class="col-md-4">
-            <div class="card shadow border-0 p-3" style="border-radius: 10px; background-color: #f8f9fa;">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Total Tamu Hadir</h5>
-                    <p class="card-text" style="font-size: 24px; font-weight: bold;">{{ $totalGuests }}</p>
+            <a href="{{ route('rsvpclient') }}" style="text-decoration: none; color: inherit;">
+                <div class="card shadow border-0 p-3" style="border-radius: 10px; background-color: #f8f9fa;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Total Tamu Hadir</h5>
+                        <p class="card-text" style="font-size: 24px; font-weight: bold;">{{ $totalGuests }}</p>
+                    </div>
                 </div>
-            </div>
+            </a>
         </div>
-
+        
         <div class="col-md-4">
-            <div class="card shadow border-0 p-3" style="border-radius: 10px; background-color: #f8f9fa;">
-                <div class="card-body text-center">
-                    <h5 class="card-title">Total Ucapan</h5>
-                    <p class="card-text" style="font-size: 24px; font-weight: bold;">{{ $totalComments }}</p>
+            <a href="{{ route('commentclient') }}" style="text-decoration: none; color: inherit;">
+                <div class="card shadow border-0 p-3" style="border-radius: 10px; background-color: #f8f9fa;">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Total Ucapan</h5>
+                        <p class="card-text" style="font-size: 24px; font-weight: bold;">{{ $totalComments }}</p>
+                    </div>
                 </div>
-            </div>
-        </div>
+            </a>
+        </div>           
     </div>
     {{-- <div class="table-responsive">
         <table class="table table-bordered">

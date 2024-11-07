@@ -16,8 +16,9 @@ class ClientController extends Controller
         // Calculate total comments
         $totalComments = Comments::count();
 
-        // Pass these totals to the view
-        return view('RVSP_Comment.client', compact('totalGuests', 'totalComments'));
+        return view('client.client', compact('totalGuests', 'totalComments'));
+
     }
+
 }
 

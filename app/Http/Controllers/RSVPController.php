@@ -62,6 +62,11 @@ class RsvpController extends Controller
         $rsvps = Rsvp::all();
         return view('admin.rsvp.rsvp', compact('rsvps'));
     }
+    public function viewclient()
+    {
+        $rsvps = Rsvp::all();
+        return view('client.rsvpclient', compact('rsvps'));
+    }
     public function invitation()
     {
         $eventResepsi = DB::table('event_details')->where('id', 1)->first();
@@ -266,7 +271,6 @@ class RsvpController extends Controller
      */
     public function show($id)
     {
-        // Find RSVP by ID
         $rsvp = Rsvp::find($id);
 
         if (!$rsvp) {

@@ -44,7 +44,10 @@ Route::get('/comment', [CommentController::class, 'index'])->name('comment.index
 //client
 Route::get('/client', [ClientController::class, 'showDashboard'])
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('client.dashboard');
+Route::get('/rsvpclient', [RsvpController::class, 'viewclient'])->name('rsvpclient');
+Route::get('/commentclient', [CommentController::class, 'viewcomment'])->name('commentclient');
+
 
 Route::get('/dashboard', [AdminController::class, 'showDashboard'])
     ->middleware(['auth', 'verified'])

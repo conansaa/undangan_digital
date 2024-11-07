@@ -1,10 +1,10 @@
-@extends('admin.layout')
+@extends('layout.app')
 
 @section('title', 'Data RSVP Acara')
 
 @section('judul', 'RSVP Acara')
 
-@section('konten_admin')
+@section('content')
 
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="row justify-content-between mb-3">
@@ -16,32 +16,33 @@
             </div>
         </div>
     </div>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col" class="text-center">No</th>
-                <th scope="col">Nama Acara</th>
-                <th scope="col">Nama</th>
-                <th scope="col">No. Telp</th>
-                <th scope="col">Konfirmasi</th>
-                <th scope="col">Total Guest</th>
-                <th scope="col" class="text-center">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($rsvps as $rsvp)
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
                 <tr>
-                    <th scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    <td scope="col">{{ $rsvp->event->event_name }}</td> 
-                    <td scope="col">{{ $rsvp->name }}</td>
-                    <td scope="col">{{ $rsvp->phone_number }}</td>
-                    <td scope="col">{{ $rsvp->confirmation}}</td> 
-                    <td scope="col">{{ $rsvp->total_guest }}</td>
-                    <td scope="col" class="text-center">
-                        <a href="/rsvps/edit/{{ $rsvp->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
-                        <a href="/rsvps/delete/{{ $rsvp->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
-                    </td>
+                    <th scope="col" class="text-center">No</th>
+                    {{-- <th scope="col">Nama Acara</th> --}}
+                    <th scope="col">Nama</th>
+                    <th scope="col">No. Telp</th>
+                    <th scope="col">Konfirmasi</th>
+                    <th scope="col">Total Guest</th>
+                    <th scope="col" class="text-center">Aksi</th>
                 </tr>
+            </thead>
+            <tbody>
+                @foreach ($rsvps as $rsvp)
+                    <tr>
+                        <th scope="col" class="text-center">{{ $loop->iteration }}</th>
+                        {{-- <td>{{ $rsvp->event->event_name }}</td> --}}
+                        <td>{{ $rsvp->name }}</td>
+                        <td>{{ $rsvp->phone_number }}</td>
+                        <td>{{ $rsvp->confirmation}}</td>
+                        <td>{{ $rsvp->total_guest }}</td>
+                        <td class="text-center">
+                            {{-- <a href="/rsvps/edit/{{ $rsvp->id }}"><i class="fa-regular fa-pen-to-square"></i></a> --}}
+                            <a href="/rsvps/delete/{{ $rsvp->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="fa-regular fa-trash-can text-danger ms-lg-3"></i></a>
+                        </td>
+                    </tr>
 
                 <!-- Modal Detail RSVP -->
                 <div class="modal fade" id="detailRsvp{{ $rsvp->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
@@ -76,7 +77,6 @@
                         </div>
                     </div>
                 </div>
-                {{-- Batas Modal --}}
             @endforeach
         </tbody>
     </table>

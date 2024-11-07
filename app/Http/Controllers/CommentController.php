@@ -45,6 +45,11 @@ class CommentController extends Controller
         $comments = Comments::all();
         return view('admin.comment.comment', compact('comments'));
     }
+    public function viewcomment()
+    {
+        $comments = Comments::all();
+        return view('client.commentclient', compact('comments'));
+    }
 
     public function create()
     {
