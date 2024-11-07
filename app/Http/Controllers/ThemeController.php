@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Theme;
 use App\Models\EventDetails;
+use App\Models\ThemeCategory;
 use Illuminate\Http\Request;
 use Laravel\Prompts\Concerns\Themes;
 
@@ -18,7 +19,8 @@ class ThemeController extends Controller
     public function create()
     {
         $eventDetails = EventDetails::all();
-        return view('admin.theme.create', compact('eventDetails'));
+        $categories = ThemeCategory::all();
+        return view('admin.theme.create', compact('eventDetails', 'categories'));
     }
 
     public function store(Request $request)
@@ -31,7 +33,7 @@ class ThemeController extends Controller
             'description' => 'nullable|string',
             'max_images' => 'required|integer|min:1',
             'tag' => 'nullable|string',
-            'category' => 'nullable|string', 
+            'theme_category_id' => 'nullable|string', 
             'color' => 'nullable|string',
         ]);
 
@@ -41,7 +43,7 @@ class ThemeController extends Controller
             'description' => $request->description,
             'max_images' => $request->max_images,
             'tag' => $request->tag,
-            'category' => $request->category,
+            'theme_category_id' => $request->category_id,
             'color' => $request->color,
         ]);
 
@@ -74,7 +76,7 @@ class ThemeController extends Controller
             'description' => 'required',
             'max_images' => 'required|integer',
             'tag' => 'required',
-            'category' => 'required',
+            'theme_category_id' => 'required',
             'color' => 'required',
         ]);
 
@@ -87,7 +89,7 @@ class ThemeController extends Controller
         $theme->description = $request->description;
         $theme->max_images = $request->max_images;
         $theme->tag = $request->tag;
-        $theme->category = $request->category;
+        $theme->theme_category_id = $request->theme_category_id;
         $theme->color = $request->color;
 
         // Simpan perubahan ke database

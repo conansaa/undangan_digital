@@ -18,11 +18,12 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->integer('max_images');
             $table->string('tag')->nullable(); 
-            $table->string('category')->nullable();
+            $table->unsignedBigInteger('theme_category_id');
             $table->string('color')->nullable(); 
             $table->timestamps();
 
             $table->foreign('event_id')->references('id')->on('event_details')->onDelete('cascade');
+            $table->foreign('theme_category_id')->references('id')->on('theme_categories')->onDelete('cascade');
         });
     }
 

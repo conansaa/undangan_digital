@@ -39,7 +39,7 @@
                     <td scope="col">{{ Str::limit($theme->description, 50) }}</td>
                     <td scope="col">{{ $theme->max_images }}</td>
                     <td scope="col">{{ $theme->tag }}</td> 
-                    <td scope="col">{{ $theme->category }}</td> 
+                    <td scope="col">{{ $theme->category->name }}</td> 
                     <td scope="col"><span style="background-color: {{ $theme->color }}; padding: 2px 10px; border-radius: 5px;">{{ $theme->color }}</span></td>
                     <td scope="col" class="text-center">
                         <a href="/themes/edit/{{ $theme->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>

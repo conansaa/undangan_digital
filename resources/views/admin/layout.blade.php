@@ -13,18 +13,17 @@
                 <ul class="fw-normal p-2">
                     <li class="list-unstyled opacity-75 mb-3" style="font-size: 12px">PAGES</li>
 
-                    <a href="/index" class="text-decoration-none text-white">
+                    <a href="/dashboard" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-chart-simple me-2"></i> Dashboard</li>
                     </a>
-
-                    {{-- <a href="/owners" class="text-decoration-none text-white">
-                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-user-tie me-2"></i> Pemilik Acara</li>
-                    </a> --}}
 
                     <a href="/themes" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-palette me-2"></i> Tema</li>
                     </a>
                     
+                    <a href="/owners" class="text-decoration-none text-white">
+                        <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-user-tie me-2"></i> Pemilik Acara</li>
+                    </a>
     
                     <a href="/event" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-calendar-day me-2"></i> Detail Acara</li>

@@ -1,12 +1,12 @@
 <?php
 
-use App\Http\Controllers\ThemeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\RSVPController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
@@ -15,6 +15,7 @@ use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\EventTypeController;
 use App\Http\Controllers\EventOwnerController;
 use App\Http\Controllers\EventReportController;
+use App\Http\Controllers\ThemeCategoryController;
 use App\Http\Controllers\EventReportDetailController;
 
 // Route::get('/', function () {
@@ -56,11 +57,14 @@ Route::middleware('auth')->group(function () {
 
     // Routes untuk Event Owner
     Route::get('/themes', [ThemeController::class, 'index']);
-    Route::get('/themes/create', [ThemeController::class, 'create']);
-    Route::post('/themes/create', [ThemeController::class, 'store']);
+    Route::get('/themes/create', [ThemeController::class, 'create'])->name('theme.create');
+    Route::post('/themes/create', [ThemeController::class, 'store'])->name('theme.store');
     Route::get('/themes/delete/{id}', [ThemeController::class, 'destroy']);
     Route::get('/themes/edit/{id}', [ThemeController::class, 'edit']);
     Route::put('/themes/edit/{id}', [ThemeController::class, 'update']);
+
+    Route::get('/categories', [ThemeCategoryController::class, 'index']);
+    Route::post('/categories/create', [ThemeCategoryController::class, 'store'])->name('category.store');
 
     // Routes untuk Event Owner
     Route::get('/owners', [EventOwnerController::class, 'index']);

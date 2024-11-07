@@ -16,7 +16,7 @@ class Theme extends Model
         'description',
         'max_images',
         'tag',
-        'category',
+        'theme_category_id',
         'color',
     ];
 
@@ -33,5 +33,10 @@ class Theme extends Model
     public function setTagsAttribute($value)
     {
         $this->attributes['tag'] = implode(',', $value);
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(ThemeCategory::class, 'theme_category_id');
     }
 }
