@@ -17,8 +17,8 @@
                 {{$eventResepsi->event_name}} - {{ \Carbon\Carbon::parse($eventResepsi->event_date)->translatedFormat('j F Y') }}
                 </p>
             <p class="wedding-to">Kepada Yth</p>
-            <h2 class="wedding-from">Sinta Dewi</h2>
-            <button class="button" onclick="window.location.href='{{ route('rsvp.index') }}';">Open the Invitation <i
+            <h2 class="wedding-from">{{$name}}</h2>
+            <button class="button" onclick="window.location.href='{{ route('rsvp.index', ['name' => $name]) }}';">Open the Invitation <i
                 class="fas fa-envelope"></i></button>
         </div>
 

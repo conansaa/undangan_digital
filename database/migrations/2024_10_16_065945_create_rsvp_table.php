@@ -17,7 +17,7 @@ class CreateRsvpTable extends Migration
             $table->id();
             $table->unsignedBigInteger('event_id');
             $table->string('name');
-            $table->string('phone_number'); //pakai string in case tamunya ada orang luar
+            $table->string('phone_number')->nullable(); //pakai string in case tamunya ada orang luar
             $table->string('confirmation', 11)->nullable();
             $table->integer('total_guest')->nullable();
             $table->timestamps();
