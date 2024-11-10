@@ -27,14 +27,14 @@ use App\Http\Controllers\EventReportDetailController;
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 //cover
-Route::get('/invitation', [RsvpController::class, 'invitation'])->name('rsvp.invitation');
+Route::get('/invitation/{name}', [RsvpController::class, 'invitation'])->name('rsvp.invitation');
 
 //enduser
-Route::get('/rsvp', [RsvpController::class, 'index'])->name('rsvp.index');
-Route::post('/rsvp', [RsvpController::class, 'store'])->name('rsvp.store');
+Route::get('/rsvp/{name}', [RsvpController::class, 'index'])->name('rsvp.index');
+Route::post('/rsvp/{name}', [RsvpController::class, 'store'])->name('rsvp.store');
 Route::get('/rsvp/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
-Route::post('/rsvp/confirm-update', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
-Route::post('/rsvp/cancel-update', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
+Route::post('/rsvp/confirm-update/{name}', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
+Route::post('/rsvp/cancel-update/{name}', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
 Route::post('/clear-modal-session', function () {
     session()->forget('show_modal');
     return response()->json(['success' => true]);
@@ -45,7 +45,13 @@ Route::get('/comment', [CommentController::class, 'index'])->name('comment.index
 //client
 Route::get('/client', [ClientController::class, 'showDashboard'])
     ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+    ->name('client.dashboard');
+Route::get('/rsvpclient', [RsvpController::class, 'viewclient'])->name('rsvpclient');
+Route::get('/rsvpclient/createtamu', [RsvpController::class, 'createtamu'])->name('rsvpclient.createtamu');
+Route::post('/rsvpclient/createtamu', [RsvpController::class, 'storetamu'])->name('rsvpclient.storetamu');
+Route::get('/rsvpclient/delete/{id}', [RsvpController::class, 'destroytamu'])->name('rsvpclient.destroytamu');
+Route::get('/commentclient', [CommentController::class, 'viewcomment'])->name('commentclient');
+
 
 Route::get('/dashboard', [AdminController::class, 'showDashboard'])
     ->middleware(['auth', 'verified'])

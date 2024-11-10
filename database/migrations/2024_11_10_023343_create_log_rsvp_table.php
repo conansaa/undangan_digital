@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRsvpTable extends Migration
+class CreateLogRsvpTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,19 @@ class CreateRsvpTable extends Migration
      */
     public function up()
     {
-        Schema::create('rsvp', function (Blueprint $table) {
+        Schema::create('log_rsvp', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('event_id');
-            $table->string('name');
-            $table->string('phone_number')->nullable(); //pakai string in case tamunya ada orang luar
+            $table->unsignedBigInteger('rsvp_id');
+            $table->unsignedBigInteger('event_id')->nullable();
+            $table->string('name', 255)->nullable();
+            $table->string('phone_number', 255)->nullable();
             $table->string('confirmation', 11)->nullable();
             $table->integer('total_guest')->nullable();
+            $table->string('action', 50);
+
             $table->timestamps();
 
+            $table->foreign('rsvp_id')->references('id')->on('rsvp')->onDelete('cascade');
             $table->foreign('event_id')->references('id')->on('event_details')->onDelete('cascade');
         });
     }
@@ -33,6 +37,7 @@ class CreateRsvpTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rsvp');
+        Schema::dropIfExists('log_rsvp');
     }
 }
+

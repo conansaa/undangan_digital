@@ -35,7 +35,7 @@
                     <td scope="col">{{ $rsvp->event->event_name }}</td> 
                     <td scope="col">{{ $rsvp->name }}</td>
                     <td scope="col">{{ $rsvp->phone_number }}</td>
-                    <td scope="col">{{ $rsvp->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir' }}</td> 
+                    <td scope="col">{{ $rsvp->confirmation}}</td> 
                     <td scope="col">{{ $rsvp->total_guest }}</td>
                     <td scope="col" class="text-center">
                         <a href="/rsvps/edit/{{ $rsvp->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
@@ -66,7 +66,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Konfirmasi</div>
-                                    <div class="col-6">{{ $rsvp->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir' }}</div>
+                                    <div class="col-6">{{ $rsvp->confirmation}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Total Guest</div>

@@ -147,7 +147,7 @@
 
     <section id="rsvp" class="rsvp-section">
         <div class="rsvp-container">
-            <div class="rsvp-container rsvp" >
+            <div class="rsvp-container rsvp">
                 <img src="{{ asset('images/rsvp.png') }}" alt="Wedding Rings" class="icon">
                 <h2 class="rsvp-title">RSVP <span class="rsvp-text">Kehadiran</span></h2>
                 <p>
@@ -155,26 +155,29 @@
                     kehadiran. Terima kasih.
                 </p>
     
-                <form action="{{ route('rsvp.store') }}#rsvp" method="POST" id="rsvpForm">
+                <form action="{{ route('rsvp.store', ['name' => $name]) }}#rsvp" method="POST" id="rsvpForm">
                     @csrf
                     <input type="hidden" name="event_id" value="1">
     
                     <label1 for="name">Nama Lengkap</label1>
-                    <input type="text" name="name" required value="{{ old('name', session('new_data')['name'] ?? '') }}">
+                    <input type="text" name="name" required value="{{ old('name', $name) }}" readonly>
     
-                    <label1 for="name">No Handphone</label1>
-                    <input type="text" id="phone" name="phone_number" value="{{ old('phone_number', session('new_data')['phone_number'] ?? '') }}">
+                    <label1 for="phone">No Handphone</label1>
+                    <input type="text" id="phone" name="phone_number" 
+                    value="{{ old('phone_number', session('existing_rsvp')->phone_number ?? session('new_data')['phone_number'] ?? '') }}" 
+                    @if(session('existing_rsvp') && session('existing_rsvp')->phone_number) readonly @endif>
+
     
                     <div class="attendance-options">
                         <label1 for="kehadiran">Kehadiran?</label1><br>
                         <div class="attendance-items">
                             <div class="attendance-item">
-                                <input type="radio" id="yes" name="confirmation" value="yes" 
+                                <input type="radio" id="yes" name="confirmation" value="yes"
                                 {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Hadir') ? 'checked' : '' }} required>
                                 <label for="yes" class="no-bold">Ya, saya akan hadir</label>
                             </div>
                             <div class="attendance-item">
-                                <input type="radio" id="no" name="confirmation" value="no" 
+                                <input type="radio" id="no" name="confirmation" value="no"
                                 {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Tidak Hadir') ? 'checked' : '' }}>
                                 <label for="no" class="no-bold">Maaf, tidak bisa</label>
                             </div>
@@ -187,7 +190,7 @@
                         <option value="2" {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '2' ? 'selected' : '' }}>2</option>
                     </select>
     
-                    @if (session('phone_exists'))
+                    @if (session('name_exists'))
                         <p style="color: red;">{{ session('message') }}</p>
                         <h3>Data Lama:</h3>
                         <ul>
@@ -197,9 +200,9 @@
                             <li>Jumlah Tamu: {{ session('existing_rsvp')->total_guest }}</li>
                         </ul>
                         <div class="rsvp-submit">
-                        <button formaction="{{ route('rsvp.confirmUpdate') }}" formmethod="POST" class="button5">Edit Data</button>
-                        <button formaction="{{ route('rsvp.cancelUpdate') }}" formmethod="POST" class="button5">Batalkan</button>
-                    </div>
+                            <button formaction="{{ route('rsvp.confirmUpdate', ['name' => $name]) }}" formmethod="POST" class="button5">Edit Data</button>
+                            <button formaction="{{ route('rsvp.cancelUpdate',  ['name' => $name]) }}" formmethod="POST" class="button5">Batalkan</button>
+                        </div>
                     @else
                         <div class="rsvp-submit">
                             <button type="submit" class="rspv-btn">Kirim</button>
@@ -218,6 +221,7 @@
             </div>
         </div>
     </section>
+    
     <script>
         function expandRSVP() {
             const rsvpSection = document.querySelector('.rsvp-section');

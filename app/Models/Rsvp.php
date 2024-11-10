@@ -19,15 +19,31 @@ class Rsvp extends Model
         'total_guest',
     ];
 
-    // Relasi dengan tabel EventDetails
     public function event()
     {
         return $this->belongsTo(EventDetails::class, 'event_id');
     }
 
-    // Relasi dengan tabel Comment
     public function comments()
     {
         return $this->hasMany(Comments::class, 'rsvp_id');
+    }
+
+    public function log_rsvp()
+    {
+        return $this->hasMany(LogRsvp::class, 'rsvp_id');
+    }
+
+    public function saveLog($action, $createdBy = null)
+    {
+        $this->log_rsvp()->create([
+            'rsvp_id' => $this->id,
+            'event_id' => $this->event_id,
+            'name' => $this->name,
+            'phone_number' => $this->phone_number,
+            'confirmation' => $this->confirmation,
+            'total_guest' => $this->total_guest,
+            'action' => $action,
+        ]);
     }
 }
