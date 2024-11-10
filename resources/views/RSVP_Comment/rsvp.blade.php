@@ -160,7 +160,7 @@
                     <input type="hidden" name="event_id" value="1">
     
                     <label1 for="name">Nama Lengkap</label1>
-                    <input type="text" name="name" required value="{{ $name }}" readonly>
+                    <input type="text" name="name" required value="{{ old('name', $name) }}" readonly>
     
                     <label1 for="phone">No Handphone</label1>
                     <input type="text" id="phone" name="phone_number" 
@@ -200,8 +200,8 @@
                             <li>Jumlah Tamu: {{ session('existing_rsvp')->total_guest }}</li>
                         </ul>
                         <div class="rsvp-submit">
-                            <button formaction="{{ route('rsvp.confirmUpdate') }}" formmethod="POST" class="button5">Edit Data</button>
-                            <button formaction="{{ route('rsvp.cancelUpdate') }}" formmethod="POST" class="button5">Batalkan</button>
+                            <button formaction="{{ route('rsvp.confirmUpdate', ['name' => $name]) }}" formmethod="POST" class="button5">Edit Data</button>
+                            <button formaction="{{ route('rsvp.cancelUpdate',  ['name' => $name]) }}" formmethod="POST" class="button5">Batalkan</button>
                         </div>
                     @else
                         <div class="rsvp-submit">

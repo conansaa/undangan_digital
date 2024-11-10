@@ -205,16 +205,29 @@ class RsvpController extends Controller
 
         Rsvp::create($validatedData);
 
-        if (!empty($validatedData['phone_number'])) {
-            $phone_number = preg_replace('/\D/', '', $validatedData['phone_number']); // Hapus karakter non-numeric
-            $name = $validatedData['name'];
-            $message = urlencode("Hello $name, thank you for RSVPing! here's the link http://127.0.0.1:8000/invitation/$name");
-            $whatsapp_link = "https://wa.me/$phone_number?text=$message";
+        // if (!empty($validatedData['phone_number'])) {
+        //     $phone_number = preg_replace('/\D/', '', $validatedData['phone_number']); // Hapus karakter non-numeric
+        //     $name = $validatedData['name'];
+        //     $message = urlencode("Hello $name, thank you for RSVPing! here's the link http://127.0.0.1:8000/invitation/$name");
+        //     $whatsapp_link = "https://wa.me/$phone_number?text=$message";
 
-            return redirect($whatsapp_link);
-        }
+        //     return redirect($whatsapp_link);
+        // }
 
         return redirect('rsvpclient')->with('success', 'Nama tamu berhasil disimpan.');
+    }
+    public function destroytamu($id)
+    {
+        // Find RSVP by ID
+        $rsvp = Rsvp::find($id);
+
+        if (!$rsvp) {
+            return response()->json(['message' => 'RSVP not found'], 404);
+        }
+
+        // Delete RSVP
+        $rsvp->delete();
+        return redirect('/rsvpclient')->with('success', 'Data Berhasil Dihapus!!');
     }
 
     public function store(Request $request, $name)
@@ -252,7 +265,7 @@ class RsvpController extends Controller
             'new_data' => $request->all(),
             'existing_rsvp' => $existingRsvp,
             'name_exists' => true,
-            'phone_number' => $phoneNumber,
+            'phone_number' => $existingRsvp->phone_number,
             'message' => 'Nama sudah terdaftar. Apakah Anda ingin memperbarui data lama?',
         ]);
 
@@ -260,6 +273,7 @@ class RsvpController extends Controller
     }
 
     $newRsvp = Rsvp::create($request->all());
+    $existingRsvp->saveLog('Created RSVP');
     session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'phone_number', 'message']);
     session(['rsvp_id' => $newRsvp->id, 'success' => true]);
 
@@ -267,8 +281,6 @@ class RsvpController extends Controller
 }
 
 
-
-    
 
 public function confirmUpdate(Request $request, $name)
 {
@@ -291,21 +303,25 @@ public function confirmUpdate(Request $request, $name)
             'event_id' => $newData['event_id'],
         ];
 
+        // Update the existing RSVP data
         $existingRsvp->update($updatedData);
 
-        session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'message']);
+        // Log the action in log_rsvp
+        $existingRsvp->saveLog('Updated RSVP');
 
-        return redirect()->route('rsvp.index', ['name' => $name], ['#rsvp'])->with('success', 'Data berhasil diperbarui!');
+        session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'message']);
+        return redirect()->route('rsvp.index', ['name' => $name, '#rsvp'])->with('success', 'Data berhasil diperbarui!');
     }
 
     return redirect()->route('rsvp.index', ['name' => $name])->with('error', 'Terjadi kesalahan dalam memperbarui data.');
 }
 
-public function cancelUpdate($name)
-{
-    session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'message']);
-    return redirect()->route('rsvp.index', ['name' => $name], ['#rsvp']);
-}
+
+    public function cancelUpdate($name)
+    {
+        session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'message']);
+        return redirect()->route('rsvp.index', ['name' => $name], ['#rsvp']);
+    }
 
 
     /**

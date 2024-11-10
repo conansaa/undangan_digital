@@ -32,8 +32,8 @@ Route::get('/invitation/{name}', [RsvpController::class, 'invitation'])->name('r
 Route::get('/rsvp/{name}', [RsvpController::class, 'index'])->name('rsvp.index');
 Route::post('/rsvp/{name}', [RsvpController::class, 'store'])->name('rsvp.store');
 Route::get('/rsvp/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
-Route::post('/rsvp/confirm-update', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
-Route::post('/rsvp/cancel-update', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
+Route::post('/rsvp/confirm-update/{name}', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
+Route::post('/rsvp/cancel-update/{name}', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
 Route::post('/clear-modal-session', function () {
     session()->forget('show_modal');
     return response()->json(['success' => true]);
@@ -48,6 +48,7 @@ Route::get('/client', [ClientController::class, 'showDashboard'])
 Route::get('/rsvpclient', [RsvpController::class, 'viewclient'])->name('rsvpclient');
 Route::get('/rsvpclient/createtamu', [RsvpController::class, 'createtamu'])->name('rsvpclient.createtamu');
 Route::post('/rsvpclient/createtamu', [RsvpController::class, 'storetamu'])->name('rsvpclient.storetamu');
+Route::get('/rsvpclient/delete/{id}', [RsvpController::class, 'destroytamu'])->name('rsvpclient.destroytamu');
 Route::get('/commentclient', [CommentController::class, 'viewcomment'])->name('commentclient');
 
 

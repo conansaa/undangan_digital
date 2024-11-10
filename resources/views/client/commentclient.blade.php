@@ -1,14 +1,14 @@
-@extends('layout.app')
+@extends('client.layout')
 
-@section('title', 'Data Ucapan Tamu')
+@section('title', 'Comment')
 
-@section('judul', 'Ucapan Tamu')
+@section('judul', 'Data Ucapan')
 
-@section('content')
+@section('konten_client')
 
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="row justify-content-between mb-3">
-        <h5 class="col-12 col-lg-6 fw-bold">Data Ucapan</h5>
+        <h5 class="col-12 col-lg-6 fw-bold">List Data Ucapan</h5>
         <div class="col-12 col-lg-6 d-flex justify-content-end">
             {{-- <div class="me-2">
                 <a href="/comment/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
