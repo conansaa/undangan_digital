@@ -80,6 +80,32 @@ class EventReportController extends Controller
         return response()->json($eventReport, 200);
     }
 
+    public function markAsFinished($id)
+    {
+        // Cari event berdasarkan ID
+        $event = EventDetails::findOrFail($id);
+
+        // Temukan laporan event yang sesuai
+        $eventReport = EventReports::where('event_id', $event->id)->first();
+
+        if ($eventReport) {
+            // Pastikan progres tidak kurang dari nol
+            if ($eventReport->progress_total > 0) {
+                $eventReport->progress_total -= 1;
+            }
+
+            // Tambahkan ke kolom selesai
+            $eventReport->finish_total += 1;
+
+            // Simpan perubahan
+            $eventReport->save();
+
+            return response()->json(['success' => true, 'message' => 'Event marked as finished.']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Event report not found.']);
+    }
+
     public function edit($id)
     {
         $eventReport = EventReports::findOrFail($id);

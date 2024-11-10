@@ -70,9 +70,18 @@
 
         <!-- category Field as Text Input -->
         <div class="mb-3">
-            <label for="category" class="form-label fw-bold">Kategori</label>
-            <input type="text" name="category" class="bg-white form-control @error('category') is-invalid @enderror" placeholder="Masukkan category Tema (misalnya: Formal, Casual)">
-            @error('category')
+            <label for="theme_category_id" class="form-label fw-bold">Kategori</label>
+            <div class="d-flex">
+                <select class="form-select bg-white me-2" aria-label="Default select example" name="theme_category_id">
+                    <option value="">Pilih Kategori</option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+                <!-- Tombol Tambah Kategori -->
+                <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#tambahKategoriModal">Tambah Kategori</button>
+            </div>
+            @error('theme_category_id')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -94,6 +103,31 @@
             <button name="submit" type="submit" class="btn btn-info text-white" onclick="return confirm('Apakah anda yakin ingin menambahkan tema tersebut?')">Submit</button>
         </div>
     </form> 
+</div>
+
+<!-- Modal Tambah Kategori -->
+<div class="modal fade" id="tambahKategoriModal" tabindex="-1" aria-labelledby="tambahKategoriModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="tambahKategoriModalLabel">Tambah Kategori</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{ route('category.store') }}" method="post">
+                @csrf
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
 
 @endsection

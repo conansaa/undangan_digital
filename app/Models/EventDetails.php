@@ -50,8 +50,29 @@ class EventDetails extends Model
         return $this->hasMany(Timelines::class, 'event_id');
     }
 
+    public function rsvps()
+    {
+        return $this->hasMany(Rsvp::class, 'event_id');
+    }
+
+    public function comments()
+    {
+        return $this->hasManyThrough(Comments::class, Rsvp::class, 'event_detail_id', 'rsvp_id', 'id', 'id');
+    }
+
+
     public function themes()
     {
         return $this->belongsTo(Theme::class, 'theme_id');
+    }
+
+    public function gifts()
+    {
+        return $this->hasMany(Gifts::class, 'event_id');
+    }
+
+    public function galleries()
+    {
+        return $this->hasMany(Gallery::class, 'event_id');
     }
 }

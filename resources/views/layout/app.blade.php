@@ -50,7 +50,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a href="/genders" class="nav-link">Logout</a>
+                            <a href="/login" class="nav-link">Logout</a>
                         </li>
                     </ul>
                 </div>

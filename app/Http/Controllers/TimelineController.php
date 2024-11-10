@@ -58,7 +58,7 @@ class TimelineController extends Controller
         ]);
 
         // Redirect back to the timeline list with a success message
-        return redirect('/timelines')->with('success', 'Timeline has been created successfully.');
+        return redirect('/event')->with('success', 'Timeline has been created successfully.');
     }
 
     /**
@@ -151,6 +151,6 @@ class TimelineController extends Controller
 
         // Hapus data
         $timeline->delete();
-        return redirect('/timelines')->with('success', 'Data Berhasil Dihapus!!');
+        return redirect('/details/{id}')->with('success', 'Data Berhasil Dihapus!!');
     }
 }

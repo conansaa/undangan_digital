@@ -77,12 +77,21 @@ class RsvpController extends Controller
         return view('RSVP_Comment.tema2', compact('eventAkad', 'eventResepsi', 'name'));
     }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 0af5174aacb3a9858ad6b99ee68ac0126d42e37b
     public function create()
     {
         $eventDetails = EventDetails::all(); 
         return view('admin.rsvp.create', compact('eventDetails')); 
+    }
+
+    public function make($id)
+    {
+        $eventDetails = EventDetails::find($id); 
+        return view('admin.rsvp.create', compact('eventDetails')); // Sesuaikan dengan nama view kamu
     }
 
     public function storedata(Request $request)

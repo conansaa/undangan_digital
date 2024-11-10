@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ThemeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\RSVPController;
@@ -8,6 +7,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
@@ -16,6 +16,7 @@ use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\EventTypeController;
 use App\Http\Controllers\EventOwnerController;
 use App\Http\Controllers\EventReportController;
+use App\Http\Controllers\ThemeCategoryController;
 use App\Http\Controllers\EventReportDetailController;
 
 // Route::get('/', function () {
@@ -67,11 +68,14 @@ Route::middleware('auth')->group(function () {
 
     // Routes untuk Event Owner
     Route::get('/themes', [ThemeController::class, 'index']);
-    Route::get('/themes/create', [ThemeController::class, 'create']);
-    Route::post('/themes/create', [ThemeController::class, 'store']);
+    Route::get('/themes/create', [ThemeController::class, 'create'])->name('theme.create');
+    Route::post('/themes/create', [ThemeController::class, 'store'])->name('theme.store');
     Route::get('/themes/delete/{id}', [ThemeController::class, 'destroy']);
     Route::get('/themes/edit/{id}', [ThemeController::class, 'edit']);
     Route::put('/themes/edit/{id}', [ThemeController::class, 'update']);
+
+    Route::get('/categories', [ThemeCategoryController::class, 'index']);
+    Route::post('/categories/create', [ThemeCategoryController::class, 'store'])->name('category.store');
 
     // Routes untuk Event Owner
     Route::get('/owners', [EventOwnerController::class, 'index']);
@@ -88,6 +92,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/event/edit/{id}', [EventController::class, 'edit'])->name('event.edit');
     Route::put('/event/edit/{id}', [EventController::class, 'update'])->name('event.update');
     Route::get('/event/delete/{id}', [EventController::class, 'destroy'])->name('event.delete');
+    Route::get('/details/{id}', [EventController::class, 'show'])->name('event.show');
 
     // Routes untuk Event Type
     Route::get('/event-type', [EventTypeController::class, 'index'])->name('eventtype.index');
@@ -104,6 +109,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/eventreport/edit/{id}', [EventReportController::class, 'edit'])->name('eventreport.edit');
     Route::put('/eventreport/edit/{id}', [EventReportController::class, 'update'])->name('eventreport.update');
     Route::get('/eventreport/delete/{id}', [EventReportController::class, 'destroy'])->name('eventreport.destroy');
+    // Route yang diarahkan ke controller untuk menangani permintaan "Finish"
+    Route::post('/event-reports/finish/{id}', [EventReportController::class, 'markAsFinished']);
+
 
     Route::get('/event-reports-detail', [EventReportDetailController::class, 'index']);
 
@@ -116,9 +124,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/timeline/delete/{id}', [TimelineController::class, 'destroy'])->name('timeline.destroy');
 
     // Routes untuk RSVP
-    Route::get('/rsvps', [RsvpController::class, 'views']);
+    Route::get('/rsvps', [RsvpController::class, 'views'])->name('rsvps.views');
     Route::get('/rsvps/create', [RsvpController::class, 'create'])->name('rsvps.create');
     Route::post('/rsvps/create', [RsvpController::class, 'storedata'])->name('rsvps.storedata');
+    Route::get('/rsvps/create/{id}', [RsvpController::class, 'make'])->name('rsvps.make');
     Route::get('/rsvps/edit/{id}', [RsvpController::class, 'edit'])->name('rsvps.edit');
     Route::put('/rsvps/edit/{id}', [RsvpController::class, 'update'])->name('rsvps.update');
     Route::get('/rsvps/delete/{id}', [RsvpController::class, 'destroy'])->name('rsvps.destroy');
@@ -148,7 +157,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/section/delete/{id}', [SectionController::class, 'destroy'])->name('section.destroy');
 
     // Routes untuk Gallery
-    Route::get('/galleries', [GalleryController::class, 'index']);
+    Route::get('/galleries', [GalleryController::class, 'index'])->name('gallery.index');
     Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
     Route::post('/gallery/create', [GalleryController::class, 'store'])->name('gallery.store');
     Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit'])->name('gallery.edit');
@@ -156,7 +165,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/gallery/delete/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 
     // Routes untuk User
-    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/users', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
     Route::post('/user/create', [UserController::class, 'store'])->name('user.store');
     Route::get('/user/edit/{id}', [UserController::class, 'edit'])->name('user.edit');

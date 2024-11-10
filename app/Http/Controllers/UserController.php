@@ -49,7 +49,7 @@ class UserController extends Controller
         // Create a new user
         User::create($validatedData);
 
-        return redirect('/users')->with('success', 'User created successfully.');
+        return redirect('/event')->with('success', 'User created successfully.');
     }
 
 
@@ -98,7 +98,7 @@ class UserController extends Controller
         // Update user data
         $user->update($validatedData);
 
-        return redirect('/users')->with('success', 'User updated successfully.');
+        return redirect('/event')->with('success', 'User updated successfully.');
     }
 
     /**
