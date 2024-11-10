@@ -54,7 +54,7 @@
                 <img src="{{ asset('images/177A8539.jpg') }}" alt="Bride" class="profile-img bride-img">
                 <p class="name">Shinta</p>
                 {!! $eventBride->owner_name !!}
-                <p>Anak pertama dari 2 bersaudara<br>{!! $eventBride->parents_name !!}</p>
+                <p>Anak pertama dari 2 bersaudara{!! $eventBride->parents_name !!}</p>
                 <div class="social-icons">
                     <a href="https://www.instagram.com/shintaamaliaw/?utm_source=ig_web_button_share_sheet"><img
                             src="{{ asset('images/ig.png') }}" alt="Instagram"></a>
@@ -64,7 +64,7 @@
                     <img src="{{ asset('images/177A8676.jpg') }}" alt="Groom" class="profile-img groom-img">
                     <p class="name">Irfan</p>
                     {!! $eventGroom->owner_name !!}
-                    <p>Anak pertama dari 5 bersaudara<br>{!! $eventGroom->parents_name !!}</p>
+                    <p>Anak pertama dari 5 bersaudara{!! $eventGroom->parents_name !!}</p>
                     <div class="social-icons">
                         <a href="https://www.instagram.com/irfan224h/?utm_source=ig_web_button_share_sheet"><img
                                 src="{{ asset('images/ig.png') }}" alt="Instagram"></a>
@@ -425,12 +425,12 @@
         <div class="app-container">
             <img src="{{ asset('images/amplop.png') }}" alt="Envelope Icon" class="icon5">
             <div class="section-title">Tinggalkan pesan/doa untuk kami</div>
-            <form action="{{ route('comment.store') }}" method="POST" id="commentForm">
-                @csrf
-                <input type="hidden" name="rsvp_id" value="{{ session('rsvp_id') }}">
-                <textarea name="comment" placeholder="Ketikkan pesan/doa terindahmu.." required></textarea>
-                <button type="submit" class="button5">Kirim</button>
-            </form>
+            <form action="{{ route('comment.store', ['name' => $name]) }}" method="POST" id="commentForm">
+    @csrf
+    <textarea name="comment" placeholder="Ketikkan pesan/doa terindahmu.." required></textarea>
+    <button type="submit" class="button5">Kirim</button>
+</form>
+
             <div class="messages">
                 @foreach ($comments as $comment)
                     <div class="message">

@@ -39,7 +39,7 @@ Route::post('/clear-modal-session', function () {
     session()->forget('show_modal');
     return response()->json(['success' => true]);
 });
-Route::post('/comment', [CommentController::class, 'store'])->name('comment.store');
+Route::post('/comment/{name}', [CommentController::class, 'store'])->name('comment.store');
 Route::get('/comment', [CommentController::class, 'index'])->name('comment.index');
 
 //client
