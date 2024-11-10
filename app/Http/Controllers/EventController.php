@@ -56,13 +56,14 @@ class EventController extends Controller
     {
         // Menemukan event berdasarkan ID
         $event = EventDetails::find($id);
+        $eventTypes = EventTypeRef::all();
 
         // Jika data tidak ditemukan, kembalikan 404
         if (!$event) {
             return response()->json(['message' => 'Event not found'], 404);
         }
 
-        return response()->json($event, 200);
+        return view('admin.eventdetail.detail', compact('event', 'eventTypes'));
     }
     public function showTgl()
     {

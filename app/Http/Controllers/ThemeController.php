@@ -33,7 +33,7 @@ class ThemeController extends Controller
             'description' => 'nullable|string',
             'max_images' => 'required|integer|min:1',
             'tag' => 'nullable|string',
-            'theme_category_id' => 'nullable|string', 
+            'theme_category_id' => 'required|exists:theme_categories,id', 
             'color' => 'nullable|string',
         ]);
 
@@ -43,7 +43,7 @@ class ThemeController extends Controller
             'description' => $request->description,
             'max_images' => $request->max_images,
             'tag' => $request->tag,
-            'theme_category_id' => $request->category_id,
+            'theme_category_id' => $request->theme_category_id,
             'color' => $request->color,
         ]);
 

@@ -47,53 +47,55 @@
                         </button>
                     </td>
                 </tr>
-
-                <!-- Modal Detail Event Report -->
-                <div class="modal fade" id="detailEventReport{{ $report->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title fw-bold" id="staticBackdropLabel">Detail Laporan Event</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Nama Pengguna</div>
-                                    <div class="col-7">{{ $detail->user->name }}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Nama Acara</div>
-                                    <div class="col-7">{{ $detail->event_name }}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Tipe Acara</div>
-                                    <div class="col-7">{{ $detail->eventType->nama }}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Tanggal</div>
-                                    <div class="col-7">{{ $detail->event_date }}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Waktu</div>
-                                    <div class="col-7">{{ $detail->event_time }}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Lokasi</div>
-                                    <div class="col-7">{{ $detail->location }}</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Kuota</div>
-                                    <div class="col-7">{{ $detail->quota }}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- Batas Modal --}}
                 {{-- {{ dd($report) }} --}}
             @endforeach
         </tbody>
     </table>
+
+    @foreach ($eventDetails as $detail)
+        <!-- Modal Detail Event Report -->
+        <div class="modal fade" id="detailEventReport{{ $report->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bold" id="staticBackdropLabel">Detail Laporan Event</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-5 col-md-4 label fw-bold mb-3">Nama Pengguna</div>
+                            <div class="col-7">{{ $detail->user->name }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 col-md-4 label fw-bold mb-3">Nama Acara</div>
+                            <div class="col-7">{{ $detail->event_name }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 col-md-4 label fw-bold mb-3">Tipe Acara</div>
+                            <div class="col-7">{{ $detail->eventType->nama }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 col-md-4 label fw-bold mb-3">Tanggal</div>
+                            <div class="col-7">{{ $detail->event_date }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 col-md-4 label fw-bold mb-3">Waktu</div>
+                            <div class="col-7">{{ $detail->event_time }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 col-md-4 label fw-bold mb-3">Lokasi</div>
+                            <div class="col-7">{{ $detail->location }}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 col-md-4 label fw-bold mb-3">Kuota</div>
+                            <div class="col-7">{{ $detail->quota }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- Batas Modal --}}
+    @endforeach
 </div>
 
 @endsection

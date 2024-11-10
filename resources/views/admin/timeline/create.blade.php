@@ -13,7 +13,7 @@
     <form action="/timeline/create" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="event_id" class="form-label fw-bold">Event ID</label>
+            <label for="event_id" class="form-label fw-bold">Nama Acara</label>
             <select class="form-select bg-white @error('event_id') is-invalid @enderror" name="event_id">
                 <option value="">Pilih Event</option>
                 @foreach($eventDetails as $event)

@@ -72,10 +72,15 @@ class RsvpController extends Controller
         ));
     }
 
-
     public function create()
     {
         $eventDetails = EventDetails::all(); 
+        return view('admin.rsvp.create', compact('eventDetails')); // Sesuaikan dengan nama view kamu
+    }
+
+    public function make($id)
+    {
+        $eventDetails = EventDetails::find($id); 
         return view('admin.rsvp.create', compact('eventDetails')); // Sesuaikan dengan nama view kamu
     }
 
