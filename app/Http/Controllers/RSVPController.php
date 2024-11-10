@@ -77,11 +77,6 @@ class RsvpController extends Controller
         return view('RSVP_Comment.tema2', compact('eventAkad', 'eventResepsi', 'name'));
     }
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> 0af5174aacb3a9858ad6b99ee68ac0126d42e37b
     public function create()
     {
         $eventDetails = EventDetails::all(); 
@@ -283,7 +278,7 @@ class RsvpController extends Controller
 
     $newRsvp = Rsvp::create($request->all());
     $existingRsvp->saveLog('Created RSVP');
-    session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'phone_number', 'message']);
+    session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'phone_qnumber', 'message']);
     session(['rsvp_id' => $newRsvp->id, 'success' => true]);
 
     return redirect()->route('rsvp.index', ['name' => $name]);
