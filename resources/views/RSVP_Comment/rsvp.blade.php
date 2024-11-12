@@ -426,11 +426,10 @@
             <img src="{{ asset('images/amplop.png') }}" alt="Envelope Icon" class="icon5">
             <div class="section-title">Tinggalkan pesan/doa untuk kami</div>
             <form action="{{ route('comment.store', ['name' => $name]) }}" method="POST" id="commentForm">
-    @csrf
-    <textarea name="comment" placeholder="Ketikkan pesan/doa terindahmu.." required></textarea>
-    <button type="submit" class="button5">Kirim</button>
-</form>
-
+                @csrf
+                <textarea name="comment" placeholder="Ketikkan pesan/doa terindahmu.." required></textarea>
+                <button type="submit" class="button5">Kirim</button>
+            </form>
             <div class="messages">
                 @foreach ($comments as $comment)
                     <div class="message">

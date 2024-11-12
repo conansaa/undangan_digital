@@ -17,6 +17,7 @@ class Rsvp extends Model
         'phone_number',
         'confirmation',
         'total_guest',
+        'sending_track',
     ];
 
     public function event()

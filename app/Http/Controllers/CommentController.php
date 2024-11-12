@@ -22,34 +22,34 @@ class CommentController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request, $name)
-{
-    // Find the RSVP entry by name
-    $rsvp = Rsvp::where('name', $name)->first();
+    {
+        // Find the RSVP entry by name
+        $rsvp = Rsvp::where('name', $name)->first();
 
-    if (!$rsvp) {
-        return response()->json(['error' => 'RSVP not found for this name.'], 404);
+        if (!$rsvp) {
+            return response()->json(['error' => 'RSVP not found for this name.'], 404);
+        }
+
+        // Validate the comment
+        $validator = Validator::make($request->all(), [
+            'comment' => 'required|string|max:500',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+
+        // Create the comment using the RSVP ID
+        $comment = Comments::create([
+            'rsvp_id' => $rsvp->id,
+            'comment' => $request->comment,
+        ]);
+
+        return response()->json([
+            'comment' => $comment->comment,
+            'rsvp_name' => $rsvp->name
+        ], 201);
     }
-
-    // Validate the comment
-    $validator = Validator::make($request->all(), [
-        'comment' => 'required|string|max:500',
-    ]);
-
-    if ($validator->fails()) {
-        return response()->json(['errors' => $validator->errors()], 422);
-    }
-
-    // Create the comment using the RSVP ID
-    $comment = Comments::create([
-        'rsvp_id' => $rsvp->id,
-        'comment' => $request->comment,
-    ]);
-
-    return response()->json([
-        'comment' => $comment->comment,
-        'rsvp_name' => $rsvp->name
-    ], 201);
-}
 
 
     public function views()

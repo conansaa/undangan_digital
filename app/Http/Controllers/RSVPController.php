@@ -340,6 +340,19 @@ public function confirmUpdate(Request $request, $name)
 
         return response()->json($rsvp, 200);
     }
+    // RSVPController.php
+    public function incrementSendingTrack($id)
+    {
+        // Cari RSVP berdasarkan ID
+        $rsvp = RSVP::findOrFail($id);
+
+        // Tambahkan nilai sending_track
+        $rsvp->sending_track = $rsvp->sending_track + 1;
+        $rsvp->save();
+
+        return redirect()->back();
+    }
+
 
     /**
      * Remove the specified resource from storage.

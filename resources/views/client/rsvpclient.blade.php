@@ -37,10 +37,16 @@
                         <td>{{ $rsvp->confirmation}}</td>
                         <td>{{ $rsvp->total_guest }}</td>
                         <td class="text-center">
-                            <a href="https://wa.me/{{ $rsvp->phone_number }}?text={{ urlencode("thank you for RSVPing! here's the link http://127.0.0.1:8000/invitation/$rsvp->name") }}" target="_blank" class="text-decoration-none ms-lg-3">
-                                <i class="fa-brands fa-whatsapp text-success"></i>
-                            </a>
-                            <a href="{{ route('rsvpclient.destroytamu', $rsvp->id) }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="fa-regular fa-trash-can text-danger ms-lg-3"></i></a>
+                            <a href="{{ route('rsvp.incrementSendingTrack', $rsvp->id) }}" 
+                                onclick="window.open('https://wa.me/{{ $rsvp->phone_number }}?text={{ urlencode("Thank you for RSVPing! Here's the link http://127.0.0.1:8000/invitation/$rsvp->name") }}'); return true;" 
+                                class="text-decoration-none ms-lg-3" 
+                                style="color: {{ $rsvp->sending_track > 0 ? 'red' : 'green' }}"
+                                title="{{ $rsvp->sending_track > 0 ? 'Anda sudah pernah mengirim ke WhatsApp' : '' }}">
+                                 <i class="fa-brands fa-whatsapp"></i>
+                             </a>
+                             <a href="{{ route('rsvpclient.destroytamu', $rsvp->id) }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                 <i class="fa-regular fa-trash-can text-danger ms-lg-3"></i>
+                             </a>
                             {{-- <a href="https://wa.me/{{ $rsvp->phone_number }}?text={{ urlencode('Thank you for RSVPing! Here\'s the link http://127.0.0.1:8000/invitation/'.$rsvp->name) }}"
                                 target="_blank" 
                                 class="text-decoration-none ms-lg-3 whatsapp-link" 
