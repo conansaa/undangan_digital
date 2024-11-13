@@ -20,13 +20,13 @@
             <tr>
                 <th scope="col" class="text-center" style="width: 5%;">No</th>
                 <th scope="col" style="width: 15%;">Nama Pengguna</th>
-                <th scope="col" style="width: 15%;">Nama Acara</th>
-                <th scope="col" style="width: 15%;">Tipe Acara</th>
+                <th scope="col" style="width: 10%;">Nama Acara</th>
+                <th scope="col" style="width: 10%;">Tipe Acara</th>
                 <th scope="col" style="width: 10%;">Tanggal</th>
                 <th scope="col" style="width: 10%;">Waktu</th>
-                <th scope="col" style="width: 5%;">Lokasi</th>
+                <th scope="col" style="width: 20%;">Lokasi</th>
                 <th scope="col" style="width: 5%;">Kuota</th>
-                <th scope="col" class="text-center" style="width: 20%;">Aksi</th>
+                <th scope="col" class="text-center" style="width: 15%;">Aksi</th>
             </tr>
         </thead>
         <tbody>

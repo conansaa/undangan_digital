@@ -95,6 +95,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/event/edit/{id}', [EventController::class, 'update'])->name('event.update');
     Route::get('/event/delete/{id}', [EventController::class, 'destroy'])->name('event.delete');
     Route::get('/details/{id}', [EventController::class, 'show'])->name('event.show');
+    Route::post('/details/{id}/timeline', [EventController::class, 'storeTimeline'])->name('event.storeTimeline');
+    Route::post('/details/{id}/rsvp', [EventController::class, 'storeRsvp'])->name('event.storeRsvp');
 
     // Routes untuk Event Type
     Route::get('/event-type', [EventTypeController::class, 'index'])->name('eventtype.index');

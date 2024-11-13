@@ -51,13 +51,13 @@
     
                     <a href="/gifts" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-gift me-2"></i> Hadiah</li>
-                    </a>
+                    </a> --}}
 
                     <a href="/sections" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-columns me-2"></i> Sections</li>
                     </a>
     
-                    <a href="/galleries" class="text-decoration-none text-white">
+                    {{-- <a href="/galleries" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-images me-2"></i> Galeri Foto</li>
                     </a> --}}
 

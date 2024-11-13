@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rsvp;
 use App\Models\User;
+use App\Models\Comments;
+use App\Models\Timelines;
 use App\Models\EventDetails;
 use App\Models\EventTypeRef;
 use Illuminate\Http\Request;
@@ -57,14 +60,88 @@ class EventController extends Controller
         // Menemukan event berdasarkan ID
         $event = EventDetails::find($id);
         $eventTypes = EventTypeRef::all();
+        $comments = Comments::all();
 
         // Jika data tidak ditemukan, kembalikan 404
         if (!$event) {
             return response()->json(['message' => 'Event not found'], 404);
         }
 
-        return view('admin.eventdetail.detail', compact('event', 'eventTypes'));
+        return view('admin.eventdetail.detail', compact('event', 'eventTypes', 'comments'));
     }
+
+    public function storeTimeline(Request $request, $event_id)
+    {
+        $request->validate([
+            // 'event_id' => 'required',
+            'title' => 'required|max:100',
+            'date' => 'required|date',
+            'description' => 'required',
+            'photo' => 'image|mimes:jpeg,png,jpg|max:1000',
+        ]);
+
+        if ($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $filename = $file->hashName(); // Generate a unique filename
+            $path = $file->storeAs('timelines', $filename, 'public'); // Store the file in the 'public/timelines' directory
+        } else {
+            $path = null; // No file uploaded
+        }
+
+        // Simpan data timeline
+        $timeline = new Timelines();
+        // $timeline->event_id = $request->event_id;
+        $timeline->title = $request->title;
+        $timeline->date = $request->date;
+        $timeline->description = $request->description;
+        $timeline->photo = $path;
+
+        $timeline->save();
+
+        return redirect()->route('event.show', ['id' => $event_id])->with('success', 'Timeline berhasil ditambahkan!');
+    }
+
+    public function storeRsvp(Request $request, $event_id)
+    {
+        dd($request->all());
+        $request->validate([
+            'name' => 'required|max:100',
+            'phone_number' => 'required',
+            'confirmation' => 'in:yes,no',
+            'total_guest' => [
+                'required_if:confirmation,yes',
+                'integer',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->confirmation === 'yes' && $value < 1) {
+                        $fail('Jumlah tamu harus lebih dari 0 jika Anda hadir.');
+                    }
+                }
+            ],
+        ]);
+
+        $existingRsvp = Rsvp::where('phone_number', $request->phone_number)
+                            ->where('event_id', $request->event_id)
+                            ->first();
+
+        if ($existingRsvp) {
+            session([
+                'new_data' => $request->all(),
+                'existing_rsvp' => $existingRsvp,
+                'phone_exists' => true,
+                'message' => 'Nomor telepon sudah terdaftar. Apakah Anda ingin memperbarui data lama?',
+            ]);
+
+            return redirect()->route('rsvp.index');
+        }
+
+        // Store new data if phone number is not in use
+        $newRsvp = Rsvp::create($request->all());
+        session()->forget(['new_data', 'existing_rsvp', 'phone_exists', 'message']);
+        session(['rsvp_id' => $newRsvp->id]);
+
+        return redirect()->route('event.show', ['id' => $event_id])->with('success', 'Rsvp berhasil ditambahkan!');
+    }
+
     public function showTgl()
     {
         // Fetch the akad and resepsi events from the database

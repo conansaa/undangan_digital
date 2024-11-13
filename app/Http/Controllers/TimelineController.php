@@ -132,7 +132,7 @@ class TimelineController extends Controller
         $timeline->save();
 
         // Redirect ke halaman daftar timeline dengan pesan sukses
-        return redirect('/timelines')->with('success', 'Timeline berhasil diperbarui.');
+        return redirect()->route('event.show', ['id' => $timeline->event_id])->with('success', 'Data berhasil diperbarui.');
     }
 
     /**
