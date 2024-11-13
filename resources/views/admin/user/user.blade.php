@@ -38,8 +38,8 @@
                     <td scope="col">{{ \Illuminate\Support\Str::limit($user->password, 10, '...') }}</td>
                     <td scope="col">{{ $user->remember_token ?? '-' }}</td>
                     <td scope="col" class="text-center">
-                        <a href="/user/edit/{{ $user->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
-                        <a href="/user/delete/{{ $user->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
+                        {{-- <a href="/user/edit/{{ $user->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a> --}}
+                        <a href="/user/delete/{{ $user->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger"><i class="fa-regular fa-trash-can"></i></span></a>
                     </td>
                 </tr>
 

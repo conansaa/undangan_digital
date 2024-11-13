@@ -71,9 +71,18 @@
         </div>
 
         <div class="mb-3">
-            <label for="category" class="form-label fw-bold">Kategori</label>
-            <input type="text" value="{{ old('category', $theme->category) }}" name="category" class="bg-white form-control @error('category') is-invalid @enderror" placeholder="Masukkan Kategori">
-            @error('category')
+            <label for="theme_category_id" class="form-label fw-bold">Kategori</label>
+            <div class="d-flex">
+                <select class="form-select bg-white me-2" aria-label="Default select example" name="theme_category_id">
+                    <option selected value="{{ $theme->theme_category_id }}">
+                        {{ $theme->category->name }}
+                    </option>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            @error('theme_category_id')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
                 </div>

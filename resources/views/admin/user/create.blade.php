@@ -8,7 +8,7 @@
 
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="mb-3">
-        <a href="/event" class="btn btn-sm btn-outline-danger fw-bold me-2">Kembali</a>
+        <a href="/users" class="btn btn-sm btn-outline-danger fw-bold me-2">Kembali</a>
     </div>
     <form action="" method="post" enctype="multipart/form-data">
         @csrf

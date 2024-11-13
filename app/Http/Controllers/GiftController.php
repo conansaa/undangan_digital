@@ -73,7 +73,7 @@ class GiftController extends Controller
         ]);
 
         // Redirect setelah berhasil menyimpan perubahan
-        return redirect('/gifts')->with('success', 'Data hadiah berhasil diperbarui!');
+        return redirect('/event')->with('success', 'Data hadiah berhasil diperbarui!');
     }
 
     // Delete a gift

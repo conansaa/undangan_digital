@@ -30,8 +30,8 @@
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
                     <td scope="col">{{ $type->nama }}</td>
                     <td scope="col" class="text-center">
-                        <a href="/event-types/edit/{{ $type->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
-                        <a href="/event-type/delete/{{ $type->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
+                        {{-- <a href="/event-types/edit/{{ $type->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a> --}}
+                        <a href="/event-type/delete/{{ $type->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger"><i class="fa-regular fa-trash-can"></i></span></a>
                     </td>
                 </tr>
 

@@ -62,9 +62,10 @@ class ThemeController extends Controller
         
         // Ambil semua event details untuk dropdown event_id
         $events = EventDetails::all();
+        $categories = ThemeCategory::all();
 
         // Kirim data ke view
-        return view('admin.theme.edit', compact('theme', 'events'));
+        return view('admin.theme.edit', compact('theme', 'events', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -72,7 +73,7 @@ class ThemeController extends Controller
         // Validasi input
         $request->validate([
             'event_id' => 'required',
-            'name' => 'required|max:255',
+            'name' => 'required|max:100',
             'description' => 'required',
             'max_images' => 'required|integer',
             'tag' => 'required',
