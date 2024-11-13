@@ -1,10 +1,10 @@
-@extends('layout.app') 
+@extends('client.layout')
 
-@section('title', 'Data RSVP Acara')
+@section('title', 'RSVP')
 
-@section('judul', 'RSVP Acara')
+@section('judul', 'Data Tamu')
 
-@section('content')
+@section('konten_client')
 
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="mb-3">
@@ -17,14 +17,14 @@
         <input type="hidden" name="event_id" value="{{ $eventDetails->id }}">
         
         <div class="mb-3">
-            <label for="name" class="form-label fw-bold">Nama</label>
-            <input type="text" name="name" class="bg-white form-control @error('name') is-invalid @enderror" placeholder="Masukkan Nama">
+            <label for="name" class="form-label fw-bold">Nama<span class="text-danger ms-1">*</span></label> 
+            <input type="text" name="name" class="bg-white form-control @error('name') is-invalid @enderror" placeholder="Masukkan Nama" required>
             @error('name')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
             @enderror
-            <small class="form-text text-muted">Pastikan nama tidak sama</small>
+            <small class="form-text text-muted">Pastikan nama tamu tidak sama</small>
         </div>
 
         <div class="mb-3">
@@ -41,7 +41,7 @@
         </div>
 
         <div class="mb-3">
-            <button name="submit" type="submit" class="btn btn-info text-white" onclick="return confirm('Apakah anda yakin ingin menambahkan RSVP tersebut?')">Submit</button>
+            <button name="submit" type="submit" class="btn btn-info text-white" onclick="return confirm('Apakah anda yakin ingin menambahkan RSVP tersebut?')">Tambah Tamu</button>
         </div>
     </form> 
 </div>

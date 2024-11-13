@@ -213,8 +213,6 @@
                     </div>
                 @endif 
             </form>
-
-            <!-- Modal HTML -->
             <div id="confirmationModal" class="modal" style="display:none;">
                 <div class="modal-content">
                     <span class="close-btn" onclick="closeModal()">&times;</span>
@@ -252,11 +250,10 @@
         var phoneInput = document.getElementById("phone");
         var alertBox = document.getElementById("phone-alert");
         
-        // Check if the phone number has at least 12 digits
         if (phoneInput.value.length < 12) {
-            alertBox.style.display = "block"; // Show the alert
+            alertBox.style.display = "block"; 
         } else {
-            alertBox.style.display = "none"; // Hide the alert
+            alertBox.style.display = "none"; 
         }
     }
 </script>

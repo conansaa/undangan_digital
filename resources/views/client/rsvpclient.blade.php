@@ -42,9 +42,14 @@
                             @endphp
                             
                             @if ($rsvp->phone_number)
+                            <a href="#" onclick="copyLink('{{ $invitationLink }}')" 
+                                   class="text-decoration-none ms-lg-3" 
+                                   title="Salin Link">
+                                    <i class="fa-solid fa-copy"></i>
+                                </a>
                                 <!-- WhatsApp Icon -->
                                 <a href="{{ route('rsvp.incrementSendingTrack', $rsvp->id) }}" 
-                                   onclick="window.open('https://wa.me/{{ $rsvp->phone_number }}?text={{ urlencode("Thank you for RSVPing! Here's the link $invitationLink") }}'); return true;" 
+                                   onclick="window.open('https://wa.me/{{ $rsvp->WhatsAppNumber }}?text={{ urlencode("Thank you for RSVPing! Here's the link $invitationLink") }}'); return true;" 
                                    class="text-decoration-none ms-lg-3" 
                                    style="color: {{ $rsvp->sending_track > 0 ? 'red' : 'green' }}"
                                    title="{{ $rsvp->sending_track > 0 ? 'Anda sudah pernah mengirim ke WhatsApp' : '' }}">
