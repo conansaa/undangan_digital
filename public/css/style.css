@@ -79,6 +79,7 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
+  overflow: auto;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -123,6 +124,11 @@ body {
   border-radius: 50%;
   margin-top: -10px;
   /* Jika ingin gambar berbentuk lingkaran */
+}
+.old-data-container {
+  max-height: 50vh; /* Set height for the scrollable area */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 10px; /* Add padding for better readability */
 }
 
 
@@ -2112,6 +2118,11 @@ button1:hover {
   top: -2em;
   font-size: 10px !important;
 }
+.old-data-container {
+  max-height: 50vh; /* Set height for the scrollable area */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 10px; /* Add padding for better readability */
+}
 
 
   .screen-prewed {
@@ -2252,6 +2263,11 @@ button1:hover {
     margin-top: -10px;
     /* Jika ingin gambar berbentuk lingkaran */
   }
+  .old-data-container {
+    max-height: 11.3vh; 
+    overflow-y: auto; 
+    padding-right: 10px; /* Add padding for better readability */
+}
 
   .title {
     font-size: 20px;

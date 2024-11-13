@@ -7,56 +7,62 @@ use App\Models\EventOwnerDetails;
 use App\Models\Gifts;
 use App\Models\Timelines;
 use App\Models\Rsvp;
+use App\Models\LogRsvp;
 use App\Models\Comments;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class RsvpController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index($name)
-    {
-        $rsvps = Rsvp::with('comments')->orderBy('name')->get();
-        $comments = Comments::with('rsvp')->get(); // Include related RSVP data
+{
+    // Retrieve RSVP data with comments, ordered by name
+    $rsvps = Rsvp::with('comments')->orderBy('name')->get();
+    $comments = Comments::with('rsvp')->get();
 
-        // Fetch event details
-        $eventResepsi = DB::table('event_details')->where('id', 1)->first();
-        $eventAkad = DB::table('event_details')->where('id', 2)->first();
+    // Fetch event and other related details
+    $eventResepsi = DB::table('event_details')->find(1);
+    $eventAkad = DB::table('event_details')->find(2);
+    $eventBride = DB::table('event_owner_details')->find(1);
+    $eventGroom = DB::table('event_owner_details')->find(2);
+    $giftBarang = DB::table('gifts')->find(1);
+    $giftTf = DB::table('gifts')->find(2);
+    $timelines = DB::table('timelines')->get();
+    $gallery = DB::table('gallery')->get();
 
-        $eventBride = DB::table('event_owner_details')->where('id', 1)->first();
-        $eventGroom = DB::table('event_owner_details')->where('id', 2)->first();
-
-        $giftBarang = DB::table('gifts')->where('id', 1)->first();
-        $giftTf = DB::table('gifts')->where('id', 2)->first();
-
-        $timelines = DB::table('timelines')->get();
-
-        $gallery = DB::table('gallery')->get();
-
-
-        if (!$eventAkad) {
-            return redirect()->back()->with('event_error', 'Event not found.');
-        }
-        if (!$eventResepsi) {
-            return redirect()->back()->with('event_error', 'Event not found.');
-        }
-        return view('RSVP_Comment.rsvp', compact(
-            'eventAkad',
-            'eventResepsi',
-            'eventBride',
-            'eventGroom', 
-            'rsvps',
-            'gallery',
-            'giftBarang',
-            'giftTf',
-            'timelines',
-            'comments',
-            'name'
-        ));
-
+    // Retrieve existing RSVP record and phone number
+    $existingRsvp = Rsvp::where('name', $name)->first();
+    $phoneNumber = optional($existingRsvp)->phone_number;
+    if ($existingRsvp) {
+        session()->flash('existing_rsvp', $existingRsvp);
     }
+
+    // Redirect if either of the event details is missing
+    if (!$eventAkad || !$eventResepsi) {
+        return redirect()->back()->with('event_error', 'Event not found.');
+    }
+
+    // Fetch old data from the log for the provided name
+    $oldData = LogRsvp::where('name', $name)->get();
+
+    return view('RSVP_Comment.rsvp', compact(
+        'eventAkad',
+        'eventResepsi',
+        'eventBride',
+        'eventGroom',
+        'rsvps',
+        'gallery',
+        'giftBarang',
+        'giftTf',
+        'timelines',
+        'comments',
+        'name',
+        'phoneNumber',
+        'oldData'
+    ));
+}
+
+
 
     public function views()
     {
@@ -194,7 +200,7 @@ class RsvpController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            'phone_number' => 'nullable|string|max:15', 
+            'phone_number' => 'nullable|string|digits_between:12,15', 
             'event_id' => 'required|exists:event_details,id',
         ]);
 
@@ -236,96 +242,143 @@ class RsvpController extends Controller
     }
 
     public function store(Request $request, $name)
-{
-    if ($request->confirmation === 'no') {
-        $request->merge(['total_guest' => 0]);
-    }
+    {
+        if ($request->confirmation === 'no') {
+            $request->merge(['total_guest' => 0]);
+        }
 
-    $confirmationValue = $request->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir';
-    $request->merge(['confirmation' => $confirmationValue]);
+        $confirmationValue = $request->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir';
+        $request->merge(['confirmation' => $confirmationValue]);
 
-    $request->validate([
-        'phone_number' => '',
-        'confirmation' => 'required|string',
-        'total_guest' => [
-            'required_if:confirmation,Hadir',
-            'integer',
-            function ($attribute, $value, $fail) use ($request) {
-                if ($request->confirmation === 'Hadir' && $value < 1) {
-                    $fail('Jumlah tamu harus lebih dari 0 jika Anda hadir.');
+        $request->validate([
+            'phone_number' => 'required',
+            'confirmation' => 'required|string',
+            'total_guest' => [
+                'required_if:confirmation,Hadir',
+                'integer',
+                function ($attribute, $value, $fail) use ($request) {
+                    if ($request->confirmation === 'Hadir' && $value < 1) {
+                        $fail('Jumlah tamu harus lebih dari 0 jika Anda hadir.');
+                    }
                 }
-            }
-        ],
-        'event_id' => 'required|exists:event_details,id',
-    ]);
-
-    $existingRsvp = Rsvp::where('name', $request->name)
-                        ->where('event_id', $request->event_id)
-                        ->first();
-
-    if ($existingRsvp) {
-        $phoneNumber = $existingRsvp->phone_number;
-
-        session([
-            'new_data' => $request->all(),
-            'existing_rsvp' => $existingRsvp,
-            'name_exists' => true,
-            'phone_number' => $existingRsvp->phone_number,
-            'message' => 'Nama sudah terdaftar. Apakah Anda ingin memperbarui data lama?',
+            ],
+            'event_id' => 'required|exists:event_details,id',
         ]);
+
+        $existingRsvp = Rsvp::where('name', $request->name)
+                            ->where('event_id', $request->event_id)
+                            ->first();
+                            if ($existingRsvp) {
+                                // Check if the existing RSVP has confirmation and total_guest filled in (not null)
+                                if ($existingRsvp->confirmation !== null && $existingRsvp->total_guest !== null) {
+                                    
+                                    // Check if any differences exist between the current data and the new data
+                                    $dataChanged = (
+                                        $existingRsvp->confirmation !== $request->confirmation ||
+                                        $existingRsvp->total_guest != $request->total_guest ||
+                                        $existingRsvp->phone_number !== $request->phone_number
+                                    );
+                            
+                                    // If data is different, ask if the user wants to update
+                                    if ($dataChanged) {
+                                        session([
+                                            'new_data' => $request->all(),
+                                            'existing_rsvp' => $existingRsvp,
+                                            'name_exists' => true,
+                                            'phone_number' => $existingRsvp->phone_number,
+                                            'message' => 'Nama sudah terdaftar dengan data konfirmasi yang berbeda, lihat history data?',
+                                        ]);
+                            
+                                        return redirect()->route('rsvp.index', ['name' => $name]);
+                                    }
+                            
+                                    // If data is the same, update without asking
+                                    $existingRsvp->update([
+                                        'confirmation' => $request->confirmation ?? $existingRsvp->confirmation,
+                                        'total_guest' => $request->total_guest ?? $existingRsvp->total_guest,
+                                        'phone_number' => $request->phone_number,
+                                    ]);
+                            
+                                    // Log the update action
+                                    $existingRsvp->saveLog('Same Data');
+                                    
+                                    return redirect()->route('rsvp.index', ['name' => $name]);
+                            
+                                } else {
+                                    // If confirmation and total_guest are null, update without showing any alert
+                                    $existingRsvp->update([
+                                        'confirmation' => $request->confirmation,
+                                        'total_guest' => $request->total_guest,
+                                        'phone_number' => $request->phone_number,
+                                    ]);
+                            
+                                    $existingRsvp->saveLog('Updated RSVP');
+                                    
+                                    return redirect()->route('rsvp.index', ['name' => $name]);
+                                }
+                            
+                            } else {
+                                $newRsvp = Rsvp::create([
+                                    'name' => $request->name,
+                                    'phone_number' => $request->phone_number,
+                                    'confirmation' => $request->confirmation,
+                                    'total_guest' => $request->total_guest,
+                                ]);
+                            
+                                // Log the creation action
+                                $newRsvp->saveLog('Created RSVP');
+                            
+                                return redirect()->route('rsvp.index', ['name' => $name]);
+                            }
+        $newRsvp = Rsvp::create($request->all());
+
+        session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'phone_number', 'message']);
+        session(['rsvp_id' => $newRsvp->id, 'success' => true]);
 
         return redirect()->route('rsvp.index', ['name' => $name]);
     }
+    public function confirmUpdate(Request $request, $name)
+    {
+        $newData = session('new_data');
+        $existingRsvp = session('existing_rsvp');
+        $confirmation = $request->input('confirmation', $newData['confirmation']);
 
-    $newRsvp = Rsvp::create($request->all());
-    $existingRsvp->saveLog('Created RSVP');
-    session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'phone_qnumber', 'message']);
-    session(['rsvp_id' => $newRsvp->id, 'success' => true]);
+        if ($request->confirmation === 'no') {
+            $request->merge(['total_guest' => 0]);
+        }
+        if ($confirmation === 'yes') {
+            $confirmation = 'Hadir';
+        } elseif ($confirmation === 'no') {
+            $confirmation = 'Tidak Hadir';
+        }
 
-    return redirect()->route('rsvp.index', ['name' => $name]);
-}
+        if ($newData && $existingRsvp) {
+            $updatedData = [
+                'name' => $request->input('name', $newData['name']),
+                'phone_number' => $newData['phone_number'],
+                'confirmation' => $confirmation,
+                'total_guest' => $request->input('total_guest', $newData['total_guest']),
+                'event_id' => $newData['event_id'],
+            ];
 
+            // Update the existing RSVP data
+            $existingRsvp->update($updatedData);
 
+            $existingRsvp->saveLog('Updated');
 
-public function confirmUpdate(Request $request, $name)
-{
-    $newData = session('new_data');
-    $existingRsvp = session('existing_rsvp');
-    $confirmation = $request->input('confirmation', $newData['confirmation']);
+            session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'message']);
+            return redirect()->route('rsvp.index', ['name' => $name, '#rsvp'])->with('success', 'Data berhasil diperbarui!');
+        }
 
-    if ($confirmation === 'yes') {
-        $confirmation = 'Hadir';
-    } elseif ($confirmation === 'no') {
-        $confirmation = 'Tidak Hadir';
+        return redirect()->route('rsvp.index', ['name' => $name])->with('error', 'Terjadi kesalahan dalam memperbarui data.');
     }
-
-    if ($newData && $existingRsvp) {
-        $updatedData = [
-            'name' => $request->input('name', $newData['name']),
-            'phone_number' => $newData['phone_number'],
-            'confirmation' => $confirmation,
-            'total_guest' => $request->input('total_guest', $newData['total_guest']),
-            'event_id' => $newData['event_id'],
-        ];
-
-        // Update the existing RSVP data
-        $existingRsvp->update($updatedData);
-
-        // Log the action in log_rsvp
-        $existingRsvp->saveLog('Updated RSVP');
-
-        session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'message']);
-        return redirect()->route('rsvp.index', ['name' => $name, '#rsvp'])->with('success', 'Data berhasil diperbarui!');
-    }
-
-    return redirect()->route('rsvp.index', ['name' => $name])->with('error', 'Terjadi kesalahan dalam memperbarui data.');
-}
 
 
     public function cancelUpdate($name)
     {
         session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'message']);
-        return redirect()->route('rsvp.index', ['name' => $name], ['#rsvp']);
+
+        return redirect()->route('rsvp.index', ['name' => $name])->withFragment('rsvp');
     }
 
 
@@ -342,7 +395,6 @@ public function confirmUpdate(Request $request, $name)
 
         return response()->json($rsvp, 200);
     }
-    // RSVPController.php
     public function incrementSendingTrack($id)
     {
         // Cari RSVP berdasarkan ID

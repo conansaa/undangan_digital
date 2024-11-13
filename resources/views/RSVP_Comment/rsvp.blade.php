@@ -146,81 +146,148 @@
     </div>
 
     <section id="rsvp" class="rsvp-section">
-        <div class="rsvp-container">
-            <div class="rsvp-container rsvp">
-                <img src="{{ asset('images/rsvp.png') }}" alt="Wedding Rings" class="icon">
-                <h2 class="rsvp-title">RSVP <span class="rsvp-text">Kehadiran</span></h2>
-                <p>
-                    Kami tidak sabar menunggu hari pernikahan kami bersama Bapak/Ibu/Saudara/i. Mohon konfirmasi
-                    kehadiran. Terima kasih.
-                </p>
-    
-                <form action="{{ route('rsvp.store', ['name' => $name]) }}#rsvp" method="POST" id="rsvpForm">
-                    @csrf
-                    <input type="hidden" name="event_id" value="1">
-    
-                    <label1 for="name">Nama Lengkap</label1>
-                    <input type="text" name="name" required value="{{ old('name', $name) }}" readonly>
-    
-                    <label1 for="phone">No Handphone</label1>
-                    <input type="text" id="phone" name="phone_number" 
-                    value="{{ old('phone_number', session('existing_rsvp')->phone_number ?? session('new_data')['phone_number'] ?? '') }}" 
-                    @if(session('existing_rsvp') && session('existing_rsvp')->phone_number) readonly @endif>
+    <div class="rsvp-container">
+        <div class="rsvp-container rsvp">
+            <img src="{{ asset('images/rsvp.png') }}" alt="Wedding Rings" class="icon">
+            <h2 class="rsvp-title">RSVP <span class="rsvp-text">Kehadiran</span></h2>
+            <p>
+                Kami tidak sabar menunggu hari pernikahan kami bersama Bapak/Ibu/Saudara/i. Mohon konfirmasi
+                kehadiran. Terima kasih.
+            </p>
 
-    
-                    <div class="attendance-options">
-                        <label1 for="kehadiran">Kehadiran?</label1><br>
-                        <div class="attendance-items">
-                            <div class="attendance-item">
-                                <input type="radio" id="yes" name="confirmation" value="yes"
-                                {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Hadir') ? 'checked' : '' }} required>
-                                <label for="yes" class="no-bold">Ya, saya akan hadir</label>
-                            </div>
-                            <div class="attendance-item">
-                                <input type="radio" id="no" name="confirmation" value="no"
-                                {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Tidak Hadir') ? 'checked' : '' }}>
-                                <label for="no" class="no-bold">Maaf, tidak bisa</label>
-                            </div>
+            <form action="{{ route('rsvp.store', ['name' => $name]) }}#rsvp" method="POST" id="rsvpForm">
+                @csrf
+                <input type="hidden" name="event_id" value="1">
+
+                <label1 for="name">Nama Lengkap</label1>
+                <input type="text" name="name" required value="{{ old('name', $name) }}" readonly>
+
+                <label1 for="phone">No Handphone</label1>
+                <input type="text" id="phone" name="phone_number" 
+                    value="{{ old('phone_number', $phoneNumber ?? session('new_data')['phone_number'] ?? '') }}" required
+                    @if($phoneNumber) readonly @endif minlength="12" oninput="validatePhoneNumber()">
+
+                <!-- Phone number alert -->
+                <div id="phone-alert" style="color: red; display: none; font-size: 12px; margin-top: 5px;">Minimal 12 digit.</div>
+
+                <div class="attendance-options">
+                    <label1 for="kehadiran">Kehadiran?</label1><br>
+                    <div class="attendance-items">
+                        <div class="attendance-item">
+                            <input type="radio" id="yes" name="confirmation" value="yes"
+                            {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Hadir') ? 'checked' : '' }} required>
+                            <label for="yes" class="no-bold">Ya, saya akan hadir</label>
+                        </div>
+                        <div class="attendance-item">
+                            <input type="radio" id="no" name="confirmation" value="no"
+                            {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Tidak Hadir') ? 'checked' : '' }}>
+                            <label for="no" class="no-bold">Maaf, tidak bisa</label>
                         </div>
                     </div>
-    
-                    <label1 for="total_guest">Jumlah Kehadiran</label1>
-                    <select id="total_guest" name="total_guest" class="custom-select" required>
-                        <option value="1" {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '1' ? 'selected' : '' }}>1</option>
-                        <option value="2" {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '2' ? 'selected' : '' }}>2</option>
-                    </select>
-    
-                    @if (session('name_exists'))
-                        <p style="color: red;">{{ session('message') }}</p>
-                        <h3>Data Lama:</h3>
+                </div>
+
+                <label1 for="total_guest">Jumlah Kehadiran</label1>
+                <select id="total_guest" name="total_guest" class="custom-select" required>
+                    <option value="1" {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '1' ? 'selected' : '' }}>1</option>
+                    <option value="2" {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '2' ? 'selected' : '' }}>2</option>
+                </select>
+
+                @if (session('name_exists'))
+                    @php
+                        $existingRsvp = session('existing_rsvp');
+                    @endphp
+                    @if ($existingRsvp->confirmation && $existingRsvp->total_guest) 
+                    <div class="alert-box">
+                        <p onclick="showModal()">{{ session('message') }}
+                            <span style="color: red; cursor: pointer;" onclick="showOldDataModal()"> ⓘ </span>
+                        </p>                            
+                    </div>
+                @endif                    
+                    <div class="rsvp-submit">
+                        <button formaction="{{ route('rsvp.confirmUpdate', ['name' => $name]) }}" formmethod="POST" class="button5">Edit Data</button>
+                        <button formaction="{{ route('rsvp.cancelUpdate',  ['name' => $name]) }}" formmethod="POST" class="button5">Batalkan</button>
+                    </div>
+                @else
+                    <div class="rsvp-submit">
+                        <button type="submit" class="rspv-btn">Kirim</button>
+                    </div>
+                @endif 
+            </form>
+
+            <!-- Modal HTML -->
+            <div id="confirmationModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeModal()">&times;</span>
+                    <img src="{{ asset('images/9304657.png') }}" alt="Thank You Image" class="modal-image">
+                    <h2>Terima Kasih!</h2>
+                    <p>Terima kasih sudah melakukan konfirmasi kehadiran.</p>
+                </div>
+            </div>
+
+            <div id="oldDataModal" class="modal" style="display:none;">
+                <div class="modal-content">
+                    <span class="close-btn" onclick="closeOldDataModal()">&times;</span>
+                    <h3>Data Lama</h3>
+                    <div class="old-data-container">
                         <ul>
-                            <li>Nama: {{ session('existing_rsvp')->name }}</li>
-                            <li>Nomor Telepon: {{ session('existing_rsvp')->phone_number }}</li>
-                            <li>Konfirmasi: {{ session('existing_rsvp')->confirmation }}</li>
-                            <li>Jumlah Tamu: {{ session('existing_rsvp')->total_guest }}</li>
+                            @foreach ($oldData->reverse() as $entry) <!-- Reverse the collection to show most recent first -->
+                                <li>Nama: {{ $entry->name }}</li>
+                                <li>Nomor Telepon: {{ $entry->phone_number }}</li>
+                                <li>Konfirmasi: {{ $entry->confirmation }}</li>
+                                <li>Jumlah Tamu: {{ $entry->total_guest }}</li>
+                                <li>Tanggal: {{ $entry->created_at->format('d M Y H:i') }}</li>
+                                <hr>
+                            @endforeach
                         </ul>
-                        <div class="rsvp-submit">
-                            <button formaction="{{ route('rsvp.confirmUpdate', ['name' => $name]) }}" formmethod="POST" class="button5">Edit Data</button>
-                            <button formaction="{{ route('rsvp.cancelUpdate',  ['name' => $name]) }}" formmethod="POST" class="button5">Batalkan</button>
-                        </div>
-                    @else
-                        <div class="rsvp-submit">
-                            <button type="submit" class="rspv-btn">Kirim</button>
-                        </div>
-                    @endif
-                </form>
-                <!-- Modal HTML -->
-                <div id="confirmationModal" class="modal" style="display:none;">
-                    <div class="modal-content">
-                        <span class="close-btn" onclick="closeModal()">&times;</span>
-                        <img src="{{ asset('images/9304657.png') }}" alt="Thank You Image" class="modal-image">
-                        <h2>Terima Kasih!</h2>
-                        <p>Terima kasih sudah melakukan konfirmasi kehadiran.</p>
                     </div>
                 </div>
             </div>
+            
         </div>
-    </section>
+    </div>
+</section>
+
+<script>
+    function validatePhoneNumber() {
+        var phoneInput = document.getElementById("phone");
+        var alertBox = document.getElementById("phone-alert");
+        
+        // Check if the phone number has at least 12 digits
+        if (phoneInput.value.length < 12) {
+            alertBox.style.display = "block"; // Show the alert
+        } else {
+            alertBox.style.display = "none"; // Hide the alert
+        }
+    }
+</script>
+
+    
+    <style>
+        .info-icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: red;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+    </style>
+    
+    <script>
+        function showModal() {
+            document.getElementById('oldDataModal').style.display = 'block';
+        }
+        
+        function closeOldDataModal() {
+            document.getElementById('oldDataModal').style.display = 'none';
+        }
+    </script>
+    
+    
     
     <script>
         function expandRSVP() {
@@ -229,12 +296,13 @@
             rsvpSection.classList.toggle('expanded');
             rsvpContainer.classList.toggle('expanded');
         }
-
-        @if (session('phone_exists'))
+    
+        @if (session('name_exists'))
             document.addEventListener('DOMContentLoaded', function() {
                 expandRSVP();
             });
         @endif
+    
         window.onload = function() {
             @if (session('success'))
                 document.getElementById("confirmationModal").style.display = "block";
@@ -252,6 +320,7 @@
                 modal.style.display = "none";
             }
         };
+    
         document.addEventListener('DOMContentLoaded', function () {
             const confirmationRadios = document.getElementsByName('confirmation');
             const totalGuestInput = document.getElementById('total_guest');
@@ -275,7 +344,8 @@
                 radio.addEventListener('change', updateTotalGuestInput);
             });
         });
-    </script>    
+    </script>
+    
 
     <h2 class="gallery-title">
         MOMEN<span class="gallery-text">Galeri</span>
