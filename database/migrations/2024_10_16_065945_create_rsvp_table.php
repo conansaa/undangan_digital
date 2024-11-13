@@ -20,6 +20,7 @@ class CreateRsvpTable extends Migration
             $table->string('phone_number')->nullable(); //pakai string in case tamunya ada orang luar
             $table->string('confirmation', 11)->nullable();
             $table->integer('total_guest')->nullable();
+            $table->integer('sending_track')->nullable();
             $table->timestamps();
 
             $table->foreign('event_id')->references('id')->on('event_details')->onDelete('cascade');

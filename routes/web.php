@@ -51,6 +51,8 @@ Route::get('/rsvpclient/createtamu', [RsvpController::class, 'createtamu'])->nam
 Route::post('/rsvpclient/createtamu', [RsvpController::class, 'storetamu'])->name('rsvpclient.storetamu');
 Route::get('/rsvpclient/delete/{id}', [RsvpController::class, 'destroytamu'])->name('rsvpclient.destroytamu');
 Route::get('/commentclient', [CommentController::class, 'viewcomment'])->name('commentclient');
+Route::get('/rsvpclient/increment-sending-track/{id}', [RSVPController::class, 'incrementSendingTrack'])->name('rsvp.incrementSendingTrack');
+
 
 
 Route::get('/dashboard', [AdminController::class, 'showDashboard'])

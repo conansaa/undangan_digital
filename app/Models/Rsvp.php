@@ -17,6 +17,7 @@ class Rsvp extends Model
         'phone_number',
         'confirmation',
         'total_guest',
+        'sending_track',
     ];
 
     public function event()
@@ -34,7 +35,7 @@ class Rsvp extends Model
         return $this->hasMany(LogRsvp::class, 'rsvp_id');
     }
 
-    public function saveLog($action, $createdBy = null)
+    public function saveLog($action)
     {
         $this->log_rsvp()->create([
             'rsvp_id' => $this->id,

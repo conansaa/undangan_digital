@@ -34,25 +34,54 @@
                         <th scope="col" class="text-center">{{ $loop->iteration }}</th>
                         <td>{{ $rsvp->name }}</td>
                         <td>{{ $rsvp->phone_number }}</td>
-                        <td>{{ $rsvp->confirmation}}</td>
+                        <td>{{ $rsvp->confirmation }}</td>
                         <td>{{ $rsvp->total_guest }}</td>
                         <td class="text-center">
-                            <a href="https://wa.me/{{ $rsvp->phone_number }}?text={{ urlencode("thank you for RSVPing! here's the link http://127.0.0.1:8000/invitation/$rsvp->name") }}" target="_blank" class="text-decoration-none ms-lg-3">
-                                <i class="fa-brands fa-whatsapp text-success"></i>
-                            </a>
-                            <a href="{{ route('rsvpclient.destroytamu', $rsvp->id) }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><i class="fa-regular fa-trash-can text-danger ms-lg-3"></i></a>
-                            {{-- <a href="https://wa.me/{{ $rsvp->phone_number }}?text={{ urlencode('Thank you for RSVPing! Here\'s the link http://127.0.0.1:8000/invitation/'.$rsvp->name) }}"
-                                target="_blank" 
-                                class="text-decoration-none ms-lg-3 whatsapp-link" 
-                                data-id="{{ $rsvp->id }}"
-                                style="color: {{ isset($_COOKIE['clicked_'.$rsvp->id]) ? 'red' : 'green' }}">
-                                 <i class="fa-brands fa-whatsapp"></i>
-                             </a> --}}
+                            @php
+                                $invitationLink = url('/invitation/'.$rsvp->name); // Generate the invitation link
+                            @endphp
+                            
+                            @if ($rsvp->phone_number)
+                                <!-- WhatsApp Icon -->
+                                <a href="{{ route('rsvp.incrementSendingTrack', $rsvp->id) }}" 
+                                   onclick="window.open('https://wa.me/{{ $rsvp->phone_number }}?text={{ urlencode("Thank you for RSVPing! Here's the link $invitationLink") }}'); return true;" 
+                                   class="text-decoration-none ms-lg-3" 
+                                   style="color: {{ $rsvp->sending_track > 0 ? 'red' : 'green' }}"
+                                   title="{{ $rsvp->sending_track > 0 ? 'Anda sudah pernah mengirim ke WhatsApp' : '' }}">
+                                    <i class="fa-brands fa-whatsapp"></i>
+                                </a>
+                            @else
+                                <!-- Copy Link Icon -->
+                                <a href="#" onclick="copyLink('{{ $invitationLink }}')" 
+                                   class="text-decoration-none ms-lg-3" 
+                                   title="Salin Link">
+                                    <i class="fa-solid fa-copy"></i>
+                                </a>
+                            @endif
+                            
+                            <!-- Delete Icon -->
+                            <a href="{{ route('rsvpclient.destroytamu', $rsvp->id) }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                 <i class="fa-regular fa-trash-can text-danger ms-lg-3"></i>
+                             </a>
                         </td>
                     </tr>
-            @endforeach
-        </tbody>
-    </table>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<script>
+    function copyLink(link) {
+        var tempInput = document.createElement('input');
+        tempInput.value = link;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+
+        alert('Link telah disalin: ' + link);
+    }
+</script>
 
 @endsection

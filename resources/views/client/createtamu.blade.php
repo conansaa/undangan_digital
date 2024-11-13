@@ -29,14 +29,15 @@
 
         <div class="mb-3">
             <label for="phone_number" class="form-label fw-bold">No Telp</label>
-            <input type="text" name="phone_number" class="bg-white form-control @error('phone_number') is-invalid @enderror" placeholder="Masukkan No Telp">
+            <input type="text" id="phone_number" name="phone_number" class="bg-white form-control @error('phone_number') is-invalid @enderror" placeholder="Masukkan No Telp">
             @error('phone_number')
                 <div class="invalid-feedback">
                     {{ $message }}
                 </div>
             @enderror
-            <!-- Add an instruction or hint about the phone number format -->
-            <small class="form-text text-muted">Isikan dengan format internasional, contoh: 085xxxxxxxxx menjadi 6285xxxxxxxxx.</small>
+            <div id="phoneError" class="invalid-feedback" style="display: none;">
+                Nomor telepon harus minimal 12 digit.
+            </div>
         </div>
 
         <div class="mb-3">
@@ -45,4 +46,27 @@
     </form> 
 </div>
 
+<script>
+    function validatePhoneNumber() {
+        const phoneInput = document.getElementById('phone_number');
+        const phoneError = document.getElementById('phoneError');
+        if (phoneInput.value.length < 12) {
+            phoneError.style.display = 'block';
+            return false; // Prevent form submission
+        } else {
+            phoneError.style.display = 'none';
+            return true;
+        }
+    }
+
+    // Optional: Real-time validation as the user types
+    document.getElementById('phone_number').addEventListener('input', function() {
+        const phoneError = document.getElementById('phoneError');
+        if (this.value.length < 12) {
+            phoneError.style.display = 'block';
+        } else {
+            phoneError.style.display = 'none';
+        }
+    });
+</script>
 @endsection
