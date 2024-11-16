@@ -26,8 +26,12 @@ use App\Http\Controllers\EventReportDetailController;
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/', function () {
+    return redirect()->route('rsvp.invitation', ['name' => 'Guest']); // Default name 'Guest'
+});
 //cover
-Route::get('/invitation/{name}', [RsvpController::class, 'invitation'])->name('rsvp.invitation');
+Route::get('/{name}', [RsvpController::class, 'invitation'])->name('rsvp.invitation');
 
 //enduser
 Route::get('/rsvp/{name}', [RsvpController::class, 'index'])->name('rsvp.index');
