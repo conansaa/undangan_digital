@@ -10,6 +10,7 @@
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 </head>
 
@@ -26,7 +27,7 @@
 
             <div class="slideshow-container">
                 <div class="mySlides">
-                    <img src="{{ asset('images/177A82761.JPG') }}" alt="Photo 1">
+                    <img src="{{ asset('images/177A82761_1.JPG') }}" alt="Photo 1">
                 </div>
             </div>
         </div>
@@ -50,8 +51,8 @@
     <div class="container">
         <h1 class="title">BRIDE & GROOM</h1>
         <div class="profiles">
-            <div class="profile">
-                <img src="{{ asset('images/177A8539.jpg') }}" alt="Bride" class="profile-img bride-img">
+            <div class="profile bride">
+                <img src="{{ asset('images/177A8539_1.jpg') }}" alt="Bride" class="profile-img bride-img">
                 <p class="name">Shinta</p>
                 {!! $eventBride->owner_name !!}
                 <p>Anak pertama dari 2 bersaudara{!! $eventBride->parents_name !!}</p>
@@ -60,8 +61,8 @@
                             src="{{ asset('images/ig.png') }}" alt="Instagram"></a>
                 </div>
                 <h1 class="title-and">&</h1>
-                <div class="profile">
-                    <img src="{{ asset('images/177A8676.jpg') }}" alt="Groom" class="profile-img groom-img">
+                <div class="profile groom">
+                    <img src="{{ asset('images/177A8676_1.jpg') }}" alt="Groom" class="profile-img groom-img">
                     <p class="name">Irfan</p>
                     {!! $eventGroom->owner_name !!}
                     <p>Anak pertama dari 5 bersaudara{!! $eventGroom->parents_name !!}</p>
@@ -116,7 +117,7 @@
             </div>
         </div>
     </div>
-    <img src="{{ asset('images/177A8157.jpg') }}" class="screen-prewed">
+    <img src="{{ asset('images/177A8157_1.JPG') }}" class="screen-prewed">
     <div class="container2">
         <div class="countdown-content">
             <h2>Hari yang ditunggu</h2>
@@ -341,29 +342,136 @@
     </h2>
 
     <section class="photo-gallery">
-        <div class="photo-item">
-            <img src="{{ asset('images/177A8263.JPG') }}" alt="Description of image 1">
+        <div class="photo-gallery-desktop">
+            <img src="{{ asset('images/177A8263_1.JPG') }}" alt="Description of image 1">
         </div>
         <div class="photo-item">
-            <img src="{{ asset('images/177A8104.JPG') }}" alt="Description of image 2">
+            <img src="{{ asset('images/177A8104_1.JPG') }}" alt="Description of image 2">
         </div>
         <div class="photo-item">
-            <img src="{{ asset('images/177A8502.JPG') }}" alt="Description of image 3">
+            <img src="{{ asset('images/177A8502_1.JPG') }}" alt="Description of image 3">
+        </div>
+    <div class="photo-gallery-desktop">
+        <div class="photo-item">
+            <img src="{{ asset('images/177A8483_1.JPG') }}" alt="Description of image 1">
+        </div>
+        <div class="photo-item">
+            <img src="{{ asset('images/177A8194_1.JPG') }}" alt="Description of image 2">
+        </div>
+        <div class="photo-item">
+            <img src="{{ asset('images/177A8517_1.JPG') }}" alt="Description of image 3">
+        </div>
+    </div>
+    <div class="photo-gallery-mobile">
+            <div class="photo-slider" id="photoSlider">
+                <div class="photo-item">
+                    <img src="{{ asset('images/177A8263_1.JPG') }}" alt="Description of image 1">
+                </div>
+                <div class="photo-item">
+                    <img src="{{ asset('images/177A8104_1.JPG') }}" alt="Description of image 2">
+                </div>
+                <div class="photo-item">
+                    <img src="{{ asset('images/177A8502_1.JPG') }}" alt="Description of image 3">
+                </div>
+                <div class="photo-item">
+                    <img src="{{ asset('images/177A8483_1.JPG') }}" alt="Description of image 1">
+                </div>
+                <div class="photo-item">{{ asset('images/177A8194_1.JPG') }}
+                    <img src="{{ asset('images/177A8194_1.JPG') }}" alt="Description of image 2">
+                </div>
+                <div class="photo-item">
+                    <img src="{{ asset('images/177A8517_1.JPG') }}" alt="Description of image 3">
+                </div>
+                <div class="photo-item">
+                    <img src="{{ asset('images/177A8263_1.JPG') }}" alt="Description of image 1">
+                </div>
+                <div class="photo-item">
+                    <img src="{{ asset('images/177A8104_1.JPG') }}" alt="Description of image 2">
+                </div>
+                <div class="photo-item">
+                    <img src="{{ asset('images/177A8502_1.JPG') }}" alt="Description of image 3">
+                </div>
+                <div class="photo-item">
+                    <img src="{{ asset('images/177A8483_1.JPG') }}" alt="Description of image 1">
+                </div>
+                <div class="photo-item">
+                    <img src="{{ asset('images/1177A8194_1.JPG') }}" alt="Description of image 2">
+                </div>
+                <div class="photo-item">
+                    <img src="{{ asset('images/177A8517_1.JPG') }}" alt="Description of image 3">
+                </div>
+            </div>
+            <div class="photo-modal" id="photoModal">
+                <span class="close-btn" id="closeModal">&times;</span>
+                <img class="modal-content" id="modalImage" alt="Preview Image">
+            </div>
         </div>
     </section>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('photoSlider');
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
 
-    <section class="photo-gallery">
-        <div class="photo-item">
-            <img src="{{ asset('images/177A8483.JPG') }}" alt="Description of image 1">
-        </div>
-        <div class="photo-item">
-            <img src="{{ asset('images/177A8194.JPG') }}" alt="Description of image 2">
-        </div>
-        <div class="photo-item">
-            <img src="{{ asset('images/177A8517.JPG') }}" alt="Description of image 3">
-        </div>
-    </section>
+    // Dragging functionality for horizontal scrolling
+    const startDragging = (e) => {
+        isDragging = true;
+        slider.classList.add('dragging');
+        startX = e.pageX || e.touches[0].pageX;
+        scrollLeft = slider.scrollLeft;
+    };
 
+    const dragging = (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX || e.touches[0].pageX;
+        const walk = x - startX;
+        slider.scrollLeft = scrollLeft - walk;
+    };
+
+    const stopDragging = () => {
+        isDragging = false;
+        slider.classList.remove('dragging');
+    };
+
+    slider.addEventListener('mousedown', startDragging);
+    slider.addEventListener('mousemove', dragging);
+    slider.addEventListener('mouseup', stopDragging);
+    slider.addEventListener('mouseleave', stopDragging);
+
+    slider.addEventListener('touchstart', startDragging);
+    slider.addEventListener('touchmove', dragging);
+    slider.addEventListener('touchend', stopDragging);
+    slider.addEventListener('touchcancel', stopDragging);
+
+    // Modal functionality
+    const photoModal = document.getElementById('photoModal');
+    const modalImage = document.getElementById('modalImage');
+    const closeModalBtn = document.getElementById('closeModal');
+
+    // Function to open the modal with the clicked image
+    slider.querySelectorAll('.photo-item img').forEach(img => {
+        img.addEventListener('click', () => {
+            modalImage.src = img.src;
+            photoModal.style.display = 'flex'; // Show modal
+        });
+    });
+
+    // Close modal when clicking the 'X' button
+    closeModalBtn.addEventListener('click', () => {
+        photoModal.style.display = 'none'; // Hide modal
+    });
+
+    // Close modal when clicking outside the image
+    photoModal.addEventListener('click', (e) => {
+        if (e.target === photoModal) {
+            photoModal.style.display = 'none';
+        }
+    });
+});
+
+    </script> 
     <section id="gift" class="gift-section">
         <div class="gift-container gift">
             <img src="{{ asset('images/gift.png') }}" alt="gift" class="icon">
@@ -418,7 +526,7 @@
                     <ul class="timeline">
 
                         <li> 
-                            <div class="timeline-image" style="background-image: url({{ asset('images/177A8474.JPG') }});"></div>
+                            <div class="timeline-image" style="background-image: url({{ asset('177A8474_1.jpg') }});"></div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     @php
@@ -435,7 +543,7 @@
                             </div>
                         </li>
                         <li class="timeline-inverted">
-                            <div class="timeline-image" style="background-image: url({{ asset('images/177A8402.JPG') }});"></div>
+                            <div class="timeline-image" style="background-image: url({{ asset('images/177A8402_1.jpg') }});"></div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     @php
@@ -453,29 +561,51 @@
                         </li>
 
                         <li> 
-                            <div class="timeline-image" style="background-image: url({{ asset('images/177A8329.JPG') }});"></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
+                            <div class="timeline-image" style="background-image: url({{ asset('images/177A8329_1.jpg') }});"></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        @php
+                                            $timeline = $timelines->firstWhere('id', 3);
+                                        @endphp
+                                        {!! $timeline->title !!}
+                                    </div>
+                                    <div class="timeline-body">
                                     @php
                                         $timeline = $timelines->firstWhere('id', 3);
                                     @endphp
-                                    {!! $timeline->title !!}
+                                    {!! $timeline->description !!}
+                                    </div>
                                 </div>
-                                <div class="timeline-body">
-                                @php
-                                    $timeline = $timelines->firstWhere('id', 3);
-                                @endphp
-                                {!! $timeline->description !!}
-                                </div>
-                            </div>
                         </li>
 
                     </ul>
-
                 </div>
             </div>
         </div>
     </section>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Pilih elemen <h2> dan .gift-text di dalam gift-container
+        const giftTextElements = document.querySelectorAll('.gift h2  .gift .gift-text');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Menambahkan kelas animate untuk memulai animasi
+                    entry.target.classList.add('animate');
+                } else {
+                    // Menghapus kelas animate untuk mengulang animasi
+                    entry.target.classList.remove('animate');
+                }
+            });
+        });
+
+        giftTextElements.forEach(element => {
+            observer.observe(element); // Mengamati setiap elemen
+        });
+    });
+
+    </script>
     <section class="screen-prewed1">
         <img src="{{ asset('images/177A8506.JPG') }}" class="screen-prewed1-img">
     </section>
@@ -533,10 +663,102 @@
     </div>
     <footer class="footer">
         <h4><span class="small-text">Made With By</span></h4>
-        <img src="{{ asset('images/logo.jpg') }}" alt="diikatJanji Logo" class="logo">
+        <img src="{{ asset('images/Logo.jpg') }}" alt="diikatJanji Logo" class="logo">
         <p>all right reserved by diikatJanji</p>
     </footer>
+    <button id="playButton">
+        <span id="icon">
+            <!-- Ikon Play -->
+            <svg id="playIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            </svg>
+            <!-- Ikon Pause -->
+            <svg id="pauseIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                style="display: none;">
+                <rect x="6" y="4" width="4" height="16"></rect>
+                <rect x="14" y="4" width="4" height="16"></rect>
+            </svg>
+        </span>
+    </button>
+    <audio id="song" loop>
+        <source src="MUSIC JANJI SUCI.mp3" type="audio/mp3">
+    </audio>
+    <script>
+        const song = document.getElementById('song');
+        const playButton = document.getElementById('playButton');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const buttonText = document.getElementById('buttonText');
+        let isPlaying = false;
 
+        // Mulai memutar musik saat halaman dimuat
+        window.onload = function () {
+            song.volume = 0.4;
+            song.play();
+            isPlaying = true;
+            updatePlayButtonIcon();
+        }
+
+        // Fungsi toggle untuk musik Play/Pause
+        playButton.addEventListener('click', function () {
+            if (isPlaying) {
+                song.pause();
+            } else {
+                song.play();
+            }
+            isPlaying = !isPlaying;
+            updatePlayButtonIcon();
+        });
+
+        // Fungsi untuk memperbarui ikon pada tombol Play/Pause
+        function updatePlayButtonIcon() {
+            if (isPlaying) {
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'inline';
+                buttonText.textContent = "Pause Music";
+            } else {
+                playIcon.style.display = 'inline';
+                pauseIcon.style.display = 'none';
+                buttonText.textContent = "Play Music";
+            }
+        }
+    </script>
+    <!-- <div id="audio-container">
+        <audio id="song" loop>
+            <source src="MUSIC JANJI SUCI.mp3" type="audio/mp3">
+        </audio>
+    </div>
+    
+    <script>
+        const song = document.getElementById('song');
+        
+        // Cek status dari localStorage
+        const musicPlaying = localStorage.getItem('musicPlaying') === 'true';
+        
+        // Jika musik di halaman sebelumnya sedang diputar, putar juga di halaman ini
+        if (musicPlaying) {
+            song.volume = 0.4;
+            song.play().catch(error => {
+                console.error("Error saat memutar audio di halaman contoh.html:", error);
+            });
+        }
+    </script> -->
+
+
+
+    <script src="
+    https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.js
+    "></script>
+    <script>
+        var swiper = new Swiper(".mySwiper", {
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+        });
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const brideImg = document.querySelector('.bride-img');
@@ -561,20 +783,21 @@
     </script>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const akadNikahElements = document.querySelectorAll('.akad-nikah h2, .akad-nikah .akad-text');
+    document.addEventListener('DOMContentLoaded', function () {
+        // Select elements to animate, including the gift section h2 and gift-text elements
+        const elementsToAnimate = document.querySelectorAll('.akad-nikah h2, .akad-nikah .akad-text, .gallery-title, .gallery-title .gallery-text, .gift-section h2, .gift-section .gift-text');
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Menambahkan kelas animate untuk memulai animasi
-                        entry.target.classList.add('animate');
-                    } else {
-                        // Menghapus kelas animate untuk mengulang animasi
-                        entry.target.classList.remove('animate');
-                    }
-                });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Add animation class to start the animation
+                    entry.target.classList.add('animate');
+                } else {
+                    // Remove animation class to restart animation when out of view
+                    entry.target.classList.remove('animate');
+                }
             });
+        });
 
             akadNikahElements.forEach(element => {
                 observer.observe(element); // Mengamati setiap elemen
