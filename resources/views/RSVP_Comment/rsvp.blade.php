@@ -196,7 +196,7 @@
                     @php
                         $existingRsvp = session('existing_rsvp');
                     @endphp
-                    @if ($existingRsvp->confirmation && $existingRsvp->total_guest) 
+                    @if (($existingRsvp->confirmation && $existingRsvp->total_guest)||($existingRsvp->confirmation !== null && $existingRsvp->total_guest !== null)) 
                     <div class="alert-box">
                         <p onclick="showModal()">{{ session('message') }}
                             <span style="color: red; cursor: pointer;" onclick="showOldDataModal()"> ⓘ </span>
@@ -257,8 +257,6 @@
         }
     }
 </script>
-
-    
     <style>
         .info-icon {
             display: inline-block;
@@ -287,12 +285,6 @@
     
     
     <script>
-        function expandRSVP() {
-            const rsvpSection = document.querySelector('.rsvp-section');
-            const rsvpContainer = document.querySelector('.rsvp-container');
-            rsvpSection.classList.toggle('expanded');
-            rsvpContainer.classList.toggle('expanded');
-        }
     
         @if (session('name_exists'))
             document.addEventListener('DOMContentLoaded', function() {

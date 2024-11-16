@@ -43,17 +43,19 @@ Route::post('/comment/{name}', [CommentController::class, 'store'])->name('comme
 Route::get('/comment', [CommentController::class, 'index'])->name('comment.index');
 
 //client
-Route::get('/client', [ClientController::class, 'showDashboard'])
-    ->middleware(['auth', 'verified'])
-    ->name('client.dashboard');
-Route::get('/rsvpclient', [RsvpController::class, 'viewclient'])->name('rsvpclient');
-Route::get('/rsvpclient/createtamu', [RsvpController::class, 'createtamu'])->name('rsvpclient.createtamu');
-Route::post('/rsvpclient/createtamu', [RsvpController::class, 'storetamu'])->name('rsvpclient.storetamu');
-Route::get('/rsvpclient/delete/{id}', [RsvpController::class, 'destroytamu'])->name('rsvpclient.destroytamu');
-Route::get('/commentclient', [CommentController::class, 'viewcomment'])->name('commentclient');
-Route::get('/rsvpclient/increment-sending-track/{id}', [RSVPController::class, 'incrementSendingTrack'])->name('rsvp.incrementSendingTrack');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/client', [ClientController::class, 'showDashboard'])
+        ->name('client.dashboard');
 
+    Route::get('/rsvpclient', [RsvpController::class, 'viewclient'])->name('rsvpclient');
+    Route::get('/rsvpclient/createtamu', [RsvpController::class, 'createtamu'])->name('rsvpclient.createtamu');
+    Route::post('/rsvpclient/createtamu', [RsvpController::class, 'storetamu'])->name('rsvpclient.storetamu');
+    Route::get('/rsvpclient/increment-sending-track/{id}', [RSVPController::class, 'incrementSendingTrack'])->name('rsvp.incrementSendingTrack');
+    Route::get('/rsvpclient/delete/{id}', [RsvpController::class, 'destroytamu'])->name('rsvpclient.destroytamu');
 
+    Route::get('/commentclient', [CommentController::class, 'viewcomment'])->name('commentclient.viewcomment');
+    Route::get('/commentclient/delete/{id}', [CommentController::class, 'destroycomment'])->name('commentclient.destroycomment');
+});
 
 Route::get('/dashboard', [AdminController::class, 'showDashboard'])
     ->middleware(['auth', 'verified'])

@@ -57,11 +57,20 @@ class CommentController extends Controller
         $comments = Comments::all();
         return view('admin.comment.comment', compact('comments'));
     }
-    public function viewcomment()
+    public function viewcomment(Request $request)
     {
-        $comments = Comments::all();
+        $sort = $request->get('sort', 'name'); 
+        $order = $request->get('order', 'asc'); 
+
+        $comments = Comments::join('rsvp', 'comments.rsvp_id', '=', 'rsvp.id') 
+                            ->orderBy('rsvp.' . $sort, $order) 
+                            ->get(['comments.*', 'rsvp.name']); 
+
         return view('client.commentclient', compact('comments'));
     }
+
+
+
 
     public function create()
     {
@@ -150,4 +159,22 @@ class CommentController extends Controller
         $comment->delete();
         return redirect('/comments')->with('success', 'Data Berhasil Dihapus!!');
     }
+    public function destroycomment($id)
+    {
+        // Find the comment by ID
+        $comment = Comments::find($id);
+
+        if (!$comment) {
+            return response()->json(['message' => 'Comment not found'], 404);
+        }
+
+        // Delete the comment
+        $comment->delete();
+        
+        // Redirect back with success message
+        return redirect()->route('commentclient.viewcomment')->with('success', 'Data Berhasil Dihapus!!');
+    }
+
+
+
 }
