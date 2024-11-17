@@ -11,7 +11,7 @@ class AdminController extends Controller
 {
     public function showDashboard()
     {
-        $eventReportCount = EventReports::select('counter')->get();
+        $eventReportCount = EventReports::sum('counter');
         $eventTypeCount = EventTypeRef::count();
         return view('admin.dashboard', compact('eventReportCount', 'eventTypeCount')); 
     }
