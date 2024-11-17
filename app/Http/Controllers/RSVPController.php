@@ -355,7 +355,7 @@ class RsvpController extends Controller
     public function confirmUpdate(Request $request, $name)
     {
         $newData = session('new_data');
-        $existingRsvp = session('existing_rsvp');
+        $existingRsvp = Rsvp::where('name', $request->name)->first();
         $confirmation = $request->input('confirmation', $newData['confirmation']);
 
         if ($request->confirmation === 'no') {
@@ -366,7 +366,7 @@ class RsvpController extends Controller
         } elseif ($confirmation === 'no') {
             $confirmation = 'Tidak Hadir';
         }
-
+        
         if ($newData && $existingRsvp) {
             $updatedData = [
                 'name' => $request->input('name'),
@@ -381,7 +381,7 @@ class RsvpController extends Controller
             $existingRsvp->saveLog('Updated');
 
             session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'message']);
-            return redirect()->route('rsvp.index', ['name' => $name, '#rsvp'])->with('success', 'Data berhasil diperbarui!');
+            return redirect()->route('rsvp.index', ['name' => $name . '#rsvp'])->with('success', 'Data berhasil diperbarui!');
         }
 
         return redirect()->route('rsvp.index', ['name' => $name])->with('error', 'Terjadi kesalahan dalam memperbarui data.');

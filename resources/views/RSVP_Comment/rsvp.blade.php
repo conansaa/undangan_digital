@@ -702,7 +702,12 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
             <div class="messages">
                 @foreach ($comments as $comment)
                     <div class="message">
-                        <p><strong>{{ $comment->rsvp->name }}:</strong><br>{{ $comment->comment }}</p>
+                        <p><strong>{{ $comment->rsvp->name }}:
+                            <a href="{{ route('commentclient.destroycomment', $comment->id) }}" 
+                               onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                <span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span>
+                            </a>
+                            </strong><br>{{ $comment->comment }}</p>
                     </div>
                 @endforeach
             </div>
