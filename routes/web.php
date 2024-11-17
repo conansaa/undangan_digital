@@ -119,6 +119,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/eventreport/delete/{id}', [EventReportController::class, 'destroy'])->name('eventreport.destroy');
     // Route yang diarahkan ke controller untuk menangani permintaan "Finish"
     Route::post('/event-reports/finish/{id}', [EventReportController::class, 'markAsFinished']);
+    Route::post('/event-reports/finish/{eventId}', [EventReportController::class, 'finishEvent'])->withoutMiddleware('auth');
+
 
 
     Route::get('/event-reports-detail', [EventReportDetailController::class, 'index']);

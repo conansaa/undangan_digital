@@ -106,6 +106,31 @@ class EventReportController extends Controller
         return response()->json(['success' => false, 'message' => 'Event report not found.']);
     }
 
+    public function finishEvent($eventId)
+    {
+        try {
+            // Debugging: Log the event ID to see if it's correct
+            \Log::info('Finish event request received for event ID: ' . $eventId);
+
+            $eventReport = EventReports::findOrFail($eventId);
+            $eventReport->update(['status' => 'finished']);
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Event has been marked as finished!'
+            ]);
+        } catch (\Exception $e) {
+            // Log the exception
+            \Log::error('Error finishing event: ' . $e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => 'Error marking event as finished: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+
     public function edit($id)
     {
         $eventReport = EventReports::findOrFail($id);
