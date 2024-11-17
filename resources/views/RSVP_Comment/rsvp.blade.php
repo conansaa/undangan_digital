@@ -24,8 +24,8 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
             <div class="text-overlay">
                 <p class="wedding-ket">The wedding of</p>
                 <h1 class="wedding-title">Shinta & Irfan</h1>
-                <p class="wedding-date">{{$eventAkad->event_name}} - {{ \Carbon\Carbon::parse($eventAkad->event_date)->translatedFormat('j F Y') }}<br>
-                    {{$eventResepsi->event_name}} - {{ \Carbon\Carbon::parse($eventResepsi->event_date)->translatedFormat('j F Y') }}
+                <p class="wedding-date">Akad - {{ \Carbon\Carbon::parse($eventAkad->event_date)->translatedFormat('j F Y') }}<br>
+                    Resepsi - {{ \Carbon\Carbon::parse($eventResepsi->event_date)->translatedFormat('j F Y') }}
                 </p>
             </div>
 
@@ -85,9 +85,9 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
         <div class="profiles">
             <div class="profile bride">
                 <img src="{{ asset('images/177A8539_1.jpg') }}" alt="Bride" class="profile-img bride-img">
-                <p class="name">Shinta</p>
-                {!! $eventBride->owner_name !!}
-                <p>Anak pertama dari 2 bersaudara{!! $eventBride->parents_name !!}</p>
+                <p class="name">{{ $eventBride->owner_name }}</p>
+                <h2>{{ $eventBride->owner_fullname }}</h2>
+                <p>Anak pertama dari 2 bersaudara dari <br>{{ $eventBride->fathers_name }}<br>&{{ $eventBride->mothers_name }}</p>
                 <div class="social-icons">
                     <a href="https://www.instagram.com/shintaamaliaw/?utm_source=ig_web_button_share_sheet"><img
                         src="{{ asset('images/ig.png') }}" alt="Instagram"></a>
@@ -96,9 +96,9 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
             <h1 class="title-and">&</h1>
             <div class="profile groom">
                 <img src="{{ asset('images/177A8676_1.jpg') }}" alt="Groom" class="profile-img groom-img">
-                <p class="name">Irfan</p>
-                    {!! $eventGroom->owner_name !!}
-                    <p>Anak pertama dari 5 bersaudara{!! $eventGroom->parents_name !!}</p>
+                <p class="name">{{ $eventGroom->owner_name }}</p>
+                <h2>{{ $eventGroom->owner_fullname }}</h2>
+                <p>Anak pertama dari 2 bersaudara dari <br>{{ $eventGroom->fathers_name }}<br>&{{ $eventGroom->mothers_name }}</p>
                 <div class="social-icons">
                     <a href="https://www.instagram.com/irfan224h/?utm_source=ig_web_button_share_sheet"><img
                         src="{{ asset('images/ig.png') }}" alt="Instagram"></a>
@@ -114,7 +114,8 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
                 <h2>AKAD <span class="akad-text">Nikah</span></h2>
                 <p>{{ \Carbon\Carbon::parse($eventAkad->event_date)->translatedFormat('j F Y') }}</p>
                 <p><strong>{{ \Carbon\Carbon::parse($eventAkad->event_time)->format('H:i') }} WIB</strong></p>
-                {!! $eventAkad->location !!}
+                <p>{{ $eventAkad->location }}</p>
+                <p>{{ $eventAkad->full_location }}</p>
                 <div style="text-align: center;">
                     <a href="https://maps.app.goo.gl/hbamQTbQYxax36jcA" target="_blank" style="text-decoration: none;">
                         <button class="button"
@@ -134,7 +135,8 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
                 <h2>RESEPSI <span class="akad-text">Pernikahan</span></h2>
                 <p>{{ \Carbon\Carbon::parse($eventResepsi->event_date)->translatedFormat('j F Y') }}</p>
                 <p><strong>{{ \Carbon\Carbon::parse($eventResepsi->event_time)->format('H:i') }} WIB</strong></p>
-                {!! $eventResepsi->location !!}
+                <p>{{ $eventResepsi->location }}</p>
+                <p>{{ $eventResepsi->full_location }}</p>
                 <div style="text-align: center;">
                     <!-- Membungkus tombol untuk memastikan tengah secara horizontal -->
                     <a href="https://maps.app.goo.gl/hbamQTbQYxax36jcA" target="_blank" style="text-decoration: none;">
@@ -575,16 +577,16 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
         <div id="giftModal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeModalGift()">&times;</span>
-                {!! $giftBarang->name !!}
-                {!! $giftBarang->notes !!}
+                <h2>{{ $giftBarang->name }}</h2>
+                <p>{{ $giftBarang->notes }}</p>
             </div>
         </div>
         <!-- Modal Pop-Up Rekening -->
         <div id="rekeningModal">
             <div class="modal-content">
                 <span class="close-btn" onclick="closeModalRekening()">&times;</span>
-                {!! $giftTf->name !!}
-                {!! $giftTf->notes !!}
+                <h2>{{ $giftTf->name }}</h2>
+                <p>{{ $giftTf->notes }}</p>
             </div>
         </div>
     </section>
@@ -608,13 +610,13 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
                                     @php
                                         $timeline = $timelines->firstWhere('id', 1);
                                     @endphp
-                                    {!! $timeline->title !!}
+                                    <h3>{{ $timeline->title }}</h3>
                                 </div>
                                 <div class="timeline-body">
                                 @php
                                     $timeline = $timelines->firstWhere('id', 1);
                                 @endphp
-                                {!! $timeline->description !!}
+                                <p>{{ $timeline->description }}</p>
                                 </div>
                             </div>
                         </li>
@@ -626,13 +628,13 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
                                     @php
                                         $timeline = $timelines->firstWhere('id', 2);
                                     @endphp
-                                    {!! $timeline->title !!}
+                                    <h3>{{ $timeline->title }}</h3>
                                 </div>
                                 <div class="timeline-body">
                                 @php
                                     $timeline = $timelines->firstWhere('id', 2);
                                 @endphp
-                                {!! $timeline->description !!}
+                                <p>{{ $timeline->description }}</p>
                                 </div>
                             </div>
                         </li>
@@ -641,17 +643,17 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
                             <div class="timeline-image" style="background-image: url({{ asset('images/177A8329_1.jpg') }});"></div>
                                 <div class="timeline-panel">
                                     <div class="timeline-heading">
-                                        @php
-                                            $timeline = $timelines->firstWhere('id', 3);
-                                        @endphp
-                                        {!! $timeline->title !!}
-                                    </div>
-                                    <div class="timeline-body">
                                     @php
                                         $timeline = $timelines->firstWhere('id', 3);
                                     @endphp
-                                    {!! $timeline->description !!}
-                                    </div>
+                                    <h3>{{ $timeline->title }}</h3>
+                                </div>
+                                <div class="timeline-body">
+                                @php
+                                    $timeline = $timelines->firstWhere('id', 3);
+                                @endphp
+                                <p>{{ $timeline->description }}</p>
+                                </div>
                                 </div>
                         </li>
 
