@@ -10,8 +10,12 @@
         rel="stylesheet">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css" rel="stylesheet">
+    <link href="
+https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
+" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+
 </head>
 
 <body>
@@ -27,8 +31,14 @@
 
             <div class="slideshow-container">
                 <div class="mySlides">
-                    <img src="{{ asset('images/177A82761_1.JPG') }}" alt="Photo 1">
+                    <img src="{{ asset('images/177A82761_1.JPG') }}" alt="Photo 1">    
                 </div>
+                <!-- <div class="mySlides">
+                    <img src="cover2.jpg" alt="Photo 2">
+                </div>
+                <div class="mySlides">
+                    <img src="cover3.jpg" alt="Photo 3">
+                </div> -->
             </div>
         </div>
     </div>
@@ -48,6 +58,28 @@
         </div>
     </div>
 
+
+    <!-- <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let slides = document.getElementsByClassName("mySlides");
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+
+            slides[slideIndex - 1].style.display = "block";
+            setTimeout(showSlides, 3500);
+        }
+    </script> -->
+
     <div class="container">
         <h1 class="title">BRIDE & GROOM</h1>
         <div class="profiles">
@@ -58,23 +90,22 @@
                 <p>Anak pertama dari 2 bersaudara{!! $eventBride->parents_name !!}</p>
                 <div class="social-icons">
                     <a href="https://www.instagram.com/shintaamaliaw/?utm_source=ig_web_button_share_sheet"><img
-                            src="{{ asset('images/ig.png') }}" alt="Instagram"></a>
+                        src="{{ asset('images/ig.png') }}" alt="Instagram"></a>
                 </div>
-                <h1 class="title-and">&</h1>
-                <div class="profile groom">
-                    <img src="{{ asset('images/177A8676_1.jpg') }}" alt="Groom" class="profile-img groom-img">
-                    <p class="name">Irfan</p>
+            </div>
+            <h1 class="title-and">&</h1>
+            <div class="profile groom">
+                <img src="{{ asset('images/177A8676_1.jpg') }}" alt="Groom" class="profile-img groom-img">
+                <p class="name">Irfan</p>
                     {!! $eventGroom->owner_name !!}
                     <p>Anak pertama dari 5 bersaudara{!! $eventGroom->parents_name !!}</p>
-                    <div class="social-icons">
-                        <a href="https://www.instagram.com/irfan224h/?utm_source=ig_web_button_share_sheet"><img
-                                src="{{ asset('images/ig.png') }}" alt="Instagram"></a>
-                    </div>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/irfan224h/?utm_source=ig_web_button_share_sheet"><img
+                        src="{{ asset('images/ig.png') }}" alt="Instagram"></a>
                 </div>
             </div>
         </div>
     </div>
-
 
     <div class="container1">
         <div class="event-section">
@@ -105,6 +136,7 @@
                 <p><strong>{{ \Carbon\Carbon::parse($eventResepsi->event_time)->format('H:i') }} WIB</strong></p>
                 {!! $eventResepsi->location !!}
                 <div style="text-align: center;">
+                    <!-- Membungkus tombol untuk memastikan tengah secara horizontal -->
                     <a href="https://maps.app.goo.gl/hbamQTbQYxax36jcA" target="_blank" style="text-decoration: none;">
                         <button class="button"
                             style="display: inline-flex; align-items: center; justify-content: center; padding: 5px 10px; border: none; cursor: pointer;">
@@ -117,252 +149,287 @@
             </div>
         </div>
     </div>
-    <img src="{{ asset('images/177A8157_1.JPG') }}" class="screen-prewed">
-    <div class="container2">
-        <div class="countdown-content">
-            <h2>Hari yang ditunggu</h2>
-            <hr class="divider">
-            <div id="countdown">
-                <div class="countdown-box">
-                    <span id="days" class="time">0</span>
-                    <span class="label">Days</span>
-                </div>
-                <div class="countdown-box">
-                    <span id="hours" class="time">0</span>
-                    <span class="label">Hours</span>
-                </div>
-                <div class="countdown-box">
-                    <span id="minutes" class="time">0</span>
-                    <span class="label">Mins</span>
-                </div>
-                <div class="countdown-box">
-                    <span id="seconds" class="time">0</span>
-                    <span class="label">Secs</span>
-                </div>
+
+
+    <!-- <div class="slideshow">
+            <div class="mySlides1">
+                <img src="177A8077.JPG" alt="Photo 1">
             </div>
-            <button class="reminder-button" onclick="setGoogleReminder()">
-                <i class="fas fa-bell"></i> Buat Pengingat
-            </button>
+            <div class="mySlides1">
+                <img src="cover2.jpg" alt="Photo 2">
+            </div>
+            <div class="mySlides1">
+                <img src="cover3.jpg" alt="Photo 3">
+            </div>
         </div>
-    </div>
-
-    <section id="rsvp" class="rsvp-section">
-    <div class="rsvp-container">
-        <div class="rsvp-container rsvp">
-            <img src="{{ asset('images/rsvp.png') }}" alt="Wedding Rings" class="icon">
-            <h2 class="rsvp-title">RSVP <span class="rsvp-text">Kehadiran</span></h2>
-            <p>
-                Kami tidak sabar menunggu hari pernikahan kami bersama Bapak/Ibu/Saudara/i. Mohon konfirmasi
-                kehadiran. Terima kasih.
-            </p>
-
-            <form action="{{ route('rsvp.store', ['name' => $name]) }}#rsvp" method="POST" id="rsvpForm">
-                @csrf
-                <input type="hidden" name="event_id" value="1">
-
-                <label1 for="name">Nama Lengkap</label1>
-                <input type="text" name="name" required value="{{ old('name', $name) }}" readonly>
-
-                <label1 for="phone">No Handphone</label1>
-                <input type="text" id="phone" name="phone_number" 
-                    value="{{ old('phone_number', $phoneNumber ?? session('new_data')['phone_number'] ?? '') }}" required
-                    @if($phoneNumber) readonly @endif minlength="12" oninput="validatePhoneNumber()">
-
-                <!-- Phone number alert -->
-                <div id="phone-alert" style="color: red; display: none; font-size: 12px; margin-top: 5px;">Minimal 12 digit.</div>
-
-                <div class="attendance-options">
-                    <label1 for="kehadiran">Kehadiran?</label1><br>
-                    <div class="attendance-items">
-                        <div class="attendance-item">
-                            <input type="radio" id="yes" name="confirmation" value="yes"
-                            {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Hadir') ? 'checked' : '' }} required>
-                            <label for="yes" class="no-bold">Ya, saya akan hadir</label>
-                        </div>
-                        <div class="attendance-item">
-                            <input type="radio" id="no" name="confirmation" value="no"
-                            {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Tidak Hadir') ? 'checked' : '' }}>
-                            <label for="no" class="no-bold">Maaf, tidak bisa</label>
-                        </div>
-                    </div>
-                </div>
-
-                <label1 for="total_guest">Jumlah Kehadiran</label1>
-                <select id="total_guest" name="total_guest" class="custom-select" required>
-                    <option value="1" {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '1' ? 'selected' : '' }}>1</option>
-                    <option value="2" {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '2' ? 'selected' : '' }}>2</option>
-                </select>
-
-                @if (session('name_exists'))
-                    @php
-                        $existingRsvp = session('existing_rsvp');
-                    @endphp
-                    @if (($existingRsvp->confirmation && $existingRsvp->total_guest)||($existingRsvp->confirmation !== null && $existingRsvp->total_guest !== null)) 
-                    <div class="alert-box">
-                        <p onclick="showModal()">{{ session('message') }}
-                            <span style="color: red; cursor: pointer;" onclick="showOldDataModal()"> ⓘ </span>
-                        </p>                            
-                    </div>
-                @endif                    
-                    <div class="rsvp-submit">
-                        <button formaction="{{ route('rsvp.confirmUpdate', ['name' => $name]) }}" formmethod="POST" class="button5">Edit Data</button>
-                        <button formaction="{{ route('rsvp.cancelUpdate',  ['name' => $name]) }}" formmethod="POST" class="button5">Batalkan</button>
-                    </div>
-                @else
-                    <div class="rsvp-submit">
-                        <button type="submit" class="rspv-btn">Kirim</button>
-                    </div>
-                @endif 
-            </form>
-            <div id="confirmationModal" class="modal" style="display:none;">
-                <div class="modal-content">
-                    <span class="close-btn" onclick="closeModal()">&times;</span>
-                    <img src="{{ asset('images/9304657.png') }}" alt="Thank You Image" class="modal-image">
-                    <h2>Terima Kasih!</h2>
-                    <p>Terima kasih sudah melakukan konfirmasi kehadiran.</p>
-                </div>
-            </div>
-
-            <div id="oldDataModal" class="modal" style="display:none;">
-                <div class="modal-content">
-                    <span class="close-btn" onclick="closeOldDataModal()">&times;</span>
-                    <h3>Data Lama</h3>
-                    <div class="old-data-container">
-                        <ul>
-                            @foreach ($oldData->reverse() as $entry) <!-- Reverse the collection to show most recent first -->
-                                <li>Nama: {{ $entry->name }}</li>
-                                <li>Nomor Telepon: {{ $entry->phone_number }}</li>
-                                <li>Konfirmasi: {{ $entry->confirmation }}</li>
-                                <li>Jumlah Tamu: {{ $entry->total_guest }}</li>
-                                <li>Tanggal: {{ $entry->created_at->format('d M Y H:i') }}</li>
-                                <hr>
-                            @endforeach
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            
-        </div>
-    </div>
-</section>
-
-<script>
-    function validatePhoneNumber() {
-        var phoneInput = document.getElementById("phone");
-        var alertBox = document.getElementById("phone-alert");
         
-        if (phoneInput.value.length < 12) {
-            alertBox.style.display = "block"; 
-        } else {
-            alertBox.style.display = "none"; 
-        }
-    }
-</script>
-    <style>
-        .info-icon {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: red;
-            color: white;
-            text-align: center;
-            font-weight: bold;
-            cursor: pointer;
-            margin-left: 10px;
-        }
-    </style>
-    
-    <script>
-        function showModal() {
-            document.getElementById('oldDataModal').style.display = 'block';
-        }
+        <script>
+            let slideIndex = 0;
+            showSlides();
         
-        function closeOldDataModal() {
-            document.getElementById('oldDataModal').style.display = 'none';
-        }
-    </script>
-    
-    
-    
-    <script>
-    
-        @if (session('name_exists'))
-            document.addEventListener('DOMContentLoaded', function() {
-                expandRSVP();
-            });
-        @endif
-    
-        window.onload = function() {
-            @if (session('success'))
-                document.getElementById("confirmationModal").style.display = "block";
-                <?php session()->forget('success'); ?>
-            @endif
-        };
-    
-        function closeModal() {
-            document.getElementById("confirmationModal").style.display = "none";
-        }
-    
-        window.onclick = function(event) {
-            const modal = document.getElementById("confirmationModal");
-            if (event.target === modal) {
-                modal.style.display = "none";
+            function showSlides() {
+                let slides = document.getElementsByClassName("mySlides1");
+        
+                for (let i = 0; i < slides.length; i++) {
+                    slides[i].style.display = "none";
+                }
+        
+                slideIndex++;
+                if (slideIndex > slides.length) {
+                    slideIndex = 1;
+                }
+        
+                slides[slideIndex - 1].style.display = "block";
+                setTimeout(showSlides, 3500); // Change image every 3.5 seconds
             }
-        };
-    
-        document.addEventListener('DOMContentLoaded', function () {
-            const confirmationRadios = document.getElementsByName('confirmation');
-            const totalGuestInput = document.getElementById('total_guest');
-    
-            function updateTotalGuestInput() {
-                const isNotAttending = Array.from(confirmationRadios).some(radio => radio.checked && radio.value === 'no');
+        </script> -->
+
+        <img src="{{ asset('images/177A8157_1.JPG') }}" class="screen-prewed">
+        <div class="container2">
+            <div class="countdown-content">
+                <h2>Hari yang ditunggu</h2>
+                <hr class="divider">
+                <div id="countdown">
+                    <div class="countdown-box">
+                        <span id="days" class="time">0</span>
+                        <span class="label">Days</span>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="hours" class="time">0</span>
+                        <span class="label">Hours</span>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="minutes" class="time">0</span>
+                        <span class="label">Mins</span>
+                    </div>
+                    <div class="countdown-box">
+                        <span id="seconds" class="time">0</span>
+                        <span class="label">Secs</span>
+                    </div>
+                </div>
+                <button class="reminder-button" onclick="setGoogleReminder()">
+                    <i class="fas fa-bell"></i> Buat Pengingat
+                </button>
+            </div>
+        </div>
+
+        <section id="rsvp" class="rsvp-section">
+            <div class="rsvp-container">
+                <div class="rsvp-container rsvp">
+                    <img src="{{ asset('images/rsvp.png') }}" alt="Wedding Rings" class="icon">
+                    <h2 class="rsvp-title">RSVP <span class="rsvp-text">Kehadiran</span></h2>
+                    <p>
+                        Kami tidak sabar menunggu hari pernikahan kami bersama Bapak/Ibu/Saudara/i. Mohon konfirmasi
+                        kehadiran. Terima kasih.
+                    </p>
+        
+                    <form action="{{ route('rsvp.store', ['name' => $name]) }}#rsvp" method="POST" id="rsvpForm">
+                        @csrf
+                        <input type="hidden" name="event_id" value="1">
+        
+                        <label1 for="name">Nama Lengkap</label1>
+                        <input type="text" name="name" required value="{{ old('name', $name) }}" readonly>
+        
+                        <label1 for="name">No Handphone</label1>
+                        <input type="text" id="phone" name="phone_number" 
+                            value="{{ old('phone_number', $phoneNumber ?? session('new_data')['phone_number'] ?? '') }}" required
+                            @if($phoneNumber) readonly @endif minlength="12" oninput="validatePhoneNumber()">
+        
+                        <!-- Phone number alert -->
+                        <div id="phone-alert" style="color: red; display: none; font-size: 12px; margin-top: 5px;">Minimal 12 digit.</div>
+        
+                        <div class="attendance-options">
+                            <label1 for="kehadiran">Kehadiran?</label1><br>
+                            <div class="attendance-items">
+                                <div class="attendance-item">
+                                    <input type="radio" id="yes" name="confirmation" value="yes"
+                                    {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Hadir') ? 'checked' : '' }} required>
+                                    <label for="yes" class="no-bold">Ya, saya akan hadir</label>
+                                </div>
+                                <div class="attendance-item">
+                                    <input type="radio" id="no" name="confirmation" value="no"
+                                    {{ (old('confirmation', session('new_data')['confirmation'] ?? '') == 'Tidak Hadir') ? 'checked' : '' }}>
+                                    <label for="no" class="no-bold">Maaf, tidak bisa</label>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <label1 for="total_guest">Jumlah Kehadiran</label1>
+                        <select id="total_guest" name="total_guest" class="custom-select" required>
+                            <option value="1" {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '1' ? 'selected' : '' }}>1</option>
+                            <option value="2" {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '2' ? 'selected' : '' }}>2</option>
+                        </select>
+        
+                        @if (session('name_exists'))
+                            @php
+                                $existingRsvp = session('existing_rsvp');
+                            @endphp
+                            @if (($existingRsvp->confirmation && $existingRsvp->total_guest)||($existingRsvp->confirmation !== null && $existingRsvp->total_guest !== null)) 
+                            <div class="alert-box">
+                                <p onclick="showModal()">{{ session('message') }}
+                                    <span style="color: red; cursor: pointer;" onclick="showOldDataModal()"> ⓘ </span>
+                                </p>                            
+                            </div>
+                        @endif                    
+                            <div class="rsvp-submit">
+                                <button formaction="{{ route('rsvp.confirmUpdate', ['name' => $name]) }}" formmethod="POST" class="button5">Edit Data</button>
+                                <button formaction="{{ route('rsvp.cancelUpdate',  ['name' => $name]) }}" formmethod="POST" class="button5">Batalkan</button>
+                            </div>
+                        @else
+                            <div class="rsvp-submit">
+                                <button type="submit" class="rspv-btn">Kirim</button>
+                            </div>
+                        @endif 
+                    </form>
+                    <div id="confirmationModal" class="modal" style="display:none;">
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="closeModal()">&times;</span>
+                            <img src="{{ asset('images/9304657.png') }}" alt="Thank You Image" class="modal-image">
+                            <h2>Terima Kasih!</h2>
+                            <p>Terima kasih sudah melakukan konfirmasi kehadiran.</p>
+                        </div>
+                    </div>
+        
+                    <div id="oldDataModal" class="modal" style="display:none;">
+                        <div class="modal-content">
+                            <span class="close-btn" onclick="closeOldDataModal()">&times;</span>
+                            <h3>Data Lama</h3>
+                            <div class="old-data-container">
+                                <ul>
+                                    @foreach ($oldData->reverse() as $entry) <!-- Reverse the collection to show most recent first -->
+                                        <li>Nama: {{ $entry->name }}</li>
+                                        <li>Nomor Telepon: {{ $entry->phone_number }}</li>
+                                        <li>Konfirmasi: {{ $entry->confirmation }}</li>
+                                        <li>Jumlah Tamu: {{ $entry->total_guest }}</li>
+                                        <li>Tanggal: {{ $entry->created_at->format('d M Y H:i') }}</li>
+                                        <hr>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+        <script>
+            function validatePhoneNumber() {
+                var phoneInput = document.getElementById("phone");
+                var alertBox = document.getElementById("phone-alert");
                 
-                if (isNotAttending) {
-                    totalGuestInput.value = 0;
-                    totalGuestInput.removeAttribute('required'); 
-                    totalGuestInput.style.display = 'none';
+                if (phoneInput.value.length < 12) {
+                    alertBox.style.display = "block"; 
                 } else {
-                    totalGuestInput.setAttribute('required', 'required'); 
-                    totalGuestInput.style.display = 'block';
+                    alertBox.style.display = "none"; 
                 }
             }
-    
-            totalGuestInput.style.display = 'block';
-    
-            confirmationRadios.forEach(radio => {
-                radio.addEventListener('change', updateTotalGuestInput);
-            });
-        });
-    </script>
-    
-
+        </script>
+            <style>
+                .info-icon {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background-color: red;
+                    color: white;
+                    text-align: center;
+                    font-weight: bold;
+                    cursor: pointer;
+                    margin-left: 10px;
+                }
+            </style>
+            
+            <script>
+                function showModal() {
+                    document.getElementById('oldDataModal').style.display = 'block';
+                }
+                
+                function closeOldDataModal() {
+                    document.getElementById('oldDataModal').style.display = 'none';
+                }
+            </script>
+            
+            
+            
+            <script>
+            
+                @if (session('name_exists'))
+                    document.addEventListener('DOMContentLoaded', function() {
+                        expandRSVP();
+                    });
+                @endif
+            
+                window.onload = function() {
+                    @if (session('success'))
+                        document.getElementById("confirmationModal").style.display = "block";
+                        <?php session()->forget('success'); ?>
+                    @endif
+                };
+            
+                function closeModal() {
+                    document.getElementById("confirmationModal").style.display = "none";
+                }
+            
+                window.onclick = function(event) {
+                    const modal = document.getElementById("confirmationModal");
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                    }
+                };
+            
+                document.addEventListener('DOMContentLoaded', function () {
+                    const confirmationRadios = document.getElementsByName('confirmation');
+                    const totalGuestInput = document.getElementById('total_guest');
+            
+                    function updateTotalGuestInput() {
+                        const isNotAttending = Array.from(confirmationRadios).some(radio => radio.checked && radio.value === 'no');
+                        
+                        if (isNotAttending) {
+                            totalGuestInput.value = 0;
+                            totalGuestInput.removeAttribute('required'); 
+                            totalGuestInput.style.display = 'none';
+                        } else {
+                            totalGuestInput.setAttribute('required', 'required'); 
+                            totalGuestInput.style.display = 'block';
+                        }
+                    }
+            
+                    totalGuestInput.style.display = 'block';
+            
+                    confirmationRadios.forEach(radio => {
+                        radio.addEventListener('change', updateTotalGuestInput);
+                    });
+                });
+            </script>
+            
     <h2 class="gallery-title">
         MOMEN<span class="gallery-text">Galeri</span>
     </h2>
 
     <section class="photo-gallery">
         <div class="photo-gallery-desktop">
-            <img src="{{ asset('images/177A8263_1.JPG') }}" alt="Description of image 1">
+            <div class="photo-item">
+                <img src="{{ asset('images/177A8263_1.JPG') }}" alt="Description of image 1">
+                </div>
+            <div class="photo-item">
+                <img src="{{ asset('images/177A8104_1.JPG') }}" alt="Description of image 2">
+            </div>
+            <div class="photo-item">
+                <img src="{{ asset('images/177A8502_1.JPG') }}" alt="Description of image 3">
+            </div>
         </div>
-        <div class="photo-item">
-            <img src="{{ asset('images/177A8104_1.JPG') }}" alt="Description of image 2">
+        <div class="photo-gallery-desktop">
+            <div class="photo-item">
+                <img src="{{ asset('images/177A8483_1.JPG') }}" alt="Description of image 1">
+                </div>
+            <div class="photo-item">
+                <img src="{{ asset('images/177A8194_1.JPG') }}" alt="Description of image 2">
+            </div>
+            <div class="photo-item">
+                <img src="{{ asset('images/177A8517_1.JPG') }}" alt="Description of image 3">
+            </div>
         </div>
-        <div class="photo-item">
-            <img src="{{ asset('images/177A8502_1.JPG') }}" alt="Description of image 3">
-        </div>
-    <div class="photo-gallery-desktop">
-        <div class="photo-item">
-            <img src="{{ asset('images/177A8483_1.JPG') }}" alt="Description of image 1">
-        </div>
-        <div class="photo-item">
-            <img src="{{ asset('images/177A8194_1.JPG') }}" alt="Description of image 2">
-        </div>
-        <div class="photo-item">
-            <img src="{{ asset('images/177A8517_1.JPG') }}" alt="Description of image 3">
-        </div>
-    </div>
-    <div class="photo-gallery-mobile">
+        <div class="photo-gallery-mobile">
             <div class="photo-slider" id="photoSlider">
                 <div class="photo-item">
                     <img src="{{ asset('images/177A8263_1.JPG') }}" alt="Description of image 1">
@@ -376,7 +443,7 @@
                 <div class="photo-item">
                     <img src="{{ asset('images/177A8483_1.JPG') }}" alt="Description of image 1">
                 </div>
-                <div class="photo-item">{{ asset('images/177A8194_1.JPG') }}
+                <div class="photo-item">
                     <img src="{{ asset('images/177A8194_1.JPG') }}" alt="Description of image 2">
                 </div>
                 <div class="photo-item">
@@ -472,6 +539,19 @@
 });
 
     </script> 
+    <!-- Swiper -->
+    <!-- <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="{{ asset('images/177A8263_1.jpg') }}" alt="Description of image 1"></div>
+      <div class="swiper-slide"><img src="{{ asset('images/177A8104_1') }}" alt="Description of image 2"></div>
+      <div class="swiper-slide"><img src="{{ asset('images/177A8502_1.jpg') }}" alt="Description of image 3"></div>
+      <div class="swiper-slide"><img src="{{ asset('images/177A8483_1.jpg') }}" alt="Description of image 1"></div>
+      <div class="swiper-slide"><img src="{{ asset('images/177A8194_1.jpg') }}" alt="Description of image 2"></div>
+      <div class="swiper-slide"> <img src="{{ asset('images/177A8517_1.jpg') }}" alt="Description of image 3"></div>
+       <div class="swiper-slide">Slide 7</div>
+      <div class="swiper-slide">Slide 8</div>
+      <div class="swiper-slide">Slide 9</div> -->
+
     <section id="gift" class="gift-section">
         <div class="gift-container gift">
             <img src="{{ asset('images/gift.png') }}" alt="gift" class="icon">
@@ -506,11 +586,9 @@
                 {!! $giftTf->name !!}
                 {!! $giftTf->notes !!}
             </div>
-        </div>        
+        </div>
     </section>
-
     <section id="story" class="story">
-
         <div class="container5">
             <div class="row justify-content-center">
                 <div class="text-center">
@@ -522,11 +600,9 @@
             </div>
             <div class="row">
                 <div class="col">
-
                     <ul class="timeline">
-
-                        <li> 
-                            <div class="timeline-image" style="background-image: url({{ asset('177A8474_1.jpg') }});"></div>
+                        <li>
+                            <div class="timeline-image" style="background-image: url('177A8474_1.jpg');"></div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     @php
@@ -542,6 +618,7 @@
                                 </div>
                             </div>
                         </li>
+
                         <li class="timeline-inverted">
                             <div class="timeline-image" style="background-image: url({{ asset('images/177A8402_1.jpg') }});"></div>
                             <div class="timeline-panel">
@@ -579,33 +656,34 @@
                         </li>
 
                     </ul>
+
                 </div>
             </div>
         </div>
     </section>
-    <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        // Pilih elemen <h2> dan .gift-text di dalam gift-container
-        const giftTextElements = document.querySelectorAll('.gift h2  .gift .gift-text');
+<script>
+   document.addEventListener('DOMContentLoaded', function () {
+    // Pilih elemen <h2> dan .gift-text di dalam gift-container
+    const giftTextElements = document.querySelectorAll('.gift h2  .gift .gift-text');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    // Menambahkan kelas animate untuk memulai animasi
-                    entry.target.classList.add('animate');
-                } else {
-                    // Menghapus kelas animate untuk mengulang animasi
-                    entry.target.classList.remove('animate');
-                }
-            });
-        });
-
-        giftTextElements.forEach(element => {
-            observer.observe(element); // Mengamati setiap elemen
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Menambahkan kelas animate untuk memulai animasi
+                entry.target.classList.add('animate');
+            } else {
+                // Menghapus kelas animate untuk mengulang animasi
+                entry.target.classList.remove('animate');
+            }
         });
     });
 
-    </script>
+    giftTextElements.forEach(element => {
+        observer.observe(element); // Mengamati setiap elemen
+    });
+});
+
+</script>
     <section class="screen-prewed1">
         <img src="{{ asset('images/177A8506.JPG') }}" class="screen-prewed1-img">
     </section>
@@ -628,7 +706,6 @@
             </div>
         </div>
     </div>
-    
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         $(document).ready(function() {
@@ -656,14 +733,17 @@
             });
         });
     </script>
-    
     <div class="thank">
         <p class="thanks">Terima Kasih</p>
         <h4>SHINTA & IRFAN</h4>
     </div>
+
+
+
+
     <footer class="footer">
         <h4><span class="small-text">Made With By</span></h4>
-        <img src="{{ asset('images/Logo.jpg') }}" alt="diikatJanji Logo" class="logo">
+        <img src="{{ asset('images/Logo.png') }}" alt="diikatJanji Logo" class="logo">
         <p>all right reserved by diikatJanji</p>
     </footer>
     <button id="playButton">
@@ -682,9 +762,11 @@
             </svg>
         </span>
     </button>
+    <!-- Elemen Audio -->
     <audio id="song" loop>
         <source src="MUSIC JANJI SUCI.mp3" type="audio/mp3">
     </audio>
+
     <script>
         const song = document.getElementById('song');
         const playButton = document.getElementById('playButton');
@@ -782,7 +864,7 @@
         });
     </script>
 
-    <script>
+<script>
     document.addEventListener('DOMContentLoaded', function () {
         // Select elements to animate, including the gift section h2 and gift-text elements
         const elementsToAnimate = document.querySelectorAll('.akad-nikah h2, .akad-nikah .akad-text, .gallery-title, .gallery-title .gallery-text, .gift-section h2, .gift-section .gift-text');
@@ -799,11 +881,11 @@
             });
         });
 
-            akadNikahElements.forEach(element => {
-                observer.observe(element); // Mengamati setiap elemen
-            });
+        elementsToAnimate.forEach(element => {
+            observer.observe(element); // Observe each element
         });
-    </script>
+    });
+</script>
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -888,7 +970,7 @@
             });
         });
     </script>
-    
+
     <!--js modal dift dan rekening-->
     <script>
         function openModalGift(event) {
@@ -925,8 +1007,6 @@
                 modal.style.display = "none";
             }
         }
-    </script>    
-
+    </script>
 </body>
-
 </html>
