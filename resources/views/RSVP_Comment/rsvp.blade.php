@@ -270,7 +270,7 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
                                     <span style="color: red; cursor: pointer;" onclick="showOldDataModal()"> ⓘ </span>
                                 </p>                            
                             </div>
-                        @endif                    
+                            @endif                    
                             <div class="rsvp-submit">
                                 <button formaction="{{ route('rsvp.confirmUpdate', ['name' => $name]) }}" formmethod="POST" class="button5">Edit Data</button>
                                 <button formaction="{{ route('rsvp.cancelUpdate',  ['name' => $name]) }}" formmethod="POST" class="button5">Batalkan</button>
