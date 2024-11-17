@@ -2,13 +2,23 @@
 
 @section('title', 'RSVP')
 
-@section('judul', 'Data Tamu')
+@section('judul')
+    Data Tamu
+    <h6 class="col-12 col-lg-6 fw-bold">Quota Terisi: {{ $totalGuests }}/{{ $totalQuota }}</h6> <br>
+@endsection
 
 @section('konten_client')
 
+<style>
+    .quota-text {
+        margin-left: 0;
+        text-align: left;
+    }
+</style>
+
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="row justify-content-between mb-3">
-        <h5 class="col-12 col-lg-6 fw-bold">List Data Tamu </h5>
+        <h5 class="col-12 col-lg-6 fw-bold">List Data Tamu</h5>
         <div class="col-12 col-lg-6 d-flex justify-content-end">
             <div class="me-2">
                 <a href="/rsvpclient/createtamu" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
@@ -16,14 +26,29 @@
             </div>
         </div>
     </div>
+
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th scope="col" class="text-center">No</th>
-                    <th scope="col">Nama</th>
+                    <th scope="col">
+                        <a href="{{ route('rsvpclient', ['sort' => 'name', 'order' => request('order') == 'asc' ? 'desc' : 'asc']) }}" 
+                            class="text-decoration-none" style="color: inherit;">
+                            Nama Tamu
+                            <i class="fa fa-sort{{ request('sort') == 'name' ? (request('order') == 'asc' ? '-up' : '-down') : '' }}"></i>
+                        </a>
+                    </th>
                     <th scope="col">No. Telp</th>
-                    <th scope="col">Konfirmasi</th>
+                    <th scope="col">
+                        <a href="{{ route('rsvpclient', ['sort' => 'confirmation', 'order' => request('order') == 'asc' && request('sort') == 'confirmation' ? 'desc' : 'asc']) }}" 
+                            class="text-decoration-none" style="color: inherit;">
+                            Konfirmasi
+                            <i class="fa fa-sort{{ request('sort') == 'confirmation' ? (request('order') == 'asc' ? '-up' : '-down') : '' }}"></i>
+                         </a>
+                         
+                         
+                    </th>
                     <th scope="col">Total Guest</th>
                     <th scope="col" class="text-center">Aksi</th>
                 </tr>
@@ -38,31 +63,31 @@
                         <td>{{ $rsvp->total_guest }}</td>
                         <td class="text-center">
                             @php
-                                $invitationLink = url('/invitation/'.$rsvp->name); // Generate the invitation link
+                                $invitationLink = url('/invitation/'.$rsvp->name); 
                             @endphp
-                            
                             @if ($rsvp->phone_number)
-                                <!-- WhatsApp Icon -->
+                                <a href="#" onclick="copyLink('{{ $invitationLink }}')" 
+                                    class="text-decoration-none ms-lg-3" 
+                                    title="Salin Link">
+                                    <i class="fa-solid fa-copy"></i>
+                                </a>
                                 <a href="{{ route('rsvp.incrementSendingTrack', $rsvp->id) }}" 
-                                   onclick="window.open('https://wa.me/{{ $rsvp->phone_number }}?text={{ urlencode("Thank you for RSVPing! Here's the link $invitationLink") }}'); return true;" 
-                                   class="text-decoration-none ms-lg-3" 
-                                   style="color: {{ $rsvp->sending_track > 0 ? 'red' : 'green' }}"
-                                   title="{{ $rsvp->sending_track > 0 ? 'Anda sudah pernah mengirim ke WhatsApp' : '' }}">
+                                    onclick="window.open('https://wa.me/{{ $rsvp->WhatsAppNumber }}?text={{ urlencode("Thank you for RSVPing! Here's the link $invitationLink") }}'); return true;" 
+                                    class="text-decoration-none ms-lg-3" 
+                                    style="color: {{ $rsvp->sending_track > 0 ? 'red' : 'green' }}"
+                                    title="{{ $rsvp->sending_track > 0 ? 'Anda sudah pernah mengirim ke WhatsApp' : '' }}">
                                     <i class="fa-brands fa-whatsapp"></i>
                                 </a>
                             @else
-                                <!-- Copy Link Icon -->
                                 <a href="#" onclick="copyLink('{{ $invitationLink }}')" 
-                                   class="text-decoration-none ms-lg-3" 
-                                   title="Salin Link">
+                                    class="text-decoration-none ms-lg-3" 
+                                    title="Salin Link">
                                     <i class="fa-solid fa-copy"></i>
                                 </a>
                             @endif
-                            
-                            <!-- Delete Icon -->
                             <a href="{{ route('rsvpclient.destroytamu', $rsvp->id) }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                 <i class="fa-regular fa-trash-can text-danger ms-lg-3"></i>
-                             </a>
+                                <i class="fa-regular fa-trash-can text-danger ms-lg-3"></i>
+                            </a>
                         </td>
                     </tr>
                 @endforeach

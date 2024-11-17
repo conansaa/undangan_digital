@@ -12,7 +12,6 @@ class ClientController extends Controller
     {
         // Calculate total guests where confirmation is 'Hadir'
         $totalGuests = Rsvp::where('confirmation', 'Hadir')->sum('total_guest');
-
         // Calculate total comments
         $totalComments = Comments::count();
 

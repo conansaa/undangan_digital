@@ -71,9 +71,24 @@ class RsvpController extends Controller
     }
     public function viewclient()
     {
-        $rsvps = Rsvp::all();
-        return view('client.rsvpclient', compact('rsvps'));
+        $totalGuests = Rsvp::where('confirmation', 'Hadir')->sum('total_guest');
+        $totalQuota = EventDetails::where('id', 1)->value('quota') ?? 0;
+
+        $sort = request('sort', 'name'); 
+        $order = request('order', 'asc');
+
+        if ($sort === 'confirmation') {
+            $rsvps = Rsvp::orderByRaw("
+                FIELD(confirmation, 'Hadir', 'Tidak Hadir', '') " . ($order == 'asc' ? "ASC" : "DESC") . ",
+                confirmation IS NULL " . ($order == 'asc' ? "ASC" : "DESC")
+            )->get();
+        } else {
+            $rsvps = Rsvp::orderBy($sort, $order)->get();
+        }
+
+        return view('client.rsvpclient', compact('totalGuests', 'totalQuota', 'rsvps', 'sort', 'order'));
     }
+
     public function invitation($name)
     {
         $eventResepsi = DB::table('event_details')->where('id', 1)->first();
@@ -276,17 +291,14 @@ class RsvpController extends Controller
                             ->where('event_id', $request->event_id)
                             ->first();
                             if ($existingRsvp) {
-                                // Check if the existing RSVP has confirmation and total_guest filled in (not null)
                                 if ($existingRsvp->confirmation !== null && $existingRsvp->total_guest !== null) {
                                     
-                                    // Check if any differences exist between the current data and the new data
                                     $dataChanged = (
                                         $existingRsvp->confirmation !== $request->confirmation ||
                                         $existingRsvp->total_guest != $request->total_guest ||
                                         $existingRsvp->phone_number !== $request->phone_number
                                     );
                             
-                                    // If data is different, ask if the user wants to update
                                     if ($dataChanged) {
                                         session([
                                             'new_data' => $request->all(),
@@ -299,20 +311,17 @@ class RsvpController extends Controller
                                         return redirect()->route('rsvp.index', ['name' => $name]);
                                     }
                             
-                                    // If data is the same, update without asking
                                     $existingRsvp->update([
                                         'confirmation' => $request->confirmation ?? $existingRsvp->confirmation,
                                         'total_guest' => $request->total_guest ?? $existingRsvp->total_guest,
                                         'phone_number' => $request->phone_number,
                                     ]);
                             
-                                    // Log the update action
                                     $existingRsvp->saveLog('Same Data');
                                     
                                     return redirect()->route('rsvp.index', ['name' => $name]);
                             
                                 } else {
-                                    // If confirmation and total_guest are null, update without showing any alert
                                     $existingRsvp->update([
                                         'confirmation' => $request->confirmation,
                                         'total_guest' => $request->total_guest,
@@ -332,7 +341,6 @@ class RsvpController extends Controller
                                     'total_guest' => $request->total_guest,
                                 ]);
                             
-                                // Log the creation action
                                 $newRsvp->saveLog('Created RSVP');
                             
                                 return redirect()->route('rsvp.index', ['name' => $name]);

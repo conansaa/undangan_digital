@@ -25,7 +25,7 @@
             <a href="{{ route('rsvpclient') }}" style="text-decoration: none; color: inherit;">
                 <div class="card shadow border-0 p-3" style="border-radius: 10px; background-color: #f8f9fa;">
                     <div class="card-body text-center">
-                        <h5 class="card-title">Total Tamu Hadir</h5>
+                        <h5 class="card-title">Total Tamu</h5>
                         <p class="card-text" style="font-size: 24px; font-weight: bold;">{{ $totalGuests }}</p>
                     </div>
                 </div>
@@ -33,7 +33,7 @@
         </div>
         
         <div class="col-md-4">
-            <a href="{{ route('commentclient') }}" style="text-decoration: none; color: inherit;">
+            <a href="{{ route('commentclient.viewcomment') }}" style="text-decoration: none; color: inherit;">
                 <div class="card shadow border-0 p-3" style="border-radius: 10px; background-color: #f8f9fa;">
                     <div class="card-body text-center">
                         <h5 class="card-title">Total Ucapan</h5>

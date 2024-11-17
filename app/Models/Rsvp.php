@@ -47,4 +47,8 @@ class Rsvp extends Model
             'action' => $action,
         ]);
     }
+    public function getWhatsAppNumberAttribute()
+    {
+        return $this->phone_number ? (substr($this->phone_number, 0, 2) == "62" ? $this->phone_number : ('62' . substr($this->phone_number, 1))) : null;
+    }
 }
