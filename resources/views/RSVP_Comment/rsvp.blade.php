@@ -230,7 +230,7 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
                         <label1 for="name">Nama Lengkap</label1>
                         <input type="text" name="name" required value="{{ old('name', $name) }}" readonly>
         
-                        <label1 for="name">No Handphone</label1>
+                        <label1 for="phone">No Handphone</label1>
                         <input type="text" id="phone" name="phone_number" 
                             value="{{ old('phone_number', $phoneNumber ?? session('new_data')['phone_number'] ?? '') }}" required
                             @if($phoneNumber) readonly @endif minlength="12" oninput="validatePhoneNumber()">
@@ -270,7 +270,7 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
                                     <span style="color: red; cursor: pointer;" onclick="showOldDataModal()"> ⓘ </span>
                                 </p>                            
                             </div>
-                            @endif                    
+                        @endif                    
                             <div class="rsvp-submit">
                                 <button formaction="{{ route('rsvp.confirmUpdate', ['name' => $name]) }}" formmethod="POST" class="button5">Edit Data</button>
                                 <button formaction="{{ route('rsvp.cancelUpdate',  ['name' => $name]) }}" formmethod="POST" class="button5">Batalkan</button>

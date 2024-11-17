@@ -263,7 +263,7 @@ class RsvpController extends Controller
         return redirect('/rsvpclient')->with('success', 'Data Berhasil Dihapus!!');
     }
 
-    public function store(Request $request, $name)
+     public function store(Request $request, $name)
     {
         if ($request->confirmation === 'no') {
             $request->merge(['total_guest' => 0]);
@@ -369,14 +369,13 @@ class RsvpController extends Controller
 
         if ($newData && $existingRsvp) {
             $updatedData = [
-                'name' => $request->input('name', $newData['name']),
+                'name' => $request->input('name'),
                 'phone_number' => $newData['phone_number'],
                 'confirmation' => $confirmation,
                 'total_guest' => $request->input('total_guest', $newData['total_guest']),
                 'event_id' => $newData['event_id'],
             ];
 
-            // Update the existing RSVP data
             $existingRsvp->update($updatedData);
 
             $existingRsvp->saveLog('Updated');
@@ -395,6 +394,7 @@ class RsvpController extends Controller
 
         return redirect()->route('rsvp.index', ['name' => $name])->withFragment('rsvp');
     }
+
 
 
     /**
