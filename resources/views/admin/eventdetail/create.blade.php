@@ -83,9 +83,20 @@
 
         <!-- Lokasi -->
         <div class="mb-3">
-            <label for="location" class="form-label fw-bold">Lokasi</label>
+            <label for="location" class="form-label fw-bold">Titik Lokasi</label>
             <input type="text" value="{{ old('location') }}" name="location" class="bg-white form-control @error('location') is-invalid @enderror" placeholder="Masukkan Lokasi Event">
             @error('location')
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
+        <!-- Lokasi Lengkap-->
+        <div class="mb-3">
+            <label for="full_location" class="form-label fw-bold">Lokasi Lengkap</label>
+            <input type="text" value="{{ old('full_location') }}" name="full_location" class="bg-white form-control @error('full_location') is-invalid @enderror" placeholder="Masukkan Lokasi Event">
+            @error('full_location')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
                 </div>

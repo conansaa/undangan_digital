@@ -21,7 +21,10 @@
             <tr>
                 <th scope="col" class="text-center">No</th>
                 <th scope="col">Nama Pemilik Acara</th>
-                <th scope="col">Nama Orangtua</th>
+                <th scope="col">Nama Panggilan</th>
+                <th scope="col">Nama Ayah</th>
+                <th scope="col">Nama Ibu</th>
+                <th scope="col">Anak Ke-berapa</th>
                 <th scope="col">Foto</th>
                 <th scope="col">Sosial Media</th>
                 <th scope="col">Gender</th>
@@ -33,9 +36,14 @@
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
                     <td scope="col">
+                        <a data-bs-target="#detailOwner{{ $owner->id }}">{{ $owner->owner_fullname }}</a>
+                    </td>
+                    <td scope="col">
                         <a data-bs-target="#detailOwner{{ $owner->id }}">{{ $owner->owner_name }}</a>
                     </td>
-                    <td scope="col">{{ $owner->parents_name }}</td>
+                    <td scope="col">{{ $owner->fathers_name }}</td>
+                    <td scope="col">{{ $owner->mothers_name }}</td>
+                    <td scope="col">{{ $owner->ordinal_child_number }}</td>
                     <td scope="col">
                         @if (empty($owner->owner_photo))
                             <span class="text-secondary">Tidak ada foto</span>

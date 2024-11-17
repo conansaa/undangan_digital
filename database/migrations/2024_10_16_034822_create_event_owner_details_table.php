@@ -13,8 +13,10 @@ class CreateEventOwnerDetailsTable extends Migration
     {
         Schema::create('event_owner_details', function (Blueprint $table) {
             $table->id();
+            $table->string('owner_fullname');
             $table->string('owner_name');
-            $table->text('parents_name')->nullable(); // Menggunakan TEXT untuk textarea
+            $table->string('fathers_name')->nullable();
+            $table->string('mothers_name')->nullable();
             $table->string('owner_photo')->nullable();
             $table->string('social_media')->nullable();
             $table->unsignedBigInteger('gender_id');

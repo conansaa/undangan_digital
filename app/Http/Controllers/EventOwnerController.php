@@ -33,9 +33,12 @@ class EventOwnerController extends Controller
     {
         // Validate input
         $request->validate([
+            'owner_fullname' => 'required|string|max:255',
             'owner_name' => 'required|string|max:255',
-            'parents_name' => 'nullable|string',
-            'owner_photo' => 'nullable|image|mimes:jpeg,png,jpg',
+            'fathers_name' => 'nullable|string',
+            'mothers_name' => 'nullable|string',
+            'ordinal_child_number' => 'nullable|integer',
+            'owner_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:1000',
             'social_media' => 'nullable|string|max:255',
             'gender_id' => 'required|integer|exists:gender_ref,id', // Validasi gender_id sesuai dengan tabel referensi gender
         ]);
@@ -52,8 +55,11 @@ class EventOwnerController extends Controller
 
         // Menyimpan data pemilik acara dengan nama file foto
         EventOwnerDetails::create([
+            'owner_fullname' => $request->owner_fullname,
             'owner_name' => $request->owner_name,
-            'parents_name' => $request->parents_name,
+            'fathers_name' => $request->fathers_name,
+            'mothers_name' => $request->mothers_name,
+            'ordinal_child_number' => $request->ordinal_child_number,
             'owner_photo' => $path, // Simpan nama file di database
             'social_media' => $request->social_media,
             'gender_id' => $request->gender_id,
@@ -90,19 +96,25 @@ class EventOwnerController extends Controller
     {
         // Validasi input
         $request->validate([
+            'owner_fullname' => 'required|max:255',
             'owner_name' => 'required|max:255',
-            'parents_name' => 'required|max:255',
+            'fathers_name' => 'required|max:255',
+            'mothers_name' => 'required|max:255',
+            'ordinal_child_number' => 'required',
             'social_media' => 'nullable|max:255',
             'gender' => 'required|exists:gender_ref,id', // ID gender harus valid
-            'owner_photo' => 'image|mimes:jpeg,png,jpg' // Optional jika tidak mengubah foto
+            'owner_photo' => 'image|mimes:jpeg,png,jpg|max:1000' // Optional jika tidak mengubah foto
         ]);
 
         // Ambil data owner berdasarkan ID
         $owner = EventOwnerDetails::findOrFail($id);
 
         // Update data owner
+        $owner->owner_fullname = $request->owner_fullname;
         $owner->owner_name = $request->owner_name;
-        $owner->parents_name = $request->parents_name;
+        $owner->fathers_name = $request->fathers_name;
+        $owner->mothers_name = $request->mothers_name;
+        $owner->ordinal_child_number = $request->ordinal_child_number;
         $owner->social_media = $request->social_media;
         $owner->gender_id = $request->gender;
 

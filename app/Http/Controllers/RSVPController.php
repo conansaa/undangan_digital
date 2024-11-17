@@ -111,7 +111,7 @@ class RsvpController extends Controller
         return view('admin.rsvp.create', compact('eventDetails')); // Sesuaikan dengan nama view kamu
     }
 
-    public function storedata(Request $request)
+    public function storeModal(Request $request, $event_id)
     {
         // Ensure confirmation is "yes" or "no" before insertion
         $confirmationValue = $request->confirmation === 'yes' ? 'yes' : 'no';
@@ -126,7 +126,7 @@ class RsvpController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'phone_number' => 'required|string|max:15',
-            'confirmation' => 'required|in:yes,no',
+            'confirmation' => 'nullable|in:yes,no',
             'total_guest' => [
                 'required_if:confirmation,yes',
                 'integer',
@@ -136,12 +136,12 @@ class RsvpController extends Controller
                     }
                 }
             ],
-            'event_id' => 'required|exists:event_details,id',
+            // 'event_id' => 'required|exists:event_details,id',
         ]);
 
         // Check if the phone number already exists
         $existingRsvp = Rsvp::where('phone_number', $request->phone_number)
-                            ->where('event_id', $request->event_id)
+                            ->where('event_id', $event_id)
                             ->first();
 
         if ($existingRsvp) {
@@ -156,11 +156,18 @@ class RsvpController extends Controller
         }
 
         // Store new data if phone number is not in use
-        $newRsvp = Rsvp::create($request->all());
+        $newRsvp = new Rsvp();
+        $newRsvp->event_id = $event_id;
+        $newRsvp->name = $request->name;
+        $newRsvp->phone_number = $request->phone_number;
+        $newRsvp->confirmation = $request->confirmation;
+        $newRsvp->total_guest = $request->total_guest;
+
+        $newRsvp->save();
         session()->forget(['new_data', 'existing_rsvp', 'phone_exists', 'message']);
         session(['rsvp_id' => $newRsvp->id]);
 
-        return redirect('/rsvps')->with('success', 'RSVP berhasil disimpan!');
+        return redirect()->route('event.show', ['id' => $event_id])->with('success', 'Rsvp berhasil ditambahkan!');
     }
 
     public function edit($id)
@@ -430,6 +437,6 @@ class RsvpController extends Controller
 
         // Delete RSVP
         $rsvp->delete();
-        return redirect('/rsvps')->with('success', 'Data Berhasil Dihapus!!');
+        return redirect()->route('event.show', ['id' => $rsvp->event_id])->with('success', 'Data berhasil dihapus.');
     }
 }
