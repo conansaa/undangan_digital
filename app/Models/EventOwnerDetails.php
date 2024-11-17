@@ -12,8 +12,11 @@ class EventOwnerDetails extends Model
     protected $table = 'event_owner_details';
 
     protected $fillable = [
+        'owner_fullname',
         'owner_name',
-        'parents_name',
+        'fathers_name',
+        'mothers_name',
+        'ordinal_child_number',
         'owner_photo',
         'social_media',
         'gender_id',

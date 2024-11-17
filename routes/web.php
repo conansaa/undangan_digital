@@ -95,8 +95,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/event/edit/{id}', [EventController::class, 'update'])->name('event.update');
     Route::get('/event/delete/{id}', [EventController::class, 'destroy'])->name('event.delete');
     Route::get('/details/{id}', [EventController::class, 'show'])->name('event.show');
-    Route::post('/details/{id}/timeline', [EventController::class, 'storeTimeline'])->name('event.storeTimeline');
-    Route::post('/details/{id}/rsvp', [EventController::class, 'storeRsvp'])->name('event.storeRsvp');
+    // Route::post('/details/{id}/timeline', [EventController::class, 'storeTimeline'])->name('event.storeTimeline');
+    // Route::post('/details/{id}/rsvp', [EventController::class, 'storeRsvp'])->name('event.storeRsvp');
+    // Route::post('/details/{id}/gift', [EventController::class, 'storeGift'])->name('event.storeGift');
+    // Route::post('/details/{id}/gallery', [EventController::class, 'storeGallery'])->name('event.storeGallery');
 
     // Routes untuk Event Type
     Route::get('/event-type', [EventTypeController::class, 'index'])->name('eventtype.index');
@@ -122,15 +124,15 @@ Route::middleware('auth')->group(function () {
     // Routes untuk Timeline
     Route::get('/timelines', [TimelineController::class, 'index'])->name('timelines.index');
     Route::get('/timeline/create', [TimelineController::class, 'create'])->name('timeline.create');
-    Route::post('/timeline/create', [TimelineController::class, 'store']);
-    Route::get('/timeline/edit/{id}', [TimelineController::class, 'edit'])->name('timeline.edit');
-    Route::put('/timeline/edit/{id}', [TimelineController::class, 'update'])->name('timeline.update');
+    Route::post('/timeline/store/{id}', [TimelineController::class, 'storeModal'])->name('timeline.storeModal');
+    Route::get('/timeline/edit/{id}', [TimelineController::class, 'editModal'])->name('timeline.edit');
+    Route::put('/timeline/update/{id}', [TimelineController::class, 'update'])->name('timeline.update');
     Route::get('/timeline/delete/{id}', [TimelineController::class, 'destroy'])->name('timeline.destroy');
 
     // Routes untuk RSVP
     Route::get('/rsvps', [RsvpController::class, 'views'])->name('rsvps.views');
     Route::get('/rsvps/create', [RsvpController::class, 'create'])->name('rsvps.create');
-    Route::post('/rsvps/create', [RsvpController::class, 'storedata'])->name('rsvps.storedata');
+    Route::post('/rsvps/store/{id}', [RsvpController::class, 'storeModal'])->name('rsvps.storeRsvp');
     Route::get('/rsvps/create/{id}', [RsvpController::class, 'make'])->name('rsvps.make');
     Route::get('/rsvps/edit/{id}', [RsvpController::class, 'edit'])->name('rsvps.edit');
     Route::put('/rsvps/edit/{id}', [RsvpController::class, 'update'])->name('rsvps.update');
@@ -147,9 +149,9 @@ Route::middleware('auth')->group(function () {
     // Routes untuk Gift
     Route::get('/gifts', [GiftController::class, 'index']);
     Route::get('/gift/create', [GiftController::class, 'create'])->name('gift.create');
-    Route::post('/gift/create', [GiftController::class, 'store'])->name('gift.store');
-    Route::get('/gift/edit/{id}', [GiftController::class, 'edit'])->name('gift.edit');
-    Route::put('/gift/edit/{id}', [GiftController::class, 'update'])->name('gift.update');
+    Route::post('/gift/store/{id}', [GiftController::class, 'storeModal'])->name('gift.storeGift');
+    Route::get('/gift/edit/{id}', [GiftController::class, 'editModal'])->name('gift.edit');
+    Route::put('/gift/update/{id}', [GiftController::class, 'update'])->name('gift.update');
     Route::get('/gift/delete/{id}', [GiftController::class, 'destroy'])->name('gift.destroy');
 
     // Routes untuk Section
@@ -163,9 +165,9 @@ Route::middleware('auth')->group(function () {
     // Routes untuk Gallery
     Route::get('/galleries', [GalleryController::class, 'index'])->name('gallery.index');
     Route::get('/gallery/create', [GalleryController::class, 'create'])->name('gallery.create');
-    Route::post('/gallery/create', [GalleryController::class, 'store'])->name('gallery.store');
-    Route::get('/gallery/edit/{id}', [GalleryController::class, 'edit'])->name('gallery.edit');
-    Route::put('/gallery/edit/{id}', [GalleryController::class, 'update'])->name('gallery.update');
+    Route::post('/gallery/store/{id}', [GalleryController::class, 'storeModal'])->name('gallery.storeGallery');
+    Route::get('/gallery/edit/{id}', [GalleryController::class, 'editModal'])->name('gallery.edit');
+    Route::put('/gallery/update/{id}', [GalleryController::class, 'update'])->name('gallery.update');
     Route::get('/gallery/delete/{id}', [GalleryController::class, 'destroy'])->name('gallery.destroy');
 
     // Routes untuk User

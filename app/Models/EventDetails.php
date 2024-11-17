@@ -18,6 +18,7 @@ class EventDetails extends Model
         'event_date',
         'event_time',
         'location',
+        'full_location',
         'quota',
     ];
 

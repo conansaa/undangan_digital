@@ -19,6 +19,7 @@ class CreateEventDetailsTable extends Migration
             $table->date('event_date'); // Tanggal acara
             $table->time('event_time'); // Waktu acara
             $table->string('location'); // Tempat acara
+            $table->string('full_location');
             $table->integer('quota'); // Kuota tamu
             $table->timestamps();
 

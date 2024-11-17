@@ -24,7 +24,8 @@
                 <th scope="col" style="width: 10%;">Tipe Acara</th>
                 <th scope="col" style="width: 10%;">Tanggal</th>
                 <th scope="col" style="width: 10%;">Waktu</th>
-                <th scope="col" style="width: 20%;">Lokasi</th>
+                <th scope="col" style="width: 10%;">Titik Lokasi</th>
+                <th scope="col" style="width: 10%;">Lokasi</th>
                 <th scope="col" style="width: 5%;">Kuota</th>
                 <th scope="col" class="text-center" style="width: 15%;">Aksi</th>
             </tr>
@@ -39,6 +40,7 @@
                     <td>{{ \Carbon\Carbon::parse($event->event_date)->format('d-m-Y') }}</td>
                     <td>{{ \Carbon\Carbon::parse($event->event_time)->format('H:i') }}</td>
                     <td>{{ $event->location }}</td>
+                    <td>{{ $event->full_location }}</td>
                     <td>{{ $event->quota }}</td>
                     <td class="text-center">
                         <a href="/event/edit/{{ $event->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>

@@ -13,7 +13,16 @@
     <form action="" method="post" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="owner_name" class="form-label fw-bold">Nama Pemilik Acara</label>
+            <label for="owner_fullname" class="form-label fw-bold">Nama Lengkap Pemilik Acara</label>
+            <input type="text" value="{{ old('owner_fullname') }}" name="owner_fullname" class="bg-white form-control @error('owner_fullname') is-invalid @enderror" placeholder="Masukkan Nama Pemilik Acara">
+            @error('owner_fullname')
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="owner_name" class="form-label fw-bold">Nama Panggilan</label>
             <input type="text" value="{{ old('owner_name') }}" name="owner_name" class="bg-white form-control @error('owner_name') is-invalid @enderror" placeholder="Masukkan Nama Pemilik Acara">
             @error('owner_name')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
@@ -22,9 +31,27 @@
             @enderror
         </div>
         <div class="mb-3">
-            <label for="parents_name" class="form-label fw-bold">Nama Orangtua</label>
-            <input type="text" value="{{ old('parents_name') }}" name="parents_name" class="bg-white form-control @error('parents_name') is-invalid @enderror" placeholder="Masukkan Nama Orangtua">
-            @error('parents_name')
+            <label for="fathers_name" class="form-label fw-bold">Nama Ayah</label>
+            <input type="text" value="{{ old('fathers_name') }}" name="fathers_name" class="bg-white form-control @error('fathers_name') is-invalid @enderror" placeholder="Masukkan Nama Ayah">
+            @error('fathers_name')
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="mothers_name" class="form-label fw-bold">Nama Ibu</label>
+            <input type="text" value="{{ old('mothers_name') }}" name="mothers_name" class="bg-white form-control @error('mothers_name') is-invalid @enderror" placeholder="Masukkan Nama Ibu">
+            @error('mothers_name')
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+        <div class="mb-3">
+            <label for="ordinal_child_number" class="form-label fw-bold">Anak ke Berapa</label>
+            <input type="number" value="{{ old('ordinal_child_number') }}" name="ordinal_child_number" class="bg-white form-control @error('ordinal_child_number') is-invalid @enderror" placeholder="Masukkan Anak ke Berapa">
+            @error('ordinal_child_number')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
                 </div>
