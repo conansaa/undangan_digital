@@ -59,24 +59,30 @@
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-Token': '{{ csrf_token() }}' // Sertakan CSRF token jika diperlukan
+                'X-CSRF-Token': '{{ csrf_token() }}'
             },
-            body: JSON.stringify({ status: 'finished' }) // Tambahkan data jika diperlukan
+            body: JSON.stringify({ status: 'finished' })
         })
-        .then(response => response.json())
+        .then(response => {
+            // Check if the response is JSON
+            return response.json().catch(() => {
+                throw new Error('Server returned non-JSON response');
+            });
+        })
         .then(data => {
             if (data.success) {
                 alert('Event has been marked as finished!');
-                location.reload(); // Muat ulang halaman untuk memperbarui tampilan
+                location.reload();
             } else {
                 alert('Failed to mark as finished: ' + data.message);
             }
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred while marking the event as finished.');
+            console.error('Error:', error); 
+            alert('An error occurred: ' + error.message);
         });
     }
+
 </script>
 
 @endsection
