@@ -31,7 +31,7 @@ Route::get('/invitation/{name}', [RsvpController::class, 'invitation'])->name('r
 
 //enduser
 Route::get('/rsvp/{name}', [RsvpController::class, 'index'])->name('rsvp.index');
-Route::post('/rsvp/store{name}', [RsvpController::class, 'store'])->name('rsvp.store');
+Route::post('/rsvp/store/{name}', [RsvpController::class, 'store'])->name('rsvp.store');
 Route::get('/rsvp/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
 Route::post('/rsvp/confirm-update/{name}', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
 Route::post('/rsvp/cancel-update/{name}', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
