@@ -114,7 +114,7 @@
                         <tr>
                             <td>{{ $rsvp->name }}</td>
                             <td>{{ $rsvp->phone_number }}</td>
-                            <td>{{ $rsvp->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir' }}</td>
+                            <td>{{ $rsvp->confirmation === 'Hadir' ? 'Hadir' : 'Tidak Hadir' }}</td>
                             <td>{{ $rsvp->total_guest }}</td>
                             <td>
                                 <a href="/rsvps/delete/{{ $rsvp->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
@@ -131,6 +131,7 @@
                     <tr>
                         <th>Nama</th>
                         <th>Ucapan</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -138,6 +139,9 @@
                         <tr>
                             <td>{{ $comment->rsvp->name }}</td>
                             <td>{{ $comment->comment }}</td>
+                            <td>
+                                <a href="/comment/delete/{{ $comment->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger"><i class="fa-regular fa-trash-can"></i></span></a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -315,7 +319,7 @@
     <!-- Modal Edit Timeline -->
     @foreach ($event->timeline as $timeline)
         <div class="modal fade" id="editTimelineModal{{ $timeline->id }}" tabindex="-1" aria-labelledby="editTimelineModalLabel{{ $timeline->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable">
+            <div class="modal-dialog modal-dialog-scrollable modal-lg">
                 <form id="editTimelineForm{{ $timeline->id }}" action="{{ route('timeline.update', ['id' => $timeline->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')

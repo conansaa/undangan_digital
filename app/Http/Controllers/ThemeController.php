@@ -28,7 +28,6 @@ class ThemeController extends Controller
         // dd($request->all());
         
         $request->validate([
-            'event_id' => 'required|exists:event_details,id',
             'name' => 'required|string|max:100',
             'description' => 'nullable|string',
             'max_images' => 'required|integer|min:1',
@@ -38,7 +37,6 @@ class ThemeController extends Controller
         ]);
 
         Theme::create([
-            'event_id' => $request->event_id,
             'name' => $request->name,
             'description' => $request->description,
             'max_images' => $request->max_images,
@@ -72,7 +70,6 @@ class ThemeController extends Controller
     {
         // Validasi input
         $request->validate([
-            'event_id' => 'required',
             'name' => 'required|max:100',
             'description' => 'required',
             'max_images' => 'required|integer',
@@ -85,7 +82,6 @@ class ThemeController extends Controller
         $theme = Theme::findOrFail($id);
 
         // Update data tema
-        $theme->event_id = $request->event_id;
         $theme->name = $request->name;
         $theme->description = $request->description;
         $theme->max_images = $request->max_images;

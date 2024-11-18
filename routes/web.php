@@ -148,7 +148,7 @@ Route::middleware('auth')->group(function () {
     // Route::post('/comment/create', [CommentController::class, 'storedata'])->name('comment.storedata');
     // Route::get('/comment/edit/{id}', [CommentController::class, 'edit'])->name('comment.edit');
     // Route::put('/comment/edit/{id}', [CommentController::class, 'update'])->name('comment.update');
-    // Route::get('/comment/delete/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
+    Route::get('/comment/delete/{id}', [CommentController::class, 'destroy'])->name('comment.destroy');
 
     // Routes untuk Gift
     Route::get('/gifts', [GiftController::class, 'index']);

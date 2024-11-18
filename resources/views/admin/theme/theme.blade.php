@@ -20,7 +20,6 @@
         <thead>
             <tr>
                 <th scope="col" class="text-center">No</th>
-                <th scope="col">Nama Acara</th>
                 <th scope="col">Nama Tema</th>
                 <th scope="col">Deskripsi</th>
                 <th scope="col">Maksimal Gambar</th>
@@ -34,7 +33,6 @@
             @foreach ($themes as $theme)
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    <td scope="col">{{ $theme->event->event_name }}</td> 
                     <td scope="col">{{ $theme->name }}</td>
                     <td scope="col">{{ Str::limit($theme->description, 50) }}</td>
                     <td scope="col">{{ $theme->max_images }}</td>
@@ -56,10 +54,6 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Event ID</div>
-                                    <div class="col-6">{{ $theme->event->event_name }}</div>
-                                </div>
                                 <div class="row">
                                     <div class="col-5 col-md-4 label fw-bold mb-3">Nama Tema</div>
                                     <div class="col-6">{{ $theme->name }}</div>

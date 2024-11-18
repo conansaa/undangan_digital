@@ -24,7 +24,7 @@
                 <th scope="col">Nama Panggilan</th>
                 <th scope="col">Nama Ayah</th>
                 <th scope="col">Nama Ibu</th>
-                <th scope="col">Anak Ke-berapa</th>
+                <th scope="col">Anak Ke</th>
                 <th scope="col">Foto</th>
                 <th scope="col">Sosial Media</th>
                 <th scope="col">Gender</th>

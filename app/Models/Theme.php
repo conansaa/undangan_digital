@@ -11,7 +11,6 @@ class Theme extends Model
     use HasFactory;
 
     protected $fillable = [
-        'event_id',
         'name',
         'description',
         'max_images',
