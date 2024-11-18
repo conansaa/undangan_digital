@@ -4,18 +4,28 @@
 
 @section('judul')
     Data Tamu
-    <h6 class="col-12 col-lg-6 fw-bold">Quota Terisi: {{ $totalGuests }}/{{ $totalQuota }}</h6> <br>
 @endsection
 
 @section('konten_client')
 
-<style>
+{{-- <style>
     .quota-text {
         margin-left: 0;
         text-align: left;
     }
-</style>
-
+</style> --}}
+<div>
+<a href="{{ route('rsvpclient') }}" style="text-decoration: none; color: inherit;">
+    <div class="card shadow border-0 p-3 d-flex align-items-center justify-content-center bg-white  mb-4" style="border-radius: 10px; background-color: #f8f9fa;">
+        <div class="card-body text-center">
+            <h5 class="card-title mb-2" style="font-size: 18px; font-weight: bold; color: #202229;">Kuota Terisi</h5>
+            <p class="card-text" style="font-size: 16px; font-weight: bold; margin-bottom: 0;">
+                {{ $totalGuests }}/{{ $totalQuota }}
+            </p>
+        </div>
+    </div>
+</a>
+</div>
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="row justify-content-between mb-3">
         <h5 class="col-12 col-lg-6 fw-bold">List Data Tamu</h5>

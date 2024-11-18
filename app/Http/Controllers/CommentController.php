@@ -22,34 +22,37 @@ class CommentController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request, $name)
-    {
-        // Find the RSVP entry by name
-        $rsvp = Rsvp::where('name', $name)->first();
+{
+    // Find the RSVP entry by name
+    $rsvp = Rsvp::where('name', $name)->first();
 
-        if (!$rsvp) {
-            return response()->json(['error' => 'RSVP not found for this name.'], 404);
-        }
-
-        // Validate the comment
-        $validator = Validator::make($request->all(), [
-            'comment' => 'required|string|max:500',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['errors' => $validator->errors()], 422);
-        }
-
-        // Create the comment using the RSVP ID
-        $comment = Comments::create([
-            'rsvp_id' => $rsvp->id,
-            'comment' => $request->comment,
-        ]);
-
-        return response()->json([
-            'comment' => $comment->comment,
-            'rsvp_name' => $rsvp->name
-        ], 201);
+    if (!$rsvp) {
+        return response()->json(['error' => 'RSVP not found for this name.'], 404);
     }
+
+    // Validate the comment
+    $validator = Validator::make($request->all(), [
+        'comment' => 'required|string|max:500',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json(['errors' => $validator->errors()], 422);
+    }
+
+    // Create the comment using the RSVP ID
+    $comment = Comments::create([
+        'rsvp_id' => $rsvp->id,
+        'comment' => $request->comment,
+    ]);
+
+    // Return the comment to be added dynamically
+    return response()->json([
+        'id' => $comment->id,
+        'comment' => $comment->comment,
+        'rsvp_name' => $rsvp->name
+    ], 201);
+}
+
 
 
     public function views()
@@ -174,6 +177,27 @@ class CommentController extends Controller
         // Redirect back with success message
         return redirect()->route('commentclient.viewcomment')->with('success', 'Data Berhasil Dihapus!!');
     }
+    public function hapus($id, $name)
+    {
+        // Cari komentar berdasarkan ID
+        $comment = Comments::find($id);
+
+        if (!$comment) {
+            return response()->json(['message' => 'Comment not found'], 404);
+        }
+
+        if ($comment->rsvp->name !== $name) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
+        // Hapus komentar
+        $comment->delete();
+
+        // Redirect ke halaman RSVP dengan pesan sukses
+        return redirect()->route('rsvp.index', ['name' => $name,'#comment']) 
+                        ->with('success', 'Data berhasil diperbarui!');
+    }
+
 
 
 

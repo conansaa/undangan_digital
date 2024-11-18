@@ -14,8 +14,9 @@
 https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
 " rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
 </head>
 
 <body>
@@ -691,62 +692,95 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
     </section>
 
     <div class="comment-section">
-        <div class="app-container">
-            <img src="{{ asset('images/amplop.png') }}" alt="Envelope Icon" class="icon5">
-            <div class="section-title">Tinggalkan pesan/doa untuk kami</div>
-            <form action="{{ route('comment.store', ['name' => $name]) }}" method="POST" id="commentForm">
-                @csrf
-                <textarea name="comment" placeholder="Ketikkan pesan/doa terindahmu.." required></textarea>
-                <button type="submit" class="button5">Kirim</button>
-            </form>
-            <div class="messages">
-                @foreach ($comments as $comment)
-                    <div class="message">
-                        <p><strong>{{ $comment->rsvp->name }}:
-                            <a href="{{ route('commentclient.destroycomment', $comment->id) }}" 
-                               onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                <span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span>
-                            </a>
-                            </strong><br>{{ $comment->comment }}</p>
+    <div class="app-container">
+        <img src="{{ asset('images/amplop.png') }}" alt="Envelope Icon" class="icon5">
+        <div class="section-title">Tinggalkan pesan/doa untuk kami</div>
+        <form action="{{ route('comment.store', ['name' => $name]) }}#comment" method="POST" id="commentForm">
+            @csrf
+            <textarea name="comment" placeholder="Ketikkan pesan/doa terindahmu.." required></textarea>
+            <button type="submit" class="button5">Kirim</button>
+        </form>
+        <div class="messages">
+            @foreach ($comments as $comment)
+                <div class="message" id="comment-{{ $comment->id }}">
+                    <div class="d-flex justify-content-between align-items-center">
+                        @if ($comment->rsvp->name !== $name) 
+                            <p>
+                                <strong>{{ $comment->rsvp->name }}:</strong><br>
+                                {{ $comment->comment }}
+                            </p>
+                        @else
+                            <div>
+                            <p>
+                                <strong>{{ $comment->rsvp->name }}:</strong><br>
+                                {{ $comment->comment }}
+                            </p>
+                        </div>
+                        <a href="{{ route('comment.hapus', ['id' => $comment->id, 'name' => $name]) }}" 
+                        onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" 
+                        class="text-danger ms-2">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                        @endif
                     </div>
-                @endforeach
-            </div>
+                </div>
+            @endforeach
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('#commentForm').on('submit', function(e) {
-                e.preventDefault(); 
-    
-                var formData = $(this).serialize();
-    
-                $.ajax({
-                    type: 'POST',
-                    url: $(this).attr('action'),
-                    data: formData,
-                    success: function(response) {
-                        $('.messages').prepend('<div class="message"><p><strong>' + response.rsvp_name + ':</strong><br>' + response.comment + '</p></div>');
-    
-                        $('textarea[name="comment"]').val('');
-                    },
-                    error: function(xhr) {
-                        var errors = xhr.responseJSON.errors;
-                        for (var key in errors) {
-                            alert(errors[key][0]); 
-                        }
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#commentForm').on('submit', function(e) {
+            e.preventDefault(); 
+
+            var formData = $(this).serialize(); 
+
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: formData,
+                success: function(response) {
+                    // Create a new comment HTML structure
+                    var newComment = `
+                        <div class="message" id="comment-${response.id}">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <p>
+                                        <strong>${response.rsvp_name}:</strong><br>
+                                        ${response.comment}
+                                    </p>
+                                </div>
+                                <a href="/comment/delete/${response.id}/${response.rsvp_name}" 
+                                   onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" 
+                                   class="text-danger ms-2">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    // Prepend the new comment to the messages section
+                    $('.messages').prepend(newComment);
+
+                    // Clear the textarea
+                    $('textarea[name="comment"]').val('');
+                },
+                error: function(xhr) {
+                    var errors = xhr.responseJSON.errors;
+                    for (var key in errors) {
+                        alert(errors[key][0]);
                     }
-                });
+                }
             });
         });
-    </script>
+    });
+</script>
+
     <div class="thank">
         <p class="thanks">Terima Kasih</p>
         <h4>SHINTA & IRFAN</h4>
     </div>
-
-
-
 
     <footer class="footer">
         <h4><span class="small-text">Made With By</span></h4>
