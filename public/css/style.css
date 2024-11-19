@@ -845,12 +845,12 @@ background-color: #444444; /* Warna sedikit lebih gelap saat di-hover */
 
 .rsvp-section.expanded {
 padding-bottom: 30px; /* Space at the bottom of rsvp-section */
-min-height: 1500px; /* Adjust height for the rsvp-section */
+min-height: 1000px; /* Adjust height for the rsvp-section */
 }
 
 .rsvp-container.expanded {
 padding-bottom: 50px; /* Space at the bottom of rsvp-container */
-min-height: 1300px; /* Adjust height for the rsvp-container */
+min-height: 800px; /* Adjust height for the rsvp-container */
 }
 
 .rsvp-container {
@@ -2025,6 +2025,7 @@ margin-top: 1em; /* Center content vertically */
   font-size: 14px;
   max-width: 100px;
   align-self: flex-end;
+  margin-right: 10px;
   margin-bottom: 20px;
 }
 
@@ -2436,12 +2437,12 @@ color: #888; /* Change this to the color you want */
     
     .rsvp-section.expanded {
       padding-bottom: 30px; /* Space at the bottom of rsvp-section */
-      min-height: 1150px; /* Adjust height for the rsvp-section */
+      min-height: 800px; /* Adjust height for the rsvp-section */
     }
     
     .rsvp-container.expanded {
       padding-bottom: 50px; /* Space at the bottom of rsvp-container */
-      min-height: 1000px; /* Adjust height for the rsvp-container */
+      min-height: 700px; /* Adjust height for the rsvp-container */
     }
 
 .rspv-btn {

@@ -216,8 +216,8 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
             </div>
         </div>
 
-        <section id="rsvp" class="rsvp-section">
-            <div class="rsvp-container">
+        <section id="rsvp" class="rsvp-section {{ session('name_exists') ? 'expanded' : '' }}">
+            <div class="rsvp-container {{ session('name_exists') ? 'expanded' : '' }}">        
                 <div class="rsvp-container rsvp">
                     <img src="{{ asset('images/rsvp.png') }}" alt="Wedding Rings" class="icon">
                     <h2 class="rsvp-title">RSVP <span class="rsvp-text">Kehadiran</span></h2>
@@ -355,6 +355,16 @@ https://cdn.jsdelivr.net/npm/swiper@11.1.14/swiper-bundle.min.css
             
             
             <script>
+                function expandRSVP() {
+                    const rsvpSection = document.querySelector('.rsvp-section');
+                    const rsvpContainer = document.querySelector('.rsvp-container');
+                    
+                    if (rsvpSection && rsvpContainer) {
+                        rsvpSection.classList.add('expanded');
+                        rsvpContainer.classList.add('expanded');
+                    }
+                }
+
             
                 @if (session('name_exists'))
                     document.addEventListener('DOMContentLoaded', function() {
