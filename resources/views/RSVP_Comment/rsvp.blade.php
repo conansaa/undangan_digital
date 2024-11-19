@@ -67,7 +67,7 @@
       </div>
     </div>
 
-    <div class="container" style="background-image: url('public/img/bg 5.png'); background-size: cover; background-position: center; padding: 40px; border-radius: 8px; color: white;">
+    <div class="container" style="background-image: url({{ asset('images/bg 5.png') }}); background-size: cover; background-position: center; padding: 40px; border-radius: 8px; color: white;">
       <h1 class="title">BRIDE & GROOM</h1>
       <div class="profiles">
         <div class="profile bride">
@@ -94,7 +94,7 @@
       </div>
     </div>
 
-    <div class="container1" style="background-image: url('public/img/bg2.png'); background-size: cover; background-position: center; padding: 40px; border-radius: 8px; color: white;">
+    <div class="container1" style="background-image: url({{ asset('images/bg2.png') }}); background-size: cover; background-position: center; padding: 40px; border-radius: 8px; color: white;">
       <div class="event-section">
         <div class="event-card akad-nikah">
           <img src="{{ asset('images/ring.png') }}" alt="Wedding Rings" class="icon">
@@ -140,7 +140,7 @@
     </div>
 
     <img src="{{ asset('images/177A8104.JPG') }}" class="screen-prewed" style="object-position: 50% 42%; object-fit: cover;">
-    <div class="container2" style="background-image: url('public/img/bg 3.png'); background-size: cover; background-position: center; padding: 20px; border-radius: 8px; color: white;">
+    <div class="container2" style="background-image: url({{ asset('images/bg 3.png') }}); background-size: cover; background-position: center; padding: 20px; border-radius: 8px; color: white;">
       <div class="countdown-content">
         <h2>Hari yang ditunggu</h2>
         <hr class="divider">
@@ -308,7 +308,7 @@
       </div>
     </section>
     
-    <section id="gift" class="gift-section" style="background-image: url('public/img/bg 3.png'); background-size: cover; background-position: center; padding: 40px; border-radius: 8px; color: white;">
+    <section id="gift" class="gift-section" style="background-image: url({{ asset('images/bg 3.png') }}); background-size: cover; background-position: center; padding: 40px; border-radius: 8px; color: white;">
       <div class="gift-container gift">
         <img src="{{ asset('images/gift.png') }}" alt="gift" class="icon">
         <h2>GIFT <span class="gift-text"> Amplop Digital</span></h2>
@@ -478,7 +478,7 @@
       </span>
     </button>
     <audio id="song" loop>
-      <source src="public/music/MUSIC JANJI SUCI.mp3" type="audio/mp3">
+      <source src="{{ asset('music/MUSIC JANJI SUCI.mp3') }}" type="audio/mp3">
     </audio>
   </section>
 

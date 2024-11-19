@@ -25,18 +25,18 @@ function validatePhoneNumber() {
         rsvpContainer.classList.add('expanded');
     }
   }
-  @if (session('name_exists'))
-    document.addEventListener('DOMContentLoaded', function() {
-        expandRSVP();
-    });
-  @endif
+//   @if (session('name_exists'))
+//     document.addEventListener('DOMContentLoaded', function() {
+//         expandRSVP();
+//     });
+//   @endif
   
-  window.onload = function() {
-    @if (session('success'))
-        document.getElementById("confirmationModal").style.display = "block";
-        <?php session()->forget('success'); ?>
-    @endif
-  };
+//   window.onload = function() {
+//     @if (session('success'))
+//         document.getElementById("confirmationModal").style.display = "block";
+//         <?php session()->forget('success'); ?>
+//     @endif
+//   };
   
   function closeModal() {
     document.getElementById("confirmationModal").style.display = "none";
