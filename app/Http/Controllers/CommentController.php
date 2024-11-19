@@ -45,7 +45,6 @@ class CommentController extends Controller
         'comment' => $request->comment,
     ]);
 
-    // Return the comment to be added dynamically
     return response()->json([
         'id' => $comment->id,
         'comment' => $comment->comment,

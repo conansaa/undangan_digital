@@ -3,7 +3,29 @@ body {
   font-family: 'Playfair Display', serif;
   background-color: #f0f0f0;
 }
+.comment-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+}
 
+.comment-header p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.delete-icon {
+  color: black;
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.delete-icon i {
+  font-size: 14px;
+}
 
 #playButton {
   position: fixed;
