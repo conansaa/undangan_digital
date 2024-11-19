@@ -218,10 +218,10 @@ function validatePhoneNumber() {
         observer.observe(element); // Observe each element
     });
   });
-  
-  // coundown resepsi
-  // Atur tanggal acara yang dituju
-  var eventDate = new Date("{{ $eventResepsi->event_date }}").getTime();
+
+
+  function eventDateCountdown(tanggal) {
+    var eventDate = new Date(tanggal).getTime();
           
           var countdownFunction = setInterval(function() {
               var now = new Date().getTime();
@@ -255,7 +255,7 @@ function validatePhoneNumber() {
     // Buka link Google Calendar di tab baru
     window.open(url, "_blank");
   }
-  
+  }
   // KEHADIRAN
   document.addEventListener('DOMContentLoaded', function () {
     const confirmationRadios = document.getElementsByName('confirmation');

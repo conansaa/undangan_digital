@@ -38,7 +38,7 @@
       <div class="content">
         <div class="text-overlay">
           <p class="wedding-ket">The wedding of</p>
-          <h1 class="wedding-title">Shinta & Irfan</h1>
+          <h1 class="wedding-title">{{ $eventBride->owner_name }} & {{ $eventGroom->owner_name }}</h1>
           <p class="wedding-date">Akad - {{ \Carbon\Carbon::parse($eventAkad->event_date)->translatedFormat('j F Y') }}<br>
             Resepsi - {{ \Carbon\Carbon::parse($eventResepsi->event_date)->translatedFormat('j F Y') }}
           </p>
@@ -71,7 +71,7 @@
       <h1 class="title">BRIDE & GROOM</h1>
       <div class="profiles">
         <div class="profile bride">
-          <img src="{{ asset('images/177A8539_1.jpg') }}" alt="Bride" class="profile-img bride-img">
+          <img src="{{ asset('images/177A8539.jpg') }}" alt="Bride" class="profile-img bride-img">
           <p class="name">{{ $eventBride->owner_name }}</p>
                 <h2>{{ $eventBride->owner_fullname }}</h2>
                 <p>Anak pertama dari 2 bersaudara dari <br>{{ $eventBride->fathers_name }}<br>&{{ $eventBride->mothers_name }}</p>
@@ -82,7 +82,7 @@
         </div>
         <h1 class="title-and">&</h1>
         <div class="profile groom">
-          <img src="{{ asset('images/177A8676_1.jpg') }}" alt="Groom" class="profile-img groom-img">
+          <img src="{{ asset('images/177A8676.jpg') }}" alt="Groom" class="profile-img groom-img">
                 <p class="name">{{ $eventGroom->owner_name }}</p>
                 <h2>{{ $eventGroom->owner_fullname }}</h2>
                 <p>Anak pertama dari 2 bersaudara dari <br>{{ $eventGroom->fathers_name }}<br>&{{ $eventGroom->mothers_name }}</p>
@@ -168,7 +168,7 @@
     </div>
     </div>
 
-    <section id="rsvp" class="rsvp-section {{ session('name_exists') ? 'expanded' : '' }}">
+    <section id="rsvp" class="rsvp-section {{ session('name_exists') ? 'expanded' : '' }}" style="background-image: url({{ asset('images/bg4.png') }}); background-size: cover; background-position: center; padding: 20px; border-radius: 8px; color: white;">
       <div class="rsvp-container {{ session('name_exists') ? 'expanded' : '' }}">        
           <div class="rsvp-container rsvp">
               <img src="{{ asset('images/rsvp.png') }}" alt="Wedding Rings" class="icon">
@@ -288,7 +288,7 @@
     <section class="photo-gallery">
       <div class="photo-gallery-desktop">
         <div class="photo-item">
-          <img src="{{ asset('images/77A8263.jpg') }}" alt="Description of image 1">
+          <img src="{{ asset('images/177A8263.jpg') }}" alt="Description of image 1">
         </div>
         <div class="photo-item">
           <img src="{{ asset('images/177A8104.jpg') }}" alt="Description of image 2">
@@ -484,9 +484,10 @@
 
 
   <!-- js -->
-  <script src="{{ asset('js/app.js') }}"></script>
-  <!-- bootstrap js -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ asset('js/app.js') }}"></script>
+  <script>eventDateCountdown('{{ $eventResepsi->event_date }}');</script>
+  <!-- bootstrap js -->
   <!-- <script src="vendor/bootstrap/js/bootstrap.min.js"></script> -->
 </body>
 
