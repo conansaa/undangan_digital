@@ -13,20 +13,17 @@ class CreateEventDetailsTable extends Migration
     {
         Schema::create('event_details', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id'); // Foreign key untuk user
+            $table->string('event_owner_id');
             $table->string('event_name'); // Nama acara
             $table->unsignedBigInteger('event_type_id'); // Foreign key untuk jenis acara (event_type_ref)
             $table->date('event_date'); // Tanggal acara
             $table->time('event_time'); // Waktu acara
-            $table->string('location'); // Tempat acara
-            $table->string('full_location');
-            $table->integer('quota'); // Kuota tamu
+            $table->unsignedBigInteger('theme_id');
             $table->timestamps();
 
-            // Relasi ke tabel user
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             // Relasi ke tabel event_type_ref
             $table->foreign('event_type_id')->references('id')->on('event_type_ref')->onDelete('cascade');
+            $table->foreign('theme_id')->references('id')->on('themes')->onDelete('cascade');
         });
     }
 

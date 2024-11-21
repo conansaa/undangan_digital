@@ -39,10 +39,10 @@
                 </div>
             @enderror
         </div>
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="email_verified_at" class="form-label fw-bold">Email Verifikasi</label>
             <input type="text" value="{{ $user->email_verified_at }}" name="email_verified_at" class="bg-white form-control" readonly>
-        </div>
+        </div> --}}
         <div class="mb-3">
             <button name="submit" type="submit" class="btn btn-info text-white" onclick="return confirm('Apakah anda yakin ingin mengubah data tersebut?')">Simpan Perubahan</button>
         </div>

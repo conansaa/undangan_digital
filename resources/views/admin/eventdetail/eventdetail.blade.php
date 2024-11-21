@@ -19,14 +19,15 @@
         <thead>
             <tr>
                 <th scope="col" class="text-center" style="width: 5%;">No</th>
-                <th scope="col" style="width: 15%;">Nama Pengguna</th>
+                <th scope="col" style="width: 10%;">Pemilik Acara</th>
                 <th scope="col" style="width: 10%;">Nama Acara</th>
                 <th scope="col" style="width: 10%;">Tipe Acara</th>
                 <th scope="col" style="width: 10%;">Tanggal</th>
                 <th scope="col" style="width: 10%;">Waktu</th>
-                <th scope="col" style="width: 10%;">Titik Lokasi</th>
+                <th scope="col" style="width: 10%;">Tema</th>
+                {{-- <th scope="col" style="width: 10%;">Titik Lokasi</th>
                 <th scope="col" style="width: 10%;">Lokasi</th>
-                <th scope="col" style="width: 5%;">Kuota</th>
+                <th scope="col" style="width: 5%;">Kuota</th> --}}
                 <th scope="col" class="text-center" style="width: 15%;">Aksi</th>
             </tr>
         </thead>
@@ -34,14 +35,15 @@
             @foreach ($events as $event)
                 <tr>
                     <th class="text-center">{{ $loop->iteration }}</th>
-                    <td>{{ $event->user->name }}</td>
+                    <td>{{ $event->eventOwner->user->name }}</td>
                     <td>{{ $event->event_name }}</td>
                     <td>{{ $event->eventType->nama }}</td>
                     <td>{{ \Carbon\Carbon::parse($event->event_date)->format('d-m-Y') }}</td>
                     <td>{{ \Carbon\Carbon::parse($event->event_time)->format('H:i') }}</td>
-                    <td>{{ $event->location }}</td>
+                    {{-- <td>{{ $event->location }}</td>
                     <td>{{ $event->full_location }}</td>
-                    <td>{{ $event->quota }}</td>
+                    <td>{{ $event->quota }}</td> --}}
+                    <td>{{ $event->themes->name }}</td>
                     <td class="text-center">
                         <a href="/event/edit/{{ $event->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
                         <a href="/details/{{ $event->id }}"><span class="text-dark ms-1"><i class="fa-regular fa-eye"></i></span></a>

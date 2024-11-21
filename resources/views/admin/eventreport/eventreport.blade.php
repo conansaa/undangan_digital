@@ -24,7 +24,7 @@
                 <th scope="col">Tipe Acara</th>
                 <th scope="col">Bulan</th>
                 <th scope="col">Tahun</th>
-                <th scope="col">Counter</th>
+                <th scope="col">Total</th>
                 <th scope="col">Progres</th>
                 <th scope="col">Selesai</th>
                 <th scope="col" class="text-center">Aksi</th>
@@ -54,7 +54,7 @@
 
     @foreach ($eventDetails as $detail)
         <!-- Modal Detail Event Report -->
-        <div class="modal fade" id="detailEventReport{{ $report->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="detailEventReport{{ $detail->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -62,40 +62,33 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="row">
-                            <div class="col-5 col-md-4 label fw-bold mb-3">Nama Pengguna</div>
-                            <div class="col-7">{{ $detail->user->name }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5 col-md-4 label fw-bold mb-3">Nama Acara</div>
-                            <div class="col-7">{{ $detail->event_name }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5 col-md-4 label fw-bold mb-3">Tipe Acara</div>
-                            <div class="col-7">{{ $detail->eventType->nama }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5 col-md-4 label fw-bold mb-3">Tanggal</div>
-                            <div class="col-7">{{ $detail->event_date }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5 col-md-4 label fw-bold mb-3">Waktu</div>
-                            <div class="col-7">{{ $detail->event_time }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5 col-md-4 label fw-bold mb-3">Lokasi</div>
-                            <div class="col-7">{{ $detail->location }}</div>
-                        </div>
-                        <div class="row">
-                            <div class="col-5 col-md-4 label fw-bold mb-3">Kuota</div>
-                            <div class="col-7">{{ $detail->quota }}</div>
-                        </div>
+                        <table class="table table-bordered">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="fw-bold">Nama Pemilik</th>
+                                    <th class="fw-bold">Nama Acara</th>
+                                    <th class="fw-bold">Tipe Acara</th>
+                                    <th class="fw-bold">Tanggal</th>
+                                    <th class="fw-bold">Waktu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ $detail->eventOwner->user->name ?? 'Tidak tersedia' }}</td>
+                                    <td>{{ $detail->event_name }}</td>
+                                    <td>{{ $detail->eventType->nama ?? 'Tidak tersedia' }}</td>
+                                    <td>{{ $detail->event_date }}</td>
+                                    <td>{{ $detail->event_time }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-        {{-- Batas Modal --}}
     @endforeach
+
+
 </div>
 
 @endsection

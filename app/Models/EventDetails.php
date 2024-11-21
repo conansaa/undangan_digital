@@ -12,14 +12,12 @@ class EventDetails extends Model
     protected $table = 'event_details';
 
     protected $fillable = [
-        'user_id',
+        'event_owner_id',
         'event_name',
         'event_type_id',
         'event_date',
         'event_time',
-        'location',
-        'full_location',
-        'quota',
+        'theme_id',
     ];
 
     // Relasi dengan tabel User
@@ -29,6 +27,22 @@ class EventDetails extends Model
     }
 
     // Relasi dengan tabel EventTypeRef
+    
+    public function eventOwner()
+    {
+        return $this->belongsTo(EventOwnerNew::class, 'event_owner_id');
+    }
+
+    public function eventCards()
+    {
+        return $this->hasMany(EventCards::class, 'event_id');
+    }
+    
+    public function figures()
+    {
+        return $this->hasMany(Figures::class, 'event_id');
+    }
+
     public function eventType()
     {
         return $this->belongsTo(EventTypeRef::class, 'event_type_id');

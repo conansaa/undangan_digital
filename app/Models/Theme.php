@@ -38,4 +38,9 @@ class Theme extends Model
     {
         return $this->belongsTo(ThemeCategory::class, 'theme_category_id');
     }
+
+    public function sections()
+    {
+        return $this->belongsToMany(SectionRef::class, 'theme_section');
+    }
 }

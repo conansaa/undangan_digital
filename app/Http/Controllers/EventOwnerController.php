@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\GenderRef;
 use Illuminate\Http\Request;
+use App\Models\EventOwnerNew;
 use App\Models\EventOwnerDetails;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -15,7 +17,8 @@ class EventOwnerController extends Controller
      */
     public function index()
     {
-        $eventOwner = EventOwnerDetails::all();
+        $eventOwner = EventOwnerNew::all();
+        // return $eventOwner;
         return view('admin.eventowner.eventowner', compact('eventOwner'));
     }
 
@@ -25,44 +28,20 @@ class EventOwnerController extends Controller
 
     public function create()
     {
-        $genders = GenderRef::all(); // Ambil data gender dari tabel referensi
-        return view('admin.eventowner.create', compact('genders')); // Sesuaikan dengan nama view kamu
+        $users = User::all(); // Ambil data gender dari tabel referensi
+        return view('admin.eventowner.create', compact('users')); // Sesuaikan dengan nama view kamu
     }
     
     public function store(Request $request)
     {
         // Validate input
         $request->validate([
-            'owner_fullname' => 'required|string|max:255',
-            'owner_name' => 'required|string|max:255',
-            'fathers_name' => 'nullable|string',
-            'mothers_name' => 'nullable|string',
-            'ordinal_child_number' => 'nullable|integer',
-            'owner_photo' => 'nullable|image|mimes:jpeg,png,jpg|max:1000',
-            'social_media' => 'nullable|string|max:255',
-            'gender_id' => 'required|integer|exists:gender_ref,id', // Validasi gender_id sesuai dengan tabel referensi gender
+            'user_id' => 'required|integer|exists:users,id', // Validasi gender_id sesuai dengan tabel referensi gender
         ]);
 
-        // Handle file upload
-        if ($request->hasFile('owner_photo')) {
-            $file = $request->file('owner_photo');
-            $filename = $file->hashName();
-            $path = $file->storeAs('owner_photos', $filename, 'public');
-
-        } else {
-            $path = null; // Atau nilai default jika tidak ada file diunggah
-        }
-
         // Menyimpan data pemilik acara dengan nama file foto
-        EventOwnerDetails::create([
-            'owner_fullname' => $request->owner_fullname,
-            'owner_name' => $request->owner_name,
-            'fathers_name' => $request->fathers_name,
-            'mothers_name' => $request->mothers_name,
-            'ordinal_child_number' => $request->ordinal_child_number,
-            'owner_photo' => $path, // Simpan nama file di database
-            'social_media' => $request->social_media,
-            'gender_id' => $request->gender_id,
+        EventOwnerNew::create([
+            'user_id' => $request->user_id,
         ]);
         return redirect('/owners')->with('success', 'Data berhasil ditambahkan!');
     }
@@ -84,9 +63,9 @@ class EventOwnerController extends Controller
 
     public function edit($id)
     {
-        $owner = EventOwnerDetails::findOrFail($id);
-        $genders = GenderRef::all(); // Assuming you have a gender reference table
-        return view('admin.eventowner.edit', compact('owner', 'genders'));
+        $owner = EventOwnerNew::findOrFail($id);
+        $users = User::all(); // Assuming you have a gender reference table
+        return view('admin.eventowner.edit', compact('owner', 'users'));
     }
 
     /**
@@ -96,43 +75,14 @@ class EventOwnerController extends Controller
     {
         // Validasi input
         $request->validate([
-            'owner_fullname' => 'required|max:255',
-            'owner_name' => 'required|max:255',
-            'fathers_name' => 'required|max:255',
-            'mothers_name' => 'required|max:255',
-            'ordinal_child_number' => 'required',
-            'social_media' => 'nullable|max:255',
-            'gender' => 'required|exists:gender_ref,id', // ID gender harus valid
-            'owner_photo' => 'image|mimes:jpeg,png,jpg|max:1000' // Optional jika tidak mengubah foto
+            'user_id' => 'required|exists:users,id', 
         ]);
 
         // Ambil data owner berdasarkan ID
-        $owner = EventOwnerDetails::findOrFail($id);
+        $owner = EventOwnerNew::findOrFail($id);
 
         // Update data owner
-        $owner->owner_fullname = $request->owner_fullname;
-        $owner->owner_name = $request->owner_name;
-        $owner->fathers_name = $request->fathers_name;
-        $owner->mothers_name = $request->mothers_name;
-        $owner->ordinal_child_number = $request->ordinal_child_number;
-        $owner->social_media = $request->social_media;
-        $owner->gender_id = $request->gender;
-
-        // Cek apakah ada file foto yang di-upload
-        if ($request->hasFile('owner_photo')) {
-            // Simpan file foto baru ke folder 'owner_photos'
-            $photoName = time() . '_' . $request->file('owner_photo')->getClientOriginalName();
-            $request->file('owner_photo')->move(public_path('owner_photos'), $photoName);
-
-            // Hapus foto lama jika ada
-            if ($owner->owner_photo) {
-                File::delete(public_path('storage/' . $owner->owner_photo));
-            }
-
-            // Simpan nama file foto yang baru
-            $owner->owner_photo = $photoName;
-        }
-
+        $owner->gender_id = $request->user_id;
         // Simpan perubahan ke database
         $owner->save();
 
@@ -147,7 +97,7 @@ class EventOwnerController extends Controller
     public function destroy($id)
     {
         // Mencari pemilik acara berdasarkan ID
-        $owner = EventOwnerDetails::find($id);
+        $owner = EventOwnerNew::find($id);
 
         // if (!$owner) {
         //     return response()->json(['message' => 'Event owner not found'], 404);

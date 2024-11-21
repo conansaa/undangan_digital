@@ -13,7 +13,7 @@
     <form action="" method="post" enctype="multipart/form-data">
         @csrf
         <!-- Nama Pengguna -->
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="user_id" class="form-label fw-bold">Nama Pengguna</label>
             <div class="d-flex">
                 <select class="form-select bg-white me-2" aria-label="Default select example" name="user_id">
@@ -30,7 +30,7 @@
                     {{ $message }}
                 </div>
             @enderror
-        </div>
+        </div> --}}
 
         <!-- Nama Event -->
         <div class="mb-3">

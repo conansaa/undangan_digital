@@ -3,25 +3,27 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\RSVPController;
-use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ThemeController;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\FigureController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TimelineController;
+use App\Http\Controllers\EventCardController;
 use App\Http\Controllers\EventTypeController;
 use App\Http\Controllers\EventOwnerController;
 use App\Http\Controllers\EventReportController;
 use App\Http\Controllers\ThemeCategoryController;
 use App\Http\Controllers\EventReportDetailController;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('admin.dashboard');
+});
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
@@ -101,6 +103,16 @@ Route::middleware('auth')->group(function () {
     // Route::post('/details/{id}/rsvp', [EventController::class, 'storeRsvp'])->name('event.storeRsvp');
     // Route::post('/details/{id}/gift', [EventController::class, 'storeGift'])->name('event.storeGift');
     // Route::post('/details/{id}/gallery', [EventController::class, 'storeGallery'])->name('event.storeGallery');
+
+    Route::post('/figure/store/{id}', [FigureController::class, 'storeModal'])->name('figure.storeModal');
+    Route::get('/figure/edit/{id}', [FigureController::class, 'editModal'])->name('figure.edit');
+    Route::put('/figure/update/{id}', [FigureController::class, 'update'])->name('figure.update');
+    Route::get('/figure/delete/{id}', [FigureController::class, 'destroy'])->name('figure.destroy');
+
+    Route::post('/card/store/{id}', [EventCardController::class, 'storeModal'])->name('card.storeModal');
+    Route::get('/card/edit/{id}', [EventCardController::class, 'editModal'])->name('card.edit');
+    Route::put('/card/update/{id}', [EventCardController::class, 'update'])->name('card.update');
+    Route::get('/card/delete/{id}', [EventCardController::class, 'destroy'])->name('card.destroy');
 
     // Routes untuk Event Type
     Route::get('/event-type', [EventTypeController::class, 'index'])->name('eventtype.index');

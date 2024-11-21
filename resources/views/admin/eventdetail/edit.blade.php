@@ -12,7 +12,7 @@
     <form action="/event/edit/{{ $event->id }}" method="post" enctype="multipart/form-data">
         @csrf
         @method("put")
-        <div class="mb-3">
+        {{-- <div class="mb-3">
             <label for="user_id" class="form-label fw-bold">Nama Pengguna</label>
             <select class="form-select bg-white" name="user_id">
                 <option selected value="{{ $event->user->id }}">
@@ -27,7 +27,7 @@
                     {{ $message }}
                 </div>
             @enderror
-        </div>
+        </div> --}}
 
         <div class="mb-3">
             <label for="event_name" class="form-label fw-bold">Nama Event</label>

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Rsvp;
-use App\Models\SectionRef;
 use App\Models\User;
+use App\Models\Figures;
 use App\Models\Comments;
+use App\Models\GenderRef;
 use App\Models\Timelines;
+use App\Models\BrideGroom;
+use App\Models\SectionRef;
 use App\Models\EventDetails;
 use App\Models\EventTypeRef;
 use Illuminate\Http\Request;
@@ -19,7 +22,9 @@ class EventController extends Controller
     public function index()
     {
         // Mengambil semua data event
-        $events = EventDetails::with('user', 'eventType')->get();
+        
+        $events = EventDetails::all();
+        // return $events->eventOwner->user->name;
         // $users = User::select('name')->get();
         // $eventTypes = EventTypeRef::select('nama')->get();
         return view('admin.eventdetail.eventdetail', compact('events'));
@@ -39,7 +44,6 @@ class EventController extends Controller
     {
         // Validate input
         $validatedData = $request->validate([
-            'user_id' => 'required|integer|exists:users,id', // Validasi user_id berdasarkan tabel users
             'event_name' => 'required|string|max:255',
             'event_type_id' => 'required|integer|exists:event_type_ref,id', // Validasi event_type_id
             'event_date' => 'required|date',
@@ -64,13 +68,14 @@ class EventController extends Controller
         $eventTypes = EventTypeRef::all();
         $comments = Comments::all();
         $sections = SectionRef::all();
+        $genders = GenderRef::all();
 
         // Jika data tidak ditemukan, kembalikan 404
         if (!$event) {
             return response()->json(['message' => 'Event not found'], 404);
         }
 
-        return view('admin.eventdetail.detail', compact('event', 'eventTypes', 'comments', 'sections'));
+        return view('admin.eventdetail.detail', compact('event', 'eventTypes', 'comments', 'sections', 'genders'));
     }
 
     // public function storeRsvp(Request $request, $event_id)
@@ -153,7 +158,6 @@ class EventController extends Controller
 
         // Validate input
         $validatedData = $request->validate([
-            'user_id' => 'sometimes|required|integer|exists:users,id',
             'event_name' => 'sometimes|required|string|max:255',
             'event_type_id' => 'sometimes|required|integer|exists:event_type_ref,id',
             'event_date' => 'sometimes|required|date',

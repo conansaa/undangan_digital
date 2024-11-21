@@ -20,14 +20,8 @@
         <thead>
             <tr>
                 <th scope="col" class="text-center">No</th>
-                <th scope="col">Nama Pemilik Acara</th>
-                <th scope="col">Nama Panggilan</th>
-                <th scope="col">Nama Ayah</th>
-                <th scope="col">Nama Ibu</th>
-                <th scope="col">Anak Ke</th>
-                <th scope="col">Foto</th>
-                <th scope="col">Sosial Media</th>
-                <th scope="col">Gender</th>
+                {{-- <th scope="col">Nama Acara</th> --}}
+                <th scope="col">Nama Pengguna</th>
                 <th scope="col" class="text-center">Aksi</th>
             </tr>
         </thead>
@@ -35,24 +29,8 @@
             @foreach ($eventOwner as $owner)
                 <tr>
                     <th scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    <td scope="col">
-                        <a data-bs-target="#detailOwner{{ $owner->id }}">{{ $owner->owner_fullname }}</a>
-                    </td>
-                    <td scope="col">
-                        <a data-bs-target="#detailOwner{{ $owner->id }}">{{ $owner->owner_name }}</a>
-                    </td>
-                    <td scope="col">{{ $owner->fathers_name }}</td>
-                    <td scope="col">{{ $owner->mothers_name }}</td>
-                    <td scope="col">{{ $owner->ordinal_child_number }}</td>
-                    <td scope="col">
-                        @if (empty($owner->owner_photo))
-                            <span class="text-secondary">Tidak ada foto</span>
-                        @else
-                            <img src="{{ asset('storage/' . $owner->owner_photo) }}" alt="{{ $owner->owner_name }}" style="width: 50px; background-size: cover">
-                        @endif
-                    </td>
-                    <td scope="col">{{ $owner->social_media }}</td>
-                    <td scope="col">{{ $owner->gender['name'] }}</td>
+                    {{-- <td scope="col">{{ $owner->event->event_name }}</td> --}}
+                    <td scope="col">{{ $owner->user->name }}</td>
                     <td scope="col" class="text-center">
                         <a href="/owners/edit/{{ $owner->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
                         <a href="/owners/delete/{{ $owner->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>

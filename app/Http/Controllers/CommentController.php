@@ -157,7 +157,7 @@ class CommentController extends Controller
 
         // Hapus data komentar
         $comment->delete();
-        return redirect('/comments')->with('success', 'Data Berhasil Dihapus!!');
+        return redirect()->route('event.show', ['id' => $comment->event_id])->with('success', 'Data berhasil dihapus.');
     }
     public function destroycomment($id)
     {

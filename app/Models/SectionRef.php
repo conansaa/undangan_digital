@@ -20,4 +20,9 @@ class SectionRef extends Model
     {
         return $this->hasMany(Gallery::class, 'section_id');
     }
+
+    public function themes()
+    {
+        return $this->belongsToMany(Theme::class, 'theme_section');
+    }
 }

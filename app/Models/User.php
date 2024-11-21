@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(EventDetails::class, 'user_id');
     }
+
+    public function eventOwner()
+    {
+        return $this->hasMany(EventOwnerNew::class, 'user_id');
+    }
 }
