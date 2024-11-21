@@ -43,6 +43,8 @@ Route::post('/clear-modal-session', function () {
 });
 Route::post('/comment/{name}', [CommentController::class, 'store'])->name('comment.store');
 Route::get('/comment', [CommentController::class, 'index'])->name('comment.index');
+Route::get('/comment/delete/{id}/{name}', [CommentController::class, 'hapus'])->name('comment.hapus');
+
 
 //client
 Route::middleware(['auth', 'verified'])->group(function () {
