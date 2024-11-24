@@ -1,61 +1,58 @@
-@extends('admin.layout')
+@extends('admin.layout.template')
 
-@section('title', 'Data Section')
+@section('pages', 'Section')
 
-@section('judul', 'Section')
+@section('pagestitle', 'Section')
 
-@section('konten_admin')
+@section('sidebar')
+    @include('admin.layout.sidebar.admin')
+@endsection
 
-<div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
-    <div class="row justify-content-between mb-3">
-        <h5 class="col-12 col-lg-6 fw-bold">Data Section</h5>
-        <div class="col-12 col-lg-6 d-flex justify-content-end">
-            <div class="me-2">
-                <a href="/section/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
-                <a href="/section/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
-            </div>
+@section('content')
+<div class="card">
+    <div class="card-header pb-0 mb-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Tabel Section</h6>
+            <a href="/owner/create" class="btn btn-sm btn-success d-none d-lg-block">
+                Tambah <i class="fa-solid fa-plus"></i>
+            </a>
+            <a href="/owner/create" class="btn btn-sm btn-success d-lg-none">
+                <i class="fa-solid fa-plus"></i>
+            </a>
         </div>
     </div>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col" class="text-center">No</th>
-                <th scope="col">Nama Section</th>
-                <th scope="col" class="text-center">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($sections as $section)
+    
+    
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+            <thead>
                 <tr>
-                    <th scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    <td scope="col">{{ $section->name }}</td>
-                    <td scope="col" class="text-center">
-                        <a href="/section/edit/{{ $section->id }}"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
-                        <a href="/section/delete/{{ $section->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
-                    </td>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Section</th>
+                    <th class="text-secondary opacity-7"></th>
                 </tr>
-
-                <!-- Modal Detail Section -->
-                <div class="modal fade" id="detailSection{{ $section->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1 class="modal-title fs-5 fw-bold" id="staticBackdropLabel">Detail Section</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-5 col-md-4 label fw-bold mb-3">Nama Section</div>
-                                    <div class="col-6">{{ $section->name }}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                {{-- Batas Modal --}}
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($sections as $section)
+                    <tr>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $section->name }}</td>
+                        <td class="align-middle">
+                            <a href="/section/edit/{{ $section->id }}">
+                                <span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span>
+                            </a>
+                            <a href="/section/delete/{{ $section->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
+                                <span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    </div>
 </div>
+@endsection
 
+@section('footjs')
+    @include('admin.layout.footer.admin')
 @endsection

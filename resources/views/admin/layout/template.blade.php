@@ -18,8 +18,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('admin/img/apple-icon.png') }}">
-  <link rel="icon" type="image/png" href="{{ asset('admin/img/favicon.png') }}">
+  <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('admin/img/dj-red.png') }}">
+  <link rel="icon" type="image/png" href="{{ asset('admin/img/dj-red.png') }}">
   <title>
     diikatJanji
   </title>
@@ -43,7 +43,7 @@
     <div class="sidenav-header">
       <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
       <a class="navbar-brand m-0" href=" https://demos.creative-tim.com/soft-ui-dashboard/pages/dashboard.html " target="_blank">
-        <img src="{{ asset('admin/img/logo-ct-dark.png') }}" class="navbar-brand-img h-100" alt="main_logo">
+        <img src="{{ asset('admin/img/dj-red.png') }}" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">diikatJanji</span>
       </a>
     </div>
@@ -61,9 +61,9 @@
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
             <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">Tables</li>
+            <li class="breadcrumb-item text-sm text-dark active" aria-current="page">@yield('pages')</li>
           </ol>
-          <h6 class="font-weight-bolder mb-0">Tables</h6>
+          <h6 class="font-weight-bolder mb-0">@yield('pagestitle')</h6>
         </nav>
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
           <div class="ms-md-auto pe-md-3 d-flex align-items-center">
@@ -73,9 +73,6 @@
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="https://www.creative-tim.com/builder?ref=navbar-soft-ui-dashboard">Online Builder</a>
-            </li>
             <li class="nav-item d-flex align-items-center">
               <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link text-body font-weight-bold px-0">
                 <i class="fa fa-user me-sm-1"></i>
@@ -177,39 +174,8 @@
     <!-- End Navbar -->
     <div class="container-fluid py-4">
         @yield('content')
-      <footer class="footer pt-3  ">
-        <div class="container-fluid">
-          <div class="row align-items-center justify-content-lg-between">
-            <div class="col-lg-6 mb-lg-0 mb-4">
-              <div class="copyright text-center text-sm text-muted text-lg-start">
-                © <script>
-                  document.write(new Date().getFullYear())
-                </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">diikatJanji</a>
-                for you.
-              </div>
-            </div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Digiyok</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
+    @yield('footjs')
   </main>
   <div class="fixed-plugin">
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
@@ -295,7 +261,6 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="{{ asset('admin/js/soft-ui-dashboard.min.js?v=1.1.0') }}"></script>
-  @yield('footjs')
 </body>
 
 </html>

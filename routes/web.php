@@ -21,9 +21,9 @@ use App\Http\Controllers\EventReportController;
 use App\Http\Controllers\ThemeCategoryController;
 use App\Http\Controllers\EventReportDetailController;
 
-Route::get('/', function () {
-    return view('admin.dashboard');
-});
+// Route::get('/', function () {
+//     return view('admin.dashboard');
+// });
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

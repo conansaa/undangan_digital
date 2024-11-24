@@ -1,94 +1,97 @@
-@extends('admin.layout')
+@extends('admin.layout.template')
 
-@section('title', 'Laporan Acara')
+@section('pages', 'Laporan Acara')
 
-@section('judul', 'Laporan Acara')
+@section('pagestitle', 'Laporan Acara')
 
-@section('konten_admin')
+@section('sidebar')
+    @include('admin.layout.sidebar.admin')
+@endsection
 
-<div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
-    <div class="row justify-content-between mb-3">
-        <h5 class="col-12 col-lg-6 fw-bold">Data Laporan Acara</h5>
-        <div class="col-12 col-lg-6 d-flex justify-content-end">
-            {{-- <div class="me-2">
-                <a href="/eventreport/create" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
-                <a href="/eventreport/create" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
-            </div> --}}
-        </div>
-    </div>
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th scope="col" class="text-center">No</th>
-                {{-- <th scope="col">ID</th> --}}
-                <th scope="col">Tipe Acara</th>
-                <th scope="col">Bulan</th>
-                <th scope="col">Tahun</th>
-                <th scope="col">Total</th>
-                <th scope="col">Progres</th>
-                <th scope="col">Selesai</th>
-                <th scope="col" class="text-center">Aksi</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($eventReports as $report)
-                <tr>
-                    <td scope="col" class="text-center">{{ $loop->iteration }}</th>
-                    {{-- <td scope="col">{{ $report->id }}</td> --}}
-                    <td scope="col">{{ $report->eventType->nama }}</td> <!-- Menggunakan relasi ke tabel event_type_ref -->
-                    <td scope="col">{{ \Carbon\Carbon::createFromFormat('m', $report->month)->format('F') }}</td> <!-- Mengonversi bulan menjadi nama bulan -->
-                    <td scope="col">{{ $report->year }}</td>
-                    <td scope="col">{{ $report->counter }}</td>
-                    <td scope="col">{{ $report->progress_total }}</td>
-                    <td scope="col">{{ $report->finish_total }}</td>
-                    <td scope="col" class="text-center">
-                        <button type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#detailEventReport{{ $report->id }}">
-                            <i class="fa-solid fa-eye"></i> <!-- Ikon View -->
-                        </button>
-                    </td>
-                </tr>
-                {{-- {{ dd($report) }} --}}
-            @endforeach
-        </tbody>
-    </table>
+@section('content')
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-4">
+            <div class="card-header pb-0">
+                <h6>Tabel Laporan</h6>
+            </div>
+            <div class="card-body px-0 pt-0 pb-2">
+            <div class="table-responsive p-0">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                        <tr>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tipe Acara</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Bulan</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tahun</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Progres</th>
+                            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Selesai</th>
+                            <th class="text-secondary opacity-7"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($eventReports as $report)
+                            <tr>
+                                <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $report->eventType->nama }}</td>
+                                <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ \Carbon\Carbon::createFromFormat('m', $report->month)->format('F') }}</td>
+                                <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $report->year }}</td>
+                                <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $report->counter }}</td>
+                                <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $report->progress_total }}</td>
+                                <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $report->finish_total }}</td>
+                                <td class="align-middle">
+                                    <button type="button" class="btn btn-sm btn-info text-white" data-bs-toggle="modal" data-bs-target="#detailEventReport{{ $report->id }}">
+                                        <i class="fa-solid fa-eye"></i> <!-- Ikon View -->
+                                    </button>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
 
-    @foreach ($eventDetails as $detail)
-        <!-- Modal Detail Event Report -->
-        <div class="modal fade" id="detailEventReport{{ $detail->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title fw-bold" id="staticBackdropLabel">Detail Laporan Event</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                @foreach ($eventDetails as $detail)
+                    <!-- Modal Detail Event Report -->
+                    <div class="modal fade" id="detailEventReport{{ $detail->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title fw-bold" id="staticBackdropLabel">Detail Laporan Event</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="table-responsive">
+                                        <table class="table align-items-center mb-0">
+                                            <thead>
+                                                <tr>
+                                                    <th class="text-secondary text-xs fw-bold">Nama Pemilik</th>
+                                                    <th class="text-secondary text-xs fw-bold">Nama Acara</th>
+                                                    <th class="text-secondary text-xs fw-bold">Tipe Acara</th>
+                                                    <th class="text-secondary text-xs fw-bold">Tanggal</th>
+                                                    <th class="text-secondary text-xs fw-bold">Waktu</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-secondary text-xs">{{ $detail->eventOwner->user->name ?? 'Tidak tersedia' }}</td>
+                                                    <td class="text-secondary text-xs">{{ $detail->event_name }}</td>
+                                                    <td class="text-secondary text-xs">{{ $detail->eventType->nama ?? 'Tidak tersedia' }}</td>
+                                                    <td class="text-secondary text-xs">{{ $detail->event_date }}</td>
+                                                    <td class="text-secondary text-xs">{{ $detail->event_time }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-body">
-                        <table class="table table-bordered">
-                            <thead class="table-light">
-                                <tr>
-                                    <th class="fw-bold">Nama Pemilik</th>
-                                    <th class="fw-bold">Nama Acara</th>
-                                    <th class="fw-bold">Tipe Acara</th>
-                                    <th class="fw-bold">Tanggal</th>
-                                    <th class="fw-bold">Waktu</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{ $detail->eventOwner->user->name ?? 'Tidak tersedia' }}</td>
-                                    <td>{{ $detail->event_name }}</td>
-                                    <td>{{ $detail->eventType->nama ?? 'Tidak tersedia' }}</td>
-                                    <td>{{ $detail->event_date }}</td>
-                                    <td>{{ $detail->event_time }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+                @endforeach
+            </div>
             </div>
         </div>
-    @endforeach
-
-
+    </div>
 </div>
+@endsection
 
+@section('footjs')
+    @include('admin.layout.footer.admin')
 @endsection
