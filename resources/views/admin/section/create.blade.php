@@ -1,10 +1,14 @@
-@extends('admin.layout')
+@extends('admin.layout.template')
 
-@section('title', 'Tambah Section')
+@section('pages', 'Tambah Section')
 
-@section('judul', 'Tambah Data Section')
+@section('pagestitle', 'Tambah Section')
 
-@section('konten_admin')
+@section('sidebar')
+    @include('admin.layout.sidebar.admin')
+@endsection
+
+@section('content')
 
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="mb-3">
@@ -27,4 +31,8 @@
     </form>    
 </div>
 
+@endsection
+
+@section('footjs')
+    @include('admin.layout.footer.admin')
 @endsection

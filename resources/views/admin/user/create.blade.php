@@ -1,11 +1,14 @@
-@extends('admin.layout')
+@extends('admin.layout.template')
 
-@section('title', 'Tambah Pengguna')
+@section('pages', 'Tambah Pengguna')
 
-@section('judul', 'Tambah Data Pengguna')
+@section('pagestitle', 'Tambah Pengguna')
 
-@section('konten_admin')
+@section('sidebar')
+    @include('admin.layout.sidebar.admin')
+@endsection
 
+@section('content')
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="mb-3">
         <a href="/users" class="btn btn-sm btn-outline-danger fw-bold me-2">Kembali</a>
@@ -44,5 +47,8 @@
         </div>
     </form>    
 </div>
+@endsection
 
+@section('footjs')
+    @include('admin.layout.footer.admin')
 @endsection

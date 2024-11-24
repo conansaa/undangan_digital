@@ -1,10 +1,14 @@
-@extends('admin.layout')
+@extends('admin.layout.template')
 
-@section('title', 'Ubah Pemilik Acara')
+@section('pages', 'Ubah Pemilik Acara')
 
-@section('judul', 'Ubah Pemilik Acara')
+@section('pagestitle', 'Ubah Pemilik Acara')
 
-@section('konten_admin')
+@section('sidebar')
+    @include('admin.layout.sidebar.admin')
+@endsection
+
+@section('content')
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="mb-3">
         <a href="/owners" class="btn btn-sm btn-outline-danger fw-bold me-2">Kembali</a>
@@ -33,4 +37,8 @@
         </div>
     </form>
 </div>
+@endsection
+
+@section('footjs')
+    @include('admin.layout.footer.admin')
 @endsection

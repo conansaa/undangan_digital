@@ -1,307 +1,352 @@
-@extends('admin.layout')
+@extends('admin.layout.template')
 
-@section('title', 'Data Detail Acara')
+@section('pages', 'Detail Acara')
 
-{{-- @section('judul', 'Detail Acara') --}}
+@section('pagestitle', 'Detail Acara')
 
-@section('konten_admin')
+@section('sidebar')
+    @include('admin.layout.sidebar.admin')
+@endsection
 
-<div>
-    <div>
-        <a href="/event" class="btn btn-sm btn-outline-danger fw-bold me-2 mb-4">Kembali</a>
-        <h1 class="fs-5 fw-bold mb-4">Detail Data Event : {{ $event->event_name }}</h1>
-        <div class="row justify-content-between mb-3">
-            <!-- Tabel Event Owner -->
-            {{-- <h5 class="d-flex justify-content-between align-items-center">
-                Pengguna
-                <a href="{{ route('user.index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
-            </h5>
-            <table class="table table-sm table-bordered mb-4 text-center" style="max-width: 50%; margin: left;">
-                <thead class="table-info">
+@section('content')
+<a href="/event" class="btn btn-sm btn-outline-danger fw-bold me-2 mb-4">Kembali</a>
+<h1 class="fs-5 fw-bold mb-4">Detail Data Event : {{ $event->event_name }}</h1>
+
+<!-- Tipe Acara -->
+<div class="card mt-2">
+    <div class="card-header pb-0 mb-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Tipe Acara</h6>
+            <a href="{{ route('eventtype.index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
+        </div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Tipe Acara</th>
+                    <th class="text-secondary opacity-7"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{-- @foreach ($events as $event) --}}
                     <tr>
-                        <th>Nama</th>
-                        <th>Email</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ $event->user->name }}</td>
-                        <td>{{ $event->user->email }}</td>
-                        <td>
-                            <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editUserModal"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table> --}}
-
-            <!-- Tabel Event Type -->
-            <h5 class="d-flex justify-content-between align-items-center">
-                Tipe Acara
-                <a href="{{ route('eventtype.index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
-            </h5>
-            <table class="table table-sm table-bordered mb-4 text-center" style="max-width: 50%; margin: left;">
-                <thead class="table-info">
-                    <tr>
-                        <th>Nama Tipe</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>{{ $event->eventType->nama }}</td>
-                        <td scope="col">
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $event->eventType->nama }}</td>
+                        <td class="align-middle">
                             <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#editEventModal"><span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span></a>
                         </td>
                     </tr>
-                </tbody>
-            </table>
+                {{-- @endforeach --}}
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
 
-            <!-- Tabel Figures -->
-            <h5 class="d-flex justify-content-between align-items-center">
-                Tokoh Utama
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addFigureModal">
-                    Tambah Data
-                </button>
-            </h5>
-            <table class="table table-sm table-bordered mb-4 text-center" style="max-width: 80%; margin: left;">
-                <thead class="table-info">
+<!-- Figures -->
+<div class="card mt-4">
+    <div class="card-header pb-0 mb-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Tokoh Utama</h6>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addFigureModal">
+                Tambah Data
+            </button>
+        </div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Lengkap</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama ayah</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Ibu</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Anak Ke-</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Media Sosial</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jenis Kelamin</th>
+                    <th class="text-secondary opacity-7"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($event->figures as $figure)
                     <tr>
-                        <th scope="col" style="width: 10%;">Nama Lengkap</th>
-                        <th scope="col" style="width: 10%;">Nama</th>
-                        <th scope="col" style="width: 10%;">Nama Ayah</th>
-                        <th scope="col" style="width: 10%;">Nama Ibu</th>
-                        <th scope="col" style="width: 10%;">Anak Ke-</th>
-                        <th scope="col" style="width: 10%;">Foto</th>
-                        <th scope="col" style="width: 10%;">Media Sosial</th>
-                        <th scope="col" style="width: 10%;">Jenis Kelamin</th>
-                        <th scope="col" style="width: 10%;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($event->figures as $figure)
-                    <tr>
-                        <td>{{ $figure->fullname }}</td>
-                        <td>{{ $figure->name }}</td>
-                        <td>{{ $figure->fathers_name }}</td>
-                        <td>{{ $figure->mothers_name }}</td>
-                        <td>{{ $figure->ordinal_child_number }}</td>
-                        <td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $figure->fullname }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $figure->name }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $figure->fathers_name }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $figure->mothers_name }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $figure->ordinal_child_number }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">
                             <img src="{{ asset('figures/' . $figure->photo) }}" alt="Foto Galeri" style="max-width: 100px;">
                         </td>
-                        <td>{{ $figure->social_media }}</td>
-                        <td>{{ $figure->gender->name }}</td>
-                        <td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $figure->social_media }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $figure->gender->name }}</td>
+                        <td class="align-middle">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#editFigureModal{{ $figure->id }}">
                                 <span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span>
                             </a>                                
                             <a href="/figure/delete/{{ $figure->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
                         </td>
                     </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
 
-            <!-- Tabel Event Cards -->
-            <h5 class="d-flex justify-content-between align-items-center">
-                Detail Acara
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addCardModal">
-                    Tambah Data
-                </button>
-            </h5>
-            <table class="table table-sm table-bordered mb-4 text-center" style="max-width: 80%; margin: left;">
-                <thead class="table-info">
+<!-- Event Cards -->
+<div class="card mt-4">
+    <div class="card-header pb-0 mb-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Detail Acara</h6>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addCardModal">
+                Tambah Data
+            </button>
+        </div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Acara</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Waktu</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Titik Lokasi</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Lokasi</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kuota</th>
+                    <th class="text-secondary opacity-7"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($event->eventCards as $card)
                     <tr>
-                        <th scope="col" style="width: 10%;">Nama Acara</th>
-                        <th scope="col" style="width: 10%;">Tanggal</th>
-                        <th scope="col" style="width: 10%;">Waktu</th>
-                        <th scope="col" style="width: 10%;">Titik Lokasi</th>
-                        <th scope="col" style="width: 10%;">Lokasi</th>
-                        <th scope="col" style="width: 10%;">Kuota</th>
-                        <th scope="col" style="width: 10%;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($event->eventCards as $card)
-                    <tr>
-                        <td>{{ $card->event_name }}</td>
-                        <td>{{ $card->event_date }}</td>
-                        <td>{{ $card->event_time }}</td>
-                        <td>{{ $card->location }}</td>
-                        <td>{{ $card->full_location }}</td>
-                        <td>{{ $card->quota }}</td>
-                        <td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $card->event_name }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $card->event_date }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $card->event_time }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $card->location }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $card->full_location }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $card->quota }}</td>
+                        <td class="align-middle">
                             <a href="#" data-bs-toggle="modal" data-bs-target="#editCardModal{{ $card->id }}">
                                 <span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span>
                             </a>                                
                             <a href="/card/delete/{{ $card->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
                         </td>
                     </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
 
-            <!-- Tabel Timeline -->
-            <h5 class="d-flex justify-content-between align-items-center">
-                Timeline
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addTimelineModal">
-                    Tambah Data
-                </button>
-            </h5>
-            <table class="table table-sm table-bordered mb-4 text-center" style="max-width: 80%; margin: left;">
-                <thead class="table-info">
-                    <tr>
-                        <th>Judul</th>
-                        <th>Tanggal</th>
-                        <th>Deskripsi</th>
-                        <th>Foto</th>
-                        <th scope="col" style="width: 10%;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($event->timeline as $timeline)
-                        <tr>
-                            <td>{{ $timeline->title }}</td>
-                            <td>{{ \Carbon\Carbon::parse($timeline->date)->format('d M Y') }}</td>
-                            <td>{{ $timeline->description }}</td>
-                            <td><img src="{{ asset('timelines/'.$timeline->photo) }}" alt="Foto" style="max-width: 150px;"></td>
-                            <td scope="col" class="text-center">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#editTimelineModal{{ $timeline->id }}">
-                                    <span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span>
-                                </a>                                
-                                <a href="/timeline/delete/{{ $timeline->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            <!-- Tabel RSVP -->
-            <h5 class="d-flex justify-content-between align-items-center">
-                Data RSVP
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addRsvpModal">
-                    Tambah Data
-                </button>
-            </h5>                                
-            <table class="table table-sm table-bordered mb-4 text-center" style="max-width: 80%; margin: left;">
-                <thead class="table-info">
-                    <tr>
-                        <th>Nama Tamu</th>
-                        <th>No Telp</th>
-                        <th>Konfirmasi</th>
-                        <th>Total Tamu</th>
-                        <th scope="col" style="width: 10%;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($event->rsvps as $rsvp)
-                        <tr>
-                            <td>{{ $rsvp->name }}</td>
-                            <td>{{ $rsvp->phone_number }}</td>
-                            <td>{{ $rsvp->confirmation === 'Hadir' ? 'Hadir' : 'Tidak Hadir' }}</td>
-                            <td>{{ $rsvp->total_guest }}</td>
-                            <td>
-                                <a href="/rsvps/delete/{{ $rsvp->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            <!-- Tabel Comments -->
-            <h5>Data Ucapan</h5>
-            <table class="table table-sm table-bordered mb-4 text-center" style="max-width: 50%; margin: left;">
-                <thead class="table-info">
-                    <tr>
-                        <th>Nama</th>
-                        <th>Ucapan</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($comments as $comment)
-                        <tr>
-                            <td>{{ $comment->rsvp->name }}</td>
-                            <td>{{ $comment->comment }}</td>
-                            <td>
-                                <a href="/comment/delete/{{ $comment->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger"><i class="fa-regular fa-trash-can"></i></span></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            <!-- Tabel Gift -->
-            <h5 class="d-flex justify-content-between align-items-center">
-                Data Hadiah
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addGiftModal">
-                    Tambah Data
-                </button>
-            </h5>                                
-            <table class="table table-sm table-bordered mb-4 text-center" style="max-width: 80%; margin: left;">
-                <thead class="table-info">
-                    <tr>
-                        <th>Nama</th>
-                        <th>Kategori</th>
-                        <th>Catatan</th>
-                        <th scope="col" style="width: 10%;">Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($event->gifts as $gift)
-                        <tr>
-                            <td>{{ $gift->name }}</td>
-                            <td>{{ $gift->category }}</td>
-                            <td>{{ $gift->notes }}</td>
-                            <td scope="col" class="text-center">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#editHadiahModal{{ $gift->id }}">
-                                    <span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span>
-                                </a> 
-                                <a href="/gift/delete/{{ $gift->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-
-            <!-- Tabel Gallery -->
-            <h5 class="d-flex justify-content-between align-items-center">
-                Galeri Acara
-                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addGalleryModal">
-                    Tambah Data
-                </button>
-            </h5>
-            <table class="table table-sm table-bordered text-center" style="max-width: 80%; margin: left;">
-                <thead class="table-info">
-                    <tr>
-                        <th>Section</th>
-                        <th>Foto</th>
-                        <th>Deskripsi</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($event->galleries as $gallery)
-                        <tr>
-                            <td>{{ $gallery->section->name }}</td>
-                            <td>
-                                <img src="{{ asset('galleries/' . $gallery->photo) }}" alt="Foto Galeri" style="max-width: 100px;">
-                            </td>
-                            <td>{{ $gallery->description }}</td>
-                            <td scope="col" class="text-center">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#editGaleriModal{{ $gallery->id }}">
-                                    <span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span>
-                                </a> 
-                                <a href="/gallery/delete/{{ $gallery->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+<!-- Timeline -->
+<div class="card mt-4">
+    <div class="card-header pb-0 mb-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Timeline Acara</h6>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addTimelineModal">
+                Tambah Data
+            </button>
         </div>
     </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Judul</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"  scope="col" style="width: 15%;">Deskripsi</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
+                    <th class="text-secondary opacity-7"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($event->timeline as $timeline)
+                    <tr>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $timeline->title }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ \Carbon\Carbon::parse($timeline->date)->format('d M Y') }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold text-truncate" style="max-width: 150px;" title="{{ $timeline->description }}">{{ $timeline->description }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">
+                            <img src="{{ asset('timelines/'.$timeline->photo) }}" alt="Foto" style="max-width: 150px;">
+                        </td>
+                        <td class="align-middle">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#editTimelineModal{{ $timeline->id }}">
+                                <span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span>
+                            </a>                                
+                            <a href="/timeline/delete/{{ $timeline->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
 
-    <!-- Modal Edit Pengguna -->
+<!-- RSVP -->
+<div class="card mt-4">
+    <div class="card-header pb-0 mb-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">RSVP</h6>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addRsvpModal">
+                Tambah Data
+            </button>
+        </div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Tamu</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">No. Telp</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Konfirmasi</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Jumlah Tamu</th>
+                    <th class="text-secondary opacity-7"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($event->rsvps as $rsvp)
+                    <tr>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $rsvp->name }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $rsvp->phone_number }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $rsvp->confirmation === 'Hadir' ? 'Hadir' : 'Tidak Hadir' }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $rsvp->total_guest }}</td>
+                        <td class="align-middle">
+                            <a href="/rsvps/delete/{{ $rsvp->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+<!-- Comment -->
+<div class="card mt-4">
+    <div class="card-header pb-0 mb-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Ucapan</h6>
+        </div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Ucapan</th>
+                    <th class="text-secondary opacity-7"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($comments as $comment)
+                    <tr>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $comment->rsvp->name }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $comment->comment }}</td>
+                        <td class="align-middle">
+                            <a href="/comment/delete/{{ $comment->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger"><i class="fa-regular fa-trash-can"></i></span></a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+<!-- Gift -->
+<div class="card mt-4">
+    <div class="card-header pb-0 mb-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Hadiah</h6>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addGiftModal">
+                Tambah Data
+            </button>
+        </div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Catatan</th>
+                    <th class="text-secondary opacity-7"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($event->gifts as $gift)
+                    <tr>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $gift->name }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $gift->category }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $gift->notes }}</td>
+                        <td class="align-middle">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#editHadiahModal{{ $gift->id }}">
+                                <span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span>
+                            </a> 
+                            <a href="/gift/delete/{{ $gift->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+<!-- Gallery -->
+<div class="card mt-4">
+    <div class="card-header pb-0 mb-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Galeri</h6>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addGalleryModal">
+                Tambah Data
+            </button>
+        </div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Section</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Deskripsi</th>
+                    <th class="text-secondary opacity-7"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($event->galleries as $gallery)
+                    <tr>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $gallery->section->name }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">
+                            <img src="{{ asset('galleries/' . $gallery->photo) }}" alt="Foto Galeri" style="max-width: 100px;">
+                        </td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $gallery->description }}</td>
+                        <td class="align-middle">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#editGaleriModal{{ $gallery->id }}">
+                                <span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span>
+                            </a> 
+                            <a href="/gallery/delete/{{ $gallery->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+<!-- Modal Edit Pengguna -->
     {{-- <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form id="editUserForm" action="{{ route('user.edit', ['id' => $event->user->id]) }}" method="POST">
@@ -890,6 +935,8 @@
         </div>
     @endforeach
 
-</div>
+@endsection
 
+@section('footjs')
+    @include('admin.layout.footer.admin')
 @endsection

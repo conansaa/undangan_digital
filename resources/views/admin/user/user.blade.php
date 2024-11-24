@@ -13,10 +13,10 @@
     <div class="card-header pb-0 mb-2">
         <div class="d-flex justify-content-between align-items-center">
             <h6 class="mb-0">Tabel Pengguna</h6>
-            <a href="/owner/create" class="btn btn-sm btn-success d-none d-lg-block">
+            <a href="/user/create" class="btn btn-sm btn-success d-none d-lg-block">
                 Tambah <i class="fa-solid fa-plus"></i>
             </a>
-            <a href="/owner/create" class="btn btn-sm btn-success d-lg-none">
+            <a href="/user/create" class="btn btn-sm btn-success d-lg-none">
                 <i class="fa-solid fa-plus"></i>
             </a>
         </div>

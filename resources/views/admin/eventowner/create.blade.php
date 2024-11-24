@@ -1,10 +1,14 @@
-@extends('admin.layout')
+@extends('admin.layout.template')
 
-@section('title', 'Tambah Pemilik Acara')
+@section('pages', 'Tambah Pemilik Acara')
 
-@section('judul', 'Tambah Data Pemilik Acara')
+@section('pagestitle', 'Tambah Pemilik Acara')
 
-@section('konten_admin')
+@section('sidebar')
+    @include('admin.layout.sidebar.admin')
+@endsection
+
+@section('content')
 
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="mb-3">
@@ -26,5 +30,8 @@
         </div>
     </form>    
 </div>
+@endsection
 
+@section('footjs')
+    @include('admin.layout.footer.admin')
 @endsection

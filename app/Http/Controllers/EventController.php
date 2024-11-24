@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventOwnerNew;
 use App\Models\Rsvp;
 use App\Models\User;
+use App\Models\Theme;
 use App\Models\Figures;
 use App\Models\Comments;
 use App\Models\GenderRef;
@@ -33,8 +35,11 @@ class EventController extends Controller
     public function create()
     {
         $users = User::all();
+        $event = EventDetails::all();
+        $owners = EventOwnerNew::all();
         $eventTypes = EventTypeRef::all();
-        return view('admin.eventdetail.create', compact('users', 'eventTypes'));
+        $themes = Theme::all();
+        return view('admin.eventdetail.create', compact('users', 'event', 'owners', 'eventTypes', 'themes'));
     }
 
     /**
@@ -138,9 +143,11 @@ class EventController extends Controller
         // Mengambil data pengguna dan tipe event untuk dropdown
         $users = User::all();
         $eventTypes = EventTypeRef::all();
+        $owners = EventOwnerNew::all();
+        $themes = Theme::all();
 
         // Menampilkan halaman edit dengan data yang diambil
-        return view('admin.eventdetail.edit', compact('event', 'users', 'eventTypes'));
+        return view('admin.eventdetail.edit', compact('event', 'users', 'eventTypes', 'owners', 'themes'));
     }
 
 

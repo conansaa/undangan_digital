@@ -88,7 +88,7 @@ Route::middleware('auth')->group(function () {
     // Routes untuk Event Owner
     Route::get('/owners', [EventOwnerController::class, 'index']);
     Route::get('/owner/create', [EventOwnerController::class, 'create']);
-    Route::post('/owner/create', [EventOwnerController::class, 'store']);
+    Route::post('/owner/create', [EventOwnerController::class, 'store'])->name('owner.store');
     Route::get('/owners/delete/{id}', [EventOwnerController::class, 'destroy']);
     Route::get('/owners/edit/{id}', [EventOwnerController::class, 'edit']);
     Route::put('/owners/edit/{id}', [EventOwnerController::class, 'update']);

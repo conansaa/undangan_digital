@@ -1,10 +1,14 @@
-@extends('client.layout')
+@extends('admin.layout.template')
 
-@section('title', 'RSVP')
+@section('pages', 'RSVP')
 
-@section('judul', 'Data Tamu')
+@section('pagestitle', 'Tamu')
 
-@section('konten_client')
+@section('sidebar')
+    @include('client.layout')
+@endsection
+
+@section('content')
 
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="mb-3">
@@ -69,4 +73,8 @@
         }
     });
 </script>
+@endsection
+
+@section('footjs')
+    @include('admin.layout.footer.admin')
 @endsection

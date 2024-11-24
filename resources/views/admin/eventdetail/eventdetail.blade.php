@@ -1,8 +1,8 @@
 @extends('admin.layout.template')
 
-@section('pages', 'Detail Acara')
+@section('pages', 'Acara')
 
-@section('pagestitle', 'Detail Acara')
+@section('pagestitle', 'Acara')
 
 @section('sidebar')
     @include('admin.layout.sidebar.admin')
@@ -12,7 +12,7 @@
 <div class="card">
     <div class="card-header pb-0 mb-2">
         <div class="d-flex justify-content-between align-items-center">
-            <h6 class="mb-0">Tabel Detail Acara</h6>
+            <h6 class="mb-0">Tabel Acara</h6>
             <a href="/event/create" class="btn btn-sm btn-success d-none d-lg-block">
                 Tambah <i class="fa-solid fa-plus"></i>
             </a>

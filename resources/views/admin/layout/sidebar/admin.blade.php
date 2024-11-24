@@ -2,7 +2,7 @@
 
 @section('sidebar')
 <li class="nav-item">
-    <a class="nav-link  " href="/dashboard">
+    <a class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}" href="/dashboard">
       <div class="fa-solid fa-chart-simple icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
         {{-- <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>dashboard </title>
@@ -22,7 +22,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link  active" href="/themes">
+    <a class="nav-link  {{ Request::is('themes*') ? 'active' : '' }}" href="/themes">
       <div class="fa-solid fa-palette icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
         {{-- <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>tema</title>
@@ -42,7 +42,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link  " href="/owners">
+    <a class="nav-link {{ Request::is('owners*') ? 'active' : '' }}" href="/owners">
       <div class="fa-solid fa-user-tie icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
         {{-- <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>pemilik acara</title>
@@ -62,7 +62,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link  " href="/event">
+    <a class="nav-link {{ Request::is('event*') ? 'active' : '' }}" href="/event">
       <div class="fa-solid fa-calendar-day icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
         {{-- <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>acara</title>
@@ -83,7 +83,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link  " href="/event-reports">
+    <a class="nav-link {{ Request::is('event-reports*') ? 'active' : '' }}" href="/event-reports">
       <div class="fa-solid fa-clipboard-list icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
         {{-- <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>laporan</title>
@@ -104,7 +104,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link  " href="/sections">
+    <a class="nav-link {{ Request::is('sections*') ? 'active' : '' }}" href="/sections">
       <div class="fa-solid fa-columns icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
         {{-- <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>section</title>
@@ -125,7 +125,7 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link  " href="/users">
+    <a class="nav-link {{ Request::is('users*') ? 'active' : '' }}" href="/users">
       <div class="fa-solid fa-users icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
         {{-- <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>user</title>

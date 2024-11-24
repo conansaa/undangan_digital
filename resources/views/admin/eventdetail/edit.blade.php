@@ -1,10 +1,14 @@
-@extends('admin.layout')
+@extends('admin.layout.template')
 
-@section('title', 'Ubah Event')
+@section('pages', 'Ubah Detail Acara')
 
-@section('judul', 'Ubah Event')
+@section('pagestitle', 'Ubah Detail Acara')
 
-@section('konten_admin')
+@section('sidebar')
+    @include('admin.layout.sidebar.admin')
+@endsection
+
+@section('content')
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="mb-3">
         <a href="/event" class="btn btn-sm btn-outline-danger fw-bold me-2">Kembali</a>
@@ -12,22 +16,22 @@
     <form action="/event/edit/{{ $event->id }}" method="post" enctype="multipart/form-data">
         @csrf
         @method("put")
-        {{-- <div class="mb-3">
-            <label for="user_id" class="form-label fw-bold">Nama Pengguna</label>
-            <select class="form-select bg-white" name="user_id">
-                <option selected value="{{ $event->user->id }}">
-                    {{ $event->user->name }}
+        <div class="mb-3">
+            <label for="event_owner_id" class="form-label fw-bold">Nama Pemilik</label>
+            <select class="form-select bg-white" name="event_owner_id">
+                <option selected value="{{ $event->eventOwner->id }}">
+                    {{ $event->eventOwner->user->name }}
                 </option>
-                @foreach($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->name }}</option>
+                @foreach($owners as $owner)
+                    <option value="{{ $owner->id }}">{{ $owner->user->name }}</option>
                 @endforeach
             </select>
-            @error('user_id')
+            @error('event_owner_id')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
                 </div>
             @enderror
-        </div> --}}
+        </div>
 
         <div class="mb-3">
             <label for="event_name" class="form-label fw-bold">Nama Event</label>
@@ -77,29 +81,16 @@
         </div>
 
         <div class="mb-3">
-            <label for="location" class="form-label fw-bold">Titik Lokasi</label>
-            <input type="text" value="{{ $event->location }}" name="location" class="bg-white form-control @error('location') is-invalid @enderror">
-            @error('location')
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="full_location" class="form-label fw-bold">Lokasi Lengkap</label>
-            <input type="text" value="{{ $event->full_location }}" name="full_location" class="bg-white form-control @error('full_location') is-invalid @enderror">
-            @error('full_location')
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        <div class="mb-3">
-            <label for="quota" class="form-label fw-bold">Kuota</label>
-            <input type="number" value="{{ $event->quota }}" name="quota" class="bg-white form-control @error('quota') is-invalid @enderror">
-            @error('quota')
+            <label for="theme_id" class="form-label fw-bold">Tema</label>
+            <select class="form-select bg-white" name="theme_id">
+                <option selected value="{{ $event->themes->id }}">
+                    {{ $event->themes->name }}
+                </option>
+                @foreach($themes as $theme)
+                    <option value="{{ $theme->id }}">{{ $theme->nama }}</option>
+                @endforeach
+            </select>
+            @error('theme_id')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
                 </div>

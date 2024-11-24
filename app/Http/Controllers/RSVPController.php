@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventDetails;
-use App\Models\EventOwnerDetails;
-use App\Models\Gifts;
-use App\Models\Timelines;
 use App\Models\Rsvp;
+use App\Models\Gifts;
 use App\Models\LogRsvp;
 use App\Models\Comments;
+use App\Models\Timelines;
+use App\Models\EventCards;
+use App\Models\EventDetails;
 use Illuminate\Http\Request;
+use App\Models\EventOwnerDetails;
 use Illuminate\Support\Facades\DB;
 
 class RsvpController extends Controller
@@ -72,7 +73,8 @@ class RsvpController extends Controller
     public function viewclient()
     {
         $totalGuests = Rsvp::where('confirmation', 'Hadir')->sum('total_guest');
-        $totalQuota = EventDetails::where('id', 1)->value('quota') ?? 0;
+        // $totalQuota = EventDetails::where('id', 1)->value('quota') ?? 0;
+        $totalQuota = EventCards::where('id', 1)->value('quota') ?? 0;
 
         $sort = request('sort', 'name'); 
         $order = request('order', 'asc');

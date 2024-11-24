@@ -1,10 +1,14 @@
-@extends('admin.layout')
+@extends('admin.layout.template')
 
-@section('title', 'Tambah Tema')
+@section('pages', 'Tambah Tema')
 
-@section('judul', 'Tambah Tema')
+@section('pagestitle', 'Tambah Tema')
 
-@section('konten_admin')
+@section('sidebar')
+    @include('admin.layout.sidebar.admin')
+@endsection
+
+@section('content')
 
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="mb-3">
@@ -12,20 +16,6 @@
     </div>
     <form action="/themes/create" method="post">
         @csrf
-        <div class="mb-3">
-            <label for="event_id" class="form-label fw-bold">Nama Acara</label>
-            <select class="form-select bg-white @error('event_id') is-invalid @enderror" name="event_id">
-                <option value="">Pilih Acara</option>
-                @foreach($eventDetails as $event)
-                    <option value="{{ $event->id }}">{{ $event->event_name }}</option>
-                @endforeach
-            </select>
-            @error('event_id')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
 
         <div class="mb-3">
             <label for="name" class="form-label fw-bold">Nama Tema</label>
@@ -106,7 +96,7 @@
 </div>
 
 <!-- Modal Tambah Kategori -->
-<div class="modal fade" id="tambahKategoriModal" tabindex="-1" aria-labelledby="tambahKategoriModalLabel" aria-hidden="true">
+{{-- <div class="modal fade" id="tambahKategoriModal" tabindex="-1" aria-labelledby="tambahKategoriModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -128,6 +118,9 @@
             </form>
         </div>
     </div>
-</div>
+</div> --}}
+@endsection
 
+@section('footjs')
+    @include('admin.layout.footer.admin')
 @endsection

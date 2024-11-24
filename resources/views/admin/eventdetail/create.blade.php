@@ -1,10 +1,14 @@
-@extends('admin.layout')
+@extends('admin.layout.template')
 
-@section('title', 'Tambah Detail Acara')
+@section('pages', 'Tambah Detail Acara')
 
-@section('judul', 'Tambah Data Detail Acara')
+@section('pagestitle', 'Tambah Detail Acara')
 
-@section('konten_admin')
+@section('sidebar')
+    @include('admin.layout.sidebar.admin')
+@endsection
+
+@section('content')
 
 <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">
     <div class="mb-3">
@@ -13,24 +17,24 @@
     <form action="" method="post" enctype="multipart/form-data">
         @csrf
         <!-- Nama Pengguna -->
-        {{-- <div class="mb-3">
-            <label for="user_id" class="form-label fw-bold">Nama Pengguna</label>
+        <div class="mb-3">
+            <label for="event_owner_id" class="form-label fw-bold">Nama Pemilik</label>
             <div class="d-flex">
-                <select class="form-select bg-white me-2" aria-label="Default select example" name="user_id">
-                    <option value="">Pilih Pengguna</option>
-                    @foreach($users as $user)
-                        <option value="{{ $user->id }}">{{ $user->name }}</option>
+                <select class="form-select bg-white me-2" aria-label="Default select example" name="event_owner_id">
+                    <option value="">Pilih Pemilik</option>
+                    @foreach($owners as $owner)
+                        <option value="{{ $owner->id }}">{{ $owner->user->name }}</option>
                     @endforeach
                 </select>
                 <!-- Tombol Tambah Pengguna -->
                 <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#tambahPenggunaModal">Tambah Pengguna</button>
             </div>
-            @error('user_id')
+            @error('event_owner_id')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
                 </div>
             @enderror
-        </div> --}}
+        </div>
 
         <!-- Nama Event -->
         <div class="mb-3">
@@ -81,33 +85,16 @@
             @enderror
         </div>
 
-        <!-- Lokasi -->
+        <!-- Theme ID -->
         <div class="mb-3">
-            <label for="location" class="form-label fw-bold">Titik Lokasi</label>
-            <input type="text" value="{{ old('location') }}" name="location" class="bg-white form-control @error('location') is-invalid @enderror" placeholder="Masukkan Lokasi Event">
-            @error('location')
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        <!-- Lokasi Lengkap-->
-        <div class="mb-3">
-            <label for="full_location" class="form-label fw-bold">Lokasi Lengkap</label>
-            <input type="text" value="{{ old('full_location') }}" name="full_location" class="bg-white form-control @error('full_location') is-invalid @enderror" placeholder="Masukkan Lokasi Event">
-            @error('full_location')
-                <div id="validationServerUsernameFeedback" class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
-        </div>
-
-        <!-- Kuota -->
-        <div class="mb-3">
-            <label for="quota" class="form-label fw-bold">Kuota</label>
-            <input type="number" value="{{ old('quota') }}" name="quota" class="bg-white form-control @error('quota') is-invalid @enderror" placeholder="Masukkan Kuota Event">
-            @error('quota')
+            <label for="theme_id" class="form-label fw-bold">Tema</label>
+            <select class="form-select bg-white" aria-label="Default select example" name="theme_id">
+                <option value="">Pilih Tema</option>
+                @foreach($themes as $theme)
+                    <option value="{{ $theme->id }}">{{ $theme->name }}</option>
+                @endforeach
+            </select>
+            @error('theme_id')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
                 </div>
@@ -129,20 +116,17 @@
                 <h5 class="modal-title" id="tambahPenggunaModalLabel">Tambah Pengguna</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{ route('user.store') }}" method="post">
+            <form action="{{ route('owner.store') }}" method="post">
                 @csrf
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" required>
+                        <label for="user_id" class="form-label fw-bold">Nama Pengguna</label>
+                        <select class="form-select bg-white" aria-label="Default select example" name="user_id">
+                            <option value="">Pilih Pengguna</option>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -154,4 +138,8 @@
     </div>
 </div>
 
+@endsection
+
+@section('footjs')
+    @include('admin.layout.footer.admin')
 @endsection
