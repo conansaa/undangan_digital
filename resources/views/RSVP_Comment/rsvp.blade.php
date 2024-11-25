@@ -334,7 +334,7 @@
       </div>
     </section>
 
-    <section id="gift" class="gift-section" style="background-image: url({{ asset('images/bg 3.png') }}); background-size: cover; background-position: center; padding: 40px; border-radius: 8px; color: white;">
+    <section id="gift" class="gift-section" style="background-image: url({{ asset('images/bg 3.png') }}); background-position: center; padding: 40px; border-radius: 8px; color: white;">
       <div class="gift-container gift">
         <img src="{{ asset('images/gift.png') }}" alt="gift" class="icon">
         <h2>GIFT <span class="gift-text"> Amplop Digital</span></h2>
