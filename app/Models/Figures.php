@@ -30,4 +30,9 @@ class Figures extends Model
   {
     return $this->belongsTo(EventDetails::class, 'event_id');
   }
+
+  public function gender()
+  {
+    return $this->belongsTo(GenderRef::class, 'gender_id');
+  }
 }

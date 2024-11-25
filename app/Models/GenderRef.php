@@ -20,4 +20,9 @@ class GenderRef extends Model
     {
         return $this->hasMany(EventOwnerDetails::class, 'gender_id');
     }
+
+    public function figures()
+    {
+        return $this->hasMany(Figures::class, 'gender_id');
+    }
 }

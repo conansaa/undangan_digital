@@ -26,6 +26,16 @@ class EventDetails extends Model
     return $this->belongsTo(User::class, 'user_id');
   }
 
+  public function eventOwner()
+  {
+    return $this->belongsTo(EventOwnerNew::class, 'event_owner_id');
+  }
+
+  public function eventCards()
+  {
+    return $this->hasMany(EventCards::class, 'event_id');
+  }
+
   // Relasi dengan tabel EventTypeRef
   public function eventType()
   {
