@@ -531,6 +531,20 @@
   </script>
   <!-- bootstrap js -->
   <!-- <script src="vendor/bootstrap/js/bootstrap.min.js"></script> -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    // Mengecek apakah ada hash (#) di URL
+    if (window.location.hash) {
+      const targetId = window.location.hash.substring(1); // Mengambil 'undangan' dari '#undangan'
+      const targetElement = document.getElementById(targetId);
+
+      if (targetElement) {
+        // Scroll ke element tujuan
+        targetElement.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  });
+</script>
 </body>
 
 </html>
