@@ -7,27 +7,27 @@ use Illuminate\Database\Eloquent\Model;
 
 class Timelines extends Model
 {
-    use HasFactory;
+  use HasFactory;
 
-    protected $table = 'timelines';
+  protected $table = 'timelines';
 
-    protected $fillable = [
-        'event_id',
-        'title',
-        'date',
-        'description',
-        'photo',
-    ];
+  protected $fillable = [
+    'event_id',
+    'title',
+    'date',
+    'description',
+    'photo',
+  ];
 
-    // Relasi dengan tabel EventDetail
-    public function event()
-    {
-        return $this->belongsTo(EventDetails::class, 'event_id');
-    }
+  // Relasi dengan tabel EventDetail
+  public function event()
+  {
+    return $this->belongsTo(EventDetails::class, 'event_id');
+  }
 
-    public function getImagePathAttribute()
-    {
-        if ($this->photo) return 'storage/' . $this->photo;
-        else return null;
-    }
+  public function getImagePathAttribute()
+  {
+    if ($this->photo) return 'timelines/' . $this->photo;
+    else return null;
+  }
 }

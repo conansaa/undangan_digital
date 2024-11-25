@@ -373,4 +373,11 @@ function validatePhoneNumber() {
       buttonText.textContent = 'Play Music';
     }
   }
-  
+  function copyToClipboard(text) {
+    // Salin teks ke clipboard
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Teks berhasil disalin ke clipboard!");
+    }).catch(err => {
+      console.error("Gagal menyalin teks:", err);
+    });
+  }
