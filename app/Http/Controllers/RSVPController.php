@@ -28,7 +28,7 @@ class RsvpController extends Controller
       $giftBarang = Gifts::where(['event_id' => $event_id, "category" => "Barang"])->first();
       $giftTf = Gifts::where(['event_id' => $event_id, "category" => "Uang"])->first();
       $timelines = Timelines::where('event_id', $event_id)->get();
-      $gallery = DB::table('gallery')->get();
+      $gallery = DB::table('gallery')->select('photo', 'description')->get();
 
       // Retrieve RSVP data with comments, ordered by name
       $rsvps = Rsvp::with('comments')->orderBy('name')->get();
@@ -79,7 +79,7 @@ class RsvpController extends Controller
   public function viewclient()
   {
     $totalGuests = Rsvp::where('confirmation', 'Hadir')->sum('total_guest');
-    $totalQuota = EventDetails::where('id', 1)->value('quota') ?? 0;
+    $totalQuota = EventCards::where('id', 1)->value('quota') ?? 0;
 
     $sort = request('sort', 'name');
     $order = request('order', 'asc');

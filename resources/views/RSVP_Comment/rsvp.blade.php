@@ -21,9 +21,14 @@
 <body>
   <!-- opening -->
   <section id="opening">
-    @foreach ($gallery as $gallery)
-    @if ($gallery->description === 'Cover undangan')
-    <div class="section section-opening" style="position: relative; padding: 40px; border-radius: 8px; color: white; background-image: url({{ asset('gallery/'.$gallery->photo) }}); background-size: cover; background-position: 50% 55%;">
+    @php
+    $deskripsi = $gallery->firstWhere('description', 'Cover undangan');
+    @endphp
+    {{-- <div>
+      <p>{{ asset('gallery/'.$deskripsi->photo) }}</p>
+    </div> --}}
+    @if ($deskripsi)
+    <div class="section section-opening" style="position: relative; padding: 40px; border-radius: 8px; color: white; background-image: url('{{ asset('galleries/'.$deskripsi->photo) }}'); background-size: cover; background-position: 50% 55%;">
       <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 8px; z-index: 1;"></div>
       <div style="position: relative; z-index: 2;">
         <div class="content">
@@ -39,11 +44,13 @@
         </div>
     </div>
     @endif
-    @endforeach
 </section>
 
   <!-- undangan -->
   <section id="undangan">
+    @php
+    $deskripsi = $gallery->firstWhere('description', 'Halaman Undangan');
+    @endphp
     <div class="section-undangan section1">
       <div class="content">
         <div class="text-overlay">
@@ -56,13 +63,14 @@
         </div>
 
         <div class="slideshow-container">
+        @if ($deskripsi)
           <div class="mySlides">
-            <img src="{{ asset('images/177A8171.JPG') }}" alt="Photo 1">
+            <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Photo 1">
           </div>
+        @endif
         </div>
       </div>
     </div>
-
     <div class="card2">
       <div class="card1">
         <img src="{{ asset('images/48061241.png') }}" alt="Photo 1">
@@ -77,13 +85,13 @@
         </p>
       </div>
     </div>
-
+    
     <div class="container"
       style="background-image: url({{ asset('images/bg_5.png') }}); background-size: cover; background-position: center; padding: 40px; border-radius: 8px; color: white;">
       <h1 class="title">BRIDE & GROOM</h1>
       <div class="profiles">
         <div class="profile bride">
-          <img class="profile-img bride-img" src="{{ asset('figures/1732531886_Shinta.webp') }}" alt="Bride">
+          <img class="profile-img bride-img" src="{{ asset('figures/'.$figures[0]->photo) }}" alt="Bride">
           <p class="name">{{ $figures[0]->name }}</p>
           <h2>{{ $figures[0]->owner_fullname }}</h2>
           <p>Anak pertama dari 2 bersaudara dari
@@ -96,7 +104,7 @@
         </div>
         <h1 class="title-and">&</h1>
         <div class="profile groom">
-          <img class="profile-img groom-img" src="{{ asset('figures/1732532814_Irfan.webp') }}" alt="Groom">
+          <img class="profile-img groom-img" src="{{ asset('figures/'.$figures[1]->photo) }}" alt="Groom">
           <p class="name">{{ $figures[1]->name }}</p>
           <h2>{{ $figures[1]->owner_fullname }}</h2>
           <p>Anak pertama dari 2 bersaudara dari
@@ -155,9 +163,14 @@
         </div>
       </div>
     </div>
-
-    <img class="screen-prewed" src="{{ asset('images/177A8104.JPG') }}"
+    
+    @php
+    $deskripsi = $gallery->firstWhere('description', 'Yang di countdown');
+    @endphp
+    @if ($deskripsi)
+    <img class="screen-prewed" src="{{ asset('galleries/'.$deskripsi->photo) }}"
       style="object-position: 50% 42%; object-fit: cover;">
+    @endif
     <div class="container2"
       style="background-image: url({{ asset('images/bg 3.png') }}); background-size: cover; background-position: center; padding: 50px; border-radius: 8px; color: white;">
       <div class="countdown-content">
@@ -314,27 +327,36 @@
     <h2 class="gallery-title">
       MOMEN<span class="gallery-text">Galeri</span>
     </h2>
-
+    
     <section class="photo-gallery">
       <div class="photo-gallery-desktop">
+        @foreach ($gallery as $deskripsi)
+        @if($deskripsi->description == 'Foto 1 Galeri')
         <div class="photo-item">
-          <img src="{{ asset('figures/Galeri_1.webp') }}" alt="Description of image 1">
+          <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Description of image 1">
         </div>
+        @elseif($deskripsi->description == 'Foto 2 Galeri')
         <div class="photo-item">
-          <img src="{{ asset('figures/Galeri_2.webp') }}" alt="Description of image 2">
+          <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Description of image 2">
         </div>
+        @elseif($deskripsi->description == 'Foto 3 Galeri')
         <div class="photo-item">
-          <img src="{{ asset('figures/Galeri_3.webp') }}" alt="Description of image 3">
+          <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Description of image 3">
         </div>
+        @elseif($deskripsi->description == 'Foto 4 Galeri')
         <div class="photo-item">
-          <img src="{{ asset('figures/Galeri_4.webp') }}" alt="Description of image 4">
+          <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Description of image 4">
         </div>
+        @elseif($deskripsi->description == 'Foto 5 Galeri')
         <div class="photo-item">
-          <img src="{{ asset('figures/Galeri_5.webp') }}" alt="Description of image 5">
+          <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Description of image 5">
         </div>
+        @elseif($deskripsi->description == 'Foto 6 Galeri')
         <div class="photo-item">
-          <img src="{{ asset('figures/Galeri_6.webp') }}" alt="Description of image 6">
+          <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Description of image 6">
         </div>
+        @endif
+        @endforeach
       </div>
     </section>
 
@@ -402,7 +424,7 @@
           <div class="col">
             <ul class="timeline">
               <li>
-                <div class="timeline-image" style="background-image: url({{ asset('images/177A8474_1.jpg') }});"></div>
+                <div class="timeline-image" style="background-image: url({{ asset('timelines/'.$timelines[0]->photo) }});"></div>
                 <div class="timeline-panel">
                   <div class="timeline-heading">
                     @php
@@ -438,7 +460,7 @@
               </li>
 
               <li>
-                <div class="timeline-image" style="background-image: url({{ asset('images/177A8194.jpg') }});"></div>
+                <div class="timeline-image" style="background-image: url({{ asset('images/177A8194.JPG') }});"></div>
                 <div class="timeline-panel">
                   <div class="timeline-heading">
                     @php

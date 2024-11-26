@@ -32,11 +32,11 @@ use App\Http\Controllers\EventReportDetailController;
 Route::get('/invitation/{name}', [RsvpController::class, 'invitation'])->name('rsvp.invitation');
 
 //enduser
-Route::get('/rsvp/{name}', [RsvpController::class, 'index'])->name('rsvp.index');
-Route::post('/rsvp/store/{name}', [RsvpController::class, 'store'])->name('rsvp.store');
-Route::get('/rsvp/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
-Route::post('/rsvp/confirm-update/{name}', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
-Route::post('/rsvp/cancel-update/{name}', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
+Route::get('/shinta-irfan/to/{name}', [RsvpController::class, 'index'])->name('rsvp.index');
+Route::post('/shinta-irfan/store/{name}', [RsvpController::class, 'store'])->name('rsvp.store');
+Route::get('/shinta-irfan/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
+Route::post('/shinta-irfan/confirm-update/{name}', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
+Route::post('/shinta-irfan/cancel-update/{name}', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
 Route::post('/clear-modal-session', function () {
     session()->forget('show_modal');
     return response()->json(['success' => true]);

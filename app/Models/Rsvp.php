@@ -44,6 +44,7 @@ class Rsvp extends Model
       'phone_number' => $this->phone_number,
       'confirmation' => $this->confirmation,
       'total_guest' => $this->total_guest,
+      'sending_track' => $this->sending_track,
       'action' => $action,
     ]);
   }
