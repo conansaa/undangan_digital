@@ -84,7 +84,7 @@
                         <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $rsvp->total_guest }}</td>
                         <td class="align-middle">
                             @php
-                                $invitationLink = url('/invitation/'.$rsvp->name); 
+                                $invitationLink = url('/shinta-irfan/to/'.$rsvp->name); 
                             @endphp
                             @if ($rsvp->phone_number)
                                 <a href="#" onclick="copyLink('{{ $invitationLink }}')" 
@@ -93,7 +93,7 @@
                                     <i class="fa-solid fa-copy"></i>
                                 </a>
                                 <a href="{{ route('rsvp.incrementSendingTrack', $rsvp->id) }}" 
-                                    onclick="window.open('https://wa.me/{{ $rsvp->WhatsAppNumber }}?text={{ urlencode("Thank you for RSVPing! Here's the link $invitationLink") }}'); return true;" 
+                                    onclick="window.open('https://wa.me/{{ $rsvp->WhatsAppNumber }}?text={{ urlencode("Hi ada undangan buat kamu nih $invitationLink, jangan lupa dateng yaa :D") }}'); return true;" 
                                     class="text-decoration-none ms-lg-3" 
                                     style="color: {{ $rsvp->sending_track > 0 ? 'red' : 'green' }}"
                                     title="{{ $rsvp->sending_track > 0 ? 'Anda sudah pernah mengirim ke WhatsApp' : '' }}">

@@ -21,7 +21,9 @@
 <body>
   <!-- opening -->
   <section id="opening">
-    <div class="section section-opening" style="position: relative; padding: 40px; border-radius: 8px; color: white; background-image: url({{ asset('images/177A8157.JPG') }}); background-size: cover; background-position: 50% 55%;">
+    @foreach ($gallery as $gallery)
+    @if ($gallery->description === 'Cover undangan')
+    <div class="section section-opening" style="position: relative; padding: 40px; border-radius: 8px; color: white; background-image: url({{ asset('gallery/'.$gallery->photo) }}); background-size: cover; background-position: 50% 55%;">
       <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.1); border-radius: 8px; z-index: 1;"></div>
       <div style="position: relative; z-index: 2;">
         <div class="content">
@@ -36,6 +38,8 @@
             <button class="button" id="openInvitationBtn">Open the Invitation <i class="fas fa-envelope"></i></button>
         </div>
     </div>
+    @endif
+    @endforeach
 </section>
 
   <!-- undangan -->
@@ -79,7 +83,7 @@
       <h1 class="title">BRIDE & GROOM</h1>
       <div class="profiles">
         <div class="profile bride">
-          <img class="profile-img bride-img" src="{{ asset('images/177A8539.jpg') }}" alt="Bride">
+          <img class="profile-img bride-img" src="{{ asset('figures/1732531886_Shinta.webp') }}" alt="Bride">
           <p class="name">{{ $figures[0]->name }}</p>
           <h2>{{ $figures[0]->owner_fullname }}</h2>
           <p>Anak pertama dari 2 bersaudara dari
@@ -92,7 +96,7 @@
         </div>
         <h1 class="title-and">&</h1>
         <div class="profile groom">
-          <img class="profile-img groom-img" src="{{ asset('images/177A8676.jpg') }}" alt="Groom">
+          <img class="profile-img groom-img" src="{{ asset('figures/1732532814_Irfan.webp') }}" alt="Groom">
           <p class="name">{{ $figures[1]->name }}</p>
           <h2>{{ $figures[1]->owner_fullname }}</h2>
           <p>Anak pertama dari 2 bersaudara dari
@@ -314,22 +318,22 @@
     <section class="photo-gallery">
       <div class="photo-gallery-desktop">
         <div class="photo-item">
-          <img src="{{ asset('images/177A8263.jpg') }}" alt="Description of image 1">
+          <img src="{{ asset('figures/Galeri_1.webp') }}" alt="Description of image 1">
         </div>
         <div class="photo-item">
-          <img src="{{ asset('images/177A8104.jpg') }}" alt="Description of image 2">
+          <img src="{{ asset('figures/Galeri_2.webp') }}" alt="Description of image 2">
         </div>
         <div class="photo-item">
-          <img src="{{ asset('images/177A8502.jpg') }}" alt="Description of image 3">
+          <img src="{{ asset('figures/Galeri_3.webp') }}" alt="Description of image 3">
         </div>
         <div class="photo-item">
-          <img src="{{ asset('images/177A8483.jpg') }}" alt="Description of image 4">
+          <img src="{{ asset('figures/Galeri_4.webp') }}" alt="Description of image 4">
         </div>
         <div class="photo-item">
-          <img src="{{ asset('images/177A8194.jpg') }}" alt="Description of image 5">
+          <img src="{{ asset('figures/Galeri_5.webp') }}" alt="Description of image 5">
         </div>
         <div class="photo-item">
-          <img src="{{ asset('images/177A8517.jpg') }}" alt="Description of image 6">
+          <img src="{{ asset('figures/Galeri_6.webp') }}" alt="Description of image 6">
         </div>
       </div>
     </section>

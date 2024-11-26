@@ -61,6 +61,7 @@ class RsvpController extends Controller
         'oldData',
         'giftBarang',
         'giftTf',
+        'gallery',
         'comments',
       ));
     }
