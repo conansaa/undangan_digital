@@ -82,7 +82,7 @@ class EventOwnerController extends Controller
         $owner = EventOwnerNew::findOrFail($id);
 
         // Update data owner
-        $owner->gender_id = $request->user_id;
+        $owner->user_id = $request->user_id;
         // Simpan perubahan ke database
         $owner->save();
 

@@ -80,8 +80,8 @@
 
         <!-- color Field -->
         <div class="mb-3">
-            <label for="color" class="form-label fw-bold">Warna</label>
-            <input type="color" name="color" class="form-control form-control-color @error('color') is-invalid @enderror" title="Pilih color Tema">
+            <label for="color" class="form-label fw-bold">Warna</label><br>
+            <input type="color" name="color" value="#000000" class="@error('color') is-invalid @enderror" title="Pilih color Tema">
             @error('color')
                 <div class="invalid-feedback">
                     {{ $message }}
@@ -96,7 +96,7 @@
 </div>
 
 <!-- Modal Tambah Kategori -->
-{{-- <div class="modal fade" id="tambahKategoriModal" tabindex="-1" aria-labelledby="tambahKategoriModalLabel" aria-hidden="true">
+<div class="modal fade" id="tambahKategoriModal" tabindex="-1" aria-labelledby="tambahKategoriModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -118,7 +118,7 @@
             </form>
         </div>
     </div>
-</div> --}}
+</div>
 @endsection
 
 @section('footjs')

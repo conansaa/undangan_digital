@@ -12,7 +12,7 @@
 <div class="card">
     <div class="card-header pb-0 mb-2">
         <div class="d-flex justify-content-between align-items-center">
-            <h6 class="mb-0">Tabel Pemilik Acara</h6>
+            <h6 class="mb-0">Tabel Tema</h6>
             <a href="/themes/create" class="btn btn-sm btn-success d-none d-lg-block">
                 Tambah <i class="fa-solid fa-plus"></i>
             </a>
@@ -27,7 +27,7 @@
             <thead>
                 <tr>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama Tema</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Deskripsi</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2" scope="col" style="width: 15%;">Deskripsi</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Maksimal Gambar</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tag</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori</th>
@@ -39,7 +39,7 @@
                 @foreach ($themes as $theme)
                     <tr>
                         <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $theme->name }}</td>
-                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ Str::limit($theme->description, 50) }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold text-truncate" style="max-width: 150px;" title="{{ $theme->description }}">{{ Str::limit($theme->description, 50) }}</td>
                         <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $theme->max_images }}</td>
                         <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $theme->tag }}</td>
                         <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $theme->category->name }}</td>

@@ -49,13 +49,12 @@ class EventController extends Controller
     {
         // Validate input
         $validatedData = $request->validate([
+            'event_owner_id' => 'required|integer|exists:event_owner,id',
             'event_name' => 'required|string|max:255',
             'event_type_id' => 'required|integer|exists:event_type_ref,id', // Validasi event_type_id
             'event_date' => 'required|date',
             'event_time' => 'required|date_format:H:i',
-            'location' => 'required|string|max:255',
-            'full_location' => 'required|string|max:255',
-            'quota' => 'required|integer',
+            'theme_id' => 'required|integer|exists:themes,id',
         ]);
 
         // Menyimpan data event baru

@@ -1,5 +1,13 @@
 @extends('admin.layout.template')
 
+@section('headmeta')
+    <!-- Bootstrap CSS -->
+    {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" defer></script>
+@endsection
+
 @section('pages', 'Detail Acara')
 
 @section('pagestitle', 'Detail Acara')
@@ -189,6 +197,92 @@
     </div>
 </div>
 
+<!-- Modal Tambah TImeline -->
+<div class="modal fade" id="addTimelineModal" tabindex="-1" aria-labelledby="addTimelineModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('timeline.storeModal', ['id' => $event->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTimelineModalLabel">Tambah Timeline</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="title">Judul</label>
+                        <input type="text" class="form-control" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Tanggal</label>
+                        <input type="date" class="form-control" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Deskripsi</label>
+                        <textarea class="form-control" name="description" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">Foto</label>
+                        <input type="file" class="form-control" name="photo" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Timeline -->
+@foreach ($event->timeline as $timeline)
+    <div class="modal fade" id="editTimelineModal{{ $timeline->id }}" tabindex="-1" aria-labelledby="editTimelineModalLabel{{ $timeline->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <form id="editTimelineForm{{ $timeline->id }}" action="{{ route('timeline.update', ['id' => $timeline->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editTimelineModalLabel{{ $timeline->id }}">Edit Timeline</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Judul -->
+                        <div class="mb-3">
+                            <label for="title" class="form-label">Judul</label>
+                            <input type="text" class="form-control" id="title" name="title" value="{{ old('Title', $timeline->title) }}" required>
+                        </div>
+                        <!-- Tanggal -->
+                        <div class="mb-3">
+                            <label for="date" class="form-label">Tanggal</label>
+                            <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $timeline->date) }}" required>
+                        </div>
+                        <!-- Deskripsi -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Deskripsi</label>
+                            <textarea class="form-control" id="description" name="description" rows="4" required>{{ old('description', $timeline->description) }}</textarea>
+                        </div>
+                        <!-- Foto -->
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Foto</label>
+                            <input type="file" id="photo" name="photo" class="form-control">
+                            @if ($timeline->photo)
+                                <div class="mt-2">
+                                    <img src="{{ asset('timelines/' . old('photo', $timeline->photo)) }}" alt="Foto Timeline" style="width: 100px;">
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endforeach
+
 <!-- RSVP -->
 <div class="card mt-4">
     <div class="card-header pb-0 mb-2">
@@ -226,6 +320,47 @@
             </tbody>
         </table>
     </div>
+    </div>
+</div>
+
+<!-- Modal Tambah RSVP -->
+<div class="modal fade" id="addRsvpModal" tabindex="-1" aria-labelledby="addRsvpModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('rsvps.storeRsvp', ['id' => $event->id]) }}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addRsvpModalLabel">Tambah RSVP</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Nama Tamu</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Nomor Telepon</label>
+                        <input type="text" class="form-control" name="phone_number" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmation">Konfirmasi</label>
+                        <select class="form-select" name="confirmation">
+                            <option value="">Pilih Status Kehadiran</option>
+                            <option value="yes">Hadir</option>
+                            <option value="no">Tidak Hadir</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="total_guest">Total Tamu</label>
+                        <input type="number" class="form-control" name="total_guest">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
@@ -303,6 +438,86 @@
     </div>
 </div>
 
+<!-- Modal Tambah Hadiah -->
+<div class="modal fade" id="addGiftModal" tabindex="-1" aria-labelledby="addGiftModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('gift.storeGift', ['id' => $event->id]) }}" method="POST">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addGiftModalLabel">Tambah Hadiah</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name">Nama</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Kategori</label>
+                        <select name="category" id="category" class="form-control">
+                            <option value="">Pilih Kategori</option>
+                            @foreach(App\Models\Gifts::CATEGORIES as $value => $label)
+                                <option value="{{ $value }}" {{ old('category') == $value ? 'selected' : '' }}>{{ $label }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="notes">Catatan</label>
+                        <textarea name="notes" class="form-control" placeholder="Tambahkan Catatan"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Hadiah -->
+@foreach ($event->gifts as $gift)
+    <div class="modal fade" id="editHadiahModal{{ $gift->id }}" tabindex="-1" aria-labelledby="editHadiahModalLabel{{ $gift->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="editHadiahForm{{ $gift->id }}" action="{{ route('gift.update', ['id' => $gift->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editHadiahModalLabel{{ $gift->id }}">Edit Hadiah</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nama Hadiah -->
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nama Hadiah</label>
+                            <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $gift->name) }}" required>
+                        </div>
+                        <!-- Kategori -->
+                        <div class="mb-3">
+                            <label for="category" class="form-label">Kategori</label>
+                            <select class="form-select" id="category" name="category" required>
+                                <option value="Uang" {{ $gift->category == 'cash' ? 'selected' : '' }}>Uang</option>
+                                <option value="Barang" {{ $gift->category == 'physical' ? 'selected' : '' }}>Barang</option>
+                            </select>
+                        </div>
+                        <!-- Catatan -->
+                        <div class="mb-3">
+                            <label for="notes" class="form-label">Catatan</label>
+                            <textarea class="form-control" id="notes" name="notes" rows="3">{{ old('notes', $gift->notes) }}</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endforeach
+
 <!-- Gallery -->
 <div class="card mt-4">
     <div class="card-header pb-0 mb-2">
@@ -346,7 +561,94 @@
     </div>
 </div>
 
-<!-- Modal Edit Pengguna -->
+<!-- Modal Tambah Galeri -->
+<div class="modal fade" id="addGalleryModal" tabindex="-1" aria-labelledby="addGalleryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('gallery.storeGallery', ['id' => $event->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addGalleryModalLabel">Tambah Galeri</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="section_id">Section</label>
+                        <select class="form-select bg-white" name="section_id">
+                            <option value="">Pilih Section</option>
+                            @foreach($sections as $section)
+                                <option value="{{ $section->id }}">{{ $section->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">Foto</label>
+                        <input type="file" name="photo" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Deskripsi</label>
+                        <textarea name="description" class="form-control" placeholder="Tambahkan Deskripsi"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Galeri -->
+@foreach ($event->galleries as $gallery)
+    <div class="modal fade" id="editGaleriModal{{ $gallery->id }}" tabindex="-1" aria-labelledby="editGaleriModalLabel{{ $gallery->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="editGaleriForm{{ $gallery->id }}" action="{{ route('gallery.update', ['id' => $gallery->id]) }}" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editGaleriModalLabel{{ $gallery->id }}">Edit Galeri</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nama Section -->
+                        <div class="mb-3">
+                            <label for="section_id" class="form-label">Nama Section</label>
+                            <select class="form-select bg-white" name="section_id">
+                                @foreach($sections as $section)
+                                    <option value="{{ $section->id }}" {{ $gallery->section_id == $section->id ? 'selected' : '' }}>
+                                        {{ $section->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <!-- Foto -->
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Foto</label>
+                            <input type="file" id="photo" name="photo" class="form-control">
+                            @if ($gallery->photo)
+                                <div class="mt-2">
+                                    <img src="{{ asset('galleries/' . old('photo', $gallery->photo)) }}" alt="Foto Galeri" style="width: 100px;">
+                                </div>
+                            @endif
+                        </div>
+                        <!-- Deskripsi -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Deskripsi</label>
+                            <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $gallery->description) }}</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endforeach
+
     {{-- <div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <form id="editUserForm" action="{{ route('user.edit', ['id' => $event->user->id]) }}" method="POST">
@@ -509,7 +811,7 @@
                             <div class="mb-3">
                                 <label for="photo" class="form-label">Foto</label>
                                 <input type="file" id="photo" name="photo" class="form-control">
-                                @if ($timeline->photo)
+                                @if ($figure->photo)
                                     <div class="mt-2">
                                         <img src="{{ asset('figures/' . old('photo', $figure->photo)) }}" alt="Foto Tokoh Utama" style="width: 100px;">
                                     </div>
@@ -630,301 +932,6 @@
                                 <label for="quota" class="form-label">Kuota</label>
                                 <input type="number" class="form-control" id="quota" name="quota" value="{{ old('quota', $card->quota) }}" required>
                             </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endforeach
-
-    <!-- Modal Tambah TImeline -->
-    <div class="modal fade" id="addTimelineModal" tabindex="-1" aria-labelledby="addTimelineModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="{{ route('timeline.storeModal', ['id' => $event->id]) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addTimelineModalLabel">Tambah Timeline</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="title">Judul</label>
-                            <input type="text" class="form-control" name="title" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="date">Tanggal</label>
-                            <input type="date" class="form-control" name="date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Deskripsi</label>
-                            <textarea class="form-control" name="description" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="photo">Foto</label>
-                            <input type="file" class="form-control" name="photo" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Edit Timeline -->
-    @foreach ($event->timeline as $timeline)
-        <div class="modal fade" id="editTimelineModal{{ $timeline->id }}" tabindex="-1" aria-labelledby="editTimelineModalLabel{{ $timeline->id }}" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                <form id="editTimelineForm{{ $timeline->id }}" action="{{ route('timeline.update', ['id' => $timeline->id]) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editTimelineModalLabel{{ $timeline->id }}">Edit Timeline</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Judul -->
-                            <div class="mb-3">
-                                <label for="title" class="form-label">Judul</label>
-                                <input type="text" class="form-control" id="title" name="title" value="{{ old('Title', $timeline->title) }}" required>
-                            </div>
-                            <!-- Tanggal -->
-                            <div class="mb-3">
-                                <label for="date" class="form-label">Tanggal</label>
-                                <input type="date" class="form-control" id="date" name="date" value="{{ old('date', $timeline->date) }}" required>
-                            </div>
-                            <!-- Deskripsi -->
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Deskripsi</label>
-                                <textarea class="form-control" id="description" name="description" rows="4" required>{{ old('description', $timeline->description) }}</textarea>
-                            </div>
-                            <!-- Foto -->
-                            <div class="mb-3">
-                                <label for="photo" class="form-label">Foto</label>
-                                <input type="file" id="photo" name="photo" class="form-control">
-                                @if ($timeline->photo)
-                                    <div class="mt-2">
-                                        <img src="{{ asset('timelines/' . old('photo', $timeline->photo)) }}" alt="Foto Timeline" style="width: 100px;">
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endforeach
-
-    <!-- Modal Tambah RSVP -->
-    <div class="modal fade" id="addRsvpModal" tabindex="-1" aria-labelledby="addRsvpModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="{{ route('rsvps.storeRsvp', ['id' => $event->id]) }}" method="POST">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addRsvpModalLabel">Tambah RSVP</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="name">Nama Tamu</label>
-                            <input type="text" class="form-control" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone_number">Nomor Telepon</label>
-                            <input type="text" class="form-control" name="phone_number" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="confirmation">Konfirmasi</label>
-                            <select class="form-select" name="confirmation">
-                                <option value="">Pilih Status Kehadiran</option>
-                                <option value="yes">Hadir</option>
-                                <option value="no">Tidak Hadir</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="total_guest">Total Tamu</label>
-                            <input type="number" class="form-control" name="total_guest">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Tambah Hadiah -->
-    <div class="modal fade" id="addGiftModal" tabindex="-1" aria-labelledby="addGiftModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="{{ route('gift.storeGift', ['id' => $event->id]) }}" method="POST">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addGiftModalLabel">Tambah Hadiah</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="name">Nama</label>
-                            <input type="text" class="form-control" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="category">Kategori</label>
-                            <select name="category" id="category" class="form-control">
-                                <option value="">Pilih Kategori</option>
-                                @foreach(App\Models\Gifts::CATEGORIES as $value => $label)
-                                    <option value="{{ $value }}" {{ old('category') == $value ? 'selected' : '' }}>{{ $label }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="notes">Catatan</label>
-                            <textarea name="notes" class="form-control" placeholder="Tambahkan Catatan"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Edit Hadiah -->
-    @foreach ($event->gifts as $gift)
-        <div class="modal fade" id="editHadiahModal{{ $gift->id }}" tabindex="-1" aria-labelledby="editHadiahModalLabel{{ $gift->id }}" aria-hidden="true">
-            <div class="modal-dialog">
-                <form id="editHadiahForm{{ $gift->id }}" action="{{ route('gift.update', ['id' => $gift->id]) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editHadiahModalLabel{{ $gift->id }}">Edit Hadiah</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Nama Hadiah -->
-                            <div class="mb-3">
-                                <label for="name" class="form-label">Nama Hadiah</label>
-                                <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $gift->name) }}" required>
-                            </div>
-                            <!-- Kategori -->
-                            <div class="mb-3">
-                                <label for="category" class="form-label">Kategori</label>
-                                <select class="form-select" id="category" name="category" required>
-                                    <option value="Uang" {{ $gift->category == 'cash' ? 'selected' : '' }}>Uang</option>
-                                    <option value="Barang" {{ $gift->category == 'physical' ? 'selected' : '' }}>Barang</option>
-                                </select>
-                            </div>
-                            <!-- Catatan -->
-                            <div class="mb-3">
-                                <label for="notes" class="form-label">Catatan</label>
-                                <textarea class="form-control" id="notes" name="notes" rows="3">{{ old('notes', $gift->notes) }}</textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
-                            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    @endforeach
-
-    <!-- Modal Tambah Galeri -->
-    <div class="modal fade" id="addGalleryModal" tabindex="-1" aria-labelledby="addGalleryModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="{{ route('gallery.storeGallery', ['id' => $event->id]) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addGalleryModalLabel">Tambah Galeri</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="section_id">Section</label>
-                            <select class="form-select bg-white" name="section_id">
-                                <option value="">Pilih Section</option>
-                                @foreach($sections as $section)
-                                    <option value="{{ $section->id }}">{{ $section->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="photo">Foto</label>
-                            <input type="file" name="photo" class="form-control">
-                        </div>
-                        <div class="form-group">
-                            <label for="description">Deskripsi</label>
-                            <textarea name="description" class="form-control" placeholder="Tambahkan Deskripsi"></textarea>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal Edit Galeri -->
-    @foreach ($event->galleries as $gallery)
-        <div class="modal fade" id="editGaleriModal{{ $gallery->id }}" tabindex="-1" aria-labelledby="editGaleriModalLabel{{ $gallery->id }}" aria-hidden="true">
-            <div class="modal-dialog">
-                <form id="editGaleriForm{{ $gallery->id }}" action="{{ route('gallery.update', ['id' => $gallery->id]) }}" method="POST">
-                    @csrf
-                    @method('PUT')
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editGaleriModalLabel{{ $gallery->id }}">Edit Galeri</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Nama Section -->
-                            <div class="mb-3">
-                                <label for="section_id" class="form-label">Nama Section</label>
-                                <select class="form-select bg-white" name="section_id">
-                                    @foreach($sections as $section)
-                                        <option value="{{ $section->id }}" {{ $gallery->section_id == $section->id ? 'selected' : '' }}>
-                                            {{ $section->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <!-- Foto -->
-                            <div class="mb-3">
-                                <label for="photo" class="form-label">Foto</label>
-                                <input type="file" id="photo" name="photo" class="form-control">
-                                @if ($gallery->photo)
-                                    <div class="mt-2">
-                                        <img src="{{ asset('galleries/' . old('photo', $gallery->photo)) }}" alt="Foto Galeri" style="width: 100px;">
-                                    </div>
-                                @endif
-                            </div>
-                            <!-- Deskripsi -->
-                            <div class="mb-3">
-                                <label for="description" class="form-label">Deskripsi</label>
-                                <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $gallery->description) }}</textarea>
-                            </div>
-                        </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

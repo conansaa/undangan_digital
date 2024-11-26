@@ -4,7 +4,6 @@
 <li class="nav-item">
     <a class="nav-link {{ Request::is('dashboard*') ? 'active' : '' }}" href="/dashboard">
       <div class="fa-solid fa-chart-simple icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-        {{-- <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>dashboard </title>
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -24,7 +23,6 @@
   <li class="nav-item">
     <a class="nav-link  {{ Request::is('themes*') ? 'active' : '' }}" href="/themes">
       <div class="fa-solid fa-palette icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-        {{-- <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>tema</title>
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -44,7 +42,6 @@
   <li class="nav-item">
     <a class="nav-link {{ Request::is('owners*') ? 'active' : '' }}" href="/owners">
       <div class="fa-solid fa-user-tie icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-        {{-- <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>pemilik acara</title>
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -62,9 +59,8 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ Request::is('event*') ? 'active' : '' }}" href="/event">
+    <a class="nav-link {{ request()->is('event') ? 'active' : '' }}" href="/event">
       <div class="fa-solid fa-calendar-day icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-        {{-- <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>acara</title>
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-2319.000000, -291.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -83,9 +79,8 @@
     </a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ Request::is('event-reports*') ? 'active' : '' }}" href="/event-reports">
+    <a class="nav-link {{ request()->is('event-reports') ? 'active' : '' }}" href="/event-reports">
       <div class="fa-solid fa-clipboard-list icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-        {{-- <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>laporan</title>
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -106,7 +101,6 @@
   <li class="nav-item">
     <a class="nav-link {{ Request::is('sections*') ? 'active' : '' }}" href="/sections">
       <div class="fa-solid fa-columns icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-        {{-- <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>section</title>
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -127,7 +121,6 @@
   <li class="nav-item">
     <a class="nav-link {{ Request::is('users*') ? 'active' : '' }}" href="/users">
       <div class="fa-solid fa-users icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-        {{-- <svg width="12px" height="12px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
           <title>user</title>
           <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
             <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">

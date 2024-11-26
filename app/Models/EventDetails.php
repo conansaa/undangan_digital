@@ -12,12 +12,12 @@ class EventDetails extends Model
   protected $table = 'event_details';
 
   protected $fillable = [
-    'id',
     'event_owner_id',
     'event_name',
     'event_type_id',
     'event_date',
     'event_time',
+    'theme_id',
   ];
 
   // Relasi dengan tabel User

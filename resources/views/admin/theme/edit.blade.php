@@ -77,8 +77,8 @@
         </div>
 
         <div class="mb-3">
-            <label for="color" class="form-label fw-bold">Warna</label>
-            <input type="color" value="{{ old('color', $theme->color) }}" name="color" class="bg-white form-control form-control-color @error('color') is-invalid @enderror" placeholder="Masukkan Warna (Hex)">
+            <label for="color" class="form-label fw-bold">Warna</label><br>
+            <input type="color" value="{{ old('color', $theme->color) }}" name="color" class="bg-white @error('color') is-invalid @enderror" placeholder="Masukkan Warna (Hex)">
             @error('color')
                 <div id="validationServerUsernameFeedback" class="invalid-feedback">
                     {{ $message }}
