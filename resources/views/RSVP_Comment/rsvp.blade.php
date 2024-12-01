@@ -558,18 +558,37 @@
   <!-- bootstrap js -->
   <!-- <script src="vendor/bootstrap/js/bootstrap.min.js"></script> -->
   <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Mengecek apakah ada hash (#) di URL
-    if (window.location.hash) {
-      const targetId = window.location.hash.substring(1); // Mengambil 'undangan' dari '#undangan'
-      const targetElement = document.getElementById(targetId);
+    document.addEventListener("DOMContentLoaded", function () {
+            const openingSection = document.getElementById('opening');
+            const undanganSection = document.getElementById('undangan');
 
-      if (targetElement) {
-        // Scroll ke element tujuan
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  });
+            // Periksa query parameter di URL
+            const params = new URLSearchParams(window.location.search);
+            const autoReload = params.get('autoReload');
+
+            if (openingSection && undanganSection) {
+                if (autoReload) {
+                    // Jika reload otomatis, sembunyikan opening dan tampilkan undangan
+                    openingSection.style.display = 'none';
+                    undanganSection.style.display = 'block';
+                    undanganSection.scrollIntoView({ behavior: 'smooth' });
+
+                    // Hapus query parameter setelah reload
+                    const cleanUrl = window.location.href.split('?')[0];
+                    window.history.replaceState(null, '', cleanUrl);
+                } else {
+                    // Tampilkan opening dan sembunyikan undangan
+                    openingSection.style.display = 'block';
+                    undanganSection.style.display = 'none';
+
+                    // Jika reload otomatis diperlukan, tambahkan query parameter
+                    if (!sessionStorage.getItem('reloaded')) {
+                        sessionStorage.setItem('reloaded', true);
+                        window.location.href = window.location.href + '?autoReload=true';
+                    }
+                }
+            }
+        });
 </script>
 </body>
 
