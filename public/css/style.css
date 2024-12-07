@@ -4,6 +4,39 @@ body {
   background-color: #f0f0f0;
   color: #333;
 }
+  .rsvp-btn {
+    display: flex;
+  }
+  
+
+.button5 {
+   background-color: black;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  max-width: 100px;
+  margin-bottom: 20px; /* Hanya margin bawah */
+  margin-left: 75.5em; 
+  display: inline-block; /* Tetap dalam aliran teks */
+}
+
+.button5:hover {
+  background-color: #333;
+}
+
+  .rsvp-btn {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: pulse 4s infinite;
+    font-size: 9px;
+  }
 .copy-btn {
   margin-top: 1em;
   padding: 8px 20px;
@@ -219,15 +252,7 @@ form{
   padding-right: 25%; 
 }
 
-.button5 {
-  padding: 10px 20px;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-}
+
 .comment-section .app-container input[type='text'] {
   width: 52em !important; 
   max-width: 52em !important; 
@@ -238,21 +263,11 @@ form{
   margin-top: 1em;
 }
 
-input {
-  width: 90%; 
-  max-width: 95%;
-  padding: 10px; 
-  border: 1px solid #ccc;
-  font-size: 14px;
-  box-sizing: border-box;
-  margin-left: 0em;
-  text-align: left; 
-  display: block;  
-}
+
 textarea
 {
   width: 100%; 
-  max-width: 51%;
+  max-width: 60em;
         padding: 10px;
         border-radius: 5px;
         border: 1px solid #ccc;
@@ -733,17 +748,16 @@ background-color: #444444; /* Warna sedikit lebih gelap saat di-hover */
 
 .mySlides {
   position: relative;
-  /* Pastikan elemen memiliki posisi relatif */
 }
 
 .mySlides img {
   width: 100%;
-  height: 160em;
+  height: 100%;
   object-fit: cover;
-  object-position: center 90%;
-  margin-top: 28em;
-  /* Atur margin sesuai kebutuhan */
+  object-position: center 90% !important;
+  margin-top: 30em;
 }
+
 
 /* Tambahkan gradien di atas gambar */
 .mySlides::before {
@@ -1371,8 +1385,7 @@ min-height: 800px; /* Adjust height for the rsvp-container */
   color: #000000;
 }
 
-.rsvp-container input,
-.rsvp-container textarea {
+.form-input{
   width: 100%;
   margin-bottom: 10px;
   max-width: 290em !important;
@@ -1428,7 +1441,16 @@ min-height: 800px; /* Adjust height for the rsvp-container */
     transform: scale(1);
   }
 }
-
+.rsvp-btn {
+  background-color: #333;
+  color: #fff;
+  font-size: 12px;
+  padding: 9px 13px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  animation: pulse 4s infinite;
+}
 .rsvp-btn:hover {
   background-color: #555;
 }
@@ -1695,7 +1717,7 @@ min-height: 800px; /* Adjust height for the rsvp-container */
   margin-bottom: 1px;
 }
 
-.rsvp-container form label1 {
+.form-label {
   display: block;
   text-align: left;
   margin-bottom: 10px;
@@ -1711,7 +1733,7 @@ min-height: 800px; /* Adjust height for the rsvp-container */
   margin-top: 15px;
 }
 
-.rsvp-container form label {
+.form-label  {
   display: block;
   text-align: left;
   margin-bottom: 10px;
@@ -1765,45 +1787,30 @@ select.custom-select:focus {
   font-size: 20px;
 }
 
-.attendance-options {
-  text-align: left;
-  margin-top: -10px;
-}
-
-.attendance-items {
+.attendance-container {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  margin-left: 0px !important;
-  margin-top: -20px;
-  flex-wrap: nowrap;
-  margin-top: -10px;
+  gap: 50px; 
+  align-items: center; 
 }
 
 .attendance-item {
   display: flex;
   align-items: center;
-  margin-right: 30px !important;
-  /* Adjust to control space between items */
 }
 
-.attendance-item label {
-  margin-left: 30px;
-  /* Space between radio button and label text */
-  white-space: nowrap;
-  /* Prevents the label text from wrapping */
+.attendance-item input[type="radio"] {
+  margin-right: 7px; 
 }
 
-.attendance-item input[type='radio'] {
-  margin-right: -15px !important;
-  transform: scale(0.8);
-}
-
-.no-bold {
-  margin-left: 10px;
-  font-size: 20px;
+.attendance-item label.no-bold {
+  font-size: 13px;
+  color: #000000 !important;
   font-weight: normal;
+  margin-top:7px;
+  cursor: pointer;
 }
+
+
 
 .photo-gallery-desktop {
   display: grid;
@@ -2393,8 +2400,7 @@ margin: 0 auto; /* Center content vertically */
 .timeline li:hover .timeline-panel {
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
   /* Tambahkan shadow saat hover */
-  transform: translateY(-5px);
-  /* Mengangkat elemen saat di-hover */
+
 }
 
 .timeline li .timeline-panel::before {
@@ -2486,33 +2492,7 @@ margin: 0 auto; /* Center content vertically */
   height: 150px;
 }
 
-.input {
-  width: 600%;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  max-width: 800px;
-  height: 40px;
-}
 
-.button5 {
-  background-color: black;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 14px;
-  max-width: 100px;
-  align-self: flex-end;
-  margin-bottom: 20px;
-  margin-right: 10px;
-}
-
-.button5:hover {
-  background-color: #333;
-}
 
 .messages {
   margin-top: 20px;
@@ -2908,7 +2888,7 @@ margin: 0 auto; /* Center content vertically */
   .wedding-to {
     color: rgb(255, 255, 255);
     font-size: 1.3em;
-    margin-top: 26em !important;
+    margin-top: 20em !important;
   }
 }
 
@@ -2919,6 +2899,9 @@ margin: 0 auto; /* Center content vertically */
     object-fit: cover;
     object-position: center -8em !important;
   }
+  
+  
+  
   .photo-gallery-desktop {
     display: grid;
     grid-template-columns: repeat(2, 1fr); 
@@ -3080,8 +3063,26 @@ margin: 0 auto; /* Center content vertically */
     background-color: #000000;
     transform: translateX(-30%); 
 }
-.rsvp-container input,
-.rsvp-container textarea {
+
+.button5 {
+  background-color: #000000; /* Warna merah */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  max-width: 100px;
+  margin-bottom: 20px; /* Hanya margin bawah */
+  margin-left: 20.5em !important;
+  display: inline-block; /* Tetap dalam aliran teks */
+}
+
+.button5:hover {
+  background-color: #333;
+}
+
+.form-input {
   width: 100%;
   margin-left: -1em !important;
 }
@@ -4045,7 +4046,7 @@ color: #888; /* Change this to the color you want */
     margin-bottom: -20px;
   }
 
-  .rsvp-container form label1 {
+  .form-label  {
     display: block;
     text-align: left;
     margin-bottom: 10px;
@@ -4101,47 +4102,30 @@ color: #888; /* Change this to the color you want */
     margin-bottom: -15px;
   }
 
-  .attendance-options {
-    text-align: left;
-    margin-top: -10px;
-    margin-bottom: -5px;
-  }
+.attendance-container {
+  display: flex;
+  gap: 35px;
+  align-items: center; 
+}
 
-  .attendance-items {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    margin-left: -12px;
-    margin-top: -20px;
-    flex-wrap: nowrap;
-    margin-top: -10px;
-  }
+.attendance-item {
+  display: flex;
+  align-items: center; 
+}
 
-  .attendance-item {
-    display: flex;
-    align-items: center;
-    margin-right: 1em;
+.attendance-item input[type="radio"] {
+  margin-right: 10px;
+  margin-left: -1em; 
+}
 
-    /* Adjust to control space between items */
-  }
+.attendance-item label.no-bold {
+  font-size: 13px;
+  color: #000000;
+  font-weight: normal;
+  margin-top:7px;
+  cursor: pointer;
+}
 
-  .attendance-item label {
-    margin-left: 25px;
-    /* Space between radio button and label text */
-    white-space: nowrap;
-
-    /* Prevents the label text from wrapping */
-  }
-
-  .attendance-item input[type='radio'] {
-    margin-right: -15px;
-    transform: scale(0.8);
-  }
-
-  .no-bold {
-    margin-left: 10px;
-    font-size: 12px !important;
-  }
 
   .gift-section {
     background: url('../images/bg 12.png') no-repeat center center/cover;
@@ -4534,8 +4518,6 @@ color: #888; /* Change this to the color you want */
   .timeline li:hover .timeline-panel {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
     /* Tambahkan shadow saat hover */
-    transform: translateY(-5px);
-    /* Mengangkat elemen saat di-hover */
   }
 
   .timeline li .timeline-panel::before {

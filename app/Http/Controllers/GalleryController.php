@@ -38,7 +38,7 @@ class GalleryController extends Controller
         $request->validate([
             'event_id' => 'required|exists:event_details,id',
             'section_id' => 'required|exists:section_ref,id',
-            'photo' => 'required|image|mimes:jpeg,png,jpg|max:6048',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,webp|max:6048',
             'description' => 'nullable|string',
         ]);
 
@@ -67,7 +67,7 @@ class GalleryController extends Controller
         $request->validate([
             // 'event_id' => 'required|exists:event_details,id',
             'section_id' => 'required|exists:section_ref,id',
-            'photo' => 'required|image|mimes:jpeg,png,jpg|max:1200',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,webp|max:1200',
             'description' => 'nullable|string',
         ]);
 
@@ -134,12 +134,11 @@ class GalleryController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            // 'event_id' => 'required|exists:event_details,id',
             'section_id' => 'required|exists:section_ref,id',
+            'photo' => 'image|mimes:jpeg,png,jpg,webp|max:1000',
             'description' => 'required|string|max:255',
-            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1000'
         ]);
-    
+        
         $gallery = Gallery::find($id);
     
         // Cek dan hapus foto lama jika ada foto baru diunggah
