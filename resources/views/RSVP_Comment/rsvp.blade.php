@@ -278,14 +278,14 @@
             </div>
             @endif
           </form>
-          <div class="modal" id="confirmationModal">
+          {{-- <div class="modal" id="confirmationModal">
             <div class="modal-content">
               <span class="close-btn" onclick="closeModal()">&times;</span>
               <img class="modal-image" src="{{ asset('images/9304657.png') }}" alt="Thank You Image">
               <h2>Terima Kasih!</h2>
               <p>Terima kasih sudah melakukan konfirmasi kehadiran.</p>
             </div>
-          </div>
+          </div> --}}
 
           <div class="modal" id="oldDataModal" style="display:none;">
             <div class="modal-content">
@@ -316,13 +316,14 @@
           expandRSVP();
         });
       @endif
+      
 
-      window.onload = function() {
-        @if (session('success'))
-          document.getElementById("confirmationModal").style.display = "block";
-          <?php session()->forget('success'); ?>
-        @endif
-      };
+      // window.onload = function() {
+      //   @if (session('success'))
+      //     document.getElementById("confirmationModal").style.display = "block";
+      //     <?php session()->forget('success'); ?>
+      //   @endif
+      // };
     </script>
     <h2 class="gallery-title">
       MOMEN<span class="gallery-text">Galeri</span>
@@ -423,59 +424,19 @@
         <div class="row">
           <div class="col">
             <ul class="timeline">
-              <li>
-                <div class="timeline-image" style="background-image: url({{ asset('timelines/'.$timelines[0]->photo) }});"></div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 1);
-                    @endphp
-                    <h3>{{ $timeline->title }}</h3>
+              @foreach ($timelines as $key => $timeline)
+              <li class="{{ $key % 2 == 1 ? 'timeline-inverted' : '' }}">
+                  <div class="timeline-image" style="background-image: url({{ asset('timelines/'.$timeline->photo) }});"></div>
+                  <div class="timeline-panel">
+                      <div class="timeline-heading">
+                          <h3>{{ $timeline->title }}</h3>
+                      </div>
+                      <div class="timeline-body">
+                          <p>{{ $timeline->description }}</p>
+                      </div>
                   </div>
-                  <div class="timeline-body">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 1);
-                    @endphp
-                    <p>{{ $timeline->description }}</p>
-                  </div>
-                </div>
               </li>
-
-              <li class="timeline-inverted">
-                <div class="timeline-image" style="background-image: url({{ asset('images/IMG_8605.JPG') }});"></div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 2);
-                    @endphp
-                    <h3>{{ $timeline->title }}</h3>
-                  </div>
-                  <div class="timeline-body">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 2);
-                    @endphp
-                    <p>{{ $timeline->description }}</p>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div class="timeline-image" style="background-image: url({{ asset('images/177A8194.JPG') }});"></div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 3);
-                    @endphp
-                    <h3>{{ $timeline->title }}</h3>
-                  </div>
-                  <div class="timeline-body">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 3);
-                    @endphp
-                    <p>{{ $timeline->description }}</p>
-                  </div>
-                </div>
-              </li>
+              @endforeach
             </ul>
           </div>
         </div>
