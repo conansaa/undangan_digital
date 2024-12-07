@@ -603,7 +603,7 @@
 @foreach ($event->galleries as $gallery)
     <div class="modal fade" id="editGaleriModal{{ $gallery->id }}" tabindex="-1" aria-labelledby="editGaleriModalLabel{{ $gallery->id }}" aria-hidden="true">
         <div class="modal-dialog">
-            <form id="editGaleriForm{{ $gallery->id }}" action="{{ route('gallery.update', ['id' => $gallery->id]) }}" method="POST">
+            <form id="editGaleriForm{{ $gallery->id }}" action="{{ route('gallery.update', ['id' => $gallery->id]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-content">

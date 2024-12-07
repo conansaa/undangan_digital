@@ -44,7 +44,7 @@
         </div>
     </div>
     @endif
-</section>
+  </section>
 
   <!-- undangan -->
   <section id="undangan">
@@ -107,7 +107,7 @@
           <img class="profile-img groom-img" src="{{ asset('figures/'.$figures[1]->photo) }}" alt="Groom">
           <p class="name">{{ $figures[1]->name }}</p>
           <h2>{{ $figures[1]->owner_fullname }}</h2>
-          <p>Anak pertama dari 2 bersaudara dari
+          <p>Anak pertama dari 5 bersaudara dari
             <br>{{ $figures[1]->fathers_name }}<br>&{{ $figures[1]->mothers_name }}
           </p>
           <div class="social-icons">
@@ -216,36 +216,37 @@
             @csrf
             <input name="event_id" type="hidden" value="1">
 
-            <label1 for="name">Nama Lengkap</label1>
-            <input name="name" type="text" value="{{ old('name', $name) }}" required readonly>
+            <label for="name" class="form-label">Nama Lengkap</label>
+            <input name="name" type="text" value="{{ old('name', $name) }} " class="form-input" required readonly>
 
-            <label1 for="phone">No Handphone</label1>
+            <label for="phone" class="form-label">No Handphone</label>
             <input id="phone" name="phone_number" type="text"
               value="{{ old('phone_number', $phoneNumber ?? (session('new_data')['phone_number'] ?? '')) }}" required
-              @if ($phoneNumber) readonly @endif minlength="12" oninput="validatePhoneNumber()">
+              @if ($phoneNumber) readonly @endif minlength="12" oninput="validatePhoneNumber()" class="form-input">
 
             <!-- Phone number alert -->
             <div id="phone-alert" style="color: red; display: none; font-size: 12px; margin-top: 5px;">Minimal 12
               digit.</div>
+              
+              <div class="attendance-options">
+              <label for="kehadiran" class="form-label">Kehadiran?</label><br>
+              
+      <div class="attendance-container">
+    <div class="attendance-item">
+        <input id="yes" name="confirmation" type="radio" value="yes"
+                {{ old('confirmation', session('new_data')['confirmation'] ?? '') == 'Hadir' ? 'checked' : '' }}
+                required>
+        <label for="yes" class="no-bold">Ya, saya akan hadir</label>
+    </div>
+    <div class="attendance-item">
+        <input id="no" name="confirmation" type="radio" value="no"
+                {{ old('confirmation', session('new_data')['confirmation'] ?? '') == 'Tidak Hadir' ? 'checked' : '' }}>
+        <label for="no" class="no-bold">Maaf, tidak bisa</label>
+    </div>
+</div>
 
-            <div class="attendance-options">
-              <label1 for="kehadiran">Kehadiran?</label1><br>
-              <div class="attendance-items">
-                <div class="attendance-item">
-                  <input id="yes" name="confirmation" type="radio" value="yes"
-                    {{ old('confirmation', session('new_data')['confirmation'] ?? '') == 'Hadir' ? 'checked' : '' }}
-                    required>
-                  <label class="no-bold" for="yes">Ya, saya akan hadir</label>
-                </div>
-                <div class="attendance-item">
-                  <input id="no" name="confirmation" type="radio" value="no"
-                    {{ old('confirmation', session('new_data')['confirmation'] ?? '') == 'Tidak Hadir' ? 'checked' : '' }}>
-                  <label class="no-bold" for="no">Maaf, tidak bisa</label>
-                </div>
-              </div>
-            </div>
 
-            <label1 for="total_guest">Jumlah Kehadiran</label1>
+            <label for="total_guest" class="form-label">Jumlah Kehadiran</label>
             <select class="custom-select" id="total_guest" name="total_guest" required>
               <option value="1"
                 {{ old('total_guest', session('new_data')['total_guest'] ?? '') == '1' ? 'selected' : '' }}>1</option>
@@ -278,14 +279,14 @@
             </div>
             @endif
           </form>
-          <div class="modal" id="confirmationModal">
-            <div class="modal-content">
-              <span class="close-btn" onclick="closeModal()">&times;</span>
-              <img class="modal-image" src="{{ asset('images/9304657.png') }}" alt="Thank You Image">
-              <h2>Terima Kasih!</h2>
-              <p>Terima kasih sudah melakukan konfirmasi kehadiran.</p>
-            </div>
-          </div>
+          <!--<div class="modal" id="confirmationModal">-->
+          <!--  <div class="modal-content">-->
+          <!--    <span class="close-btn" onclick="closeModal()">&times;</span>-->
+          <!--    <img class="modal-image" src="{{ asset('images/9304657.png') }}" alt="Thank You Image">-->
+          <!--    <h2>Terima Kasih!</h2>-->
+          <!--    <p>Terima kasih sudah melakukan konfirmasi kehadiran.</p>-->
+          <!--  </div>-->
+          <!--</div>-->
 
           <div class="modal" id="oldDataModal" style="display:none;">
             <div class="modal-content">
@@ -423,59 +424,72 @@
         <div class="row">
           <div class="col">
             <ul class="timeline">
-              <li>
-                <div class="timeline-image" style="background-image: url({{ asset('timelines/'.$timelines[0]->photo) }});"></div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 1);
-                    @endphp
-                    <h3>{{ $timeline->title }}</h3>
+              @foreach ($timelines as $key => $timeline)
+              <li class="{{ $key % 2 == 1 ? 'timeline-inverted' : '' }}">
+                  <div class="timeline-image" style="background-image: url({{ asset('timelines/'.$timeline->photo) }});"></div>
+                  <div class="timeline-panel">
+                      <div class="timeline-heading">
+                          <h3>{{ $timeline->title }}</h3>
+                      </div>
+                      <div class="timeline-body">
+                          <p>{{ $timeline->description }}</p>
+                      </div>
                   </div>
-                  <div class="timeline-body">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 1);
-                    @endphp
-                    <p>{{ $timeline->description }}</p>
-                  </div>
-                </div>
               </li>
+              @endforeach
+              <!--<li>-->
+              <!--  <div class="timeline-image" style="background-image: url({{ asset('timelines/'.$timelines[0]->photo) }});"></div>-->
+              <!--  <div class="timeline-panel">-->
+              <!--    <div class="timeline-heading">-->
+              <!--      @php-->
+              <!--        $timeline = $timelines->firstWhere('id', 1);-->
+              <!--      @endphp-->
+              <!--      <h3>{{ $timeline->title }}</h3>-->
+              <!--    </div>-->
+              <!--    <div class="timeline-body">-->
+              <!--      @php-->
+              <!--        $timeline = $timelines->firstWhere('id', 1);-->
+              <!--      @endphp-->
+              <!--      <p>{{ $timeline->description }}</p>-->
+              <!--    </div>-->
+              <!--  </div>-->
+              <!--</li>-->
 
-              <li class="timeline-inverted">
-                <div class="timeline-image" style="background-image: url({{ asset('images/IMG_8605.JPG') }});"></div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 2);
-                    @endphp
-                    <h3>{{ $timeline->title }}</h3>
-                  </div>
-                  <div class="timeline-body">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 2);
-                    @endphp
-                    <p>{{ $timeline->description }}</p>
-                  </div>
-                </div>
-              </li>
+              <!--<li class="timeline-inverted">-->
+              <!--  <div class="timeline-image" style="background-image: url({{ asset('timelines/'.$timelines[1]->photo) }});"></div>-->
+              <!--  <div class="timeline-panel">-->
+              <!--    <div class="timeline-heading">-->
+              <!--      @php-->
+              <!--        $timeline = $timelines->firstWhere('id', 2);-->
+              <!--      @endphp-->
+              <!--      <h3>{{ $timeline->title }}</h3>-->
+              <!--    </div>-->
+              <!--    <div class="timeline-body">-->
+              <!--      @php-->
+              <!--        $timeline = $timelines->firstWhere('id', 2);-->
+              <!--      @endphp-->
+              <!--      <p>{{ $timeline->description }}</p>-->
+              <!--    </div>-->
+              <!--  </div>-->
+              <!--</li>-->
 
-              <li>
-                <div class="timeline-image" style="background-image: url({{ asset('images/177A8194.JPG') }});"></div>
-                <div class="timeline-panel">
-                  <div class="timeline-heading">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 3);
-                    @endphp
-                    <h3>{{ $timeline->title }}</h3>
-                  </div>
-                  <div class="timeline-body">
-                    @php
-                      $timeline = $timelines->firstWhere('id', 3);
-                    @endphp
-                    <p>{{ $timeline->description }}</p>
-                  </div>
-                </div>
-              </li>
+              <!--<li>-->
+              <!--  <div class="timeline-image" style="background-image: url({{ asset('timelines/'.$timelines[2]->photo) }});"></div>-->
+              <!--  <div class="timeline-panel">-->
+              <!--    <div class="timeline-heading">-->
+              <!--      @php-->
+              <!--        $timeline = $timelines->firstWhere('id', 3);-->
+              <!--      @endphp-->
+              <!--      <h3>{{ $timeline->title }}</h3>-->
+              <!--    </div>-->
+              <!--    <div class="timeline-body">-->
+              <!--      @php-->
+              <!--        $timeline = $timelines->firstWhere('id', 3);-->
+              <!--      @endphp-->
+              <!--      <p>{{ $timeline->description }}</p>-->
+              <!--    </div>-->
+              <!--  </div>-->
+              <!--</li>-->
             </ul>
           </div>
         </div>
@@ -483,7 +497,10 @@
     </section>
 
     <section class="screen-prewed1">
-      <img class="screen-prewed1-img" src="{{ asset('images/177A8506.JPG') }}">
+      @php
+      $deskripsi = $gallery->firstWhere('description', 'Sebelum Ucapan');
+      @endphp
+      <img class="screen-prewed1-img" src="{{ asset('galleries/'.$deskripsi->photo) }}">
     </section>
 
     <div class="comment-section">
@@ -544,7 +561,7 @@
       </span>
     </button>
     <audio id="song" loop>
-      <source src="{{ asset('music/MUSIC JANJI SUCI.mp3') }}" type="audio/mp3">
+      <source src="{{ asset('music/Ed Sheeran - Best Part of Me (Lyrics) ft. YEBBA.mp3') }}" type="audio/mp3">
     </audio>
   </section>
 
@@ -557,20 +574,31 @@
   </script>
   <!-- bootstrap js -->
   <!-- <script src="vendor/bootstrap/js/bootstrap.min.js"></script> -->
-  <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    // Mengecek apakah ada hash (#) di URL
-    if (window.location.hash) {
-      const targetId = window.location.hash.substring(1); // Mengambil 'undangan' dari '#undangan'
-      const targetElement = document.getElementById(targetId);
+<!-- <script>
+//   document.addEventListener("DOMContentLoaded", function () {
+//             const openingSection = document.getElementById('opening');
+//             const undanganSection = document.getElementById('undangan');
 
-      if (targetElement) {
-        // Scroll ke element tujuan
-        targetElement.scrollIntoView({ behavior: 'smooth' });
-      }
-    }
-  });
-</script>
+//             // Cek apakah halaman sudah pernah dibuka sebelumnya
+//             const hasVisited = localStorage.getItem('hasVisited');
+
+//             if (openingSection && undanganSection) {
+//                 if (hasVisited) {
+//                     // Jika halaman sudah pernah dibuka, sembunyikan opening dan tampilkan undangan
+//                     openingSection.style.display = 'none';
+//                     undanganSection.style.display = 'block';
+//                     undanganSection.scrollIntoView({ behavior: 'smooth' });
+//                 } else {
+//                     // Jika halaman belum pernah dibuka, tampilkan opening
+//                     openingSection.style.display = 'block';
+//                     undanganSection.style.display = 'none';
+
+//                     // Simpan status kunjungan ke localStorage
+//                     localStorage.setItem('hasVisited', true);
+//                 }
+//             }
+//         });
+    </script> -->
 </body>
 
 </html>

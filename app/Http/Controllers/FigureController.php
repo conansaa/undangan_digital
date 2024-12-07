@@ -18,7 +18,7 @@ class FigureController extends Controller
             'fathers_name' => 'required|string',
             'mothers_name' => 'required|string',
             'ordinal_child_number' => 'required|integer',
-            'photo' => 'required|image|mimes:jpeg,png,jpg|max:1000',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,webp|max:1000',
             'social_media' => 'required|string',
             'gender_id' => 'required|exists:gender_ref,id'
         ]);
@@ -73,7 +73,7 @@ class FigureController extends Controller
             'fathers_name' => 'required|string',
             'mothers_name' => 'required|string',
             'ordinal_child_number' => 'required|integer',
-            'photo' => 'image|mimes:jpeg,png,jpg|max:1000',
+            'photo' => 'image|mimes:jpeg,png,jpg,webp|max:1000',
             'social_media' => 'required|string',
             'gender_id' => 'required|exists:gender_ref,id'
         ]);

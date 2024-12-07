@@ -5,7 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+		<link rel="apple-touch-icon" sizes="76x76" href="{{ asset('admin/img/dj-red.png') }}">
+		<link rel="icon" type="image/png" href="{{ asset('admin/img/dj-red.png') }}">
+
+        <title>{{ config('app.name', 'diikatJanji') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -13,21 +16,70 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+		<!--     Fonts and icons     -->
+		<link href="https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700,800" rel="stylesheet" />
+		<!-- Nucleo Icons -->
+		<link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-icons.css" rel="stylesheet" />
+		<link href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-svg.css" rel="stylesheet" />
+		<!-- Font Awesome Icons -->
+		<script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+		<!-- CSS Files -->
+		<link id="pagestyle" href="../admin/css/soft-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
+		<!-- Nepcha Analytics (nepcha.com) -->
+		<!-- Nepcha is a easy-to-use web analytics. No cookies and fully compliant with GDPR, CCPA and PECR. -->
+		<script defer data-site="YOUR_DOMAIN_HERE" src="https://api.nepcha.com/js/nepcha-analytics.js"></script>
     </head>
-    <body class="font-sans text-gray-900 antialiased bg-gradient-to-br from-pink-100 via-blue-100 to-purple-100">
-        <div class="min-h-screen flex flex-col justify-center items-center p-6 sm:p-0">
+    <body class="">
+        <main class="main-content  mt-0">
             <!-- Logo Section -->
-            <div class="mb-8">
+            {{-- <div class="mb-8">
                 <a href="/">
                     <x-application-logo class="w-20 h-20 fill-current text-pink-500 transition duration-300 transform hover:scale-110" />
                 </a>
-            </div>
+            </div> --}}
 
             <!-- Content Container -->
-            <div class="w-full sm:max-w-md px-8 py-10 bg-white rounded-lg shadow-lg transform transition-all duration-500 hover:shadow-2xl">
+			<section>
+				<div class="page-header min-vh-75">
+					<div class="container">
+						<div class="row">
+							{{ $slot }}
+							<div class="col-md-6 position-relative">
+								<div class="oblique position-absolute top-50 start-50 translate-middle h-100 w-100">
+									<div 
+										class="bg-cover h-100 w-100 bg-center" 
+										style="background-image: url('../admin/img/dj-red.png');">
+									</div>
+								</div>
+							</div>														
+						</div>
+					</div>
+				</div>
+			</section>
+            {{-- <div class="w-full sm:max-w-md px-8 py-10 bg-white rounded-lg shadow-lg transform transition-all duration-500 hover:shadow-2xl">
                 {{ $slot }}
-            </div>
-        </div>
+            </div> --}}
+        </main>
+
+		<!--   Core JS Files   -->
+		<script src="../assets/js/core/popper.min.js"></script>
+		<script src="../assets/js/core/bootstrap.min.js"></script>
+		<script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
+		<script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+		<script>
+			var win = navigator.platform.indexOf('Win') > -1;
+			if (win && document.querySelector('#sidenav-scrollbar')) {
+				var options = {
+				damping: '0.5'
+				}
+				Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
+			}
+		</script>
+		<!-- Github buttons -->
+		<script async defer src="https://buttons.github.io/buttons.js"></script>
+		<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
+		<script src="../assets/js/soft-ui-dashboard.min.js?v=1.1.0"></script>
     </body>
 </html>
 
