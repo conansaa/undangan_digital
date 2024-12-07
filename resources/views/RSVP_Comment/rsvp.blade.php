@@ -279,14 +279,14 @@
             </div>
             @endif
           </form>
-          <div class="modal" id="confirmationModal">
+          {{-- <div class="modal" id="confirmationModal">
             <div class="modal-content">
               <span class="close-btn" onclick="closeModal()">&times;</span>
               <img class="modal-image" src="{{ asset('images/9304657.png') }}" alt="Thank You Image">
               <h2>Terima Kasih!</h2>
               <p>Terima kasih sudah melakukan konfirmasi kehadiran.</p>
             </div>
-          </div>
+          </div> --}}
 
           <div class="modal" id="oldDataModal" style="display:none;">
             <div class="modal-content">
