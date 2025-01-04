@@ -17,6 +17,7 @@ use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\EventCardController;
 use App\Http\Controllers\EventTypeController;
 use App\Http\Controllers\EventOwnerController;
+use App\Http\Controllers\MediaAssetController;
 use App\Http\Controllers\EventReportController;
 use App\Http\Controllers\ThemeCategoryController;
 use App\Http\Controllers\EventReportDetailController;
@@ -146,6 +147,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/timeline/edit/{id}', [TimelineController::class, 'editModal'])->name('timeline.edit');
     Route::put('/timeline/update/{id}', [TimelineController::class, 'update'])->name('timeline.update');
     Route::get('/timeline/delete/{id}', [TimelineController::class, 'destroy'])->name('timeline.destroy');
+
+    // Routes untuk Media Asset
+    Route::post('/media/store/{id}', [MediaAssetController::class, 'storeModal'])->name('media.storeModal');
+    Route::put('/media/update/{id}', [MediaAssetController::class, 'update'])->name('media.update');
+    Route::get('/media/delete/{id}', [MediaAssetController::class, 'destroy'])->name('media.destroy');
 
     // Routes untuk RSVP
     Route::get('/rsvps', [RsvpController::class, 'views'])->name('rsvps.views');

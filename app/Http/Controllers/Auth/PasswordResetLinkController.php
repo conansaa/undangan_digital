@@ -76,7 +76,7 @@ class PasswordResetLinkController extends Controller
 
         // Reset password menggunakan token
         $status = Password::reset(
-            $request->only('email', 'password', 'password_confirmation', 'token'),
+            $request->only('email', 'password', 'token'),
             function ($user, $password) {
                 $user->forceFill([
                     'password' => bcrypt($password),

@@ -89,4 +89,9 @@ class EventDetails extends Model
   {
     return $this->hasMany(Gallery::class, 'event_id');
   }
+
+  public function mediaAssets()
+  {
+    return $this->hasMany(MediaAssets::class, 'event_id');
+  }
 }

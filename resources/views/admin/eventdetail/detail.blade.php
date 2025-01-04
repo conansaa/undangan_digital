@@ -283,6 +283,115 @@
     </div>
 @endforeach
 
+<!-- Media Asset -->
+<div class="card mt-4">
+    <div class="card-header pb-0 mb-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-0">Media Acara</h6>
+            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addMediaModal">
+                Tambah Data
+            </button>
+        </div>
+    </div>
+    <div class="card-body px-0 pt-0 pb-2">
+    <div class="table-responsive p-0">
+        <table class="table align-items-center mb-0">
+            <thead>
+                <tr>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Foto</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Link</th>
+                    <th class="text-secondary opacity-7"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($event->mediaAssets as $media)
+                    <tr>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">
+                            <img src="{{ asset('media/'.$media->photo) }}" alt="Foto" style="max-width: 150px;">
+                        </td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $media->link }}</td>
+                        <td class="align-middle">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#editMediaModal{{ $media->id }}">
+                                <span class="text-dark"><i class="fa-regular fa-pen-to-square"></i></span>
+                            </a>                                
+                            <a href="/media/delete/{{ $media->id }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')"><span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span></a>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    </div>
+</div>
+
+<!-- Modal Tambah Media -->
+<div class="modal fade" id="addMediaModal" tabindex="-1" aria-labelledby="addMediaModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('media.storeModal', ['id' => $event->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addMediaModalLabel">Tambah Media</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="photo">Foto</label>
+                        <input type="file" class="form-control" name="photo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="link">Link</label>
+                        <input type="text" class="form-control" name="link" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Media -->
+@foreach ($event->mediaAssets as $media)
+    <div class="modal fade" id="editMediaModal{{ $media->id }}" tabindex="-1" aria-labelledby="editMediaModalLabel{{ $media->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <form id="editMediaForm{{ $media->id }}" action="{{ route('media.update', ['id' => $media->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editMediaModalLabel{{ $media->id }}">Edit Media</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Foto -->
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Foto</label>
+                            <input type="file" id="photo" name="photo" class="form-control">
+                            @if ($media->photo)
+                                <div class="mt-2">
+                                    <img src="{{ asset('media/' . old('photo', $media->photo)) }}" alt="Foto Media" style="width: 100px;">
+                                </div>
+                            @endif
+                        </div>
+                        <!-- Link -->
+                        <div class="mb-3">
+                            <label for="link" class="form-label">Link</label>
+                            <input type="text" class="form-control" id="link" name="link" value="{{ old('Link', $media->link) }}" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endforeach
+
 <!-- RSVP -->
 <div class="card mt-4">
     <div class="card-header pb-0 mb-2">

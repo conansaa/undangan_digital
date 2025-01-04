@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('password.update') }}">
+    <form method="POST" action="{{ route('password.store') }}">
         @csrf
         @method('PUT')
     
@@ -41,7 +41,7 @@
             <input id="password_confirmation" type="password" name="password_confirmation" required>
         </div> --}}
     
-        <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-black py-2 px-4 rounded-lg">
+        <button type="submit" class="btn bg-gradient-info text-black mt-4 py-2 px-4 rounded-lg">
             {{ __('Reset Password') }}
         </button>
     </form>    
