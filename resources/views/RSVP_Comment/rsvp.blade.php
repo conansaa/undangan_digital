@@ -231,19 +231,19 @@
               <div class="attendance-options">
               <label for="kehadiran" class="form-label">Kehadiran?</label><br>
               
-      <div class="attendance-container">
-    <div class="attendance-item">
-        <input id="yes" name="confirmation" type="radio" value="yes"
-                {{ old('confirmation', session('new_data')['confirmation'] ?? '') == 'Hadir' ? 'checked' : '' }}
-                required>
-        <label for="yes" class="no-bold">Ya, saya akan hadir</label>
-    </div>
-    <div class="attendance-item">
-        <input id="no" name="confirmation" type="radio" value="no"
-                {{ old('confirmation', session('new_data')['confirmation'] ?? '') == 'Tidak Hadir' ? 'checked' : '' }}>
-        <label for="no" class="no-bold">Maaf, tidak bisa</label>
-    </div>
-</div>
+            <div class="attendance-container">
+          <div class="attendance-item">
+              <input id="yes" name="confirmation" type="radio" value="yes"
+                      {{ old('confirmation', session('new_data')['confirmation'] ?? '') == 'Hadir' ? 'checked' : '' }}
+                      required>
+              <label for="yes" class="no-bold">Ya, saya akan hadir</label>
+          </div>
+          <div class="attendance-item">
+              <input id="no" name="confirmation" type="radio" value="no"
+                      {{ old('confirmation', session('new_data')['confirmation'] ?? '') == 'Tidak Hadir' ? 'checked' : '' }}>
+              <label for="no" class="no-bold">Maaf, tidak bisa</label>
+          </div>
+      </div>
 
 
             <label for="total_guest" class="form-label">Jumlah Kehadiran</label>

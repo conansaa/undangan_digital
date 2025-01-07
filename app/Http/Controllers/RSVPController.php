@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EventDetails;
 use App\Models\EventOwnerDetails;
+use App\Models\EventOwnerNew;
 use App\Models\Gifts;
 use App\Models\Timelines;
 use App\Models\Rsvp;
@@ -13,6 +14,8 @@ use App\Models\EventCards;
 use App\Models\Figures;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class RsvpController extends Controller
 {
@@ -68,6 +71,58 @@ class RsvpController extends Controller
 
     return redirect()->route('rsvp.invitation', ['name' => "Demo"]);
   }
+  public function caroline($name)
+  {
+
+    $event_id = Rsvp::where('name', $name)->value('event_id');
+
+    if ($event_id) {
+      $pemberkatan = EventCards::where(['event_id' => 4, "event_name" => "Pemberkatan"])->first();
+      $resepsi = EventCards::where(['event_id' => 4, "event_name" => "Resepsi"])->first();
+      $figures = Figures::where('event_id', 4)->get();
+      $giftBarang = Gifts::where(['event_id' => $event_id, "category" => "Barang"])->first();
+      $giftTf = Gifts::where(['event_id' => $event_id, "category" => "Uang"])->first();
+      $timelines = Timelines::where('event_id', $event_id)->get();
+      $gallery = DB::table('gallery')->select('photo', 'description')->get();
+
+      // Retrieve RSVP data with comments, ordered by name
+      $rsvps = Rsvp::with('comments')->orderBy('name')->get();
+      $comments = Comments::with('rsvp')->get();
+
+      // Retrieve existing RSVP record and phone number
+      $existingRsvp = Rsvp::where('name', $name)->first();
+      $phoneNumber = optional($existingRsvp)->phone_number;
+      if ($existingRsvp) {
+        session()->flash('existing_rsvp', $existingRsvp);
+      }
+
+      // Redirect if either of the event details is missing
+      if (!$pemberkatan || !$resepsi) {
+        return redirect()->back()->with('event_error', 'Event not found.');
+      }
+
+      // Fetch old data from the log for the provided name
+      $oldData = LogRsvp::where('name', $name)->get();
+
+
+      return view('Caroline.caroline', compact(
+        'timelines',
+        'pemberkatan',
+        'resepsi',
+        'figures',
+        'name',
+        'existingRsvp',
+        'phoneNumber',
+        'oldData',
+        'giftBarang',
+        'giftTf',
+        'gallery',
+        'comments',
+      ));
+    }
+
+    return redirect()->route('rsvp.invitation', ['name' => "Demo"]);
+  }
 
 
 
@@ -78,24 +133,42 @@ class RsvpController extends Controller
   }
   public function viewclient()
   {
-    $totalGuests = Rsvp::where('confirmation', 'Hadir')->sum('total_guest');
-    $totalQuota = EventCards::where('id', 1)->value('quota') ?? 0;
+      $userId = Auth::id();
 
-    $sort = request('sort', 'name');
-    $order = request('order', 'asc');
+      $eventOwner = EventOwnerNew::where('user_id', $userId)->first();
 
-    if ($sort === 'confirmation') {
-      $rsvps = Rsvp::orderByRaw(
-        "
-                FIELD(confirmation, 'Hadir', 'Tidak Hadir', '') " . ($order == 'asc' ? "ASC" : "DESC") . ",
-                confirmation IS NULL " . ($order == 'asc' ? "ASC" : "DESC")
-      )->get();
-    } else {
-      $rsvps = Rsvp::orderBy($sort, $order)->get();
-    }
+      if (!$eventOwner) {
+          return redirect()->route('home')->withErrors('Event Owner tidak ditemukan.');
+      }
 
-    return view('client.rsvpclient', compact('totalGuests', 'totalQuota', 'rsvps', 'sort', 'order'));
+      $eventDetailsIds = $eventOwner->event()->pluck('id');
+
+      $totalGuests = Rsvp::whereIn('event_id', $eventDetailsIds)
+          ->where('confirmation', 'Hadir')
+          ->sum('total_guest');
+
+      $totalQuota = EventCards::whereIn('event_id', $eventDetailsIds)->value('quota') ?? 0;
+
+      $sort = request('sort', 'name');
+      $order = request('order', 'asc');
+
+      if ($sort === 'confirmation') {
+          $rsvps = Rsvp::whereIn('event_id', $eventDetailsIds)
+              ->orderByRaw(
+                  "
+                      FIELD(confirmation, 'Hadir', 'Tidak Hadir', '') " . ($order == 'asc' ? "ASC" : "DESC") . ",
+                      confirmation IS NULL " . ($order == 'asc' ? "ASC" : "DESC")
+              )
+              ->get();
+      } else {
+          $rsvps = Rsvp::whereIn('event_id', $eventDetailsIds)
+              ->orderBy($sort, $order)
+              ->get();
+      }
+
+      return view('client.rsvpclient', compact('totalGuests', 'totalQuota', 'rsvps', 'sort', 'order'));
   }
+
 
   public function invitation($name)
   {
@@ -226,41 +299,106 @@ class RsvpController extends Controller
   }
 
   public function createtamu()
-  {
-    $eventDetails = EventDetails::first();
-    return view('client.createtamu', compact('eventDetails'));
-  }
-  public function storetamu(Request $request)
-  {
-    $validatedData = $request->validate([
-      'name' => 'required|string|max:255',
-      'phone_number' => 'nullable|string|digits_between:12,15',
-      'event_id' => 'required|exists:event_details,id',
-    ]);
+{
+    $userId = Auth::id(); // Ambil ID user yang sedang login
 
-    $existingRsvp = Rsvp::where('name', $validatedData['name'])
-      ->where('event_id', $validatedData['event_id'])
-      ->first();
+    // Cari event_owner berdasarkan user_id
+    $eventOwner = EventOwnerNew::where('user_id', $userId)->first();
 
-    if ($existingRsvp) {
-      return redirect()->back()->withErrors([
-        'name' => 'Nama tidak boleh sama, mohon berikan pembeda yang unik.'
-      ]);
+    if (!$eventOwner) {
+        return redirect()->route('client.dashboard')->withErrors('Event Owner tidak ditemukan.');
     }
 
+    // Ambil event_details terkait dengan event_owner
+    $eventDetails = EventDetails::where('event_owner_id', $eventOwner->id)->get();
+
+    return view('client.createtamu', compact('eventDetails'));
+}
+
+public function storetamu(Request $request)
+{
+    $userId = Auth::id(); // Ambil ID user yang sedang login
+
+    // Validasi input
+    $validatedData = $request->validate([
+        'name' => 'required|string|max:255',
+        'phone_number' => 'nullable|string|digits_between:12,15',
+        'event_id' => [
+            'required',
+            function ($attribute, $value, $fail) use ($userId) {
+                // Pastikan event_id terkait dengan user yang login
+                $eventOwner = EventOwnerNew::where('user_id', $userId)->first();
+
+                if (!$eventOwner) {
+                    $fail('Event Owner tidak ditemukan.');
+                    return;
+                }
+
+                $eventDetail = EventDetails::where('id', $value)
+                    ->where('event_owner_id', $eventOwner->id)
+                    ->first();
+
+                if (!$eventDetail) {
+                    $fail('Event ID tidak valid untuk pengguna yang login.');
+                }
+            },
+        ],
+    ]);
+
+    // Cek jika nama tamu sudah ada untuk event yang sama
+    $existingRsvp = Rsvp::where('name', $validatedData['name'])
+        ->where('event_id', $validatedData['event_id'])
+        ->first();
+
+    if ($existingRsvp) {
+        return redirect()->back()->withErrors([
+            'name' => 'Nama tidak boleh sama, mohon berikan pembeda yang unik.',
+        ]);
+    }
+
+    // Simpan RSVP
     Rsvp::create($validatedData);
 
-    // if (!empty($validatedData['phone_number'])) {
-    //     $phone_number = preg_replace('/\D/', '', $validatedData['phone_number']); // Hapus karakter non-numeric
-    //     $name = $validatedData['name'];
-    //     $message = urlencode("Hello $name, thank you for RSVPing! here's the link http://127.0.0.1:8000/invitation/$name");
-    //     $whatsapp_link = "https://wa.me/$phone_number?text=$message";
-
-    //     return redirect($whatsapp_link);
-    // }
-
     return redirect('rsvpclient')->with('success', 'Nama tamu berhasil disimpan.');
-  }
+}
+
+  //ini yang lamaa
+  // public function createtamu()
+  // {
+  //   $eventDetails = EventDetails::first();
+  //   return view('client.createtamu', compact('eventDetails'));
+  // }
+  // public function storetamu(Request $request)
+  // {
+  //   $validatedData = $request->validate([
+  //     'name' => 'required|string|max:255',
+  //     'phone_number' => 'nullable|string|digits_between:12,15',
+  //     'event_id' => 'required|exists:event_details,id',
+  //   ]);
+
+  //   $existingRsvp = Rsvp::where('name', $validatedData['name'])
+  //     ->where('event_id', $validatedData['event_id'])
+  //     ->first();
+
+  //   if ($existingRsvp) {
+  //     return redirect()->back()->withErrors([
+  //       'name' => 'Nama tidak boleh sama, mohon berikan pembeda yang unik.'
+  //     ]);
+  //   }
+
+  //   Rsvp::create($validatedData);
+
+  //   // if (!empty($validatedData['phone_number'])) {
+  //   //     $phone_number = preg_replace('/\D/', '', $validatedData['phone_number']); // Hapus karakter non-numeric
+  //   //     $name = $validatedData['name'];
+  //   //     $message = urlencode("Hello $name, thank you for RSVPing! here's the link http://127.0.0.1:8000/invitation/$name");
+  //   //     $whatsapp_link = "https://wa.me/$phone_number?text=$message";
+
+  //   //     return redirect($whatsapp_link);
+  //   // }
+
+  //   return redirect('rsvpclient')->with('success', 'Nama tamu berhasil disimpan.');
+  // }
   public function destroytamu($id)
   {
     // Find RSVP by ID

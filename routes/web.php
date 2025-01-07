@@ -32,7 +32,7 @@ use App\Http\Controllers\EventReportDetailController;
 //cover
 Route::get('/invitation/{name}', [RsvpController::class, 'invitation'])->name('rsvp.invitation');
 
-//enduser
+//Shinta
 Route::get('/shinta-irfan/to/{name}', [RsvpController::class, 'index'])->name('rsvp.index');
 Route::post('/shinta-irfan/store/{name}', [RsvpController::class, 'store'])->name('rsvp.store');
 Route::get('/shinta-irfan/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
@@ -42,6 +42,11 @@ Route::post('/clear-modal-session', function () {
     session()->forget('show_modal');
     return response()->json(['success' => true]);
 });
+
+//Carol
+Route::get('/caroline-hezron/to/{name}', [RsvpController::class, 'caroline'])->name('caroline.index');
+
+
 Route::post('/comment/{name}', [CommentController::class, 'store'])->name('comment.store');
 Route::get('/comment', [CommentController::class, 'index'])->name('comment.index');
 Route::get('/comment/delete/{id}/{name}', [CommentController::class, 'hapus'])->name('comment.hapus');

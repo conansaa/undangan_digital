@@ -1,0 +1,1932 @@
+body {
+    display: flex; /* Menggunakan Flexbox untuk tata letak horizontal */
+    margin: 0; /* Hilangkan margin bawaan */
+    padding: 0; /* Hilangkan padding bawaan */
+    width: 100%; /* Lebar penuh layar */
+    height: 100vh; /* Tinggi penuh layar */
+    font-family: "Kaisei Opti", serif;
+    font-weight: 400;
+    font-style: normal;
+    overflow: hidden; /* Menghindari scroll pada body */
+}
+/* Kontainer Khusus */
+.custom-container { 
+    position: relative;
+    width: 100%;
+    height: 150vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif; /* Gunakan font di sini jika diperlukan */
+  }
+  
+  /* Gambar Latar Belakang */
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../assets_tema_2/bgpatternputih.svg') no-repeat center center;
+    background-size: cover;
+    z-index: 1;
+  }
+  
+  .window-image {
+    position: absolute;
+    top: 50%; /* Pusat secara vertikal */
+    left: 50%; /* Pusat secara horizontal */
+    transform: translate(-50%, -50%); /* Perbaiki pusat dari posisi */
+    width: 120%;
+    height: 100%;
+    background: url('../assets_tema_2/bg6.svg') no-repeat center center;
+    background-size: contain; /* Sesuaikan ukuran gambar */
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  
+  /* Elemen Dekorasi Bunga */
+  .flower-atas img {
+    position: absolute;
+    top: 2em;
+    width: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+  
+  .flower-side img {
+    position: absolute;
+    margin-top: -10em;
+    left: 29em;
+    transform: translateY(-50%);
+    width: 30%;
+    z-index: 3;
+    animation: swayBottomToTop 5s ease-in-out infinite; /* Animasi gerak kanan-kiri */
+    transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
+  }
+  .flower-left img {
+    position: absolute;
+    margin-top: -10em;
+    left: -1em;
+    transform: translateY(-50%);
+    width: 30%;
+    z-index: 3;
+    animation: swayBottomToTop 5s ease-in-out infinite; /* Animasi gerak kanan-kiri */
+    transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
+  }
+  
+  /* Konten Countdown */
+  .countdown-content {
+    position: relative;
+    z-index: 4;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .countdown-content h2 {
+    font-size: 5vh;
+    margin-bottom: 2vh;
+    margin-top: 1em;
+    font-family: 'Kaisei Opti', serif;
+    color: #653C3C;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: scale(0.5); /* Awalnya lebih kecil */
+    transition: all 1.5s ease-in-out;
+  }
+  
+  .countdown-content h2.animate {
+    opacity: 1; /* Menjadi terlihat */
+    transform: scale(1); /* Ukuran penuh */
+  }  
+
+  .add-to-calendar {
+    width: 30%;
+    padding: 10px;
+    background-color: #5A2C2C;
+    color: #E7E7E7;
+    border: none;
+    border-radius: 25px !important;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Kaisei Opti', serif;
+    margin-top: -1em !important;
+}
+
+.add-to-calendar:hover {
+    color: #653C3C;
+    background-color: #ffffff;
+    transform: scale(1.05);
+    font-family: 'Kaisei Opti', serif;
+}
+
+.gift-flower {
+    position: absolute; 
+    top: -3.1em; /* Gambar berada di bagian atas */
+    right: -2em; /* Gambar berada di bagian kanan */
+    width: 10em; /* Menjaga ukuran gambar agar sesuai dengan dimensi aslinya */
+    height: auto; /* Menjaga proporsi gambar */
+}
+
+.container1 {
+    margin: 0 auto;
+    padding: 20px;
+    position: relative; /* Dibutuhkan untuk elemen pseudo */
+    background: url('../assets_tema_2/bg5.svg') no-repeat center center;
+    background-size: cover;
+    font-family: 'Kaisei Opti', serif;
+    text-align: center;
+    overflow: hidden; /* Mencegah pseudo-elemen keluar dari container */
+}
+
+.container1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Warna hitam semi transparan */
+    z-index: 1; /* Memastikan overlay muncul di atas background */
+   
+}
+
+.container1 > * {
+    position: relative;
+    z-index: 2; /* Membuat konten berada di atas overlay */
+}
+
+/* Animasi Awan */
+.animasi-awan {
+    position: absolute;
+    top: 1%; /* posisi vertikal */
+    left: 0;
+    width: 100%; /* Memastikan awan mengisi layar */
+    height: 30%; /* Tinggi animasi */
+    overflow: hidden;
+    z-index: 10; /* Di atas latar belakang */
+    pointer-events: none; /* Tidak menghalangi klik */
+}
+
+.animasi-awan img {
+    position: absolute;
+    bottom: 20%; /* posisi vertikal awan */
+    width: 35%; /* ukuran awan */
+    height: auto;
+    animation: gerakAwan 25s linear infinite; /* Animasi berjalan terus-menerus */
+}
+
+.animasi-awan img:nth-child(1) {
+    top: 1%;
+    left: -40%; /* Mulai dari luar layar kiri */
+    animation-delay: 0s; /* Tidak ada jeda untuk awan pertama */
+    z-index: 11; /* Pastikan berada di atas background */
+}
+
+.animasi-awan img:nth-child(2) {
+    bottom: 15%;
+    left: -40%; /* Mulai dari luar layar kiri */
+    animation-delay: 3s; /* Tambahkan jeda untuk awan kedua */
+    z-index: 11; /* Pastikan berada di atas background */
+}
+
+/* Keyframes untuk gerakan awan */
+@keyframes gerakAwan {
+    0% {
+        transform: translateX(0); /* Posisi awal */
+    }
+    100% {
+        transform: translateX(120vw); /* Berjalan ke luar layar kanan */
+    }
+}
+
+/* Konten utama */
+.invitation-content {
+    position: relative;
+    padding: 20px;
+    color: #ffffff;
+    text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Slide down animation for h2 */
+.invitation-content h2 {
+    font-size: 2.5vh;
+    margin-bottom: 10px;
+    margin-top: 1em;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: translateY(-50px); /* Mulai dari atas */
+    transition: all 1.5s ease-in-out;
+}
+
+.invitation-content h2.animate {
+    opacity: 1;
+    transform: translateY(0); /* Posisi akhir di tempat semula */
+}
+
+/* Scale up animation for h1 */
+.invitation-content h1 {
+    font-size: 3.5vh;
+    margin-bottom: 10px;
+    font-weight: bold;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: scale(0.5); /* Mulai dari skala kecil */
+    transition: all 1.5s ease-in-out;
+}
+
+.invitation-content h1.animate {
+    opacity: 1;
+    transform: scale(1); /* Ukuran penuh */
+}
+
+/* Slide up animation for .date */
+.invitation-content .date {
+    font-size: 2vh;
+    margin-bottom: 20px;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: translateY(50px); /* Mulai dari bawah */
+    transition: all 1.5s ease-in-out;
+}
+
+.invitation-content .date.animate {
+    opacity: 1;
+    transform: translateY(0); /* Posisi akhir di tempat semula */
+}
+
+.rsvp-button {
+    width: 20%;
+    padding: 10px 0;
+    color: #653C3C;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 25px !important;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.rsvp-button:hover {
+    background-color: #5A2C2C;
+    color: #E7E7E7;
+    transform: scale(1.05);
+}
+
+.rsvp-button a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+.rsvp-button a:hover {
+    color: #E7E7E7;
+}
+
+
+.image-arch {
+    margin: 70px auto;
+    position: relative;
+    width: 350px;
+    height: 520px;
+    margin-bottom: -3em;
+    display: flex; /* Mengaktifkan Flexbox */
+    justify-content: center; /* Memusatkan gambar di dalam .image-arch */
+    align-items: center; /* Memusatkan gambar di dalam .image-arch */
+    z-index: 0; /* Pastikan pseudo-element tidak menutupi konten */
+}
+
+.main-photo {
+    width: 100%;
+    height: 106%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1; /* Memastikan gambar di atas pseudo-element */
+}
+
+.garis-photo {
+    position: absolute;
+    bottom: -85px;
+    left: 50%; /* Memindahkan elemen ke tengah */
+    transform: translateX(-50%); /* Mengoreksi posisi agar benar-benar berada di tengah */
+    width: 26vw;
+    pointer-events: none;
+}
+
+.flower-wedding {
+    position: absolute;
+    left: -20px;
+    width: 100%;
+    pointer-events: none;
+}
+
+.info .pemberkatan .merak2{
+    position: absolute;
+    bottom: -200px; /* Sesuaikan jarak vertikal */
+    right: -135px; /* Sesuaikan jarak horizontal */
+    z-index: 1;
+    height: 60vh;
+    pointer-events: none; /* Tidak menghalangi klik */
+}
+
+.info .resepsi .merak1 {
+    position: absolute;
+    bottom: -190px;/* Sesuaikan jarak vertikal */
+    right: 10px; /* Sesuaikan jarak horizontal */
+    z-index: 1;
+    height: 60vh;
+    pointer-events: none; /* Tidak menghalangi klik */
+}
+
+.info .pemberkatan .merak2 img, .info .resepsi .merak1 img{
+    width: 70vh;
+    height: auto;
+ }
+
+.info .pemberkatan .bunga2{
+    position: absolute;
+    top: 200px; /* Sesuaikan jarak vertikal */
+    left: -90px; /* Sesuaikan jarak horizontal */
+    z-index: 1;
+    animation: swayBottomToTop 5s ease-in-out infinite; /* Animasi gerak kanan-kiri */
+    transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
+    pointer-events: none; /* Tidak menghalangi klik */
+}
+
+.info .resepsi .bunga1 {
+    position: absolute;
+    top: 260px; /* Sesuaikan jarak vertikal */
+    right: -60px; /* Sesuaikan jarak horizontal */
+    z-index: 1;
+    animation: swayBottomToTop 5s ease-in-out infinite; /* Animasi gerak kanan-kiri */
+    transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
+    pointer-events: none; /* Tidak menghalangi klik */
+}
+
+.info .pemberkatan .bunga2 img, .info .resepsi .bunga1 img{
+    width: 25vh;
+    height: auto;
+ }
+
+.info .pemberkatan .daun2 {
+    position: absolute;
+    top: 100px; /* Sesuaikan jarak vertikal */
+    right: -75px; /* Sesuaikan jarak horizontal */
+    z-index: 0;
+    animation: swayBottomToTop 5s ease-in-out infinite; /* Animasi gerak kanan-kiri */
+    transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
+    pointer-events: none; /* Tidak menghalangi klik */
+  }
+
+  .info .resepsi .daun1 {
+    position: absolute;
+    top: 100px; /* Sesuaikan jarak vertikal */
+    left: -90px; /* Sesuaikan jarak horizontal */
+    z-index: 0;
+    animation: swayBottomToTop 5s ease-in-out infinite; /* Animasi gerak kanan-kiri */
+    transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
+      pointer-events: none; /* Tidak menghalangi klik */
+}
+
+.info .pemberkatan .daun2 img, .info .resepsi .daun1 img{
+    width: 20vh;
+    height: auto;
+ }
+  
+  /* Keyframes untuk gerakan kanan-kiri bagian bawah */
+  @keyframes swayBottomToTop {
+    0%, 100% {
+      transform: rotate(0deg); /* Posisi awal */
+    }
+    50% {
+      transform: rotate(5deg); /* Sedikit bergoyang ke kanan */
+    }
+  }
+
+
+/* Overlay bunga */
+.flower-overlay {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    width: 100%;
+    pointer-events: none;
+}
+
+.flower-image {
+    width: 110%;
+    height: auto;
+    object-fit: cover;
+}
+.flower-images {
+    width: 110%;
+    height: auto;
+    object-fit: cover;
+    animation: sway 3s ease-in-out infinite;
+}
+
+@keyframes sway {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px); 
+    }
+    100% {
+        transform: translateX(0); 
+    }
+}
+
+.flower-info {
+    width: 110%;
+    height: auto;
+    margin-top: 4.5em;
+    object-fit: cover;
+    animation: sway 3s ease-in-out infinite;
+}
+
+.flower-info1 {
+    width: 110%;
+    height: auto;
+    object-fit: cover;
+    margin-top: 4.5em;
+}
+
+.flower-images {
+    width: 110%;
+    height: auto;
+    object-fit: cover;
+    animation: sway 3s ease-in-out infinite;
+}
+
+@keyframes sway {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(10px); 
+    }
+    100% {
+        transform: translateX(0); 
+    }
+}
+
+.invitation {
+    position: relative;
+    width: 100%;
+    height: 125vh;
+    background: url('../assets_tema_2/bg4.svg') no-repeat center center/cover;
+  }
+  
+  .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+  }
+  
+  .invitation .overlay h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10em;
+    margin-top: -5em;
+    font-family: 'Kaisei Opti', serif;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: scale(0.5); /* Mulai dari skala kecil */
+    transition: all 1.5s ease-in-out;
+  }
+
+
+  .invitation .overlay h1.animate {
+    opacity: 1;
+    transform: scale(1); /* Ukuran penuh */
+}
+
+  .invitation .overlay h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10em;
+    margin-top: -5em;
+    font-family: 'Kaisei Opti', serif;
+  }
+  
+  .invitation .overlay p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-family: 'Kaisei Opti', serif;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: translateY(-50px); /* Mulai dari atas */
+    transition: all 1.5s ease-in-out;
+  }
+
+
+.invitation .overlay p.animate {
+    opacity: 1;
+    transform: translateY(0); /* Posisi akhir di tempat semula */
+}
+  .invitation .overlay h5 {
+    font-size: 1.2rem;
+    margin-top : -1em;
+    margin-bottom: 20px;
+    font-family: 'Kaisei Opti', serif;
+  }
+  .invitation .overlay h3 {
+    font-size: 1.3rem;
+    margin-top :-0.7em;
+    margin-bottom: 20px;
+    font-family: 'Kaisei Opti', serif;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: translateY(-50px); /* Mulai dari atas */
+    transition: all 1.5s ease-in-out;
+  }
+
+  .invitation .overlay h3.animate {
+    opacity: 1;
+    transform: translateY(0); /* Posisi akhir di tempat semula */
+}
+  
+  .invitation .overlay button {
+    width: 45%;
+    padding: 10px 0;
+    color: #653C3C;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 25px !important;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.invitation .overlay button:hover {
+    color: #E7E7E7;
+    background-color: #653C3C;
+}
+  
+
+.left-section {
+    position: fixed; /* Membuat bagian ini menetap */
+    top: 0;
+    left: 0;
+    width:60%; /* Lebar tetap untuk left-section */
+    height: 100vh; /* Tinggi penuh layar */
+    background-color:rgb(0, 0, 0); /* Background putih opsional */
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Menambahkan sedikit bayangan */
+    z-index: 10; /* Memastikan left-section berada di atas */
+}
+#invitation {
+    display: flex;
+    flex-direction: row; /* Atur elemen menjadi horizontal */
+    width: 100%; /* Gunakan lebar penuh */
+    height: 100vh; /* Tinggi penuh layar */
+    margin: 0; /* Hilangkan margin default */
+    padding: 0; /* Hilangkan padding default */
+    box-sizing: border-box; /* Pastikan padding tidak mempengaruhi ukuran */
+}
+
+.left-section main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%; /* Konten vertikal berada di tengah */
+    text-align: center;
+}
+
+.right-section {
+    margin-left: 60%; /* Beri ruang untuk left-section */
+    width: 40%; /* Sesuai ukuran di body */
+    height: 100%; /* Sesuai ukuran di body */
+    overflow-y: auto; /* Scroll hanya pada right-section */
+    background-size: cover; /* Atur agar background pas */
+}
+
+
+.info{
+    background-image: url('../assets_tema_2/bgpatternputih.svg');
+    font-family: "Kaisei Opti", serif;
+    font-weight: 400;
+    font-style: normal;
+    padding: 20px 0 16.4em 0;
+     background-size: cover;
+}
+
+.col-md-8.col-10.text-center {
+    display: flex; /* Aktifkan flexbox */
+    flex-direction: column; /* Susun elemen secara vertikal */
+    align-items: center; /* Rata tengah secara horizontal */
+    justify-content: center; /* Rata tengah secara vertikal */
+    height: 100vh; /* Atur tinggi container agar penuh */
+}
+
+.info h1 {
+    color: #653C3C;
+    font-size: 5vh;
+    margin-bottom: 6vh;
+    margin-top: 6vh;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: scale(0.5); /* Awalnya lebih kecil */
+    transition: all 1.5s ease-in-out;
+}
+
+.info h1.animate {
+    opacity: 1; /* Menjadi terlihat */
+    transform: scale(1); /* Ukuran penuh */
+  }  
+
+.info h2 {
+    width: auto;
+    color: #653C3C;
+    font-size: 3vh;
+    text-align: center; 
+    margin-bottom: 6vh;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: translateY(50px); /* Mulai dari bawah */
+    transition: all 1.5s ease-in-out;
+}
+
+.info h2.animate {
+    opacity: 1;
+    transform: translateY(0); /* Posisi akhir di tempat semula */
+}
+
+.info .pemberkatan, .info .resepsi {
+    background-size: cover;
+    width: 50vh; /* Sesuaikan ukuran elemen */
+    height: 72vh; /* Kurangi tinggi elemen */
+    margin-top: 4vh; /* Sesuaikan jarak antar elemen */
+    margin-left: auto;
+    margin-right: auto; /* Tengah secara horizontal */
+    position: relative; /* Untuk konten absolut */
+    border-radius: 150px; /* Membuat sudut lebih halus */
+    box-shadow: 0px 0px 4px 4px #653C3C; /* Bayangan lebih halus */
+    margin-bottom: 30vh;
+}
+
+.ring-image {
+    margin-bottom: 2em;
+    margin-top: 2em;
+    width: 63px; /* Ukuran gambar */
+    height: auto;
+    
+}
+.gelas-image {
+    margin-bottom: 1em;
+    margin-top: -1em;
+    width: 65px; /* Ukuran gambar */
+    height: auto;
+    
+}
+
+
+.info .pemberkatan .isi {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Benar-benar di tengah */
+    text-align: center; /* Konten rata tengah */
+    justify-content: center;
+    width: 40vh;
+    margin-top: -5vh;
+}
+
+.info .resepsi .isi {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Benar-benar di tengah */
+    text-align: center; /* Konten rata tengah */
+    width: 40vh;
+}
+
+.info .pemberkatan h4, .info .resepsi h4 {
+    font-size: 4.5vh; /* Kurangi ukuran font */
+    color: #653C3C;
+    margin-bottom: 8px; /* Tambahkan jarak antar elemen */
+}
+
+.info .pemberkatan h5, .info .resepsi h5 {
+    font-size: 2.5vh; /* Kurangi ukuran font */
+    color: #653C3C;
+    margin-bottom: 8px;
+}
+
+.info .pemberkatan p, .info .resepsi p {
+    font-size: 2.5vh; /* Kurangi ukuran font */
+    color: #423838;
+    margin-bottom: 20px; /* Tambahkan jarak antar teks */
+}
+
+.info .pemberkatan a, .info .resepsi a {
+    font-size: 2.5vh;
+    color: #653C3C; 
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 3;
+}
+.jam {
+    margin-top: 20px; /* Adjust the value as needed */
+}
+.small-text {
+    font-size: 15px !important; /* Adjust the size to your preference */
+}
+
+
+.info .pemberkatan a:hover, .info .resepsi a:hover {
+    text-decoration: underline; /* Teks bergaris saat hover */
+}
+
+/* Container Utama RSVP */
+#rsvp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../assets_tema_2/bgpatterncoklat.svg'); 
+    background-size: cover;
+    text-align: center;/* Warna latar belakang */
+}
+
+.rsvp-container {
+    width: 70%;
+    background-color: #F7F4F2;
+    border-radius: 100px;
+    border: 1px solid #4B2E2A; /* Garis coklat tua di sekitar container */
+    box-shadow: 
+        inset 0 5px 3px rgba(0, 0, 0, 0.3), /* Bayangan dalam di bagian atas */
+        0 5px 3px rgba(0, 0, 0, 0.3); /* Bayangan luar di bagian bawah */
+    padding: 30px 40px;
+    text-align: center;
+    position: relative;
+    font-family: 'Arial', sans-serif;
+    margin-top: 10em;
+}
+
+.rsvp .judul h1 {
+    font-family: "Kaisei Opti", serif;
+    font-style: normal;
+    font-size: 4vh;
+    color: #653C3C;
+    position: absolute; /* Elemen diposisikan relatif terhadap kontainer terdekat yang memiliki posisi */
+    top: 50%; /* Atur posisi vertikal ke tengah */
+    left: 50%; /* Atur posisi horizontal ke tengah */
+    transform: translate(-50%, -50%); /* Koreksi agar benar-benar di tengah */
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: scale(0.5) translate(-50%, -50%); /* Awalnya lebih kecil dan tetap di tengah */
+    transition: all 1.5s ease-in-out; /* Animasi transisi */
+    margin-top: -11em; /* Hilangkan margin default */
+}
+
+.rsvp .judul h1.animate {
+    opacity: 1; /* Menjadi terlihat */
+    transform: scale(1) translate(-50%, -50%); /* Ukuran penuh dan tetap di tengah */
+}
+ 
+.form-rsvp{
+    font-family: "Kaisei Opti", serif;
+    font-weight: 400;
+    font-style: normal;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: translateY(50px); /* Awalnya bergeser ke bawah */
+    transition: all 1.5s ease-in-out; /* Animasi transisi */
+}
+
+/* Ketika animasi dimulai */
+.form-rsvp.animate-form {
+    opacity: 1; /* Muncul */
+    transform: translateY(0); /* Kembali ke posisi awal */
+}
+/* Form */
+.form-rsvp p {
+    font-size: 1.8vh;
+    color: #423838;
+    margin-bottom: 20px;
+    text-align: left;
+    margin-top:2em;
+}
+
+.form label {
+    display: block;
+    font-size: 1.6vh;
+    color: #653C3C;
+    margin-bottom: 5px;
+    text-align: left;
+    font-weight: bold;
+}
+
+
+input[type="text"],
+input[type="number"] {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 1.5vh;
+    border: none;
+    border-bottom: 2px solid #653C3C;
+    margin-bottom: 20px;
+    outline: none;
+    background: none;
+    color: #423838;
+}
+
+/* Label untuk judul Attendance */
+.attendance-label {
+    display: flex;
+    font-size: 1.5vh;
+    color: #653C3C; /* Warna merah gelap */
+    margin-bottom: 10px;
+}
+
+/* Container untuk pilihan */
+.attendance-options {
+    display: flex;
+    align-items: center;
+    gap: 30px; /* Jarak antara pilihan */
+}
+
+/* Input Radio */
+.attendance-options input[type="radio"] {
+    accent-color: #653C3C; /* Warna radio button */
+    margin-right: -25px; /* Jarak antara radio dan teks */
+}
+
+/* Label untuk pilihan */
+.option-label {
+    font-size: 1.4vh;
+    font-weight: normal;
+    color: #423838; /* Warna teks pilihan */
+    cursor: pointer; /* Ubah kursor menjadi pointer */
+    transition: color 0.3s ease;
+}
+
+/* Efek hover pada label pilihan */
+.option-label:hover {
+    color: #653C3C; /* Warna saat hover */
+}
+
+
+.total label {
+    font-size: 1.6vh;
+    color: #653C3C;
+    display: block;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.total input {
+    width: 100%;
+    padding: 8px 10px;
+    font-size: 1.5vh;
+    border: none;
+    border-bottom: 2px solid #653C3C;
+    outline: none;
+    background: none;
+    color: #423838;
+}
+
+/* Tombol Confirm */
+form {
+    margin-top: 20px;
+}
+
+form button {
+    width: 50%;
+    padding: 10px 0;
+    background-color: #653C3C;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.5vh;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 2.5em;
+}
+
+form button:hover {
+    background-color: #E7E7E7;
+    color: #653C3C;
+}
+
+/* Section Live Streaming */
+.live {
+    font-family: "Kaisei Opti", serif;
+    font-style: normal;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-size: cover;
+    background-image: url('../assets_tema_2/bgpatterncoklat.svg');
+    
+}
+
+
+.live .judul h1 {
+    font-size: 3.2vh;
+    color: #653C3C; 
+    margin-bottom: 60px;
+    margin-top: 5em;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: scale(0.5); /* Mulai dari skala kecil */
+    transition: all 1.5s ease-in-out;
+}
+
+.live .judul h1.animate {
+    opacity: 1;
+    transform: scale(1); /* Ukuran penuh */
+}
+
+
+
+.live-container .live-thumbnail img {
+    width: 150%; /* Sesuaikan ukuran gambar */
+    max-width: 1000px; /* Batas lebar maksimum */
+    border-radius: 50px; /* Rounded corners untuk gambar */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow untuk efek kedalaman */
+    margin-bottom: 20px;
+}
+
+/* Tombol Watch Here */
+.live a {
+    background-color: #653C3C; /* Warna tombol */
+    color: #fff; /* Warna teks tombol */
+    font-size: 1.6vh;
+    padding: 10px 30px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.watch-button:hover {
+    background-color: #E7E7E7; /* Warna saat hover */
+    color: #653C3C;
+}
+
+/* Styling untuk Wedding Gift Section */
+.gift {
+    text-align: center;
+    font-family: "Kaisei Opti", 'sherif';
+    background-image: url('../assets_tema_2/bgpatternputih.svg');
+    padding: 50px 20px;
+}
+
+.gift-container {
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative; 
+}
+
+.gift .judul h1 {
+    color: #653C3C;
+    font-size: 3.2vh;
+    margin-bottom: 6vh;
+    margin-bottom: 40px;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: scale(0.5); /* Mulai dari skala kecil */
+    transition: all 1.5s ease-in-out;
+}
+
+.gift .judul h1.animate {
+    opacity: 1;
+    transform: scale(1); /* Ukuran penuh */
+}
+
+
+
+.gift .description p {
+    color: #423838;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 60px;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: translateY(50px); /* Mulai dari bawah */
+    transition: all 1.5s ease-in-out;
+}
+
+.gift .description p.animate {
+    opacity: 1;
+    transform: translateY(0); /* Posisi akhir di tempat semula */
+}
+
+.gift .btn1, .gift .btn2 {
+    display: inline-block;
+    margin: 10px;
+}
+
+.gift button {
+    background-color: #653C3C;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    padding: 15px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.gift button:hover {
+    background-color: #E7E7E7;
+    color: #653C3C;
+}
+
+.gift button::before {
+    content: '';
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.gift .btn1 button::before {
+    content: url('../assets_tema_2/hadiah.svg'); /* Emoji untuk hadiah */
+}
+
+.gift .btn2 button::before {
+    content: url('../assets_tema_2/card.svg'); /* Emoji untuk kartu bank */
+}
+.health-protocol {
+    text-align: center;
+    font-family: "Kaisei Opti", 'serif';
+    background-image: url('../assets_tema_2/bgpatternputih.svg');
+    padding: 50px 20px;
+}
+
+.protocol-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.health-protocol .judul h1 {
+    color: #653C3C;
+    font-size: 3.2vh;
+    margin-bottom: 40px;
+}
+
+.protocol-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.protocol-item {
+    text-align: center;
+    width: 120px;
+}
+
+.protocol-item img {
+    width: 50px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.protocol-item p {
+    color: #423838;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.wedding-wish {
+    background-image: url('../assets_tema_2/bg pattern1.svg');
+    padding: 50px 20px;
+    text-align: center;
+    font-family: 'Kaisei Opti', serif;
+}
+
+.wedding-wish h2 {
+    font-size: 1.8rem;
+    color: #653C3C;
+    margin-bottom: 3em;
+    margin-top: 1em;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: scale(0.5); /* Mulai dari skala kecil */
+    transition: all 1.5s ease-in-out;
+}
+
+.wedding-wish h2.animate {
+    opacity: 1;
+    transform: scale(1); /* Ukuran penuh */
+}
+
+
+.wish-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    margin-top: -2em;
+}
+
+.wish-form textarea {
+    width: 100%;
+    max-width: 600px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    resize: none;
+}
+
+.wish-form button {
+    background-color: #653C3C;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-family: 'Kaisei Opti', serif;
+    padding: 6px 12px;
+    width: 17%;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: flex-start; /* Pastikan tombol di posisi kiri */
+    margin-top: 5px; /* Tambahkan sedikit margin agar ada spasi di atas */
+}
+
+.wish-form button:hover {
+    color: #4a2929;
+    background-color: #fff;
+}
+
+
+.wish-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: -1em;
+}
+
+.wish-item {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 20px;
+    padding: 15px 20px;
+    max-width: 600px;
+    text-align: left;
+    width: 100%;
+    height: 5em;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0; /* Default hidden */
+    transform: translateY(20px); /* Start from below */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.wish-item.animate {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.wish-item:nth-child(1) {
+    animation-delay: 0s;
+}
+.wish-item:nth-child(2) {
+    animation-delay: 0.3s;
+}
+.wish-item:nth-child(3) {
+    animation-delay: 0.6s;
+}
+.wish-item:nth-child(4) {
+    animation-delay: 0.9s;
+}
+
+.wish-item strong {
+    font-size: 1rem;
+    color: #653C3C;
+}
+
+.wish-item p {
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 5px;
+}
+
+.wedding-invitation {
+    background: linear-gradient(to bottom, rgba(255, 248, 240, 1), rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5)), url('../assets_tema_2/bg.svg'); /* Cream effect at the top transitioning to dark */
+    background-size: cover;
+    background-position: center;
+    background-blend-mode: overlay; /* Ensures the gradation blends with the image */
+    padding: 50px 20px;
+    text-align: center;
+    font-family: 'Kaisei Opti', serif;
+}
+
+
+.invitation-container {
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.verse {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    line-height: 1.8;
+}
+
+.verse p {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    color:#fff;
+}
+.verse .source {
+    margin-top: 10px;
+}
+
+.details h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color:#fff;
+    margin-top: 4em;
+}
+
+.details h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color:#fff;
+}
+
+.details p {
+    font-size: 1.2rem;
+    color:#fff;
+}
+.footer {
+    background-color: #f8f4f1; /* Cream background */
+    text-align: center;
+    padding: 20px;
+    font-family: 'Kaisei Opti', serif;
+    color: #653C3C; /* Dark text color */
+}
+
+.footer-container p {
+    margin-top: 5px;
+    font-size: 0.8rem;
+}
+
+.footer .logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -25px;
+}
+
+.footer .logo img {
+    width: 5em; 
+    height: auto;
+    margin-bottom: -1px;
+}
+
+.footer .logo p {
+    font-size: 0.8rem;
+    color: #653C3C;
+    margin-top: -1em;
+}
+
+
+/* The wedding of Section */ 
+  .container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: url('../assets_tema_2/bgpatternputih.svg') ;
+    font-family: 'Kaisei Opti', serif;
+    text-align: center;
+  }
+  
+ /* Gaya dasar untuk h1 */
+.container h1 {
+    font-size: 3.2vh;
+    margin-bottom: 6vh;
+    margin-top: 6vh;
+    color: #5a2c2c;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: scale(0.5); /* Awalnya lebih kecil */
+    transition: all 1.5s ease-in-out;
+  }
+  
+  /* Gaya saat kelas animate ditambahkan */
+  .container h1.animate {
+    opacity: 1; /* Menjadi terlihat */
+    transform: scale(1); /* Ukuran penuh */
+  }
+  
+
+  .section {
+    margin-bottom: 40px;
+  }
+  
+  .image-wrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 15px;
+  }
+  
+  .photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .name {
+    font-size: 2.8vh;
+    margin: 0 0 10px;
+    color: #5a2c2c;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: translateY(50px); /* Mulai dari bawah */
+    transition: all 1.5s ease-in-out;
+  }
+
+
+  .name.animate {
+    opacity: 1;
+    transform: translateY(0); /* Posisi akhir di tempat semula */
+}
+  
+  .details {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #5a2c2c;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: translateY(50px); /* Mulai dari bawah */
+    transition: all 1.5s ease-in-out;
+  }
+
+  .details.animate {
+    opacity: 1;
+    transform: translateY(0); /* Posisi akhir di tempat semula */
+}
+  
+  .and-symbol {
+    font-size: 2rem;
+    margin: 20px 0;
+    color: #5a2c2c;
+  }
+  
+  .icon img {
+    width: 30px;
+    height: 30px;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: scale(0.5); /* Awalnya lebih kecil */
+    transition: all 1.5s ease-in-out;
+  }
+  
+  .icon img.animate {
+    opacity: 1; /* Menjadi terlihat */
+    transform: scale(1); /* Ukuran penuh */
+  }
+  
+  .portraits-section {
+    background: url('../assets_tema_2/bgpatterncoklat.svg') center center / cover no-repeat;
+    padding: 110px 20px;
+    text-align: center;
+    color: #5a2c2c;
+  }
+  
+  .portraits-section h1 {
+    font-size: 3.2vh;
+    margin-bottom: 6vh;
+    margin-top: -2em;
+    font-family: 'Kaisei Opti', serif;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: scale(0.5); /* Awalnya lebih kecil */
+    transition: all 1.5s ease-in-out;
+  }
+  
+  .portraits-section h1.animate {
+    opacity: 1; /* Menjadi terlihat */
+    transform: scale(1); /* Ukuran penuh */
+  }  
+  
+  .portraits-gallery {
+    display: grid;
+    gap: 10px;
+  }
+  
+  .portrait-row {
+    display: grid;
+    grid-template-columns: 70% 30%; /* Default layout */
+    gap: 10px;
+  }
+  
+  .portrait-row.alt {
+    grid-template-columns: 30% 70%; /* Alternate layout */
+  }
+  
+  .portrait-item {
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .portrait-item img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: translateY(50px); /* Awalnya berada di bawah */
+    transition: all 0.6s ease-in-out;
+  }
+  
+  .portrait-item img.animate {
+    opacity: 1; /* Menjadi terlihat */
+    transform: translateY(0); /* Kembali ke posisi semula */
+  }
+  
+  .portrait-item img:hover {
+    transform: scale(1.05); /* Efek hover */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .countdown-section {
+    background-image: url('../assets_tema_2/BG3.svg'); /* Background cream */
+    padding: 200px 5px;
+    text-align: center;
+    font-family: 'Kaisei Opti', serif;
+}
+
+.arch-decoration {
+    position: relative;
+}
+
+.flower-top img {
+    width: 120px; /* Adjust size of the top flower decoration */
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+}
+
+
+
+.content h2 {
+    font-size: 1.8rem;
+    color: #653C3C;
+    margin-bottom: 20px;
+}
+
+.time-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.time-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 70px;
+}
+
+.time-box .time {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #653C3C;
+}
+
+.time-box .label {
+    font-size: 0.9rem;
+    color: #653C3C;
+}
+
+.add-calendar-btn {
+    background-color: #653C3C;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.add-calendar-btn:hover {
+    background-color: #4a2929;
+}
+
+/* Bagian untuk section opening */
+#opening {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('../assets_tema_2/bg4.svg') no-repeat center;
+    background-size: cover;
+    background-position: center 38%; /* Adjust the vertical position */
+}
+
+/* Overlay untuk teks */
+#opening .overlay {
+    background-color: rgba(0, 0, 0, 0.4); /* Warna hitam transparan */
+
+}
+
+
+#opening .undangan {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('../assets_tema_2/bg4.svg') no-repeat center;
+    background-size: cover;
+    background-position: center 38%; /* Adjust the vertical position */
+}
+
+#opening .undangan .overlay {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 100%;
+    height: 100%; 
+  }
+  
+  #opening .undangan .overlay h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10em;
+    margin-top: 1em;
+    font-family: 'Kaisei Opti', serif;
+    opacity: 0; /* Awalnya tidak terlihat */
+    transform: translateY(-50px); /* Mulai dari atas */
+    transition: all 1.5s ease-in-out;
+  }
+  #opening .undangan .overlay h1 {
+    opacity: 1;
+    transform: translateY(0); /* Posisi akhir di tempat semula */
+}
+  #opening .undangan .overlay h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10em;
+    margin-top: -5em;
+    font-family: 'Kaisei Opti', serif;
+  }
+  
+  #opening .undangan .overlay p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-family: 'Kaisei Opti', serif;
+  }
+  #opening .undangan .overlay h5 {
+    font-size: 1.2rem;
+    margin-top : -1em;
+    margin-bottom: 20px;
+    font-family: 'Kaisei Opti', serif;
+  }
+  #opening .undangan .overlay h3 {
+    font-size: 1.3rem;
+    margin-top :-0.7em;
+    margin-bottom: 20px;
+    font-family: 'Kaisei Opti', serif;
+  }
+  
+  
+  #opening .undangan  .overlay button {
+    width: 10%;
+    padding: 10px 0;
+    color: #653C3C;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 25px !important;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#opening .undangan .overlay button:hover {
+    color: #E7E7E7;
+    background-color: #653C3C;
+}
+  
+/* Pop-up Overlay */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease;
+}
+
+.popup-overlay.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Pop-up Content */
+.popup-content {
+    background: transparent;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    max-height: 80%;
+}
+
+/* Individual Pop-up Box */
+.popup-box {
+    width: 100%;
+    background: #fefefe;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.popup-box h2 {
+    font-family: "Kaisei Opti", serif;
+    font-weight: 400;
+    color: #653C3C;
+    margin-bottom: 10px;
+}
+
+.popup-box p {
+    font-family: "Kaisei Opti", serif;
+    font-weight: 400;
+    color: #423838;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.popup-box button {
+    background-color: #653C3C;
+    color: #E7E7E7;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: "Kaisei Opti", serif;
+    transition: background-color 0.3s ease;
+}
+
+.popup-box button:hover {
+    background-color: #E7E7E7;
+    color: #653C3C;
+}
+
+/* Close Button */
+.popup-box .close1 {
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 270px;
+    right: 550px;
+}
+
+.popup-box .close2 {
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 295px;
+    right: 550px;
+}
+/* Kontainer Khusus */
+.custom-container {
+    position: relative;
+    width: 100%;
+    height: 150vh;
+    overflow: hidden;
+    font-family: Arial, sans-serif; /* Gunakan font di sini jika diperlukan */
+  }
+  
+  /* Gambar Latar Belakang */
+  .background-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../assets_tema_2/bgpatternputih.svg') no-repeat center center;
+    background-size: cover;
+    z-index: 1;
+  }
+  
+  .window-image {
+    position: absolute;
+    top: 50%; /* Pusat secara vertikal */
+    left: 50%; /* Pusat secara horizontal */
+    transform: translate(-50%, -50%); /* Perbaiki pusat dari posisi */
+    width: 120%;
+    height: 100%;
+    background: url('../assets_tema_2/bg6.svg') no-repeat center center;
+    background-size: contain; /* Sesuaikan ukuran gambar */
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  
+  /* Elemen Dekorasi Bunga */
+  .flower-atas img {
+    position: absolute;
+    top: 2em;
+    width: 40%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 3;
+  }
+  
+  .flower-side img {
+    position: absolute;
+    top: 50%;
+    left: 29em;
+    transform: translateY(-50%);
+    width: 30%;
+    z-index: 3;
+  }
+  .flower-left img {
+    position: absolute;
+    top: 50%;
+    left: 3em;
+    transform: translateY(-50%);
+    width: 30%;
+    z-index: 3;
+  }
+  
+  #playButton {
+    position: fixed;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #555555;
+    color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 15px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  
+  #icon svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+  
+  #playButton:hover {
+    background-color: #444444;
+  }
+
+  .falling-leaves {
+    position: absolute;
+    top: -4em;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Agar tidak mengganggu interaksi pengguna */
+    overflow: hidden;
+}
+
+.leaf {
+    position: absolute;
+    width: 40px; /* Lebar tetap */
+    height: 69px; /* Tinggi tetap */
+    background-image: url('../assets_tema_2/flower7.svg');
+    background-size: contain; /* Pastikan gambar tidak terdistorsi */
+    background-repeat: no-repeat;
+    animation: fall linear infinite;
+    opacity: 0.2; /* Tetap dengan transparansi yang diinginkan */
+}
+
+/* Animasi jatuh */
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) translateX(0) rotate(0deg); /* Mulai di atas */
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) translateX(0) rotate(360deg); /* Jatuh lurus ke bawah */
+        opacity: 0;
+    }
+}
+
+.falling-leaves1 {
+    position: absolute;
+    top: -4em;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Agar tidak mengganggu interaksi pengguna */
+    overflow: hidden;
+}
+
+.leaf1 {
+    position: absolute;
+    width: 40px; /* Lebar tetap */
+    height: 69px; /* Tinggi tetap */
+    background-image: url('../assets_tema_2/daun3.svg');
+    background-size: contain; /* Pastikan gambar tidak terdistorsi */
+    background-repeat: no-repeat;
+    animation: fall linear infinite;
+    opacity: 0.2; /* Tetap dengan transparansi yang diinginkan */
+}
+
+/* Animasi jatuh */
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) translateX(0) rotate(0deg); /* Mulai di atas */
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) translateX(0) rotate(360deg); /* Jatuh lurus ke bawah */
+        opacity: 0;
+    }
+}
+
+.falling-leaves3 {
+    position: absolute;
+    top: -4em;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Agar tidak mengganggu interaksi pengguna */
+    overflow: hidden;
+}
+
+.leaf3 {
+    position: absolute;
+    width: 40px; /* Lebar tetap */
+    height: 69px; /* Tinggi tetap */
+    background-image: url('../assets_tema_2/flower7.svg');
+    background-size: contain; /* Pastikan gambar tidak terdistorsi */
+    background-repeat: no-repeat;
+    animation: fall linear infinite;
+    opacity: 0.2; /* Tetap dengan transparansi yang diinginkan */
+}
+
+/* Animasi jatuh */
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) translateX(0) rotate(0deg); /* Mulai di atas */
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) translateX(0) rotate(360deg); /* Jatuh lurus ke bawah */
+        opacity: 0;
+    }
+}
+
+.falling-leaves4 {
+    position: absolute;
+    top: -4em;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Agar tidak mengganggu interaksi pengguna */
+    overflow: hidden;
+}
+
+.leaf4 {
+    position: absolute;
+    width: 40px; /* Lebar tetap */
+    height: 69px; /* Tinggi tetap */
+    background-image: url('../assets_tema_2/daun3.svg');
+    background-size: contain; /* Pastikan gambar tidak terdistorsi */
+    background-repeat: no-repeat;
+    animation: fall linear infinite;
+    opacity: 0.2; /* Tetap dengan transparansi yang diinginkan */
+}
+
+/* Animasi jatuh */
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) translateX(0) rotate(0deg); /* Mulai di atas */
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) translateX(0) rotate(360deg); /* Jatuh lurus ke bawah */
+        opacity: 0;
+    }
+}
