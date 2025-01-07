@@ -51,9 +51,26 @@
                             <a href="/details/{{ $event->id }}">
                                 <span class="text-dark ms-1"><i class="fa-regular fa-eye"></i></span>
                             </a>
-                            <button type="button" class="btn btn-link text-success text-xs p-0 m-0" onclick="markAsFinished({{ $event->id }})">
+                            <button type="button"
+                                    id="finish-btn-{{ $event->id }}"
+                                    style="@if(session('finished_event_ids') && in_array($event->id, session('finished_event_ids')))
+                                            background-color: red; color: white; cursor: not-allowed; opacity: 0.7; border-radius: 10px; font-size: 0.75rem /* 12px */; line-height: 1rem /* 16px */;
+                                        @else
+                                            color: white; background-color: green; border: none; cursor: pointer; border-radius: 10px; font-size: 0.75rem /* 12px */; line-height: 1rem /* 16px */;
+                                        @endif"
+                                    @if(session('finished_event_ids') && in_array($event->id, session('finished_event_ids')))
+                                        disabled
+                                    @endif
+                                    onclick="@if(!(session('finished_event_ids') && in_array($event->id, session('finished_event_ids'))) ) markAsFinished({{ $event->id }}) @endif">
+                                @if(session('finished_event_ids') && in_array($event->id, session('finished_event_ids')))
+                                    Finished
+                                @else
+                                    Finish
+                                @endif
+                            </button>
+                            {{-- <button type="button" class="btn btn-link text-success text-xs p-0 m-0" onclick="markAsFinished({{ $event->id }})">
                                 Finish
-                            </button>  
+                            </button>   --}}
                         </td>
                     </tr>
                 @endforeach
@@ -62,37 +79,33 @@
     </div>
     </div>
 </div>
-
 <script>
     function markAsFinished(eventId) {
-        fetch(`/event-reports/finish/${eventId}`, {
+        fetch(`/event/finish/${eventId}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-Token': '{{ csrf_token() }}'
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
             },
-            body: JSON.stringify({ status: 'finished' })
         })
-        .then(response => {
-            // Check if the response is JSON
-            return response.json().catch(() => {
-                throw new Error('Server returned non-JSON response');
-            });
-        })
+        .then(response => response.json())
         .then(data => {
             if (data.success) {
-                alert('Event has been marked as finished!');
-                location.reload();
-            } else {
-                alert('Failed to mark as finished: ' + data.message);
+                const button = document.getElementById(`finish-btn-${eventId}`);
+                button.style.backgroundColor = 'red';
+                button.style.color = 'white';
+                button.style.cursor = 'not-allowed';
+                button.style.opacity = '0.7';
+                button.textContent = 'Finished';
+                button.disabled = true; // Disable tombol
+                button.onclick = null; // Hapus onclick handler
+                alert(data.message);
             }
         })
         .catch(error => {
-            console.error('Error:', error); 
-            alert('An error occurred: ' + error.message);
+            console.error('Error:', error);
         });
     }
-
 </script>
 @endsection
 

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventOwnerNew;
+use App\Models\EventReportDetails;
+use App\Models\EventReports;
+use Carbon\Carbon;
 use App\Models\Rsvp;
 use App\Models\User;
 use App\Models\Theme;
@@ -15,6 +17,7 @@ use App\Models\SectionRef;
 use App\Models\EventDetails;
 use App\Models\EventTypeRef;
 use Illuminate\Http\Request;
+use App\Models\EventOwnerNew;
 
 class EventController extends Controller
 {
@@ -58,8 +61,111 @@ class EventController extends Controller
         ]);
 
         // Menyimpan data event baru
-        EventDetails::create($validatedData);
+        $eventDetail = EventDetails::create($validatedData);
+
+        // Data untuk tabel event report
+        $eventType = $eventDetail->eventType;
+        $eventDate = Carbon::parse($eventDetail->event_date);
+        $month = $eventDate->month;
+        $year = $eventDate->year;
+
+        // Cek apakah sudah ada laporan untuk tipe acara, bulan, dan tahun ini
+        $eventReport = EventReports::where('event_type_id', $eventType->id)
+            ->where('month', $month)
+            ->where('year', $year)
+            ->first();
+
+        if ($eventReport) {
+            // Update laporan yang sudah ada
+            $eventReport->counter += 1;
+            $eventReport->progress_total += 1; // Tambahkan event ke progres
+            $eventReport->save();
+        } else {
+            // Buat laporan baru
+            EventReports::create([
+                'event_type_id' => $eventType->id,
+                'month' => $month,
+                'year' => $year,
+                'counter' => 1,
+                'progress_total' => 1,
+                'finish_total' => 0,
+            ]);
+        }
+
+        // Tambahkan data ke tabel event_report_details
+        EventReportDetails::create([
+            'event_report_id' => $eventReport->id,
+            'event_id' => $eventDetail->id,
+        ]);
         return redirect('/event')->with('success', 'Tipe acara berhasil ditambahkan');
+    }
+
+    public function markAsFinished($id)
+    {
+        // Cari event detail
+        $eventDetail = EventDetails::findOrFail($id);
+
+        // Cari event report terkait
+        $eventTypeId = $eventDetail->event_type_id;
+        $eventDate = Carbon::parse($eventDetail->event_date);
+        $month = $eventDate->month;
+        $year = $eventDate->year;
+
+        $eventReport = EventReports::where('event_type_id', $eventTypeId)
+            ->where('month', $month)
+            ->where('year', $year)
+            ->first();
+
+        if ($eventReport) {
+            // Update progress dan finish
+            if ($eventReport->progress_total > 0) {
+                $eventReport->progress_total -= 1;
+            }
+            $eventReport->finish_total += 1;
+            $eventReport->save();
+        }
+
+        // Tandai event selesai dengan flag di session atau di view
+        session()->flash('finished_event_ids', array_merge(
+            session()->get('finished_event_ids', []),
+            [$eventDetail->id]
+        ));
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Event marked as finished.',
+        ]);
+    }
+
+    public function finishEvent($eventId)
+    {
+        // Cek apakah event dengan ID yang diberikan ada
+        $eventDetail = EventDetails::findOrFail($eventId);
+        
+        // Cek apakah event sudah ada di session sebagai finished
+        if (session('finished_event_ids') && in_array($eventId, session('finished_event_ids'))) {
+            return response()->json(['success' => false, 'message' => 'Event sudah selesai']);
+        }
+
+        // Ambil event report yang terkait dengan event
+        $eventReport = EventReports::where('event_type_id', $eventDetail->event_type_id)
+            ->where('month', Carbon::parse($eventDetail->event_date)->month)
+            ->where('year', Carbon::parse($eventDetail->event_date)->year)
+            ->first();
+
+        if ($eventReport) {
+            // Update event report untuk mengurangi progress dan menambah selesai
+            $eventReport->progress_total -= 1;
+            $eventReport->finish_total += 1;
+            $eventReport->save();
+        }
+
+        // Simpan ID event yang selesai ke session
+        $finishedEventIds = session('finished_event_ids', []);
+        $finishedEventIds[] = $eventId;
+        session(['finished_event_ids' => $finishedEventIds]);
+
+        return response()->json(['success' => true, 'message' => 'Event berhasil ditandai selesai']);
     }
 
     /**

@@ -48,42 +48,44 @@
                     </tbody>
                 </table>
 
-                @foreach ($eventDetails as $detail)
-                    <!-- Modal Detail Event Report -->
-                    <div class="modal fade" id="detailEventReport{{ $detail->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title fw-bold" id="staticBackdropLabel">Detail Laporan Event</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="table-responsive">
-                                        <table class="table align-items-center mb-0">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-secondary text-xs fw-bold">Nama Pemilik</th>
-                                                    <th class="text-secondary text-xs fw-bold">Nama Acara</th>
-                                                    <th class="text-secondary text-xs fw-bold">Tipe Acara</th>
-                                                    <th class="text-secondary text-xs fw-bold">Tanggal</th>
-                                                    <th class="text-secondary text-xs fw-bold">Waktu</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="text-secondary text-xs">{{ $detail->eventOwner->user->name ?? 'Tidak tersedia' }}</td>
-                                                    <td class="text-secondary text-xs">{{ $detail->event_name }}</td>
-                                                    <td class="text-secondary text-xs">{{ $detail->eventType->nama ?? 'Tidak tersedia' }}</td>
-                                                    <td class="text-secondary text-xs">{{ $detail->event_date }}</td>
-                                                    <td class="text-secondary text-xs">{{ $detail->event_time }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                @foreach ($eventReports as $report)
+                    @foreach ($report->eventDetails as $detail)
+                        <!-- Modal Detail Event Report -->
+                        <div class="modal fade" id="detailEventReport{{ $report->id }}" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title fw-bold" id="staticBackdropLabel">Detail Laporan Event</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="table-responsive">
+                                            <table class="table align-items-center mb-0">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="text-secondary text-xs fw-bold">Nama Pemilik</th>
+                                                        <th class="text-secondary text-xs fw-bold">Nama Acara</th>
+                                                        <th class="text-secondary text-xs fw-bold">Tipe Acara</th>
+                                                        <th class="text-secondary text-xs fw-bold">Tanggal</th>
+                                                        <th class="text-secondary text-xs fw-bold">Waktu</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-secondary text-xs">{{ $detail->eventOwner->user->name ?? 'Tidak tersedia' }}</td>
+                                                        <td class="text-secondary text-xs">{{ $detail->event_name }}</td>
+                                                        <td class="text-secondary text-xs">{{ $detail->eventType->nama ?? 'Tidak tersedia' }}</td>
+                                                        <td class="text-secondary text-xs">{{ $detail->event_date }}</td>
+                                                        <td class="text-secondary text-xs">{{ $detail->event_time }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 @endforeach
             </div>
             </div>

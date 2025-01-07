@@ -16,9 +16,9 @@ class EventReportController extends Controller
     public function index()
     {
         // Mengambil semua data event report
-        $eventReports = EventReports::with('eventType')->get();
+        $eventReports = EventReports::with('eventDetails')->get();
         // dd($eventReports);
-        $eventDetails = EventDetails::all();
+        $eventDetails = EventDetails::with('eventReports')->get();
         return view('admin.eventreport.eventreport', compact('eventReports', 'eventDetails'));
     }
 

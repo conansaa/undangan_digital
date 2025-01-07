@@ -44,7 +44,12 @@ class EventDetails extends Model
 
   public function eventReports()
   {
-    return $this->belongsTo(EventReports::class, 'event_report_id');
+    return $this->belongsToMany(
+      EventReports::class,
+      'event_report_details',  // Nama tabel perantara
+      'event_id',       // Foreign key di tabel perantara untuk tabel ini
+      'event_report_id'        // Foreign key di tabel perantara untuk tabel terkait
+    );
   }
 
   // Relasi dengan tabel EventReportDetails

@@ -106,6 +106,8 @@ Route::middleware('auth')->group(function () {
     // Route::post('/details/{id}/rsvp', [EventController::class, 'storeRsvp'])->name('event.storeRsvp');
     // Route::post('/details/{id}/gift', [EventController::class, 'storeGift'])->name('event.storeGift');
     // Route::post('/details/{id}/gallery', [EventController::class, 'storeGallery'])->name('event.storeGallery');
+    // Route::post('/event/finish/{id}', [EventController::class, 'markAsFinished'])->name('event.finish');
+    Route::post('/event/finish/{eventId}', [EventController::class, 'finishEvent'])->name('event.finish');
 
     Route::post('/figure/store/{id}', [FigureController::class, 'storeModal'])->name('figure.storeModal');
     Route::get('/figure/edit/{id}', [FigureController::class, 'editModal'])->name('figure.edit');
