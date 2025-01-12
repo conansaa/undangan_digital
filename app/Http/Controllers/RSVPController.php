@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventDetails;
-use App\Models\EventOwnerDetails;
-use App\Models\EventOwnerNew;
-use App\Models\Gifts;
-use App\Models\Timelines;
 use App\Models\Rsvp;
+use App\Models\Gifts;
+use App\Models\Figures;
+use App\Models\Gallery;
 use App\Models\LogRsvp;
 use App\Models\Comments;
+use App\Models\Timelines;
 use App\Models\EventCards;
-use App\Models\Figures;
+use App\Models\EventDetails;
 use Illuminate\Http\Request;
+use App\Models\EventOwnerNew;
+use App\Models\EventOwnerDetails;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -75,15 +76,21 @@ class RsvpController extends Controller
   {
 
     $event_id = Rsvp::where('name', $name)->value('event_id');
+    // dd($name);
+    // $data = Rsvp::where('name', $name)->first();
+    // dd($data);
+    // dd($event_id);
+    // dd(Rsvp::where('name', $name)->value('event_id'));
 
     if ($event_id) {
-      $pemberkatan = EventCards::where(['event_id' => 4, "event_name" => "Pemberkatan"])->first();
-      $resepsi = EventCards::where(['event_id' => 4, "event_name" => "Resepsi"])->first();
-      $figures = Figures::where('event_id', 4)->get();
+      $pemberkatan = EventCards::where(['event_id' => 5, "event_name" => "Pemberkatan"])->first();
+      $resepsi = EventCards::where(['event_id' => 5, "event_name" => "Resepsi"])->first();
+      $figures = Figures::where('event_id', 5)->get();
       $giftBarang = Gifts::where(['event_id' => $event_id, "category" => "Barang"])->first();
       $giftTf = Gifts::where(['event_id' => $event_id, "category" => "Uang"])->first();
       $timelines = Timelines::where('event_id', $event_id)->get();
-      $gallery = DB::table('gallery')->select('photo', 'description')->get();
+      // $gallery = DB::table('gallery')->select('photo', 'description')->get();
+      $gallery = Gallery::where('event_id', $event_id)->get();
 
       // Retrieve RSVP data with comments, ordered by name
       $rsvps = Rsvp::with('comments')->orderBy('name')->get();
@@ -493,13 +500,121 @@ public function storetamu(Request $request)
 
       return redirect()->route('rsvp.index', ['name' => $name]);
     }
-    $newRsvp = Rsvp::create($request->all());
+    // $newRsvp = Rsvp::create($request->all());
 
-    session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'phone_number', 'message']);
-    session(['rsvp_id' => $newRsvp->id, 'success' => true]);
+    // session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'phone_number', 'message']);
+    // session(['rsvp_id' => $newRsvp->id, 'success' => true]);
 
-    return redirect()->route('rsvp.index', ['name' => $name]);
+    // return redirect()->route('rsvp.index', ['name' => $name]);
   }
+
+  public function storeCaroline(Request $request, $name)
+  {
+    if ($request->confirmation === 'no') {
+      $request->merge(['total_guest' => 0]);
+    }
+
+    $confirmationValue = $request->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir';
+    $request->merge(['confirmation' => $confirmationValue]);
+    \Log::info('Request before validation', $request->all());
+    $eventId = Rsvp::where('name', $name)->value('event_id');
+    if (!$eventId) {
+        return redirect()->back()->withErrors(['error' => 'Event ID tidak ditemukan untuk nama ini.']);
+    }
+
+    $request->merge(['event_id' => $eventId]);
+
+    $validated = $request->validate([
+      // 'name' => 'required|string',
+      'phone_number' => 'nullable|string|min:12',
+      'confirmation' => 'required|in:Hadir,Tidak Hadir',
+      'total_guest' => [
+        'required_if:confirmation,Hadir',
+        'integer',
+        function ($attribute, $value, $fail) use ($request) {
+          if ($request->confirmation === 'Hadir' && $value < 1) {
+            $fail('Jumlah tamu harus lebih dari 0 jika Anda hadir.');
+          }
+        }
+      ],
+      'event_id' => 'required|exists:event_details,id',
+    ]);
+    // dd($validated);
+    // try {
+    //     dd($request->all());
+    // } catch (\Exception $e) {
+    //     \Log::error('Error occurred: ' . $e->getMessage());
+    // }  
+
+    $existingRsvp = Rsvp::where('name', $request->name)
+      ->where('event_id', $request->event_id)
+      ->first();
+    // try {
+    //     dd($existingRsvp);
+    // } catch (\Exception $e) {
+    //     \Log::error('Error occurred: ' . $e->getMessage());
+    // } 
+    if ($existingRsvp) {
+      if ($existingRsvp->confirmation !== null && $existingRsvp->total_guest !== null) {
+
+        $dataChanged = (
+          $existingRsvp->confirmation !== $request->confirmation ||
+          $existingRsvp->total_guest != $request->total_guest ||
+          $existingRsvp->phone_number !== $request->phone_number
+        );
+
+        if ($dataChanged) {
+          session([
+            'new_data' => $request->all(),
+            'existing_rsvp' => $existingRsvp,
+            'name_exists' => true,
+            'phone_number' => $existingRsvp->phone_number,
+            'message' => 'Nama sudah terdaftar dengan data konfirmasi yang berbeda, lihat history data?',
+          ]);
+
+          return redirect()->route('caroline.index', ['name' => $name]);
+        }
+
+        $existingRsvp->update([
+          'confirmation' => $request->confirmation ?? $existingRsvp->confirmation,
+          'total_guest' => $request->total_guest ?? $existingRsvp->total_guest,
+          'phone_number' => $request->phone_number,
+        ]);
+
+        $existingRsvp->saveLog('Same Data');
+
+        return redirect()->route('caroline.index', ['name' => $name]);
+      } else {
+        $existingRsvp->update([
+          'confirmation' => $request->confirmation,
+          'total_guest' => $request->total_guest,
+          'phone_number' => $request->phone_number,
+        ]);
+
+        $existingRsvp->saveLog('Updated RSVP');
+
+        return redirect()->route('caroline.index', ['name' => $name]);
+      }
+    } else {
+      $newRsvp = Rsvp::create([
+        'name' => $request->name,
+        'phone_number' => $request->phone_number,
+        'confirmation' => $request->confirmation,
+        'total_guest' => $request->total_guest,
+      ]);
+
+      $newRsvp->saveLog('Created RSVP');
+
+      return redirect()->route('caroline.index', ['name' => $name]);
+    }
+    // $newRsvp = Rsvp::create($request->all());
+
+    // session()->forget(['new_data', 'existing_rsvp', 'name_exists', 'phone_number', 'message']);
+    // session(['rsvp_id' => $newRsvp->id, 'success' => true]);
+
+    // return redirect()->route('rsvp.index', ['name' => $name]);
+  }
+
   public function confirmUpdate(Request $request, $name)
   {
     $newData = session('new_data');

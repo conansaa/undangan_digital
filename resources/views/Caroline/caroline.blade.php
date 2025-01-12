@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Caroline & Hezron Wedding</title>
     <link rel="stylesheet" href="{{ asset('css/tema2.css') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,30 +19,44 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-    <section id="opening">
-    <div class="undangan">
-        <div class="overlay">
-          <h1>{{ $figures[0]->name }} & {{ $figures[1]->name }}</h1>
-          <p>Hai</p>
-          <h3>{{ $name }}</h3>
-          <button class="button" id="openInvitationBtn">Open Invitation <i class="fas fa-envelope"></i></button>
+    @php
+        $deskripsi = $gallery->firstWhere('description', 'cover');
+        // @dump($deskripsi)
+    @endphp
+    @if ($deskripsi)
+    <section id="opening" style="position: relative; background-image: url('{{ asset('galleries/'.$deskripsi->photo) }}'); background-size: cover; background-position: 20% 25%;">
+    
+        <div class="undangan">
+            <div class="overlay">
+            <h1>{{ $figures[0]->name }} & {{ $figures[1]->name }}</h1>
+            <p>Hai</p>
+            <h3>{{ $name }}</h3>
+            <button class="button" id="openInvitationBtn">Open Invitation <i class="fas fa-envelope"></i></button>
+            </div>
         </div>
-      </div>
-      <div class="falling-leaves"></div>
-      <div class="falling-leaves1"></div>
+        <div class="falling-leaves"></div>
+        <div class="falling-leaves1"></div>
+    
     </section>
+    @endif
     <section id="invitation" style="display: none;">
-    <div class="left-section">
+    @php
+        $deskripsi = $gallery->firstWhere('description', 'halaman awal');
+        // @dump($deskripsi)
+    @endphp
+    @if ($deskripsi)
+    <div class="left-section" style=" background-image: url('{{ asset('galleries/'.$deskripsi->photo) }}'); background-size: cover; background-position: 20% 25%;">
         <div class="invitation">
             <div class="overlay">
               <h1>{{ $figures[0]->name }} & {{ $figures[1]->name }}</h1>
               <p>Hai</p>
               <h3>{{ $name }}</h3>
             </div>
-          </div>
-          <div class="falling-leaves3"></div>
-      <div class="falling-leaves4"></div>          
+        </div>
+        <div class="falling-leaves3"></div>
+        <div class="falling-leaves4"></div>          
     </div>
+    @endif
     
     <div class="right-section">
         <div class="container1">
@@ -55,7 +70,9 @@
                 <p class="date">{{ \Carbon\Carbon::parse($pemberkatan->event_date)->translatedFormat('j F Y') }}</p>
                 <button class="rsvp-button"><a href="#rsvp">RSVP</a></button>
                 <div class="image-arch">
-                    <img src="image/prewed.svg" alt="Foto Hezron dan Caroline" class="main-photo">
+                    @if ($deskripsi)
+                        <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Foto Hezron dan Caroline" class="main-photo">
+                    @endif
                 </div>
                 <div class="garis-overlay">
                     <img src="{{ asset('assets_tema_2/garis.svg') }}" alt="Foto Hezron dan Caroline" class="garis-photo">
@@ -73,7 +90,8 @@
             <h1>The Wedding Of</h1>
             <div class="section">
                 <div class="image-wrapper">
-                    <img src="image/fotocpw.svg" alt="Foto Perempuan" class="photo">
+                    <img src="{{ asset('figures/'.$figures[0]->photo) }}" class="photo">
+                    <img src="{{ asset('assets_tema_2/framecpw.svg') }}" alt="Foto Perempuan" class="frame">
                 </div>
                 <p class="name">{{ $figures[0]->fullname }}</p>
                 <p class="details">Anak pertama dari<br>{{ $figures[0]->fathers_name }}<br>& {{ $figures[0]->mothers_name }}</p>
@@ -84,7 +102,8 @@
             <p class="and-symbol">&</p>
             <div class="section">
                 <div class="image-wrapper">
-                    <img src="image/fotocpp.svg" alt="Foto Laki-laki" class="photo">
+                    <img src="{{ asset('figures/'.$figures[1]->photo) }}" class="photo">
+                    <img src="{{ asset('assets_tema_2/framecpp.svg') }}" alt="Foto Laki-laki" class="frame">
                 </div>
                 <p class="name">{{ $figures[1]->fullname }}</p>
                 <p class="details">Anak pertama dari<br>{{ $figures[1]->fathers_name }}<br>& {{ $figures[1]->mothers_name }}</p>
@@ -96,46 +115,75 @@
             <div class="portraits-section">
                 <h1>Portraits of Us</h1>
                 <div class="portraits-gallery">
+                    {{-- @foreach ($gallery as $deskripsi)
                     <div class="portrait-row">
+                        @if($deskripsi->description == 'foto 1')
                         <div class="portrait-item">
-                            <img src="image/1.svg" alt="Portrait 1">
+                            <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Portrait 1">
                         </div>
+                        @elseif($deskripsi->description == 'foto 2')
                         <div class="portrait-item">
-                            <img src="image/2.svg" alt="Portrait 2">
+                            <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Portrait 2">
                         </div>
                     </div>
                     <div class="portrait-row alt">
+                        @elseif($deskripsi->description == 'foto 3')
                         <div class="portrait-item">
-                            <img src="image/3.svg" alt="Portrait 3">
+                            <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Portrait 3">
                         </div>
+                        @elseif($deskripsi->description == 'foto 4')
                         <div class="portrait-item">
-                            <img src="image/4.svg" alt="Portrait 4">
+                            <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Portrait 4">
                         </div>
                     </div>
                     <div class="portrait-row">
+                        @elseif($deskripsi->description == 'foto 5')
                         <div class="portrait-item">
-                            <img src="image/5.svg" alt="Portrait 5">
+                            <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Portrait 5">
                         </div>
+                        @elseif($deskripsi->description == 'foto 6')
                         <div class="portrait-item">
-                            <img src="image/6.svg" alt="Portrait 6">
+                            <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Portrait 6">
                         </div>
                     </div>
                     <div class="portrait-row alt">
+                        @elseif($deskripsi->description == 'foto 7')
                         <div class="portrait-item">
-                            <img src="image/3.svg" alt="Portrait 3">
+                            <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Portrait 3">
                         </div>
+                        @elseif($deskripsi->description == 'foto 8')
                         <div class="portrait-item">
-                            <img src="image/4.svg" alt="Portrait 4">
+                            <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Portrait 4">
                         </div>
                     </div>
                     <div class="portrait-row">
+                        @elseif($deskripsi->description == 'foto 9')
                         <div class="portrait-item">
-                            <img src="image/5.svg" alt="Portrait 5">
+                            <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Portrait 5">
                         </div>
+                        @elseif($deskripsi->description == 'foto 10')
                         <div class="portrait-item">
-                            <img src="image/6.svg" alt="Portrait 6">
+                            <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Portrait 6">
                         </div>
                     </div>
+                    @endif
+                    @endforeach --}}
+                    @foreach ($gallery as $index => $deskripsi)
+                        {{-- Buka row baru setiap 2 foto --}}
+                        @if ($loop->first || $index % 2 == 0)
+                            <div class="portrait-row {{ $index % 4 == 0 ? 'alt' : '' }}">
+                        @endif
+
+                        {{-- Tambahkan item gambar --}}
+                        <div class="portrait-item">
+                            <img src="{{ asset('galleries/' . $deskripsi->photo) }}" alt="Portrait {{ $loop->iteration }}">
+                        </div>
+
+                        {{-- Tutup row setiap 2 foto atau di akhir iterasi --}}
+                        @if ($index % 2 == 1 || $loop->last)
+                            </div>
+                        @endif
+                    @endforeach
                 </div>
             </div>
             <div class="custom-container">
@@ -220,14 +268,14 @@
                     </div>
                 </div>
             </section>
-            <section id="rsvp" class="rsvp">
-                <div class="rsvp-container">
+            <section id="rsvp" class="rsvp {{ session('name_exists') ? 'expanded' : '' }}">
+                <div class="rsvp-container {{ session('name_exists') ? 'expanded' : '' }}">
                     <div class="judul">
                         <h1>RSVP</h1>
                     </div>
                     <div class="form-rsvp animate-form">
                         <p>Please Confirm Your Attendance</p>
-                        <form id="rsvpForm" action="{{ route('rsvp.store', ['name' => $name]) }}#rsvp" method="POST">
+                        <form id="rsvpForm" action="{{ route('rsvpp.store', ['name' => $name]) }}#rsvp" method="POST">
                             @csrf
                             <div class="form">
                                 <label for="name">Full Name</label>
@@ -239,7 +287,7 @@
                                 <div id="phone-alert" style="color: red; display: none; font-size: 12px; margin-top: 5px;">Minimal 12
                                     digit.</div>
                             </div>
-                            <div class="atte  ndance">
+                            <div class="attendance">
                                 <label for="attendance" class="attendance-label">Attendance</label>
                                 <div class="attendance-options">
                                     <input type="radio" id="yes" name="confirmation" type="radio" value="yes"
@@ -262,6 +310,7 @@
                             </div>
                             @if (session('name_exists'))
                             @php
+                                \Log::info('Redirect caused by session', session()->all());
                                 $existingRsvp = session('existing_rsvp');
                             @endphp
                             @if (
@@ -369,7 +418,8 @@
                 <div class="wish-container">
                     <h2>Wedding Wish</h2>
                     <form class="wish-form" id="commentForm" action="{{ route('comment.store', ['name' => $name]) }}#comment" method="POST">
-                        <textarea placeholder="Give your wish..."></textarea>
+                        @csrf
+                        <textarea name="comment" placeholder="Give your wish..."></textarea>
                         <button type="submit">Send</button>
                     </form>
                     <div class="wish-list">
@@ -390,8 +440,8 @@
             </section>
             <section class="wedding-invitation">
                 <div class="verse">
-                    <p>“Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang.”</p>
-                    <p class="source">(QS. Ar-Rum: 21)</p>
+                    <p>“Demikianlah mereka bukan lagi dua, melainkan satu. Karena itu, apa yang telah dipersatukan Allah, tidak boleh diceraikan manusia.”</p>
+                    <p class="source">Matius 19:6</p>
                 </div>
                 <div class="details">
                     <h2>Wedding Invitation</h2>
@@ -427,10 +477,11 @@
         </span>
       </button>
       <audio id="song" loop>
-        <source src="music/Worth The Wait by Spencer Crandall.MP3" type="audio/mp3">
+        <source src="{{ asset('music/Worth The Wait by Spencer Crandall.MP3') }}" type="audio/mp3">
       </audio>
     </section>
     
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ asset('js/tema2.js') }}"></script> 
     
 </body>

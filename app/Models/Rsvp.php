@@ -27,7 +27,7 @@ class Rsvp extends Model
 
   public function comments()
   {
-    return $this->hasMany(Comments::class, 'rsvp_id');
+    return $this->hasMany(Comments::class, 'rsvp_id', 'id');
   }
 
   public function log_rsvp()

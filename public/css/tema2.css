@@ -10,7 +10,7 @@ body {
     overflow: hidden; /* Menghindari scroll pada body */
 }
 /* Kontainer Khusus */
-.custom-container { 
+.custom-container {
     position: relative;
     width: 100%;
     height: 150vh;
@@ -177,7 +177,7 @@ body {
     bottom: 20%; /* posisi vertikal awan */
     width: 35%; /* ukuran awan */
     height: auto;
-    animation: gerakAwan 25s linear infinite; /* Animasi berjalan terus-menerus */
+    animation: gerakAwan 23s linear infinite; /* Animasi berjalan terus-menerus */
 }
 
 .animasi-awan img:nth-child(1) {
@@ -191,6 +191,14 @@ body {
     bottom: 15%;
     left: -40%; /* Mulai dari luar layar kiri */
     animation-delay: 3s; /* Tambahkan jeda untuk awan kedua */
+    z-index: 11; /* Pastikan berada di atas background */
+}
+.animasi-awan img:nth-child(3) {
+    top: 20%; /* Posisi vertikal awan ketiga */
+    left: -50%; /* Mulai dari luar layar kiri */
+    width: 35%; /* Ukuran tetap sama dengan awan pertama/kedua */
+    animation-delay: 10s; /* Jeda animasi agar muncul setelah awan kedua */
+    animation-duration: 30s; /* Durasi sedikit lebih lama agar gerakannya terlihat unik */
     z-index: 11; /* Pastikan berada di atas background */
 }
 
@@ -302,8 +310,8 @@ body {
     height: 106%;
     object-fit: cover;
     position: absolute;
+    border-radius: 200px 200px 0px 0px;
     top: 0;
-    left: 0;
     z-index: 1; /* Memastikan gambar di atas pseudo-element */
 }
 
@@ -421,6 +429,7 @@ body {
     height: auto;
     object-fit: cover;
 }
+
 .flower-images {
     width: 110%;
     height: auto;
@@ -478,7 +487,7 @@ body {
     position: relative;
     width: 100%;
     height: 125vh;
-    background: url('../assets_tema_2/bg4.svg') no-repeat center center/cover;
+    /* background: url('../assets_tema_2/bg4.svg') no-repeat center center/cover; */
   }
   
   .overlay {
@@ -495,6 +504,7 @@ body {
     margin-bottom: 10em;
     margin-top: -5em;
     font-family: 'Kaisei Opti', serif;
+    color: black;
     opacity: 0; /* Awalnya tidak terlihat */
     transform: scale(0.5); /* Mulai dari skala kecil */
     transition: all 1.5s ease-in-out;
@@ -517,6 +527,7 @@ body {
     font-size: 1.2rem;
     margin-bottom: 20px;
     font-family: 'Kaisei Opti', serif;
+    /* color: black; */
     opacity: 0; /* Awalnya tidak terlihat */
     transform: translateY(-50px); /* Mulai dari atas */
     transition: all 1.5s ease-in-out;
@@ -538,6 +549,7 @@ body {
     margin-top :-0.7em;
     margin-bottom: 20px;
     font-family: 'Kaisei Opti', serif;
+    /* color: black; */
     opacity: 0; /* Awalnya tidak terlihat */
     transform: translateY(-50px); /* Mulai dari atas */
     transition: all 1.5s ease-in-out;
@@ -992,8 +1004,6 @@ form button:hover {
     transform: scale(1); /* Ukuran penuh */
 }
 
-
-
 .gift .description p {
     color: #423838;
     font-size: 0.9rem;
@@ -1035,6 +1045,7 @@ form button:hover {
     display: inline-block;
     margin-right: 10px;
     vertical-align: middle;
+
 }
 
 .gift .btn1 button::before {
@@ -1322,13 +1333,33 @@ form button:hover {
     width: 200px;
     height: 200px;
     margin: 0 auto 15px;
+    /* new */
+    overflow: hidden; /* Memastikan gambar tidak keluar dari frame */
+    /* new */
   }
   
   .photo {
-    width: 100%;
-    height: 100%;
+    /* new */
+    position: absolute;
+    top: 12%;
+    left: 12%;
+    z-index: 1;
+    /* new */
+    width: 75%;
+    height: 75%;
     object-fit: cover;
     border-radius: 50%;
+  }
+
+  .frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Sesuaikan frame dengan container */
+    z-index: 2; /* Letakkan di atas foto */
+    pointer-events: none; /* Agar klik tidak terblokir oleh frame */
   }
   
   .name {
@@ -1404,6 +1435,9 @@ form button:hover {
   .portraits-gallery {
     display: grid;
     gap: 10px;
+    margin: 0 auto; /* Galeri tetap di tengah */
+    margin-left: -10px; /* Pindahkan sedikit ke kiri */
+    padding: 0 10px;
   }
   
   .portrait-row {
@@ -1427,6 +1461,7 @@ form button:hover {
   .portrait-item img {
     height: 100%;
     width: 100%;
+    object-position: 50% 30%;
     object-fit: cover;
     opacity: 0; /* Awalnya tidak terlihat */
     transform: translateY(50px); /* Awalnya berada di bawah */
@@ -1444,7 +1479,7 @@ form button:hover {
   }
   
   .countdown-section {
-    background-image: url('../assets_tema_2/BG3.svg'); /* Background cream */
+    background-image: url('image/BG3.svg'); /* Background cream */
     padding: 200px 5px;
     text-align: center;
     font-family: 'Kaisei Opti', serif;
@@ -1518,7 +1553,7 @@ form button:hover {
     position: relative;
     width: 100%;
     height: 100vh;
-    background: url('../assets_tema_2/bg4.svg') no-repeat center;
+    /* background: url('image/bg4.svg') no-repeat center; */
     background-size: cover;
     background-position: center 38%; /* Adjust the vertical position */
 }
@@ -1534,7 +1569,7 @@ form button:hover {
     position: relative;
     width: 100%;
     height: 100vh;
-    background: url('../assets_tema_2/bg4.svg') no-repeat center;
+    /* background: url('image/bg4.svg') no-repeat center; */
     background-size: cover;
     background-position: center 38%; /* Adjust the vertical position */
 }
@@ -1557,6 +1592,7 @@ form button:hover {
     transform: translateY(-50px); /* Mulai dari atas */
     transition: all 1.5s ease-in-out;
   }
+
   #opening .undangan .overlay h1 {
     opacity: 1;
     transform: translateY(0); /* Posisi akhir di tempat semula */
@@ -1573,6 +1609,7 @@ form button:hover {
     margin-bottom: 20px;
     font-family: 'Kaisei Opti', serif;
   }
+
   #opening .undangan .overlay h5 {
     font-size: 1.2rem;
     margin-top : -1em;
@@ -1929,4 +1966,395 @@ form button:hover {
         transform: translateY(100vh) translateX(0) rotate(360deg); /* Jatuh lurus ke bawah */
         opacity: 0;
     }
+}
+
+.simply-countdown {
+    opacity: 0;
+    transform: translateX(50px); /* Awalnya dari kanan */
+    transition: all 1.5s ease-in-out;
+    overflow: hidden;
+    display: table;
+    margin-left: 21vh;
+    padding: 10vh;
+    width: 70%;
+  }
+  .simply-countdown > .simply-section {
+    width: 5vh;
+    height: 5vh;
+    padding: 7vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    margin: 10px;
+    background: #fff;
+    opacity: 85%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    border-radius: 10%;
+  }
+  .simply-countdown > .simply-section .simply-amount,
+  .simply-countdown > .simply-section .simply-word {
+      display: block;
+      text-align: center;
+      font-family: "Kaisei Opti", serif;
+      font-weight: 400;
+      font-style: normal;
+      color: #653C3C;
+  }
+  .simply-countdown > .simply-section .simply-amount{
+      font-size: 1.6rem;
+  }
+  .simply-countdown.animate {
+    opacity: 1;
+    transform: translateX(0); /* Posisi normal */
+  }
+  /* Elemen bagian kiri (jika ada split animasi untuk sisi kiri) */
+  .simply-countdown.left {
+    transform: translateX(-50px); /* Awalnya dari kiri */
+  }
+  
+
+/* Responsif untuk Handphone */
+@media only screen and (min-width: 393px) and (max-width: 480px) {
+    .left-section {
+        display: none; 
+    }
+
+    .right-section {
+        margin-left: 0; 
+        width: 100%; 
+        height: 100%; 
+    }
+
+    #opening .overlay h1 {
+        font-size: 2rem; 
+    }
+    
+
+    #opening .overlay h3 {
+        font-size: 1.5rem;
+    }
+
+    #opening .button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    #right-section h1 {
+        font-size: 1.5rem;
+    }
+
+    #right-section .animasi-awan img {
+        width: 80px; 
+    }
+
+    #right-section .image-arch img {
+        max-width: 300px; 
+    }
+
+
+
+      #opening .undangan .overlay h1 {
+        font-size: 2rem;
+        margin-bottom: 15em;
+        margin-top: 5em;
+
+      }
+
+      #opening .undangan .overlay p {
+        font-size: 1.2rem;
+        margin-bottom: -5px;
+      }
+
+      #opening .undangan .overlay h3 {
+        font-size: 1rem;
+        margin-top :0.5em;
+      }
+    
+      .gift button {
+        padding: 8px 16px; /* Kurangi padding untuk handphone */
+        font-size: 0.8rem; /* Font lebih kecil */
+    }
+
+    .gift button::before {
+        width: 5px; /* Ikon lebih kecil */
+        margin-right: 10px; /* Kurangi margin ikon */
+    }
+
+    #opening .undangan  .overlay button {
+        width: 30%;
+        padding: 8px 0;
+        color: #653C3C;
+        background-color: #ffffff;
+        border: none;
+        border-radius: 25px !important;
+        font-size: 0.7em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    #opening .undangan .overlay button:hover {
+        color: #E7E7E7;
+        background-color: #653C3C;
+    }
+
+    .flower-image {
+        width: 120%;
+    }
+    
+    .flower-images {
+        width: 120%;
+        height: auto;
+        object-fit: cover;
+        animation: sway 3s ease-in-out infinite;
+    }
+    .image-arch {
+        margin: 150px auto;
+        position: relative;
+        width: 300px;
+        height: 420px;
+        margin-bottom: -3em;
+        display: flex; /* Mengaktifkan Flexbox */
+        justify-content: center; /* Memusatkan gambar di dalam .image-arch */
+        align-items: center; /* Memusatkan gambar di dalam .image-arch */
+        z-index: 0; /* Pastikan pseudo-element tidak menutupi konten */
+    }
+    
+    .main-photo {
+        width: 90%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        z-index: 1; /* Memastikan gambar di atas pseudo-element */
+    }
+
+    .garis-photo {
+        width: 90%;
+    }
+    .info h1 {
+        color: #653C3C;
+        font-size: 4vh;
+        margin-bottom: 6vh;
+        margin-top: 1vh;
+        opacity: 0; /* Awalnya tidak terlihat */
+        transform: scale(0.5); /* Awalnya lebih kecil */
+        transition: all 1.5s ease-in-out;
+    }
+    .info h2 {
+        font-size: 2.5vh;
+    }
+    .rsvp-container {
+        width: 90%;
+    }
+
+    .rsvp .judul h1 {
+        top: 60%; /* Atur posisi vertikal ke tengah */ 
+    }
+
+    .gift-flower {
+        width: 7em; /* Menjaga ukuran gambar agar sesuai dengan dimensi aslinya */
+    }
+    .gift .btn1 button::before {
+        content: url('../assets_tema_2/hadiah.svg'); /* Emoji untuk hadiah */
+        padding-right: 18px;
+    }
+    .gift .btn2 button::before {
+        content: url('../assets_tema_2/hadiah.svg'); /* Emoji untuk hadiah */
+        padding-right: 18px;
+    }
+}
+
+/* Responsif untuk Handphone */
+@media only screen and (max-width: 391px) {
+    .left-section {
+        display: none; 
+    }
+
+    .right-section {
+        margin-left: 0; 
+        width: 100%; 
+        height: 100%; 
+    }
+
+    #opening .overlay h1 {
+        font-size: 2rem; 
+    }
+
+    #opening .overlay h3 {
+        font-size: 1.5rem;
+    }
+
+    #opening .button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+    }
+
+    #right-section h1 {
+        font-size: 1.5rem;
+    }
+
+    #right-section .animasi-awan img {
+        width: 80px; 
+    }
+
+    #right-section .image-arch img {
+        max-width: 300px; 
+    }
+
+    #opening .undangan .overlay h1 {
+        font-size: 2rem;
+        margin-top: 3em;
+        margin-bottom: 12em;
+      }
+
+      #opening .undangan .overlay p {
+        font-size: 1.2rem;
+        margin-bottom: -5px;
+      }
+
+      #opening .undangan .overlay h3 {
+        font-size: 1rem;
+        margin-top :0.5em;
+      }
+    
+      .gift button {
+        padding: 8px 12px; /* Kurangi padding untuk handphone */
+        font-size: 0.7rem; /* Font lebih kecil */
+    }
+
+    .gift button::before {
+        width: 3px; /* Ikon lebih kecil */
+        margin-right: 10px; /* Kurangi margin ikon */
+    }
+
+    #opening .undangan  .overlay button {
+        width: 30%;
+        padding: 8px 0;
+        color: #653C3C;
+        background-color: #ffffff;
+        border: none;
+        border-radius: 25px !important;
+        font-size: 0.7em;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    #opening .undangan .overlay button:hover {
+        color: #E7E7E7;
+        background-color: #653C3C;
+    }
+
+    .flower-image {
+        width: 120%;
+        height: auto;
+        object-fit: cover;
+    }
+    
+    .flower-images {
+        width: 120%;
+        height: auto;
+        object-fit: cover;
+        animation: sway 3s ease-in-out infinite;
+    }
+    .image-arch {
+        margin: 70px auto;
+        position: relative;
+        width: 260px;
+        height: 380px;
+        margin-bottom: -3em;
+        display: flex; /* Mengaktifkan Flexbox */
+        justify-content: center; /* Memusatkan gambar di dalam .image-arch */
+        align-items: center; /* Memusatkan gambar di dalam .image-arch */
+        z-index: 0; /* Pastikan pseudo-element tidak menutupi konten */
+    }
+    
+    .main-photo {
+        width: 100%;
+        height: 106%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        z-index: 1; /* Memastikan gambar di atas pseudo-element */
+    }
+    .garis-photo {
+        width: 91.5%;
+    }
+    .info h1 {
+        color: #653C3C;
+        font-size: 4vh;
+        margin-bottom: 6vh;
+        margin-top: 2vh;
+        opacity: 0; /* Awalnya tidak terlihat */
+        transform: scale(0.5); /* Awalnya lebih kecil */
+        transition: all 1.5s ease-in-out;
+    }
+    .info h2 {
+        font-size: 2.5vh;
+    }
+    
+    .info .pemberkatan .isi {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Benar-benar di tengah */
+        text-align: center; /* Konten rata tengah */
+        justify-content: center;
+        width: 20vh;
+        margin-top: -5vh;
+    }
+    .rsvp-container {
+        width: 90%;
+    }
+
+    .gift-flower {
+        width: 7em; /* Menjaga ukuran gambar agar sesuai dengan dimensi aslinya */
+    }
+
+    .details h2 {
+        font-size: 1.1rem;
+        margin-bottom: 10px;
+        color:#fff;
+        margin-top: 4em;
+    }
+    
+    .details h3 {
+        font-size: 1.7rem;
+        margin-bottom: 10px;
+        color:#fff;
+    }
+    
+    .details p {
+        font-size: 1.1rem;
+        color:#fff;
+    }
+
+    .wish-form button {
+        width: 19%;
+        font-size: 0.9rem;
+    }
+    .gift .btn1 button::before {
+        content: url('../assets_tema_2/hadiah.svg'); /* Emoji untuk hadiah */
+        padding-right: 18px;
+    }
+    .gift .btn2 button::before {
+        content: url('../assets_tema_2/hadiah.svg'); /* Emoji untuk hadiah */
+        padding-right: 18px;
+    }
+    
+    .flower-atas img {
+       
+        top: 4em;
+        width: 40%;
+      }
+
+      .custom-container {
+        height: 110vh;
+      }
+
+      .countdown-content h2 {
+        font-size: 4vh;
+        margin-bottom: 2vh;
+        margin-top: 20em;
+      }
 }

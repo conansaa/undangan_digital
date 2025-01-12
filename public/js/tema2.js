@@ -40,53 +40,63 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 //COMMENT
-$(document).ready(function() {
-    $('#commentForm').on('submit', function(e) {
-        e.preventDefault(); 
-  
-        var formData = $(this).serialize(); 
-  
-        $.ajax({
-            type: 'POST',
-            url: $(this).attr('action'),
-            data: formData,
-            success: function(response) {
-                // Create a new comment HTML structure
-                var newComment = `
-                    <div class="message" id="comment-${response.id}">
-                        <div class="comment-header">
-                            <div>
-                                <p>
-                                    <strong>${response.rsvp_name}:</strong><br>
-                                    ${response.comment}
-                                </p>
-                            </div>
-                            <a href="/comment/delete/${response.id}/${response.rsvp_name}" 
-                               onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" 
-                               class="text-danger ms-2">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </a>
-                        </div>
-                    </div>
-                `;
-                // Prepend the new comment to the messages section
-                $('.messages').prepend(newComment);
-                $('.text-danger').css({
-                    color: 'black',
-                    textDecoration: 'none'
-                });
-                // Clear the textarea
-                $('textarea[name="comment"]').val('');
-            },
-            error: function(xhr) {
-                var errors = xhr.responseJSON.errors;
-                for (var key in errors) {
-                    alert(errors[key][0]);
-                }
-            }
-        });
-    });
+$(document).ready(function () {
+  // Sertakan CSRF token di setiap permintaan AJAX
+  $.ajaxSetup({
+      headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      }
   });
+
+  $('#commentForm').on('submit', function (e) {
+      e.preventDefault();
+
+      var formData = $(this).serialize(); // Ambil semua data dari form
+
+      $.ajax({
+          type: 'POST',
+          url: $(this).attr('action'), // URL action dari form
+          data: formData, // Data form yang akan dikirim
+          success: function (response) {
+              // Buat HTML untuk komentar baru
+              var newComment = `
+                  <div class="message" id="comment-${response.id}">
+                      <div class="comment-header">
+                          <div>
+                              <p>
+                                  <strong>${response.rsvp_name}:</strong><br>
+                                  ${response.comment}
+                              </p>
+                          </div>
+                          <a href="/comment/delete/${response.id}/${response.rsvp_name}" 
+                             onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')" 
+                             class="text-danger ms-2">
+                              <i class="fa-solid fa-trash-can"></i>
+                          </a>
+                      </div>
+                  </div>
+              `;
+              // Tambahkan komentar baru di atas komentar lain
+              $('.messages').prepend(newComment);
+
+              // Reset tampilan form
+              $('textarea[name="comment"]').val('');
+          },
+          error: function (xhr) {
+              // Tampilkan error jika ada
+              if (xhr.responseJSON && xhr.responseJSON.errors) {
+                  var errors = xhr.responseJSON.errors;
+                  for (var key in errors) {
+                      alert(errors[key][0]);
+                  }
+              } else {
+                  alert('Terjadi kesalahan. Coba lagi.');
+              }
+          }
+      });
+  });
+});
+
   
 
 //pop up
@@ -193,28 +203,28 @@ simplyCountdown('.simply-countdown' , {
 const targetDate = new Date('December 27, 2025 00:00:00').getTime();
 
 // Fungsi hitung mundur
-const countdownFunction = setInterval(() => {
-  const now = new Date().getTime();
-  const distance = targetDate - now;
+// const countdownFunction = setInterval(() => {
+//   const now = new Date().getTime();
+//   const distance = targetDate - now;
 
-  // Hitung hari, jam, menit, dan detik
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000)) / 1000);
+//   // Hitung hari, jam, menit, dan detik
+//   const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+//   const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+//   const minutes = Math.floor((distance % (1000 * 60)) / (1000 * 60));
+//   const seconds = Math.floor((distance % (1000)) / 1000);
 
-  // Update elemen HTML
-  document.getElementById('days').innerText = days;
-  document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
-  document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
-  document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+//   // Update elemen HTML
+//   document.getElementById('days').innerText = days;
+//   document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+//   document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+//   document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
 
-  // Jika waktu habis
-  if (distance < 0) {
-    clearInterval(countdownFunction);
-    document.getElementById('countdown').innerHTML = '<h3>Waktu telah tiba!</h3>';
-  }
-}, 1000);
+//   // Jika waktu habis
+//   if (distance < 0) {
+//     clearInterval(countdownFunction);
+//     document.getElementById('countdown').innerHTML = '<h3>Waktu telah tiba!</h3>';
+//   }
+// }, 1000);
 
 // Fungsi untuk menambahkan pengingat ke Google Calendar
 function setGoogleReminder() {

@@ -16,6 +16,7 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TimelineController;
 use App\Http\Controllers\EventCardController;
 use App\Http\Controllers\EventTypeController;
+use App\Http\Middleware\AdminEmailMiddleware;
 use App\Http\Controllers\EventOwnerController;
 use App\Http\Controllers\MediaAssetController;
 use App\Http\Controllers\EventReportController;
@@ -45,6 +46,14 @@ Route::post('/clear-modal-session', function () {
 
 //Carol
 Route::get('/caroline-hezron/to/{name}', [RsvpController::class, 'caroline'])->name('caroline.index');
+Route::post('/caroline-hezron/store/{name}', [RsvpController::class, 'storeCaroline'])->name('rsvpp.store');
+Route::get('/caroline-hezron/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
+Route::post('/caroline-hezron/confirm-update/{name}', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
+Route::post('/caroline-hezron/cancel-update/{name}', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
+Route::post('/clear-modal-session', function () {
+    session()->forget('show_modal');
+    return response()->json(['success' => true]);
+});
 
 
 Route::post('/comment/{name}', [CommentController::class, 'store'])->name('comment.store');
@@ -67,9 +76,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/commentclient/delete/{id}', [CommentController::class, 'destroycomment'])->name('commentclient.destroycomment');
 });
 
-Route::get('/dashboard', [AdminController::class, 'showDashboard'])
-    ->middleware(['auth', 'verified'])
-    ->name('dashboard');
+// Route::get('/dashboard', [AdminController::class, 'showDashboard'])
+//     ->middleware(['auth', 'verified', AdminEmailMiddleware::class])
+//     ->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'showDashboard'])
+        ->name('dashboard');
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -19,6 +19,6 @@ class Comments extends Model
     // Relasi dengan tabel RSVP
     public function rsvp()
     {
-        return $this->belongsTo(Rsvp::class, 'rsvp_id');
+        return $this->belongsTo(Rsvp::class, 'rsvp_id', 'id');
     }
 }

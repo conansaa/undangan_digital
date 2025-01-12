@@ -24,11 +24,26 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
-        $request->authenticate();
-
-        $request->session()->regenerate();
-
-        return redirect()->intended(route('dashboard', absolute: false));
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+    
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $user = Auth::user();
+    
+            // Pengecekan berdasarkan email
+            if ($user->email === 'admin@gmail.com') {
+                return redirect()->route('dashboard'); // Admin ke dashboard
+            } elseif ($user) {
+                return redirect()->route('client.dashboard'); // Client ke halaman client
+            } else {
+                Auth::logout();
+                return redirect()->route('login')->withErrors('Email tidak valid untuk login.');
+            }
+        }
+    
+        return redirect()->back()->withErrors('Email atau password salah.');
     }
 
     /**

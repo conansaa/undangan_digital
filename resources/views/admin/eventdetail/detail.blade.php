@@ -152,6 +152,105 @@
     </div>
 </div>
 
+<!-- Modal Tambah Card -->
+<div class="modal fade" id="addCardModal" tabindex="-1" aria-labelledby="addCardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('card.storeModal', ['id' => $event->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCardModalLabel">Tambah Detail Acara</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="event_name">Nama Acara</label>
+                        <input type="text" class="form-control" name="event_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event_date">Tanggal</label>
+                        <input type="date" class="form-control" name="event_date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="event_time">Waktu</label>
+                        <input type="time" class="form-control" name="event_time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Titik Lokasi</label>
+                        <input type="text" class="form-control" name="location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="full_location" class="form-label">Lokasi</label>
+                        <input type="text" class="form-control" name="full_location" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="quota">Kuota</label>
+                        <input type="number" class="form-control" name="quota" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Card -->
+@foreach ($event->eventCards as $card)
+    <div class="modal fade" id="editCardModal{{ $card->id }}" tabindex="-1" aria-labelledby="editCardModalLabel{{ $card->id }}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <form id="editCardForm{{ $card->id }}" action="{{ route('card.update', ['id' => $card->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editCardModalLabel{{ $card->id }}">Edit Card</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nama Acara -->
+                        <div class="mb-3">
+                            <label for="event_name" class="form-label">Nama Acara</label>
+                            <input type="text" class="form-control" id="event_name" name="event_name" value="{{ old('event_name', $card->event_name) }}" required>
+                        </div>
+                        <!-- Tanggal -->
+                        <div class="mb-3">
+                            <label for="event_date" class="form-label">Tanggal</label>
+                            <input type="date" class="form-control" id="event_date" name="event_date" value="{{ old('event_date', $card->event_date) }}" required>
+                        </div>
+                        <!-- Waktu -->
+                        <div class="mb-3">
+                            <label for="event_time" class="form-label">Waktu</label>
+                            <input type="time" class="form-control" id="event_time" name="event_time" value="{{ old('event_time', $card->event_time) }}" required>
+                        </div>
+                        <!-- Titik Lokasi -->
+                        <div class="mb-3">
+                            <label for="location" class="form-label">Titik Lokasi</label>
+                            <input type="text" class="form-control" id="location" name="location" value="{{ old('location', $card->location) }}" required>
+                        </div>
+                        <!-- Lokasi -->
+                        <div class="mb-3">
+                            <label for="full_location" class="form-label">Lokasi</label>
+                            <input type="text" class="form-control" id="full_location" name="full_location" value="{{ old('full_location', $card->full_location) }}" required>
+                        </div>
+                        <!-- Kuota -->
+                        <div class="mb-3">
+                            <label for="quota" class="form-label">Kuota</label>
+                            <input type="number" class="form-control" id="quota" name="quota" value="{{ old('quota', $card->quota) }}" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endforeach
+
 <!-- Timeline -->
 <div class="card mt-4">
     <div class="card-header pb-0 mb-2">
@@ -952,51 +1051,6 @@
             </div>
         </div>
     @endforeach
-
-    <!-- Modal Tambah Card -->
-    <div class="modal fade" id="addCardModal" tabindex="-1" aria-labelledby="addCardModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form action="{{ route('card.storeModal', ['id' => $event->id]) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="addCardModalLabel">Tambah Detail Acara</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="event_name">Nama Acara</label>
-                            <input type="text" class="form-control" name="event_name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="event_date">Tanggal</label>
-                            <input type="date" class="form-control" name="event_date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="event_time">Waktu</label>
-                            <input type="time" class="form-control" name="event_time" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="location">Titik Lokasi</label>
-                            <input type="text" class="form-control" name="location" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="full_location" class="form-label">Lokasi</label>
-                            <input type="text" class="form-control" name="full_location" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="quota">Kuota</label>
-                            <input type="number" class="form-control" name="quota" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal Edit Figure -->
     @foreach ($event->eventCards as $card)
