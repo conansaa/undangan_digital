@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Rsvp;
 use App\Models\Comments;
 use Illuminate\Http\Request;
+use App\Models\EventOwnerNew;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
@@ -61,12 +63,40 @@ class CommentController extends Controller
     }
     public function viewcomment(Request $request)
     {
-        $sort = $request->get('sort', 'name'); 
+        $userId = Auth::id(); // ID user yang login
+        // dd($userId);
+
+        // Ambil event owner berdasarkan user yang login
+        $eventOwner = EventOwnerNew::where('user_id', $userId)->first();
+        // dd($eventOwner);
+
+        if (!$eventOwner) {
+            return redirect()->route('home')->withErrors('Event Owner tidak ditemukan.');
+        }
+
+        // Ambil ID event yang dimiliki oleh user
+        $eventDetailsIds = $eventOwner->event()->pluck('id');
+        if ($eventDetailsIds->isEmpty()) {
+            return redirect()->route('home')->withErrors('Tidak ada event yang ditemukan untuk Event Owner ini.');
+        }
+        // dd($eventDetailsIds);
+
+        $rsvpIds = Rsvp::whereIn('event_id', $eventDetailsIds)->pluck('id');
+        // dd($rsvpIds);
+        
+        $sort = $request->get('sort', 'created_at'); 
         $order = $request->get('order', 'asc'); 
 
-        $comments = Comments::join('rsvp', 'comments.rsvp_id', '=', 'rsvp.id') 
-                            ->orderBy('rsvp.' . $sort, $order) 
-                            ->get(['comments.*', 'rsvp.name']); 
+        $comments = Comments::whereHas('rsvp', function ($query) use ($eventDetailsIds) {
+            $query->where('event_id', $eventDetailsIds);
+        })->with('rsvp')->get(); 
+        // $comments = Comments::whereIn('rsvp_id', $rsvpIds) 
+        //     ->with(['rsvp' => function ($query) {
+        //         $query->select('name'); // Ambil hanya kolom 'id' dan 'name' dari tabel RSVP
+        //     }])
+        //     ->orderBy($sort, $order) 
+        //     ->get();
+        // dd($comments);
 
         return view('client.commentclient', compact('comments'));
     }

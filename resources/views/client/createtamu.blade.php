@@ -14,11 +14,11 @@
     <div class="mb-3">
         <a href="/rsvpclient" class="btn btn-sm btn-outline-danger fw-bold me-2">Kembali</a>
     </div>
-    <form action="/rsvpclient/createtamu" method="post">
+    <form action="{{ route('rsvpclient.storetamu') }}" method="post">
         @csrf
         
         <!-- Hidden input for event_id -->
-        <input type="hidden" name="event_id" value="{{ $eventDetails->id }}">
+        <input type="hidden" name="event_id" value="{{ $eventDetails }}">
         
         <div class="mb-3">
             <label for="name" class="form-label fw-bold">Nama<span class="text-danger ms-1">*</span></label> 

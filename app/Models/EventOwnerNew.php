@@ -18,7 +18,7 @@ class EventOwnerNew extends Model
 
     public function event()
     {
-        return $this->hasMany(EventDetails::class, 'id');
+        return $this->hasMany(EventDetails::class, 'event_owner_id', 'id');
     }
 
     public function user()

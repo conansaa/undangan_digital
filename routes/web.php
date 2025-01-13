@@ -68,7 +68,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/rsvpclient', [RsvpController::class, 'viewclient'])->name('rsvpclient');
     Route::get('/rsvpclient/createtamu', [RsvpController::class, 'createtamu'])->name('rsvpclient.createtamu');
-    Route::post('/rsvpclient/createtamu', [RsvpController::class, 'storetamu'])->name('rsvpclient.storetamu');
+    Route::post('/rsvpclient/storeamu', [RsvpController::class, 'storetamu'])->name('rsvpclient.storetamu');
     Route::get('/rsvpclient/increment-sending-track/{id}', [RSVPController::class, 'incrementSendingTrack'])->name('rsvp.incrementSendingTrack');
     Route::get('/rsvpclient/delete/{id}', [RsvpController::class, 'destroytamu'])->name('rsvpclient.destroytamu');
 

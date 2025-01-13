@@ -49,8 +49,8 @@
         <div class="invitation">
             <div class="overlay">
               <h1>{{ $figures[0]->name }} & {{ $figures[1]->name }}</h1>
-              <p>Hai</p>
-              <h3>{{ $name }}</h3>
+              {{-- <p>Hai</p>
+              <h3>{{ $name }}</h3> --}}
             </div>
         </div>
         <div class="falling-leaves3"></div>
@@ -69,13 +69,13 @@
                 <h1>{{ $figures[0]->name }} & {{ $figures[1]->name }}</h1>
                 <p class="date">{{ \Carbon\Carbon::parse($pemberkatan->event_date)->translatedFormat('j F Y') }}</p>
                 <button class="rsvp-button"><a href="#rsvp">RSVP</a></button>
+                <div class="garis-overlay">
+                    <img src="{{ asset('assets_tema_2/garis.svg') }}" alt="Foto Hezron dan Caroline" class="garis-photo">
+                </div>
                 <div class="image-arch">
                     @if ($deskripsi)
                         <img src="{{ asset('galleries/'.$deskripsi->photo) }}" alt="Foto Hezron dan Caroline" class="main-photo">
                     @endif
-                </div>
-                <div class="garis-overlay">
-                    <img src="{{ asset('assets_tema_2/garis.svg') }}" alt="Foto Hezron dan Caroline" class="garis-photo">
                 </div>
                 <div class="flower-overlay">
                     <img src="{{ asset('assets_tema_2/flower5.svg') }}" alt="Bunga Dekorasi" class="flower-images">
@@ -96,7 +96,9 @@
                 <p class="name">{{ $figures[0]->fullname }}</p>
                 <p class="details">Anak pertama dari<br>{{ $figures[0]->fathers_name }}<br>& {{ $figures[0]->mothers_name }}</p>
                 <div class="icon">
-                    <img src="{{ asset('assets_tema_2/instagram-icon.svg') }}" alt="Instagram Icon">
+                    <a href="https://instagram.com/{{ $figures[0]->social_media }}" target="_blank" rel="noopener noreferrer">
+                        <img src="{{ asset('assets_tema_2/instagram-icon.svg') }}" alt="Instagram Icon">
+                    </a>
                 </div>
             </div>
             <p class="and-symbol">&</p>
@@ -108,7 +110,9 @@
                 <p class="name">{{ $figures[1]->fullname }}</p>
                 <p class="details">Anak pertama dari<br>{{ $figures[1]->fathers_name }}<br>& {{ $figures[1]->mothers_name }}</p>
                 <div class="icon">
-                    <img src="{{ asset('assets_tema_2/instagram-icon.svg') }}" alt="Instagram Icon">
+                    <a href="https://instagram.com/{{ $figures[1]->social_media }}" target="_blank" rel="noopener noreferrer">
+                        <img src="{{ asset('assets_tema_2/instagram-icon.svg') }}" alt="Instagram Icon">
+                    </a>
                 </div>
             </div>
             </div>
@@ -226,7 +230,7 @@
                             <a href="https://maps.app.goo.gl/NZHAR1DorpSko13z5">View Maps</a>
                         </div>
                         <div class="merak2">
-                            <img src="{{ asset('assets_tema_2/merak2.svg') }}" alt="merak2">
+                            <img src="{{ asset('assets_tema_2/meraknew.svg') }}" alt="merak2">
                         </div>
                         <div class="bunga2">
                             <img src="{{ asset('assets_tema_2/bunga2.svg') }}" alt="bunga2">

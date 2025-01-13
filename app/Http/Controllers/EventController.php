@@ -176,7 +176,11 @@ class EventController extends Controller
         // Menemukan event berdasarkan ID
         $event = EventDetails::find($id);
         $eventTypes = EventTypeRef::all();
-        $comments = Comments::all();
+        // $rsvps = Rsvp::where('event_id', $id)->get();
+        $comments = Comments::whereHas('rsvp', function ($query) use ($id) {
+            $query->where('event_id', $id);
+        })->with('rsvp')->get(); 
+        // $comments = Comments::all();
         $sections = SectionRef::all();
         $genders = GenderRef::all();
 

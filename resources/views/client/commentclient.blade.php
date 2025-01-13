@@ -41,7 +41,7 @@
                 @foreach ($comments as $comment)
                     <tr>
                         <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $loop->iteration }}</td>
-                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $comment->name }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $comment->rsvp->name }}</td>
                         <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $comment->comment }}</td>
                         <td class="align-middle">
                             <a href="{{ route('commentclient.destroycomment', $comment->id) }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
