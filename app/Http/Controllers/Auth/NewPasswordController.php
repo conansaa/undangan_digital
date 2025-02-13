@@ -17,9 +17,9 @@ class NewPasswordController extends Controller
     /**
      * Display the password reset view.
      */
-    public function create(Request $request): View
+    public function create(Request $request, $token): View
     {
-        return view('auth.reset-password', ['request' => $request]);
+        return view('auth.reset-password', ['token' => $token, 'email' => $request->query('email')]);
     }
 
     /**
@@ -39,7 +39,7 @@ class NewPasswordController extends Controller
         // will update the password on an actual user model and persist it to the
         // database. Otherwise we will parse the error and return the response.
         $status = Password::reset(
-            $request->only('email', 'password', 'token'),
+            $request->only('email', 'password', 'password_confirmation', 'token'),
             function ($user) use ($request) {
                 $user->forceFill([
                     'password' => Hash::make($request->password),

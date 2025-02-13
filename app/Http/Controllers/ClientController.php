@@ -18,8 +18,8 @@ class ClientController extends Controller
         $eventOwner = EventOwnerNew::where('user_id', $userId)->first();
         // dd($eventOwner);
 
-        if (!$eventOwner) {
-            return redirect()->route('home')->withErrors('Event Owner tidak ditemukan.');
+        if (!$eventOwner || $eventOwner->event()->count() == 0) {
+            return redirect()->route('info')->withErrors('Silakan buat event terlebih dahulu.');
         }
 
         // Ambil ID event yang dimiliki oleh user

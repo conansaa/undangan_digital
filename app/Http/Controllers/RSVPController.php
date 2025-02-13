@@ -10,6 +10,7 @@ use App\Models\LogRsvp;
 use App\Models\Comments;
 use App\Models\Timelines;
 use App\Models\EventCards;
+use App\Models\MediaAssets;
 use App\Models\EventDetails;
 use Illuminate\Http\Request;
 use App\Models\EventOwnerNew;
@@ -91,6 +92,7 @@ class RsvpController extends Controller
       $timelines = Timelines::where('event_id', $event_id)->get();
       // $gallery = DB::table('gallery')->select('photo', 'description')->get();
       $gallery = Gallery::where('event_id', $event_id)->get();
+      $media = MediaAssets::where('event_id', $event_id)->get();
 
       // Retrieve RSVP data with comments, ordered by name
       // $rsvps = Rsvp::with('comments')->orderBy('name')->get();
@@ -127,6 +129,7 @@ class RsvpController extends Controller
         'giftBarang',
         'giftTf',
         'gallery',
+        'media',
         'comments',
       ));
     }

@@ -6,6 +6,7 @@ use App\Http\Controllers\RSVPController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FigureController;
@@ -22,6 +23,9 @@ use App\Http\Controllers\MediaAssetController;
 use App\Http\Controllers\EventReportController;
 use App\Http\Controllers\ThemeCategoryController;
 use App\Http\Controllers\EventReportDetailController;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', function () {
 //     return view('admin.dashboard');
@@ -66,14 +70,64 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/client', [ClientController::class, 'showDashboard'])
         ->name('client.dashboard');
 
+    Route::get('/info', function () {
+        return view('client.eventinfo');
+    })->name('info');
+
     Route::get('/rsvpclient', [RsvpController::class, 'viewclient'])->name('rsvpclient');
     Route::get('/rsvpclient/createtamu', [RsvpController::class, 'createtamu'])->name('rsvpclient.createtamu');
     Route::post('/rsvpclient/storeamu', [RsvpController::class, 'storetamu'])->name('rsvpclient.storetamu');
     Route::get('/rsvpclient/increment-sending-track/{id}', [RSVPController::class, 'incrementSendingTrack'])->name('rsvp.incrementSendingTrack');
     Route::get('/rsvpclient/delete/{id}', [RsvpController::class, 'destroytamu'])->name('rsvpclient.destroytamu');
 
+    Route::get('/export-guests', [ExcelController::class, 'export'])->name('export.guests');
+    Route::post('/import-guests', [ExcelController::class, 'import'])->name('import.guests');
+
     Route::get('/commentclient', [CommentController::class, 'viewcomment'])->name('commentclient.viewcomment');
     Route::get('/commentclient/delete/{id}', [CommentController::class, 'destroycomment'])->name('commentclient.destroycomment');
+});
+
+Route::get('/auth/google', function () {
+    return Socialite::driver('google')->redirect();
+})->name('google.login');
+
+// Route::get('/auth/google/callback', function () {
+//     $googleUser = Socialite::driver('google')->with(['prompt' => 'select_account'])->stateless()->user();
+
+//     $user = User::updateOrCreate([
+//         'email' => $googleUser->getEmail(),
+//     ], [
+//         'name' => $googleUser->getName(),
+//         'password' => bcrypt(str()->random(16)), // Generate password random
+//     ]);
+
+//     Auth::login($user);
+
+//     return redirect()->route('dashboard'); // Sesuaikan dengan halaman setelah login
+// });
+
+// Callback setelah Google memberikan data user
+Route::get('/auth/google/callback', function () {
+    $googleUser = Socialite::driver('google')->stateless()->user();
+
+    // Cari user berdasarkan email
+    $user = User::where('email', $googleUser->getEmail())->first();
+
+    // Jika user tidak ditemukan, buat user baru
+    if (!$user) {
+        $user = User::create([
+            'name' => $googleUser->getName(),
+            'email' => $googleUser->getEmail(),
+            'password' => bcrypt(str()->random(16)), // Password random
+            'email_verified_at' => now(),
+        ]);
+    }
+
+    // Login user
+    Auth::login($user);
+
+    // Redirect ke dashboard atau halaman lain setelah login
+    return redirect()->route('client.dashboard'); 
 });
 
 // Route::get('/dashboard', [AdminController::class, 'showDashboard'])
@@ -90,7 +144,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/genders', [AdminController::class, 'showGenders']);
 
     // Routes untuk Event Owner

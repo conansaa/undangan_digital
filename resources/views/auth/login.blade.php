@@ -1,6 +1,11 @@
 <x-guest-layout>
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif
 
     <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
         <div class="card card-plain mt-8">
@@ -27,11 +32,22 @@
                             <label class="form-check-label" for="rememberMe">Remember me</label>
                         </div>
                         @if (Route::has('password.request'))
-                            <a href="{{ route('password.reset', ['token' => 'dummy-token']) }}" class="text-info font-weight-bold" style="text-decoration: none;">Forget Password?</a>
+                            <a href="{{ route('password.request', ['token' => 'dummy-token']) }}" class="text-info font-weight-bold" style="text-decoration: none;">Forget Password?</a>
                         @endif
                     </div>
                     <div class="text-center">
-                        <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Login</button>
+                        <button type="submit" class="btn bg-gradient-info w-100 mt-3 mb-0">Login</button>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ route('google.login') }}" class="btn bg-gradient-danger w-100">
+                            <i class="fab fa-google me-2"></i> Login with Google
+                        </a>
+                    </div>                    
+                    <div class="card-footer text-center pt-0 px-lg-2 px-1 mt-2">
+                        <p class="mb-4 text-sm mx-auto">
+                            Don't have an account?
+                            <a href="{{ route('register') }}" class="text-info text-gradient font-weight-bold">Sign up</a>
+                        </p>
                     </div>
                 </form>
             </div>

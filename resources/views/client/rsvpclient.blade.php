@@ -52,12 +52,28 @@
             </div>
         </div>
     </div>
+    <div class="col-lg-6 col-12 d-flex justify-content-end align-items-end mt-auto">
+        <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#importModal">
+            <i class="fas fa-file-import"></i> Import
+        </button>
+        <a href="/export-guests" class="btn btn-primary">
+            <i class="fas fa-file-export"></i> Export
+        </a>
+    </div>
 </div>
 
 <div class="card mt-4">
     <div class="card-header pb-0 mb-2">
         <div class="d-flex justify-content-between align-items-center">
             <h6 class="mb-0">List Data Tamu</h6>
+            {{-- <div>
+                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#importModal">
+                    <i class="fas fa-file-import"></i> Import
+                </button>
+                <a href="/export-guests" class="btn btn-primary">
+                    <i class="fas fa-file-export"></i> Export
+                </a>
+            </div> --}}
             <a href="/rsvpclient/createtamu" class="text-decoration-none btn btn-sm btn-success d-none d-lg-block">Tambah <i class="fa-solid fa-plus"></i></a>
             <a href="/rsvpclient/createtamu" class="text-decoration-none btn btn-sm btn-success d-lg-none d-block"><i class="fa-solid fa-plus"></i></a>
         </div>
@@ -85,7 +101,7 @@
                         <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $rsvp->total_guest }}</td>
                         <td class="align-middle">
                             @php
-                                $invitationLink = url('/shinta-irfan/to/'.$rsvp->name); 
+                                $invitationLink = url('/caroline-hezron/to/'.$rsvp->name); 
                             @endphp
                             @if ($rsvp->phone_number)
                                 <a href="#" onclick="copyLink('{{ $invitationLink }}')" 
@@ -116,6 +132,31 @@
             </tbody>
         </table>
     </div>
+    </div>
+
+    <!-- Modal Import -->
+    <div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="importModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="importModalLabel">Import Daftar Tamu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('import.guests') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="file" class="form-label">Pilih File Excel (CSV/XLSX)</label>
+                            <input type="file" class="form-control" id="file" name="file" accept=".csv, .xlsx" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-success">Import</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 

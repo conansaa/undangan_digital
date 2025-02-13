@@ -24,7 +24,7 @@
         // @dump($deskripsi)
     @endphp
     @if ($deskripsi)
-    <section id="opening" style="position: relative; background-image: url('{{ asset('galleries/'.$deskripsi->photo) }}'); background-size: cover; background-position: 20% 25%;">
+    <section id="opening" style="position: relative; background-image: url('{{ asset('galleries/'.$deskripsi->photo) }}'); background-size: cover; background-position: 20%;">
     
         <div class="undangan">
             <div class="overlay">
@@ -229,15 +229,21 @@
                             <img src="{{ asset('assets_tema_2/lokasi.png') }}" alt="pin">
                             <a href="https://maps.app.goo.gl/NZHAR1DorpSko13z5">View Maps</a>
                         </div>
-                        <div class="merak2">
+                        {{-- <div class="merak2">
                             <img src="{{ asset('assets_tema_2/meraknew.svg') }}" alt="merak2">
+                        </div> --}}
+                        <div class="merak1">
+                            <img src="{{ asset('assets_tema_2/merak1.svg') }}" alt="merak1">
                         </div>
-                        <div class="bunga2">
+                        <div class="daun1">
+                            <img src="{{ asset('assets_tema_2/daun1.svg') }}" alt="daun1">
+                        </div>
+                        {{-- <div class="bunga2">
                             <img src="{{ asset('assets_tema_2/bunga2.svg') }}" alt="bunga2">
-                        </div>
-                        <div class="daun2">
+                        </div> --}}
+                        {{-- <div class="daun2">
                             <img src="{{ asset('assets_tema_2/daun2.svg') }}" alt="daun2">
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="resepsi col-md-8.col-10 text-center">
                         <div class="isi">
@@ -253,9 +259,9 @@
                         <div class="merak1">
                             <img src="{{ asset('assets_tema_2/merak1.svg') }}" alt="merak1">
                         </div>
-                        <div class="bunga1">
+                        {{-- <div class="bunga1">
                             <img src="{{ asset('assets_tema_2/bunga1.svg') }}" alt="bunga1">
-                        </div>
+                        </div> --}}
                         <div class="daun1">
                             <img src="{{ asset('assets_tema_2/daun1.svg') }}" alt="daun1">
                         </div>
@@ -347,9 +353,9 @@
                         <h1>Live Streaming</h1>
                     </div>
                     <div class="thumbnail">
-                        <img src="{{ asset('assets_tema_2/thumbnail.svg') }}" alt="live">
+                        <img src="{{ asset('media/'.$media[0]->photo) }}" alt="live">
                     </div>
-                    <a href="https://www.youtube.com/@GKGUNUNGPUTRI" target="_blank" class="btn btn-light btn-sm my-4" style="margin-top: 30px;">Watch Here</a>
+                    <a href="{{ $media[0]->link }}" target="_blank" class="btn btn-light btn-sm my-4" style="margin-top: 30px;">Watch Here</a>
                 </div>
                 
             </section>

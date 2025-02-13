@@ -61,7 +61,7 @@ body {
   .flower-side img {
     position: absolute;
     margin-top: -10em;
-    left: 29em;
+    left: 27em;
     transform: translateY(-50%);
     width: 30%;
     z-index: 3;
@@ -127,7 +127,7 @@ body {
 .gift-flower {
     position: absolute; 
     top: -3.1em; /* Gambar berada di bagian atas */
-    right: -2em; /* Gambar berada di bagian kanan */
+    right: -1.2em; /* Gambar berada di bagian kanan */
     width: 10em; /* Menjaga ukuran gambar agar sesuai dengan dimensi aslinya */
     height: auto; /* Menjaga proporsi gambar */
 }
@@ -332,15 +332,24 @@ body {
 
 .flower-wedding {
     position: absolute;
-    left: -20px;
+    left: -7px;
     width: 100%;
     pointer-events: none;
 }
 
 .info .pemberkatan .merak2{
     position: absolute;
-    bottom: -137px; /* Sesuaikan jarak vertikal */
+    bottom: -155px; /* Sesuaikan jarak vertikal */
     left: 27px; /* Sesuaikan jarak horizontal */
+    z-index: 0;
+    height: 60vh;
+    pointer-events: none; /* Tidak menghalangi klik */
+}
+
+.info .pemberkatan .merak1 {
+    position: absolute;
+    bottom: -160px;/* Sesuaikan jarak vertikal */
+    right: -10px; /* Sesuaikan jarak horizontal */
     z-index: 1;
     height: 60vh;
     pointer-events: none; /* Tidak menghalangi klik */
@@ -348,14 +357,14 @@ body {
 
 .info .resepsi .merak1 {
     position: absolute;
-    bottom: -190px;/* Sesuaikan jarak vertikal */
-    right: 10px; /* Sesuaikan jarak horizontal */
+    bottom: -160px;/* Sesuaikan jarak vertikal */
+    right: -10px; /* Sesuaikan jarak horizontal */
     z-index: 1;
     height: 60vh;
     pointer-events: none; /* Tidak menghalangi klik */
 }
 
-.info .pemberkatan .merak2 img, .info .resepsi .merak1 img{
+.info .pemberkatan .merak1 img, .info .resepsi .merak1 img{
     width: 70vh;
     height: auto;
  }
@@ -394,6 +403,16 @@ body {
     transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
     pointer-events: none; /* Tidak menghalangi klik */
   }
+  
+  .info .pemberkatan .daun1 {
+    position: absolute;
+    top: 125px; /* Sesuaikan jarak vertikal */
+    left: -70px; /* Sesuaikan jarak horizontal */
+    z-index: 0;
+    animation: swayBottomToTop 5s ease-in-out infinite; /* Animasi gerak kanan-kiri */
+    transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
+      pointer-events: none; /* Tidak menghalangi klik */
+}
 
   .info .resepsi .daun1 {
     position: absolute;
@@ -405,7 +424,7 @@ body {
       pointer-events: none; /* Tidak menghalangi klik */
 }
 
-.info .pemberkatan .daun2 img, .info .resepsi .daun1 img{
+.info .pemberkatan .daun1 img, .info .resepsi .daun1 img{
     width: 20vh;
     height: auto;
  }
@@ -456,7 +475,7 @@ body {
 }
 
 .flower-info {
-    width: 110%;
+    width: 99%;
     height: auto;
     margin-top: 4.5em;
     object-fit: cover;
@@ -464,7 +483,7 @@ body {
 }
 
 .flower-info1 {
-    width: 110%;
+    width: 100%;
     height: auto;
     object-fit: cover;
     margin-top: 4.5em;
@@ -604,18 +623,20 @@ body {
     box-sizing: border-box; /* Pastikan padding tidak mempengaruhi ukuran */
 }
 
-.left-section main {
+/* .left-section main {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%; /* Konten vertikal berada di tengah */
+    height: 100%; /* Konten vertikal berada di tengah
     text-align: center;
-}
+} */
 
 .right-section {
-    margin-left: 60%; /* Beri ruang untuk left-section */
-    width: 40%; /* Sesuai ukuran di body */
+    /* position: fixed;
+	left: 60vw; */
+	margin-left: 60%;  /* Beri ruang untuk left-section */
+    width: 40vw; /* Sesuai ukuran di body */
     height: 100%; /* Sesuai ukuran di body */
     overflow-y: auto; /* Scroll hanya pada right-section */
     background-size: cover; /* Atur agar background pas */
@@ -672,7 +693,7 @@ body {
 
 .info .pemberkatan, .info .resepsi {
     background-size: cover;
-    width: 50vh; /* Sesuaikan ukuran elemen */
+    width: 45vh; /* Sesuaikan ukuran elemen */
     height: 72vh; /* Kurangi tinggi elemen */
     margin-top: 4vh; /* Sesuaikan jarak antar elemen */
     margin-left: auto;
@@ -976,10 +997,13 @@ form button:hover {
 
 
 
-.live-container .live-thumbnail img {
-    width: 150%; /* Sesuaikan ukuran gambar */
-    max-width: 1000px; /* Batas lebar maksimum */
-    border-radius: 50px; /* Rounded corners untuk gambar */
+.live-container .thumbnail img {
+    /* width: 100%; Sesuaikan ukuran gambar */
+    width: 300px; /* Batas lebar maksimum */
+	height: 150px;
+	object-position: center;
+    object-fit: cover;
+    border-radius: 25px; /* Rounded corners untuk gambar */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow untuk efek kedalaman */
     margin-bottom: 20px;
 }
@@ -1173,7 +1197,7 @@ form button:hover {
     border-radius: 20px;
     font-family: 'Kaisei Opti', serif;
     padding: 6px 12px;
-    width: 17%;
+    width: 25%;
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -1581,7 +1605,7 @@ form button:hover {
     height: 100vh;
     /* background: url('image/bg4.svg') no-repeat center; */
     background-size: cover;
-    background-position: center 38%; /* Adjust the vertical position */
+    background-position: top center; /* Adjust the vertical position */
 }
 
 /* Overlay untuk teks */
@@ -1597,7 +1621,7 @@ form button:hover {
     height: 100vh;
     /* background: url('image/bg4.svg') no-repeat center; */
     background-size: cover;
-    background-position: center 38%; /* Adjust the vertical position */
+    background-position: top center; /* Adjust the vertical position */
 }
 
 #opening .undangan .overlay {
@@ -1820,7 +1844,7 @@ form button:hover {
   .flower-side img {
     position: absolute;
     top: 50%;
-    left: 29em;
+    left: 27em;
     transform: translateY(-50%);
     width: 30%;
     z-index: 3;
@@ -1828,7 +1852,7 @@ form button:hover {
   .flower-left img {
     position: absolute;
     top: 50%;
-    left: 3em;
+    left: 1.5em;
     transform: translateY(-50%);
     width: 30%;
     z-index: 3;
@@ -2012,6 +2036,7 @@ form button:hover {
     align-items: center;
     justify-content: center;
     float: left;
+	right: 5vh;
     margin: 10px;
     background: #fff;
     opacity: 85%;
@@ -2039,6 +2064,41 @@ form button:hover {
     transform: translateX(-50px); /* Awalnya dari kiri */
   }
   
+@media only screen and (max-width: 770px) {
+	.popup-box .close1 {
+		background-color: transparent;
+		border: none;
+		font-size: 1.2rem;
+		font-weight: bold;
+		cursor: pointer;
+		position: absolute;
+		top: 200px;
+		right: 70px;
+	}
+	
+	.popup-box .close2 {
+		background-color: transparent;
+		border: none;
+		font-size: 1.2rem;
+		font-weight: bold;
+		cursor: pointer;
+		position: absolute;
+		top: 230px;
+		right: 70px;
+	}
+	
+	.live-container .thumbnail img {
+		/* width: 100%; Sesuaikan ukuran gambar */
+		width: 300px; /* Batas lebar maksimum */
+		height: 150px;
+		object-position: center;
+		object-fit: cover;
+		border-radius: 25px; /* Rounded corners untuk gambar */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow untuk efek kedalaman */
+		margin-bottom: 20px;
+	}
+}
+
 
 /* Responsif untuk Handphone */
 @media only screen and (min-width: 393px) and (max-width: 480px) {
@@ -2082,8 +2142,8 @@ form button:hover {
 
       #opening .undangan .overlay h1 {
         font-size: 2rem;
-        margin-bottom: 15em;
-        margin-top: 5em;
+        margin-bottom: 12em;
+        margin-top: 2em;
 
       }
 
@@ -2158,6 +2218,11 @@ form button:hover {
     .garis-photo {
         width: 90%;
     }
+	
+	.flower-side img {
+		display: none;
+	}
+	
     .info h1 {
         color: #653C3C;
         font-size: 4vh;
@@ -2170,6 +2235,54 @@ form button:hover {
     .info h2 {
         font-size: 2.5vh;
     }
+
+    .info .pemberkatan .merak2{
+        position: absolute;
+        bottom: -137px; /* Sesuaikan jarak vertikal */
+        left: 27px; /* Sesuaikan jarak horizontal */
+        z-index: 0;
+        height: 60vh;
+        pointer-events: none; /* Tidak menghalangi klik */
+    }
+	
+	.info .pemberkatan .merak1 {
+		position: absolute;
+		bottom: -160px;/* Sesuaikan jarak vertikal */
+		right: -10px; /* Sesuaikan jarak horizontal */
+		z-index: 1;
+		height: 60vh;
+		pointer-events: none; /* Tidak menghalangi klik */
+	}
+
+	.info .resepsi .merak1 {
+		position: absolute;
+		bottom: -160px;/* Sesuaikan jarak vertikal */
+		right: -15px; /* Sesuaikan jarak horizontal */
+		z-index: 1;
+		height: 60vh;
+		pointer-events: none; /* Tidak menghalangi klik */
+	}
+	
+	.info .pemberkatan .daun1 {
+		position: absolute;
+		top: 125px; /* Sesuaikan jarak vertikal */
+		left: -70px; /* Sesuaikan jarak horizontal */
+		z-index: 0;
+		animation: swayBottomToTop 5s ease-in-out infinite; /* Animasi gerak kanan-kiri */
+		transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
+		  pointer-events: none; /* Tidak menghalangi klik */
+	}
+
+	  .info .resepsi .daun1 {
+		position: absolute;
+		top: 100px; /* Sesuaikan jarak vertikal */
+		left: -90px; /* Sesuaikan jarak horizontal */
+		z-index: 0;
+		animation: swayBottomToTop 5s ease-in-out infinite; /* Animasi gerak kanan-kiri */
+		transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
+		  pointer-events: none; /* Tidak menghalangi klik */
+	}
+
     .rsvp-container {
         width: 90%;
     }
@@ -2215,6 +2328,39 @@ form button:hover {
         content: url('../assets_tema_2/hadiah.svg'); /* Emoji untuk hadiah */
         padding-right: 18px;
     }
+	
+	.popup-box .close1 {
+		background-color: transparent;
+		border: none;
+		font-size: 1.2rem;
+		font-weight: bold;
+		cursor: pointer;
+		position: absolute;
+		top: 230px;
+		right: 70px;
+	}
+	
+	.popup-box .close2 {
+		background-color: transparent;
+		border: none;
+		font-size: 1.2rem;
+		font-weight: bold;
+		cursor: pointer;
+		position: absolute;
+		top: 230px;
+		right: 70px;
+	}
+	
+	.live-container .thumbnail img {
+		/* width: 100%; Sesuaikan ukuran gambar */
+		width: 300px; /* Batas lebar maksimum */
+		height: 150px;
+		object-position: center;
+		object-fit: cover;
+		border-radius: 25px; /* Rounded corners untuk gambar */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow untuk efek kedalaman */
+		margin-bottom: 20px;
+	}
 }
 
 /* Responsif untuk Handphone */
@@ -2332,6 +2478,11 @@ form button:hover {
     .garis-photo {
         width: 91.5%;
     }
+	
+	.flower-side img {
+		display: none;
+	}
+	
     .info h1 {
         color: #653C3C;
         font-size: 4vh;
@@ -2344,7 +2495,54 @@ form button:hover {
     .info h2 {
         font-size: 2.5vh;
     }
-    
+
+    .info .pemberkatan .merak2{
+        position: absolute;
+        bottom: -137px; /* Sesuaikan jarak vertikal */
+        left: 27px; /* Sesuaikan jarak horizontal */
+        z-index: 0;
+        height: 60vh;
+        pointer-events: none; /* Tidak menghalangi klik */
+    }
+	
+	.info .pemberkatan .merak1 {
+		position: absolute;
+		bottom: -160px;/* Sesuaikan jarak vertikal */
+		right: -10px; /* Sesuaikan jarak horizontal */
+		z-index: 1;
+		height: 60vh;
+		pointer-events: none; /* Tidak menghalangi klik */
+	}
+
+	.info .resepsi .merak1 {
+		position: absolute;
+		bottom: -160px;/* Sesuaikan jarak vertikal */
+		right: -15px; /* Sesuaikan jarak horizontal */
+		z-index: 1;
+		height: 60vh;
+		pointer-events: none; /* Tidak menghalangi klik */
+	}
+	
+	.info .pemberkatan .daun1 {
+		position: absolute;
+		top: 125px; /* Sesuaikan jarak vertikal */
+		left: -70px; /* Sesuaikan jarak horizontal */
+		z-index: 0;
+		animation: swayBottomToTop 5s ease-in-out infinite; /* Animasi gerak kanan-kiri */
+		transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
+		  pointer-events: none; /* Tidak menghalangi klik */
+	}
+
+	  .info .resepsi .daun1 {
+		position: absolute;
+		top: 100px; /* Sesuaikan jarak vertikal */
+		left: -90px; /* Sesuaikan jarak horizontal */
+		z-index: 0;
+		animation: swayBottomToTop 5s ease-in-out infinite; /* Animasi gerak kanan-kiri */
+		transform-origin: bottom center; /* Titik rotasi di bagian bawah elemen */
+		  pointer-events: none; /* Tidak menghalangi klik */
+	}
+
     .info .pemberkatan .isi {
         position: absolute;
         top: 50%;
@@ -2355,6 +2553,16 @@ form button:hover {
         width: 20vh;
         margin-top: -5vh;
     }
+	
+	.info .pemberkatan h4 {
+		font-size: 4.5vh; /* Kurangi ukuran font */
+		position: absolute;
+		top: 23%;
+		right: -22%;
+		color: #653C3C;
+		margin-bottom: 8px; /* Tambahkan jarak antar elemen */
+	}
+	
     .rsvp-container {
         width: 90%;
     }
@@ -2419,6 +2627,39 @@ form button:hover {
         content: url('../assets_tema_2/hadiah.svg'); /* Emoji untuk hadiah */
         padding-right: 18px;
     }
+	
+	.popup-box .close1 {
+		background-color: transparent;
+		border: none;
+		font-size: 1.2rem;
+		font-weight: bold;
+		cursor: pointer;
+		position: absolute;
+		top: 255px;
+		right: 50px;
+	}
+	
+	.popup-box .close2 {
+		background-color: transparent;
+		border: none;
+		font-size: 1.2rem;
+		font-weight: bold;
+		cursor: pointer;
+		position: absolute;
+		top: 270px;
+		right: 50px;
+	}
+	
+	.live-container .thumbnail img {
+		/* width: 100%; Sesuaikan ukuran gambar */
+		width: 300px; /* Batas lebar maksimum */
+		height: 150px;
+		object-position: center;
+		object-fit: cover;
+		border-radius: 25px; /* Rounded corners untuk gambar */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow untuk efek kedalaman */
+		margin-bottom: 20px;
+	}
     
     .flower-atas img {
        
