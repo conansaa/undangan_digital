@@ -17,6 +17,7 @@ use App\Models\EventOwnerNew;
 use App\Models\EventOwnerDetails;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log; 
 
 
 class RsvpController extends Controller
@@ -330,6 +331,7 @@ class RsvpController extends Controller
 
 public function storetamu(Request $request)
 {
+    Log::info('Masuk ke storetamu', $request->all());
     $userId = Auth::id(); // Ambil ID user yang sedang login
 
     // Ambil event owner berdasarkan user yang login
@@ -348,10 +350,18 @@ public function storetamu(Request $request)
     $eventId = $eventDetailsIds->first(); 
     // dd($eventDetailsIds);
 
+    // Ambil data dari request, pastikan berbentuk array
+    $names = $request->input('name', []); // Default ke array kosong jika null
+    $phoneNumbers = $request->input('phone_number', []);
+
+    if (empty($names)) {
+        return redirect()->back()->withErrors(['name' => 'Minimal 1 tamu harus diinput.']);
+    }
+
     // Validasi input
     $validatedData = $request->validate([
-        'name' => 'required|string|max:255',
-        'phone_number' => 'nullable|string|digits_between:12,15',
+        'name.*' => 'required|string|max:50',
+        'phone_number.*' => 'nullable|string|digits_between:12,15',
         // 'event_id' => 'required|exists:event_details,id',
         // 'event_id' => [
         //     'required',
@@ -377,25 +387,59 @@ public function storetamu(Request $request)
     // dd($validatedData);
 
     // Cek jika nama tamu sudah ada untuk event yang sama
-    $existingRsvp = Rsvp::where('name', $validatedData['name'])
-        ->where('event_id', $eventId)
-        ->first();
+    // $existingRsvp = Rsvp::where('name', $validatedData['name'])
+    //     ->where('event_id', $eventId)
+    //     ->first();
 
-    if ($existingRsvp) {
-        return redirect()->back()->withErrors([
-            'name' => 'Nama tidak boleh sama, mohon berikan pembeda yang unik.',
-        ]);
+    // if ($existingRsvp) {
+    //     return redirect()->back()->withErrors([
+    //         'name' => 'Nama tidak boleh sama, mohon berikan pembeda yang unik.',
+    //     ]);
+    // }
+
+    // // Simpan RSVP
+    // // Rsvp::create($validatedData);
+    // $newRsvp = new Rsvp();
+    // $newRsvp->event_id = $eventId;
+    // $newRsvp->name = $request->name;
+    // $newRsvp->phone_number = $request->phone_number;
+    // $newRsvp->save();
+
+    // $names = $request->name;
+    // $phoneNumbers = $request->phone_number;
+
+    $dataToInsert = [];
+
+    foreach ($names as $index => $name) {
+        $phone = $phoneNumbers[$index] ?? null;
+
+        // Cek jika nama sudah ada dalam event ini
+        $existingRsvp = Rsvp::where('name', $name)
+            ->where('event_id', $eventId)
+            ->first();
+
+        if ($existingRsvp) {
+            return redirect()->back()->withErrors([
+                "name.$index" => "Nama '$name' sudah terdaftar, mohon gunakan nama unik.",
+            ]);
+        }
+
+        $dataToInsert[] = [
+            'event_id' => $eventId,
+            'name' => $name,
+            'phone_number' => $phone,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
     }
 
-    // Simpan RSVP
-    // Rsvp::create($validatedData);
-    $newRsvp = new Rsvp();
-    $newRsvp->event_id = $eventId;
-    $newRsvp->name = $request->name;
-    $newRsvp->phone_number = $request->phone_number;
-    $newRsvp->save();
+    // Simpan semua data sekaligus
+    if (!empty($dataToInsert)) {
+        Rsvp::insert($dataToInsert);
+    }
 
-    return redirect('rsvpclient')->with('success', 'Nama tamu berhasil disimpan.');
+    // return redirect('rsvpclient')->with('success', 'Nama tamu berhasil disimpan.');
+    return response()->json(['success' => true, 'message' => 'Nama tamu berhasil disimpan.']);
 }
 
   //ini yang lamaa

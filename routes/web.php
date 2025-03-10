@@ -74,14 +74,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('client.eventinfo');
     })->name('info');
 
+    Route::get('/create-event', [EventController::class, 'createevent'])->name('create.event');
+    Route::post('/store-event', [EventController::class, 'storeevent'])->name('store.event');
+
     Route::get('/rsvpclient', [RsvpController::class, 'viewclient'])->name('rsvpclient');
     Route::get('/rsvpclient/createtamu', [RsvpController::class, 'createtamu'])->name('rsvpclient.createtamu');
     Route::post('/rsvpclient/storeamu', [RsvpController::class, 'storetamu'])->name('rsvpclient.storetamu');
     Route::get('/rsvpclient/increment-sending-track/{id}', [RSVPController::class, 'incrementSendingTrack'])->name('rsvp.incrementSendingTrack');
     Route::get('/rsvpclient/delete/{id}', [RsvpController::class, 'destroytamu'])->name('rsvpclient.destroytamu');
 
-    Route::get('/export-guests', [ExcelController::class, 'export'])->name('export.guests');
+    // Route::get('/export-guests', [ExcelController::class, 'export'])->name('export.guests');
+    Route::get('/export-guests/{format}', [ExcelController::class, 'export']);
     Route::post('/import-guests', [ExcelController::class, 'import'])->name('import.guests');
+    Route::get('/download-template', function () {
+        $filePath = public_path('templates/template_daftar_tamu.xlsx'); // Sesuaikan dengan lokasi file template
+        return response()->download($filePath, 'Template_Daftar_Tamu.xlsx');
+    })->name('download.template');  
+    Route::get('/export-comments/{format}', [ExcelController::class, 'exportComments']);
 
     Route::get('/commentclient', [CommentController::class, 'viewcomment'])->name('commentclient.viewcomment');
     Route::get('/commentclient/delete/{id}', [CommentController::class, 'destroycomment'])->name('commentclient.destroycomment');

@@ -12,11 +12,9 @@ class ClientController extends Controller
     public function showDashboard()
     {
         $userId = Auth::id(); // ID user yang login
-        // dd($userId);
 
         // Ambil event owner berdasarkan user yang login
         $eventOwner = EventOwnerNew::where('user_id', $userId)->first();
-        // dd($eventOwner);
 
         if (!$eventOwner || $eventOwner->event()->count() == 0) {
             return redirect()->route('info')->withErrors('Silakan buat event terlebih dahulu.');
@@ -27,25 +25,25 @@ class ClientController extends Controller
         if ($eventDetailsIds->isEmpty()) {
             return redirect()->route('home')->withErrors('Tidak ada event yang ditemukan untuk Event Owner ini.');
         }
-        // dd($eventDetailsIds);
-        // dd($eventOwner->event);
 
         // Ambil ID RSVP yang terkait dengan event milik user
         $rsvpIds = Rsvp::whereIn('event_id', $eventDetailsIds)->pluck('id');
-        // dd($rsvpIds);
 
         // Total tamu yang hadir berdasarkan RSVP
         $totalGuests = Rsvp::whereIn('event_id', $eventDetailsIds)
             ->where('confirmation', 'Hadir')
             ->sum('total_guest');
-        // dd($totalGuests);
 
         // Total komentar yang terkait dengan RSVP milik user
         $totalComments = Comments::whereIn('rsvp_id', $rsvpIds)->count();
-        // dd($totalComments);
+
+        // $latestComments = Comments::whereIn('rsvp_id', $rsvpIds)->first();
+        $latestComment = Comments::whereHas('rsvp', function ($query) use ($eventDetailsIds) {
+            $query->where('event_id', $eventDetailsIds);
+        })->with('rsvp')->latest()->take(1)->get(); 
 
         // Kirim data ke view
-        return view('client.client', compact('totalGuests', 'totalComments'));
+        return view('client.client', compact('totalGuests', 'totalComments', 'latestComment'));
     }
 }
 

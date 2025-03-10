@@ -12,7 +12,7 @@ class ThemeSection extends Model
     protected $fillable = [
         'theme_id',
         'section_id',
-        'max_images',,
+        'max_images',
     ];
 
     

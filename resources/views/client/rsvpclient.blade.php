@@ -56,9 +56,9 @@
         <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#importModal">
             <i class="fas fa-file-import"></i> Import
         </button>
-        <a href="/export-guests" class="btn btn-primary">
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportModal">
             <i class="fas fa-file-export"></i> Export
-        </a>
+        </button>
     </div>
 </div>
 
@@ -145,10 +145,36 @@
                 <form action="{{ route('import.guests') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
+                        
+                        <!-- Info untuk pengguna -->
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i>  
+                            Gunakan template berikut agar format file sesuai. Klik tombol <strong>"Download Template"</strong> sebelum mengunggah daftar tamu.
+                        </div>
+    
+                        <!-- Tombol Download Template -->
+                        <div class="mb-3">
+                            <a href="{{ route('download.template') }}" class="btn btn-primary">
+                                <i class="fas fa-download"></i> Download Template
+                            </a>
+                        </div>
+    
+                        <!-- Info Format Nama & Nomor Telepon -->
+                        <div class="alert alert-warning">
+                            <i class="fas fa-exclamation-triangle"></i>  
+                            <strong>Pastikan format penulisan benar:</strong>
+                            <ul class="mb-0">
+                                <li><strong>Nama:</strong> Gunakan huruf kapital di awal kata (contoh: <em>Khansa Delphi</em>) bisa menggunakan spasi ya!. Disarankan untuk menggunakan nama lengkap agar unik!</li>
+                                <li><strong>Nomor Telepon:</strong> Tanpa kode negara (+62) dan tanpa 0 di depan (contoh: <em>81234567890</em>).</li>
+                            </ul>
+                        </div>
+    
+                        <!-- Input File -->
                         <div class="mb-3">
                             <label for="file" class="form-label">Pilih File Excel (CSV/XLSX)</label>
                             <input type="file" class="form-control" id="file" name="file" accept=".csv, .xlsx" required>
                         </div>
+    
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
@@ -157,7 +183,31 @@
                 </form>
             </div>
         </div>
+    </div>        
+
+    <!-- Modal Export -->
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">Pilih Format Export</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Silakan pilih format file untuk export data RSVP.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="{{ url('/export-guests/excel') }}" class="btn btn-success">
+                            <i class="fas fa-file-excel"></i> Export Excel
+                        </a>
+                        <a href="{{ url('/export-guests/pdf') }}" class="btn btn-danger">
+                            <i class="fas fa-file-pdf"></i> Export PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </div>
 
 

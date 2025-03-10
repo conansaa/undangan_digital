@@ -2,20 +2,20 @@
 
 namespace App\Exports;
 
-use App\Models\Rsvp;
+use App\Models\Comments;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class GuestExport implements FromCollection, WithHeadings, WithMapping, WithStyles
+class CommentExport implements FromCollection, WithHeadings,  WithMapping, WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-    protected $data;
 
+    protected $data;
     public function __construct($data)
     {
         $this->data = $data;
@@ -28,16 +28,15 @@ class GuestExport implements FromCollection, WithHeadings, WithMapping, WithStyl
 
     public function headings(): array
     {
-        return ['Nama', 'No Telepon', 'Konfirmasi', 'Jumlah Tamu'];
+        return ['Nama Tamu', 'Komentar', 'Tanggal Dibuat'];
     }
 
-    public function map($rsvp): array
+    public function map($comment): array
     {
         return [
-            $rsvp->name,
-            $rsvp->phone_number,
-            $rsvp->confirmation == 'Hadir' ? 'Hadir' : 'Tidak Hadir',
-            $rsvp->total_guest
+            $comment->rsvp->name,
+            $comment->comment,
+            $comment->created_at->format('d-m-Y H:i')
         ];
     }
 

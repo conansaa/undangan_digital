@@ -29,9 +29,9 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-12">
                 {{-- <a href="{{ route('rsvpclient') }}" style="text-decoration: none; color: inherit;"> --}}
-                <div class="card">
+                <div class="card d-flex flex-column h-100">
                     <span class="mask bg-primary opacity-10 border-radius-lg"></span>
-                    <div class="card-body p-3 position-relative">
+                    <div class="card-body p-3 position-relative flex-grow-1">
                         <div class="row">
                             <div class="col-8 text-start">
                                 <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
@@ -61,10 +61,10 @@
 
             <div class="col-lg-6 col-md-6 col-12 mt-4 mt-md-0">
                 {{-- <a href="{{ route('commentclient.viewcomment') }}" style="text-decoration: none; color: inherit;"> --}}
-                <div class="card">
-                    <span class="mask bg-dark opacity-10 border-radius-lg"></span>
-                    <div class="card-body p-3 position-relative">
-                        <div class="row">
+                <div class="card w-100">
+                    {{-- <span class="mask bg-dark opacity-10 border-radius-lg"></span> --}}
+                    <div class="card-body d-flex flex-row align-items-center bg-dark opacity-10 border-radius-lg">
+                        {{-- <div class="row">
                             <div class="col-8 text-start">
                                 <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
                                     <i class="fa-solid fa-tags text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
@@ -86,6 +86,20 @@
                                     </ul>
                                 </div>
                             </div>
+                        </div> --}}
+                        <div class="flex-grow-1">
+                            <h5 class="text-white font-weight-bolder mb-2">Ucapan Terbaru</h5>
+                            @if ($latestComment)
+                                @foreach ($latestComment as $comment)
+                                    <div class="bg-white p-3 border-radius-md shadow-sm mb-1">
+                                        <p class="mb-1 text-dark"><strong>{{ $comment->rsvp->name }}</strong></p>
+                                        <p class="text-sm text-dark mb-0 me-2"  style="text-align: justify;">{{ $comment->comment }}</p>
+                                        <small class="text-muted">{{ $comment->created_at->format('d M Y H:i') }} WIB</small>                                   
+                                    </div>
+                                @endforeach
+                            @else
+                                <p class="text-white">Belum ada ucapan.</p>
+                            @endif
                         </div>
                     </div>
                 </div>

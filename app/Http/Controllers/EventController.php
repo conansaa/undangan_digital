@@ -100,6 +100,55 @@ class EventController extends Controller
         return redirect('/event')->with('success', 'Tipe acara berhasil ditambahkan');
     }
 
+    // Untuk client
+    public function createevent()
+    {
+        $theme = Theme::all();
+        $type = EventTypeRef::all();
+        return view('client.create_event', compact('theme', 'type'));
+    }
+
+    public function storeevent(Request $request)
+    {
+        $validated = $request->validate([
+            'event_name' => 'required|string|max:255',
+            'event_date' => 'required|date',
+            'event_time' => 'required|string|max:50',
+            'type' => 'required|integer',
+            'event_location' => 'required|string|max:255',
+            'theme_id' => 'required|integer'
+        ]);
+
+        // Cari event_owner_id berdasarkan user_id yang sedang login
+        $eventOwner = EventOwnerNew::firstOrCreate(
+            ['user_id' => auth()->id()], // Kondisi pencarian
+            // ['other_field' => 'default_value'] // Data default jika belum ada (sesuaikan dengan tabelmu)
+        );
+        if (!$eventOwner) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Event owner tidak ditemukan!',
+            ], 404);
+        }
+
+        $event = EventDetails::create([
+            'user_id' => auth()->id(),
+            'event_owner_id' => $eventOwner->id,
+            'event_name' => $validated['event_name'],
+            'event_date' => $validated['event_date'],
+            'event_type_id' => $validated['type'],
+            'event_time' => $validated['event_time'],
+            // 'location' => $validated['event_location'],
+            'theme_id' => $validated['theme_id']
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Event berhasil dibuat!',
+            'event_id' => $event->id
+        ]);
+    }
+
     public function markAsFinished($id)
     {
         // Cari event detail

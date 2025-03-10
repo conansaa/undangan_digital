@@ -15,6 +15,9 @@
     <div class="card-header pb-0 mb-2">
         <div class="d-flex justify-content-between align-items-center">
             <h6 class="mb-0">List Data Ucapan</h6>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exportModal">
+                <i class="fas fa-file-export"></i> Export
+            </button>
         </div>
     </div>
     <div class="card-body px-0 pt-0 pb-2">
@@ -54,6 +57,30 @@
         </table>
     </div>
     </div>
+
+    <!-- Modal Export -->
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exportModalLabel">Pilih Format Export</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p>Silakan pilih format file untuk export data Ucapan.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <a href="{{ url('/export-comments/excel') }}" class="btn btn-success">
+                            <i class="fas fa-file-excel"></i> Export Excel
+                        </a>
+                        <a href="{{ url('/export-comments/pdf') }}" class="btn btn-danger">
+                            <i class="fas fa-file-pdf"></i> Export PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
 {{-- <div class="card bg-white border-0 shadow p-4" style="min-height: 70vh">

@@ -48,41 +48,59 @@
 </x-guest-layout> --}}
 
 <x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg p-4" style="max-width: 400px; width: 100%;">
+            <h3 class="text-center mb-3">Reset Password</h3>
 
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $token }}">
+            <form method="POST" action="{{ route('password.store') }}">
+                @csrf
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                <!-- Password Reset Token -->
+                <input type="hidden" name="token" value="{{ $token }}">
+
+                <!-- Email Address -->
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" id="email" name="email" class="form-control"
+                        value="{{ old('email', $email) }}" required autofocus autocomplete="username">
+                    @error('email')
+                        <div class="alert alert-danger mt-2 p-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Password -->
+                <div class="mb-3">
+                    <label for="password" class="form-label">New Password</label>
+                    <div class="input-group">
+                        <input type="password" id="password" name="password" class="form-control" required autocomplete="new-password">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    </div>
+                    @error('password')
+                        <div class="alert alert-danger mt-2 p-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="mb-3">
+                    <label for="password_confirmation" class="form-label">Confirm Password</label>
+                    <div class="input-group">
+                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control" required autocomplete="new-password">
+                        <span class="input-group-text"><i class="fas fa-check"></i></span>
+                    </div>
+                    @error('password_confirmation')
+                        <div class="alert alert-danger mt-2 p-2">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sync-alt"></i> Reset Password
+                    </button>
+                </div>
+            </form>
         </div>
+    </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
+    <!-- FontAwesome untuk ikon -->
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
 </x-guest-layout>
