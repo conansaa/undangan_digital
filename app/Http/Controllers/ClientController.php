@@ -17,7 +17,7 @@ class ClientController extends Controller
         $eventOwner = EventOwnerNew::where('user_id', $userId)->first();
 
         if (!$eventOwner || $eventOwner->event()->count() == 0) {
-            return redirect()->route('info')->withErrors('Silakan buat event terlebih dahulu.');
+            return redirect()->route('client.landingpage')->withErrors('Silakan buat event terlebih dahulu.');
         }
 
         // Ambil ID event yang dimiliki oleh user
@@ -44,6 +44,11 @@ class ClientController extends Controller
 
         // Kirim data ke view
         return view('client.client', compact('totalGuests', 'totalComments', 'latestComment'));
+    }
+
+    public function showLandingPage()
+    {
+        return view('client.landingpage');
     }
 }
 

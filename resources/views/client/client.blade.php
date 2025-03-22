@@ -24,6 +24,9 @@
     </style> --}}
 
 <h5 class="heading-with-margin">Client Page diikatJanji</h5>
+<div class="mt-4">
+    <a href="{{ route('event.step2') }}" class="btn btn-primary">Lanjutkan Pengisian Data!</a>
+</div>
 <div class="row">
     <div class="col-lg-6 col-12">
         <div class="row">
@@ -89,7 +92,7 @@
                         </div> --}}
                         <div class="flex-grow-1">
                             <h5 class="text-white font-weight-bolder mb-2">Ucapan Terbaru</h5>
-                            @if ($latestComment)
+                            @if ($latestComment->isNotEmpty())
                                 @foreach ($latestComment as $comment)
                                     <div class="bg-white p-3 border-radius-md shadow-sm mb-1">
                                         <p class="mb-1 text-dark"><strong>{{ $comment->rsvp->name }}</strong></p>

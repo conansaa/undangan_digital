@@ -589,7 +589,7 @@ public function storetamu(Request $request)
 
     $confirmationValue = $request->confirmation === 'yes' ? 'Hadir' : 'Tidak Hadir';
     $request->merge(['confirmation' => $confirmationValue]);
-    \Log::info('Request before validation', $request->all());
+    // \Log::info('Request before validation', $request->all());
     $eventId = Rsvp::where('name', $name)->value('event_id');
     if (!$eventId) {
         return redirect()->back()->withErrors(['error' => 'Event ID tidak ditemukan untuk nama ini.']);

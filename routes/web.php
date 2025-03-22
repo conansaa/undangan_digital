@@ -1,9 +1,14 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\GiftController;
 use App\Http\Controllers\RSVPController;
 use App\Http\Controllers\UserController;
+use Laravel\Socialite\Facades\Socialite;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ExcelController;
@@ -12,6 +17,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\FigureController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TimelineController;
@@ -19,13 +25,11 @@ use App\Http\Controllers\EventCardController;
 use App\Http\Controllers\EventTypeController;
 use App\Http\Middleware\AdminEmailMiddleware;
 use App\Http\Controllers\EventOwnerController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\MediaAssetController;
 use App\Http\Controllers\EventReportController;
 use App\Http\Controllers\ThemeCategoryController;
 use App\Http\Controllers\EventReportDetailController;
-use Laravel\Socialite\Facades\Socialite;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 
 // Route::get('/', function () {
 //     return view('admin.dashboard');
@@ -70,12 +74,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/client', [ClientController::class, 'showDashboard'])
         ->name('client.dashboard');
 
+    Route::get('/home', [ClientController::class, 'showLandingPage'])
+        ->name('client.landingpage');
+
     Route::get('/info', function () {
         return view('client.eventinfo');
     })->name('info');
 
     Route::get('/create-event', [EventController::class, 'createevent'])->name('create.event');
     Route::post('/store-event', [EventController::class, 'storeevent'])->name('store.event');
+
+    Route::get('/event/step2', [EventController::class, 'step2'])->name('event.step2');
 
     Route::get('/rsvpclient', [RsvpController::class, 'viewclient'])->name('rsvpclient');
     Route::get('/rsvpclient/createtamu', [RsvpController::class, 'createtamu'])->name('rsvpclient.createtamu');
@@ -94,6 +103,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/commentclient', [CommentController::class, 'viewcomment'])->name('commentclient.viewcomment');
     Route::get('/commentclient/delete/{id}', [CommentController::class, 'destroycomment'])->name('commentclient.destroycomment');
+
+    Route::post('/confirm-payment/{figureId}', [PaymentController::class, 'confirmPayment'])->name('payment.confirm');
+    Route::get('/caroline-hezron/to/{name}', [InvitationController::class, 'show'])
+    ->name('invitation.show');
+
 });
 
 Route::get('/auth/google', function () {
@@ -117,7 +131,7 @@ Route::get('/auth/google', function () {
 
 // Callback setelah Google memberikan data user
 Route::get('/auth/google/callback', function () {
-    $googleUser = Socialite::driver('google')->stateless()->user();
+    $googleUser = Socialite::driver('google')->user();
 
     // Cari user berdasarkan email
     $user = User::where('email', $googleUser->getEmail())->first();

@@ -171,7 +171,7 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    Swal.fire("Berhasil!", "Event berhasil dibuat!", "success")
+                    Swal.fire("Berhasil!", "Event berhasil dibuat! Silahkan melanjutkan pengisian data undangan ya!", "success")
                     .then(() => {
                         window.location.href = "/client";
                     });

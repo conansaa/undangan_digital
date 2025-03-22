@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\EventReportDetails;
-use App\Models\EventReports;
 use Carbon\Carbon;
 use App\Models\Rsvp;
 use App\Models\User;
@@ -15,9 +13,12 @@ use App\Models\Timelines;
 use App\Models\BrideGroom;
 use App\Models\SectionRef;
 use App\Models\EventDetails;
+use App\Models\EventReports;
 use App\Models\EventTypeRef;
 use Illuminate\Http\Request;
 use App\Models\EventOwnerNew;
+use App\Models\EventReportDetails;
+use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
 {
@@ -119,9 +120,11 @@ class EventController extends Controller
             'theme_id' => 'required|integer'
         ]);
 
+        $userId = Auth::id();
+
         // Cari event_owner_id berdasarkan user_id yang sedang login
         $eventOwner = EventOwnerNew::firstOrCreate(
-            ['user_id' => auth()->id()], // Kondisi pencarian
+            ['user_id' => $userId], // Kondisi pencarian
             // ['other_field' => 'default_value'] // Data default jika belum ada (sesuaikan dengan tabelmu)
         );
         if (!$eventOwner) {
@@ -132,7 +135,7 @@ class EventController extends Controller
         }
 
         $event = EventDetails::create([
-            'user_id' => auth()->id(),
+            // 'user_id' => auth()->id(),
             'event_owner_id' => $eventOwner->id,
             'event_name' => $validated['event_name'],
             'event_date' => $validated['event_date'],
@@ -147,6 +150,18 @@ class EventController extends Controller
             'message' => 'Event berhasil dibuat!',
             'event_id' => $event->id
         ]);
+    }
+
+    public function step2()
+    {
+        $userId = Auth::id();
+        $event = EventDetails::where('user_id', $userId)->first();
+
+        // if (!$event || !$event->is_step1_completed) {
+        //     return redirect()->route('client.dashboard')->with('error', 'Selesaikan tahap pertama terlebih dahulu.');
+        // }
+
+        return view('event.step2', compact('event'));
     }
 
     public function markAsFinished($id)
