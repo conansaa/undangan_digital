@@ -116,4 +116,56 @@ class GiftController extends Controller
 
         return redirect()->route('event.show', ['id' => $gift->event_id])->with('success', 'Data berhasil dihapus.');
     }
+
+    public function storeModalClient(Request $request, $event_id)
+    {
+        // Validasi data input
+        $request->validate([
+            // 'event_id' => 'required|exists:event_details,id',
+            'name' => 'required|string|max:100',
+            'category' => 'required|in:Uang,Barang',
+            'notes' => 'nullable|string',
+        ]);
+
+        // Simpan data ke tabel gift
+        Gifts::create([
+            'event_id' => $event_id,
+            'name' => $request->name,
+            'category' => $request->category,
+            'notes' => $request->notes,
+        ]);
+
+        // Redirect setelah berhasil menyimpan data
+        return redirect()->route('manageevent.detail', ['id' => $event_id])->with('success', 'Hadiah berhasil ditambahkan!');
+    }
+
+    public function updateClient(Request $request, $id)
+    {
+        // dd($request->all());
+        $request->validate([
+            // 'event_id' => 'required|exists:event_details,id',
+            'name' => 'required|string|max:100',
+            'category' => 'required|in:Uang,Barang',
+            'notes' => 'nullable|string',
+        ]);
+
+        // Temukan data gift dan perbarui isinya
+        $gift = Gifts::find($id);
+        $gift->name = $request->name;
+        $gift->category = $request->category;
+        $gift->notes = $request->notes;
+
+        $gift->save();
+
+        // Redirect setelah berhasil menyimpan perubahan
+        return redirect()->route('manageevent.detail', ['id' => $gift->event_id])->with('success', 'Data berhasil diperbarui.');
+    }
+
+    public function destroyClient($id)
+    {
+        $gift = Gifts::find($id);
+        $gift->delete();
+
+        return redirect()->route('manageevent.detail', ['id' => $gift->event_id])->with('success', 'Data berhasil dihapus.');
+    }
 }

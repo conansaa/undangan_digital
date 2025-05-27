@@ -31,6 +31,8 @@ use App\Http\Controllers\EventReportController;
 use App\Http\Controllers\ThemeCategoryController;
 use App\Http\Controllers\EventReportDetailController;
 
+
+Route::get('/carolline-hezron/to/{name}', [RsvpController::class, 'caroline'])->name('caroline.index');
 // Route::get('/', function () {
 //     return view('admin.dashboard');
 // });
@@ -39,6 +41,9 @@ use App\Http\Controllers\EventReportDetailController;
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 //cover
+Route::get('/', [ClientController::class, 'showLandingPage'])
+        ->name('client.landingpage');
+    
 Route::get('/invitation/{name}', [RsvpController::class, 'invitation'])->name('rsvp.invitation');
 
 //Shinta
@@ -53,9 +58,8 @@ Route::post('/clear-modal-session', function () {
 });
 
 //Carol
-Route::get('/caroline-hezron/to/{name}', [RsvpController::class, 'caroline'])->name('caroline.index');
 Route::post('/caroline-hezron/store/{name}', [RsvpController::class, 'storeCaroline'])->name('rsvpp.store');
-Route::get('/caroline-hezron/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
+// Route::get('/caroline-hezron/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
 Route::post('/caroline-hezron/confirm-update/{name}', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
 Route::post('/caroline-hezron/cancel-update/{name}', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
 Route::post('/clear-modal-session', function () {
@@ -68,18 +72,44 @@ Route::post('/comment/{name}', [CommentController::class, 'store'])->name('comme
 Route::get('/comment', [CommentController::class, 'index'])->name('comment.index');
 Route::get('/comment/delete/{id}/{name}', [CommentController::class, 'hapus'])->name('comment.hapus');
 
-
 //client
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/client', [ClientController::class, 'showDashboard'])
         ->name('client.dashboard');
-
-    Route::get('/home', [ClientController::class, 'showLandingPage'])
-        ->name('client.landingpage');
-
+        
     Route::get('/info', function () {
         return view('client.eventinfo');
     })->name('info');
+
+    Route::get('/check-event', [ClientController::class, 'checkEvent'])->name('check.event');
+
+    Route::get('/manage-event', [ClientController::class, 'showManageEvent'])
+        ->name('client.manageevent');
+
+    Route::get('/payment/confirm/{id}', [PaymentController::class, 'confirm'])->name('payment.confirm');
+    Route::post('/payment/store/{id}', [PaymentController::class, 'store'])->name('payment.store');
+
+    Route::get('/manageevent/{id}', [ClientController::class, 'detail'])->name('manageevent.detail');
+
+    Route::post('/manageevent/{id}/figures', [FigureController::class, 'storeModalClient'])->name('figure.storeModalClient');
+    Route::put('/manageevent/figure/update/{id}', [FigureController::class, 'updateModalClient'])->name('figure.updateModalClient');
+    Route::get('/manageevent/figure/delete/{id}', [FigureController::class, 'destroyClient'])->name('figure.destroyClient');
+
+    Route::post('/manageevent/card/store/{id}', [EventCardController::class, 'storeModalClient'])->name('card.storeModalClient');
+    Route::put('/manageevent/card/update/{id}', [EventCardController::class, 'updateClient'])->name('card.updateClient');
+    Route::get('/manageevent/card/delete/{id}', [EventCardController::class, 'destroyClient'])->name('card.destroyClient');
+
+    Route::post('/manageevent/timeline/store/{id}', [TimelineController::class, 'storeModalClient'])->name('timeline.storeModalClient');
+    Route::put('/manageevent/timeline/update/{id}', [TimelineController::class, 'updateClient'])->name('timeline.updateClient');
+    Route::get('/manageevent/timeline/delete/{id}', [TimelineController::class, 'destroyClient'])->name('timeline.destroyClient');
+
+    Route::post('/manageevent/media/store/{id}', [MediaAssetController::class, 'storeModalClient'])->name('media.storeModalClient');
+    Route::put('/manageevent/media/update/{id}', [MediaAssetController::class, 'updateClient'])->name('media.updateClient');
+    Route::get('/manageevent/media/delete/{id}', [MediaAssetController::class, 'destroyClient'])->name('media.destroyClient');
+
+    Route::post('/manageevent/gift/store/{id}', [GiftController::class, 'storeModalClient'])->name('gift.storeGiftClient');
+    Route::put('/manageevent/gift/update/{id}', [GiftController::class, 'updateClient'])->name('gift.updateClient');
+    Route::get('/manageevent/gift/delete/{id}', [GiftController::class, 'destroyClient'])->name('gift.destroyClient');
 
     Route::get('/create-event', [EventController::class, 'createevent'])->name('create.event');
     Route::post('/store-event', [EventController::class, 'storeevent'])->name('store.event');
@@ -94,19 +124,26 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     // Route::get('/export-guests', [ExcelController::class, 'export'])->name('export.guests');
     Route::get('/export-guests/{format}', [ExcelController::class, 'export']);
+    Route::get('/guest-export', [ExcelController::class, 'show']);
     Route::post('/import-guests', [ExcelController::class, 'import'])->name('import.guests');
+
+    Route::get('/export/tamu-ucapan/{format}', [ExcelController::class, 'exportTamuUcapan'])->name('export.tamu_ucapan');
+    
     Route::get('/download-template', function () {
-        $filePath = public_path('templates/template_daftar_tamu.xlsx'); // Sesuaikan dengan lokasi file template
-        return response()->download($filePath, 'Template_Daftar_Tamu.xlsx');
-    })->name('download.template');  
+        return redirect(asset('templates/Template_Daftar_Tamu.xlsx'));
+    })->name('download.template');             
+    
     Route::get('/export-comments/{format}', [ExcelController::class, 'exportComments']);
 
     Route::get('/commentclient', [CommentController::class, 'viewcomment'])->name('commentclient.viewcomment');
     Route::get('/commentclient/delete/{id}', [CommentController::class, 'destroycomment'])->name('commentclient.destroycomment');
 
-    Route::post('/confirm-payment/{figureId}', [PaymentController::class, 'confirmPayment'])->name('payment.confirm');
+    // Route::post('/confirm-payment/{figureId}', [PaymentController::class, 'confirmPayment'])->name('payment.confirm');
     Route::get('/caroline-hezron/to/{name}', [InvitationController::class, 'show'])
     ->name('invitation.show');
+
+    Route::get('/report', [ClientController::class, 'showEventReport'])
+        ->name('client.eventreport');
 
 });
 
@@ -161,17 +198,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('dashboard');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/profile', [UserController::class, 'indexProfile'])->name('profile');
+    Route::post('/profile/change-password', [UserController::class, 'changePassword'])->name('profile.changePassword');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/genders', [AdminController::class, 'showGenders']);
 
     // Routes untuk Event Owner
-    Route::get('/themes', [ThemeController::class, 'index']);
+    Route::get('/themes', [ThemeController::class, 'index'])->name('themes');
     Route::get('/themes/create', [ThemeController::class, 'create'])->name('theme.create');
     Route::post('/themes/create', [ThemeController::class, 'store'])->name('theme.store');
     Route::get('/themes/delete/{id}', [ThemeController::class, 'destroy']);
@@ -233,7 +275,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/event-reports/finish/{id}', [EventReportController::class, 'markAsFinished']);
     Route::post('/event-reports/finish/{eventId}', [EventReportController::class, 'finishEvent'])->withoutMiddleware('auth');
 
-
+    Route::get('/admin/payments', [PaymentController::class, 'index'])->name('admin.payments.index');
+    Route::post('/admin/payments/{id}/verify', [PaymentController::class, 'verify'])->name('admin.payments.verify');
+    Route::post('/admin/payments/{id}/reject', [PaymentController::class, 'reject'])->name('admin.payments.reject');
 
     Route::get('/event-reports-detail', [EventReportDetailController::class, 'index']);
 

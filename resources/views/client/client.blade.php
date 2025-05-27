@@ -1,32 +1,29 @@
 @extends('admin.layout.template')
 
-@section('pages', 'Client')
+@section('pages', 'Dashboard')
 
-@section('pagestitle', 'Client')
+{{-- @section('pagestitle', '') --}}
 
 @section('sidebar')
     @include('client.layout')
 @endsection
 
 @section('content')
-    {{-- <style>
-        .heading-with-margin {
-            margin-bottom: 50px;
-        }
-        .card {
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            background-color: #fff;
-        }
-        .card-body {
-            padding: 20px;
-        }
-    </style> --}}
 
 <h5 class="heading-with-margin">Client Page diikatJanji</h5>
-<div class="mt-4">
-    <a href="{{ route('event.step2') }}" class="btn btn-primary">Lanjutkan Pengisian Data!</a>
-</div>
+
+<form method="GET" action="{{ route('client.dashboard') }}" class="mb-3">
+    <div class="input-group" style="width: 250px;">
+        <select name="event_id" class="form-select" onchange="this.form.submit()">
+            @foreach ($allEvents as $evt)
+                <option value="{{ $evt->id }}" {{ $evt->id == $selectedEventId ? 'selected' : '' }}>
+                    {{ $evt->event_name }}
+                </option>
+            @endforeach
+        </select>
+    </div>
+</form>
+
 <div class="row">
     <div class="col-lg-6 col-12">
         <div class="row">
@@ -43,7 +40,9 @@
                                 <h5 class="text-white font-weight-bolder mb-0 mt-3">
                                     {{ $totalGuests }}
                                 </h5>
-                                <span class="text-white text-sm">Total Tamu</span>
+                                <span class="text-white text-sm text-truncate d-block" style="max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                    Tamu {{ $event }}
+                                </span>
                             </div>
                             <div class="col-4">
                                 <div class="dropdown text-end mb-6">
@@ -62,80 +61,84 @@
                 </div>
             </div>
 
-            <div class="col-lg-6 col-md-6 col-12 mt-4 mt-md-0">
-                {{-- <a href="{{ route('commentclient.viewcomment') }}" style="text-decoration: none; color: inherit;"> --}}
-                <div class="card w-100">
-                    {{-- <span class="mask bg-dark opacity-10 border-radius-lg"></span> --}}
-                    <div class="card-body d-flex flex-row align-items-center bg-dark opacity-10 border-radius-lg">
-                        {{-- <div class="row">
-                            <div class="col-8 text-start">
-                                <div class="icon icon-shape bg-white shadow text-center border-radius-2xl">
-                                    <i class="fa-solid fa-tags text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
+            
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-lg-8 col-md-12 mb-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-center">Ucapan Terbaru</h5>
+
+                <div class="chat-container">
+                    @if ($latestComment->isEmpty())
+                        <p class="text-muted text-center">Belum ada data.</p>
+                    @else
+                        @foreach ($latestComment as $comment)
+                            <div class="d-flex align-items-center mt-2 mb-2">
+                                <!-- Avatar dengan inisial -->
+                                <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-2"
+                                    style="width: 50px; height: 50px; font-size: 18px; font-weight: bold; flex-shrink: 0;">
+                                    {{ strtoupper(substr($comment->rsvp->name, 0, 1)) }}
                                 </div>
-                                <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                                    {{ $totalComments }}
-                                </h5>
-                                <span class="text-white text-sm">Total Ucapan</span>
-                            </div>
-                            <div class="col-4">
-                                <div class="dropstart text-end mb-6">
-                                    <a href="javascript:;" class="cursor-pointer" id="dropdownUsers2" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <i class="fa fa-ellipsis-h text-white"></i>
-                                    </a>
-                                    <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers2">
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
-                                    </ul>
+                
+                                <!-- Kotak Ucapan -->
+                                <div class="p-2 rounded-3 shadow-sm mt-2"
+                                    style="max-width: 70%; border-left: 3px solid black; background-color: #f8f9fa; text-align: left;">
+                                    <p class="mb-1 fw-bold">{{ $comment->rsvp->name }}</p>
+                                    <p class="mb-0">{{ $comment->comment }}</p>
+                                    <small class="d-block text-muted">{{ $comment->created_at->format('d M Y H:i') }} WIB</small>
                                 </div>
                             </div>
-                        </div> --}}
-                        <div class="flex-grow-1">
-                            <h5 class="text-white font-weight-bolder mb-2">Ucapan Terbaru</h5>
-                            @if ($latestComment->isNotEmpty())
-                                @foreach ($latestComment as $comment)
-                                    <div class="bg-white p-3 border-radius-md shadow-sm mb-1">
-                                        <p class="mb-1 text-dark"><strong>{{ $comment->rsvp->name }}</strong></p>
-                                        <p class="text-sm text-dark mb-0 me-2"  style="text-align: justify;">{{ $comment->comment }}</p>
-                                        <small class="text-muted">{{ $comment->created_at->format('d M Y H:i') }} WIB</small>                                   
-                                    </div>
-                                @endforeach
-                            @else
-                                <p class="text-white">Belum ada ucapan.</p>
-                            @endif
-                        </div>
+                        @endforeach
+                    @endif
+                </div>  
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-12 mb-2">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="text-center">Statistik Ucapan</h5>
+                @if ($totalRsvpWithComments == 0 && $totalRsvpWithoutComments == 0)
+                    <p class="text-center text-muted">Belum ada data.</p>
+                @else
+                    <div class="d-flex justify-content-center">
+                        <canvas id="donutChart" style="height: 300px !important; width: 300px !important;"></canvas>
                     </div>
-                </div>
+                @endif
             </div>
         </div>
     </div>
 </div>
 
-
-
-    {{-- <div class="row">
-        <div class="col-md-4">
-            <a href="{{ route('rsvpclient') }}" style="text-decoration: none; color: inherit;">
-                <div class="card shadow border-0 p-3" style="border-radius: 10px; background-color: #f8f9fa;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Total Tamu</h5>
-                        <p class="card-text" style="font-size: 24px; font-weight: bold;">{{ $totalGuests }}</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        
-        <div class="col-md-4">
-            <a href="{{ route('commentclient.viewcomment') }}" style="text-decoration: none; color: inherit;">
-                <div class="card shadow border-0 p-3" style="border-radius: 10px; background-color: #f8f9fa;">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Total Ucapan</h5>
-                        <p class="card-text" style="font-size: 24px; font-weight: bold;">{{ $totalComments }}</p>
-                    </div>
-                </div>
-            </a>
-        </div>           
-    </div> --}}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('donutChart').getContext('2d');
+    var donutChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ['Sudah Ucapkan', 'Belum Ucapkan'],
+            datasets: [{
+                data: [{{ $totalRsvpWithComments }}, {{ $totalRsvpWithoutComments }}],
+                backgroundColor: ['#BBF1C4', '#F4D0D5'],
+                hoverBackgroundColor: ['#8AC6A3', '#F4B5C7']
+            }]
+        },
+        options: {
+            responsive: false,
+            maintainAspectRatio: true,
+            cutout: '65%', // Mengatur ukuran lubang tengah (default: 50%)
+            plugins: {
+                legend: {
+                    position: 'bottom'
+                }
+            }
+        }
+    });
+</script>
 @endsection
 
 @section('footjs')

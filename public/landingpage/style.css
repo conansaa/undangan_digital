@@ -366,6 +366,12 @@ button:hover {
     gap: 2vh;
 }
 
+.order .list li a {
+    text-decoration: none; /* Hilangkan garis bawah */
+    color: white; /* Ubah warna teks menjadi putih */
+    display: block; /* Buat seluruh area klikabel */
+}
+
 .order .list li::before {
     content: counter(list-item);
     counter-increment: list-item;

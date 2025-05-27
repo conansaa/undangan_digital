@@ -196,4 +196,95 @@ class TimelineController extends Controller
         $timeline->delete();
         return redirect()->route('event.show', ['id' => $timeline->event_id])->with('success', 'Data berhasil dihapus.');
     }
+
+    public function storeModalClient(Request $request, $event_id)
+    {
+        $request->validate([
+            // 'event_id' => 'required',
+            'title' => 'required|max:100',
+            'date' => 'required|date',
+            'description' => 'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,webp|max:1000',
+        ]);
+
+        $timeline = new Timelines();
+
+        if ($request->hasFile('photo')) {
+            // Simpan file foto ke folder 'timelines' dengan nama unik
+            $photoName = time() . '_' . $request->file('photo')->getClientOriginalName();
+            $request->file('photo')->move(public_path('timelines'), $photoName);
+            
+            // Simpan nama file foto yang baru ke dalam timeline
+            $timeline->photo = $photoName;
+        }
+
+        // Simpan data timeline
+        $timeline->event_id = $event_id;
+        $timeline->title = $request->title;
+        $timeline->date = $request->date;
+        $timeline->description = $request->description;
+
+        $timeline->save();
+
+        return redirect()->route('manageevent.detail', ['id' => $event_id])->with('success', 'Timeline berhasil ditambahkan!');
+    }
+
+    public function updateClient(Request $request, $id)
+    {
+        // dd($request->all());
+        // Validasi input
+        $request->validate([
+            // 'event_id' => 'required',
+            'title' => 'required|max:100',
+            'date' => 'required|date',
+            'description' => 'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,webp|max:1000', // optional jika mengubah foto
+        ]);
+
+        // Ambil timeline berdasarkan id
+        $timeline = Timelines::find($id);
+
+        // Cek apakah ada file foto yang di-upload
+        if ($request->hasFile('photo')) {
+            // Simpan file foto ke folder 'timeline_photos'
+            $photoName = time() . '_' . $request->file('photo')->getClientOriginalName();
+            $request->file('photo')->move(public_path('timelines'), $photoName);
+
+            // Hapus foto lama jika ada
+            if ($timeline->photo) {
+                File::delete(public_path('timelines/' . $timeline->photo));
+            }
+
+            // Simpan nama file foto yang baru
+            $timeline->photo = $photoName;
+        }
+
+        // Update data timeline
+        // $timeline->event_id = $request->event_id;
+        $timeline->title = $request->title;
+        $timeline->date = $request->date;
+        $timeline->description = $request->description;
+
+        $timeline->save();
+        
+        return redirect()->route('manageevent.detail', ['id' => $timeline->event_id])->with('success', 'Data berhasil diperbarui.');
+    }
+
+    public function destroyClient($id)
+    {
+        // Menemukan timeline berdasarkan ID
+        $timeline = Timelines::find($id);
+
+        if (!$timeline) {
+            return response()->json(['message' => 'Timeline not found'], 404);
+        }
+
+        if ($timeline->photo && File::exists(public_path('timelines/' . $timeline->photo))) {
+            File::delete(public_path('timelines/' . $timeline->photo));
+        }
+
+        // Hapus data
+        $timeline->delete();
+        return redirect()->route('manageevent.detail', ['id' => $timeline->event_id])->with('success', 'Data berhasil dihapus.');
+    }
 }

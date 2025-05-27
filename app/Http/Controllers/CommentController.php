@@ -71,34 +71,36 @@ class CommentController extends Controller
         // dd($eventOwner);
 
         if (!$eventOwner) {
-            return redirect()->route('home')->withErrors('Event Owner tidak ditemukan.');
+            return redirect()->route('info')->withErrors('Event Owner tidak ditemukan.');
         }
 
         // Ambil ID event yang dimiliki oleh user
-        $eventDetailsIds = $eventOwner->event()->pluck('id');
+        // $eventDetailsIds = $eventOwner->event()->pluck('id');
+        $eventDetails = $eventOwner->event()->orderBy('created_at', 'desc')->get(); // urutkan event dari yang terbaru
+        $eventDetailsIds = $eventDetails->pluck('id');
         if ($eventDetailsIds->isEmpty()) {
-            return redirect()->route('home')->withErrors('Tidak ada event yang ditemukan untuk Event Owner ini.');
+            return redirect()->route('info')->withErrors('Tidak ada event yang ditemukan untuk Event Owner ini.');
         }
         // dd($eventDetailsIds);
+        $selectedEventId = $request->get('event_id', $eventDetailsIds->first());
 
-        $rsvpIds = Rsvp::whereIn('event_id', $eventDetailsIds)->pluck('id');
+        $rsvpIds = Rsvp::where('event_id', $selectedEventId)->pluck('id');
         // dd($rsvpIds);
         
         $sort = $request->get('sort', 'created_at'); 
         $order = $request->get('order', 'asc'); 
 
-        $comments = Comments::whereHas('rsvp', function ($query) use ($eventDetailsIds) {
-            $query->where('event_id', $eventDetailsIds);
-        })->with('rsvp')->get(); 
-        // $comments = Comments::whereIn('rsvp_id', $rsvpIds) 
-        //     ->with(['rsvp' => function ($query) {
-        //         $query->select('name'); // Ambil hanya kolom 'id' dan 'name' dari tabel RSVP
-        //     }])
-        //     ->orderBy($sort, $order) 
-        //     ->get();
-        // dd($comments);
+        // $comments = Comments::whereHas('rsvp', function ($query) use ($eventDetailsIds) {
+        //     $query->where('event_id', $eventDetailsIds);
+        // })->with('rsvp')->get(); 
+        $comments = Comments::whereHas('rsvp', function ($query) use ($selectedEventId) {
+            $query->where('event_id', $selectedEventId);
+        })
+        ->with('rsvp')
+        ->orderBy($sort, $order)
+        ->get();
 
-        return view('client.commentclient', compact('comments'));
+        return view('client.commentclient', compact('comments', 'eventDetails', 'selectedEventId'));
     }
 
 

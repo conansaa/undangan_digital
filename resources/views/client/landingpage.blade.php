@@ -15,6 +15,7 @@
             <li><a href="#template">Template</a></li>
             <li><a href="#price">Price</a></li>
             <li><a href="#order">How to Order</a></li>
+            <li><a href="{{ route('login') }}">Login</a></li>
         </ul>
     </nav>
 
@@ -123,16 +124,19 @@
                     <h3>Rp150.000</h3>
                     <h4>Rp199.000</h4>
                     <ul>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
+                        <li>Akses Semua Tema Basic.</li>
+                        <li>Galeri Foto Max 6 Foto.</li>
+                        <li>Masa Aktif 3 Bulan.</li>
+                        <li>Manajemen Data Tamu.</li>
+                        <li>Background Music.</li>
+                        <li>Informasi Acara.</li>
+                        <li>Galeri Foto.</li>
+                        <li>RSVP Online.</li>
+                        <li>Gmaps.</li>
+                        <li>Wedding Gift.</li>
+                        <li>Ucapan dan Doa</li>
+                        <li>Ayat/Quotes</li>
+                        <li>1 Kali Revisi</li>
                     </ul>
                 </div>
                 <div class="price-item">
@@ -140,16 +144,22 @@
                     <h3>Rp200.000</h3>
                     <h4>Rp280.000</h4>
                     <ul>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
+                        <li>Akses Semua Tema Basisc.</li>
+                        <li>Akses Sebagian Tema Premium.</li>
+                        <li>Galeri Foto Max 10 Foto.</li>
+                        <li>Masa Aktif 6 Bulan.</li>
+                        <li>Manajemen Data Tamu.</li>
+                        <li>Background Music.</li>
+                        <li>Informasi Acara.</li>
+                        <li>Galeri Foto.</li>
+                        <li>RSVP Online.</li>
+                        <li>Gmaps.</li>
+                        <li>Link Streaming</li>
+                        <li>Wedding Gift</li>
+                        <li>Ucapan dan Doa</li>
+                        <li>Love Story</li>
+                        <li>Ayat/Quotes</li>
+                        <li>3 Kali Revisi</li>
                     </ul>
                 </div>
                 <div class="price-item">
@@ -157,16 +167,25 @@
                     <h3>Rp250.000</h3>
                     <h4>Rp350.000</h4>
                     <ul>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
-                        <li>Lorem, ipsum.</li>
+                        <li>Akses Semua Tema.</li>
+                        <li>Akses Semua Fitur.</li>
+                        <li>Berbagai Tema dengan Animasi.</li>
+                        <li>Galeri Foto Max 15 Foto.</li>
+                        <li>Masa Aktif 1 Tahun.</li>
+                        <li>Manajemen Data Tamu.</li>
+                        <li>Custom Design.</li>
+                        <li>Background Music.</li>
+                        <li>Informasi Acara.</li>
+                        <li>Galeri Foto.</li>
+                        <li>Countdown & Add to Google Calendar</li>
+                        <li>RSVP Online</li>
+                        <li>Gmaps</li>
+                        <li>Link Streaming</li>
+                        <li>Wedding Gift</li>
+                        <li>Ucapan dan Doa</li>
+                        <li>Love Story</li>
+                        <li>Ayat/Quotes</li>
+                        <li>Unlimited Revisi</li>
                     </ul>
                 </div>
             </div>
@@ -177,7 +196,7 @@
                 <h4>Pesan dengan Mudah, Rayakan dengan Bahagia</h4>
             </div>
             <div class="image">
-                 <img src="{{ asset('landingpage/media/RSVP - iPhone 13.svg') }} alt="">
+                 <img src="{{ asset('landingpage/media/RSVP - iPhone 13.svg') }}" alt="">
                  <img src="{{ asset('landingpage/media/Home - iPhone 13.svg') }}" alt="">
                  <img src="{{ asset('landingpage/media/Countdown - iPhone 13.svg') }}" alt="">
             </div>
@@ -185,7 +204,7 @@
                 <ol>
                     <li>Tentukan desain template yang kamu suka </li>
                     <li>Tentukan paket harga sesuai keinginan</li>
-                    <li>Hubungi kami terkait detail acara, di sini</li>
+                    <li>Hubungi kami terkait detail acara,<a href="https://wa.me/6281215257835" target="_blank">di sini</a></li>
                     <li>Konfirmasi pembayaran</li>
                     <li>Undangan kamu siap kami proses</li>
                     <li>Sebarkan undangan kamu untuk kerabat!</li>

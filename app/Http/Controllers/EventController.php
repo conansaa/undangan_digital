@@ -106,7 +106,11 @@ class EventController extends Controller
     {
         $theme = Theme::all();
         $type = EventTypeRef::all();
-        return view('client.create_event', compact('theme', 'type'));
+        $userId = Auth::id();
+        $hasEvent = EventDetails::whereHas('eventOwner', function ($q) use ($userId) {
+            $q->where('user_id', $userId);
+        })->exists();
+        return view('client.create_event', compact('theme', 'type', 'hasEvent'));
     }
 
     public function storeevent(Request $request)
@@ -134,16 +138,25 @@ class EventController extends Controller
             ], 404);
         }
 
-        $event = EventDetails::create([
-            // 'user_id' => auth()->id(),
-            'event_owner_id' => $eventOwner->id,
-            'event_name' => $validated['event_name'],
-            'event_date' => $validated['event_date'],
-            'event_type_id' => $validated['type'],
-            'event_time' => $validated['event_time'],
-            // 'location' => $validated['event_location'],
-            'theme_id' => $validated['theme_id']
-        ]);
+        // $event = EventDetails::create([
+        //     // 'user_id' => auth()->id(),
+        //     'event_owner_id' => $eventOwner->id,
+        //     'event_name' => $validated['event_name'],
+        //     'event_date' => $validated['event_date'],
+        //     'event_type_id' => $validated['type'],
+        //     'event_time' => $validated['event_time'],
+        //     'theme_id' => $validated['theme_id']
+        // ]);
+        $event = new EventDetails();
+        $event->event_owner_id = $eventOwner->id;
+        $event->event_name = $validated['event_name'];
+        $event->event_date = $validated['event_date'];
+        $event->event_time = $validated['event_time'];
+        $event->event_type_id = $validated['type'];
+        $event->theme_id = $validated['theme_id'];
+        // $event->user_id = auth()->id(); // kalau perlu
+
+        $event->save();
 
         return response()->json([
             'success' => true,

@@ -32,6 +32,8 @@
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tag</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Kategori</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Warna</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Link Tema</th>
+                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Preview Tema</th>
                     <th class="text-secondary opacity-7"></th>
                 </tr>
             </thead>
@@ -45,6 +47,10 @@
                         <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $theme->category->name }}</td>
                         <td class="align-middle text-center text-secondary text-xs font-weight-bold">
                             <span style="background-color: {{ $theme->color }}; padding: 2px 10px; border-radius: 5px;">{{ $theme->color }}</span>
+                        </td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold text-truncate" style="max-width: 150px;" title="{{ $theme->preview_url }}">{{ Str::limit($theme->preview_url, 50) }}</td>
+                        <td class="align-middle text-center text-secondary text-xs font-weight-bold">
+                            <img src="{{ asset('themes/' . $theme->preview_image) }}" alt="Foto Tema" style="max-width: 100px;">
                         </td>
                         <td class="align-middle">
                             <a href="/themes/edit/{{ $theme->id }}">

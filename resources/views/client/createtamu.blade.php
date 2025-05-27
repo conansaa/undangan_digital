@@ -1,8 +1,8 @@
 @extends('admin.layout.template')
 
-@section('pages', 'RSVP')
+@section('pages', 'Tamu Undangan')
 
-@section('pagestitle', 'Tamu')
+@section('pagestitle', 'Tambah Tamu')
 
 @section('sidebar')
     @include('client.layout')
@@ -21,27 +21,28 @@
         <input type="hidden" name="event_id" value="{{ $eventDetails }}">
         
         <div id="guestInputs">
-            @for ($i = 0; $i < 1; $i++)
-            <div class="row mb-3">
-                <div class="col-md-6">
-                    <label class="form-label fw-bold">Nama<span class="text-danger ms-1">*</span></label>
-                    <input type="text" name="name[]" class="bg-white form-control" placeholder="Contoh: Khansa Delphi. Pastikan nama berbeda." required>
+            @php
+                $sisa = $quota - $rsvpCount;
+            @endphp
+
+            @for ($i = 0; $i < min(3, $sisa); $i++)
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Nama{!! $i == 0 ? '<span class="text-danger ms-1">*</span>' : '' !!}</label>
+                        <input type="text" name="name[]" class="bg-white form-control" placeholder="Contoh: Khansa Delphi. Pastikan nama berbeda." {!! $i == 0 ? 'required' : '' !!}>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">No Telp (Opsional)</label>
+                        <input type="text" name="phone_number[]" class="bg-white form-control phone-number" placeholder="Contoh: 081234567890">
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <label class="form-label fw-bold">No Telp (Opsional)</label>
-                    <input type="text" name="phone_number[]" class="bg-white form-control" placeholder="Contoh: 081234567890">
-                </div>
-            </div>
             @endfor
+
         </div>
 
         <div class="mb-3">
-            <button type="button" class="btn btn-secondary" onclick="addGuestInput()">Tambah Input</button>
+            <button type="button" class="btn btn-secondary" id="addGuestButton">Tambah Input</button>
         </div>
-
-        {{-- <div class="mb-3">
-            <button name="submit" type="submit" class="btn btn-info text-white" onclick="return confirm('Apakah anda yakin ingin menambahkan RSVP tersebut?')">Tambah Tamu</button>
-        </div> --}}
         <div class="mb-3">
             <button id="submitBtn" name="submit" type="button" class="btn btn-info text-white">Tambah Tamu</button>
         </div>
@@ -50,32 +51,55 @@
 </div>
 
 <script>
-    function addGuestInput() {
-        const guestInputs = document.getElementById('guestInputs');
-        if (guestInputs.children.length >= 10) {
-            Swal.fire({
-                icon: 'warning',
-                title: 'Batas Maksimal Tercapai!',
-                text: 'Anda hanya bisa menambahkan maksimal 10 tamu.',
-                confirmButtonColor: '#3085d6',
-                confirmButtonText: 'Mengerti'
-            });
-            return; // Hentikan fungsi jika sudah mencapai batas
+    document.addEventListener("DOMContentLoaded", function () {
+        let totalGuests = {{ $totalGuests }}; // Jumlah tamu yang sudah ada
+        const maxQuota = {{ $quota }}; // Kuota dari database
+
+        function addGuestInput() {
+            const guestInputs = document.getElementById('guestInputs');
+            let currentGuestCount = guestInputs.children.length + totalGuests;
+
+            if (currentGuestCount >= maxQuota) {
+                let remainingQuota = maxQuota - totalGuests;
+                let unsubmittedGuests = [];
+                
+                // Ambil nama dari input yang belum tersimpan
+                document.querySelectorAll('input[name="name[]"]').forEach(input => {
+                    unsubmittedGuests.push(input.value || "Tidak ada nama");
+                });
+
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Kuota Tamu Penuh!',
+                    html: `
+                        <p>Anda hanya bisa menambahkan ${remainingQuota} tamu lagi.</p>
+                        <p><strong>Tamu yang belum tersimpan:</strong></p>
+                        <ul>${unsubmittedGuests.map(name => `<li>${name}</li>`).join('')}</ul>
+                    `,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: 'Mengerti'
+                });
+
+                return; // Hentikan fungsi jika kuota sudah penuh
+            }
+
+            const newInput = document.createElement('div');
+            newInput.classList.add('row', 'mb-3');
+            newInput.innerHTML = `
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Nama</label>
+                    <input type="text" name="name[]" class="bg-white form-control" placeholder="Contoh: Khansa Delphi. Pastikan nama berbeda.">
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">No Telp (Opsional)</label>
+                    <input type="text" name="phone_number[]" class="bg-white form-control phone-number" placeholder="Contoh: 081234567890">
+                </div>
+            `;
+            guestInputs.appendChild(newInput);
         }
-        const newInput = document.createElement('div');
-        newInput.classList.add('row', 'mb-3');
-        newInput.innerHTML = `
-            <div class="col-md-6">
-                <label class="form-label fw-bold">Nama<span class="text-danger ms-1">*</span></label>
-                <input type="text" name="name[]" class="bg-white form-control" placeholder="Contoh: Khansa Delphi. Pastikan nama berbeda." required>
-            </div>
-            <div class="col-md-6">
-                <label class="form-label fw-bold">No Telp (Opsional)</label>
-                <input type="text" name="phone_number[]" class="bg-white form-control" placeholder="Contoh: 081234567890">
-            </div>
-        `;
-        guestInputs.appendChild(newInput);
-    }
+
+        document.getElementById("addGuestButton").addEventListener("click", addGuestInput);
+    });
 
     function validatePhoneNumber() {
         const phoneInput = document.getElementById('phone_number');
@@ -120,7 +144,8 @@
                     method: 'POST',
                     body: formData,
                     headers: {
-                        'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value
+                        'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value,
+                        'Accept': 'application/json'
                     }
                 })
                 .then(response => response.json())
@@ -128,7 +153,8 @@
                     if (data.success) {
                         Swal.fire('Sukses!', 'Tamu berhasil ditambahkan.', 'success')
                         .then(() => {
-                            window.location.reload(); // Reload halaman setelah sukses
+                            const eventId = data.event_id; // pastikan server mengembalikan event_id
+                            window.location.href = "/rsvpclient?event_id=" + eventId; // Reload halaman setelah sukses
                         });
                     } else {
                         Swal.fire('Gagal!', data.message || 'Terjadi kesalahan.', 'error');
@@ -154,13 +180,22 @@
     document.head.appendChild(style);
 
     // Optional: Real-time validation as the user types
-    document.getElementById('phone_number').addEventListener('input', function() {
-        const phoneError = document.getElementById('phoneError');
-        if (this.value.length < 12) {
-            phoneError.style.display = 'block';
-        } else {
-            phoneError.style.display = 'none';
-        }
+    // document.getElementById('phone_number').addEventListener('input', function() {
+    //     const phoneError = document.getElementById('phoneError');
+    //     if (this.value.length < 12) {
+    //         phoneError.style.display = 'block';
+    //     } else {
+    //         phoneError.style.display = 'none';
+    //     }
+    // });
+    document.querySelectorAll('.phone-number').forEach(function(input) {
+        input.addEventListener('input', function() {
+            if (this.value.length < 12) {
+                this.classList.add('is-invalid');
+            } else {
+                this.classList.remove('is-invalid');
+            }
+        });
     });
 
 </script>

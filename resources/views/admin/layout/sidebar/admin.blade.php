@@ -99,6 +99,25 @@
     </a>
   </li>
   <li class="nav-item">
+    <a class="nav-link {{ Request::is('admin/payments*') ? 'active' : '' }}" href="{{ route('admin.payments.index') }}">
+      <div class="fa-solid fa-money-check-dollar icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+          <title>verifikasi pembayaran</title>
+          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <g transform="translate(-2020.000000, -442.000000)" fill="#FFFFFF" fill-rule="nonzero">
+              <g transform="translate(1716.000000, 291.000000)">
+                <g transform="translate(304.000000, 151.000000)">
+                  <path class="color-background opacity-6" d="M36 4H4C2.9 4 2 4.9 2 6v28c0 1.1.9 2 2 2h32c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 34V6h32v28H4z"/>
+                  <path class="color-background" d="M10 14h20v2H10zM10 18h14v2H10zM10 22h10v2H10z"/>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <span class="nav-link-text ms-1">Verifikasi Pembayaran</span>
+    </a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link {{ Request::is('sections*') ? 'active' : '' }}" href="/sections">
       <div class="fa-solid fa-columns icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
           <title>section</title>

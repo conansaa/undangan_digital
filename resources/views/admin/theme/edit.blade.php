@@ -13,7 +13,7 @@
     <div class="mb-3">
         <a href="/themes" class="btn btn-sm btn-outline-danger fw-bold me-2">Kembali</a>
     </div>
-    <form action="/themes/edit/{{ $theme->id }}" method="post">
+    <form action="/themes/edit/{{ $theme->id }}" method="post" enctype="multipart/form-data">
         @csrf
         @method("put")
 
@@ -84,7 +84,32 @@
                     {{ $message }}
                 </div>
             @enderror
-        </div>        
+        </div>
+
+        <div class="mb-3">
+            <label for="preview_url" class="form-label fw-bold">Link Tema</label><br>
+            <input type="text" value="{{ old('preview_url', $theme->preview_url) }}" name="preview_url" class="bg-white form-control @error('preview_url') is-invalid @enderror" placeholder="Masukkan Link Tema">
+            @error('preview_url')
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>
+
+        <div class="mb-3">
+            <label for="preview_image" class="form-label fw-bold">Preview Tema</label>
+            <input type="file" name="preview_image" class="form-control @error('preview_image') is-invalid @enderror">
+            @error('preview_image')
+                <div id="validationServerUsernameFeedback" class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+            @if ($theme->preview_image)
+                <div class="mt-2">
+                    <img src="{{ asset('themes/' . $theme->preview_image) }}" alt="Foto Tema" style="width: 100px;">
+                </div>
+            @endif
+        </div>   
 
         <div class="mb-3">
             <button name="submit" type="submit" class="btn btn-info text-white" onclick="return confirm('Apakah anda yakin ingin mengubah tema ini?')">Simpan Perubahan</button>

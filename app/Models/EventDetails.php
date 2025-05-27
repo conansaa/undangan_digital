@@ -99,4 +99,10 @@ class EventDetails extends Model
   {
     return $this->hasMany(MediaAssets::class, 'event_id');
   }
+
+  public function payment()
+  {
+      return $this->hasOne(Payments::class, 'event_id', 'id');
+  }
+
 }

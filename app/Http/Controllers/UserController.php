@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -112,4 +113,31 @@ class UserController extends Controller
 
         return redirect('/users')->with('success', 'User deleted successfully.');
     }
+
+    public function indexProfile()
+    {
+        $user = Auth::user();
+        return view('profile.index', compact('user'));
+    }
+
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'new_password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = Auth::user();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return back()->withErrors(['current_password' => 'Password lama salah.']);
+        }
+
+        // Ganti password
+        $user->password = Hash::make($request->new_password);
+        $user->save(); // Ini tidak error jika $user adalah model Eloquent
+
+        return back()->with('success', 'Password berhasil diubah.');
+    }
+
 }

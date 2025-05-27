@@ -1,8 +1,12 @@
 @extends('admin.layout.template')
 
+@section('sidebar')
+    @include('client.layout')
+@endsection
+
 @section('content')
 
-<script>
+{{-- <script>
     document.addEventListener("DOMContentLoaded", function() {
         let sidebar = document.getElementById("sidenav-main");
         if (sidebar) {
@@ -17,16 +21,42 @@
         margin-left: 0 !important;  /* Hilangkan margin kiri */
         width: 100% !important;  /* Buat selebar mungkin */
     }
-</style>
+</style> --}}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        let sidebar = document.getElementById("sidenav-main");
+        if (sidebar) {
+            // Aktifkan sidebar
+            sidebar.style.display = "block";
+
+            // Nonaktifkan semua link
+            let links = sidebar.querySelectorAll("a");
+            links.forEach(link => {
+                link.style.pointerEvents = "none";
+                link.style.opacity = "0.5";
+                link.style.cursor = "not-allowed";
+            });
+        }
+    });
+</script>
+
+{{-- <style>
+    .main-content {
+        margin-left: 250px !important; /* Sesuaikan dengan lebar sidebar */
+    }
+</style> --}}
 
 <div class="container text-center mt-5">
-    <h1 class="text-warning">Halo! 👋</h1>
-    <p class="lead mt-3">Buat acaramu bersama diikatJanji! 🎉</p>
-    <p>Isi detail acaramu secara bertahap dengan panduan yang sudah kami siapkan.</p>
+    <div class="card p-4">
+        <h1 class="text-warning">Halo! 👋</h1>
+        <p class="lead mt-3">Buat acaramu bersama diikatJanji! 🎉</p>
+        <p>Isi detail acaramu secara bertahap dengan panduan yang sudah kami siapkan.</p>
 
-    <a href="{{ route('create.event') }}" class="btn btn-warning mt-3">
-        Buat Acara Sekarang 🚀
-    </a>
+        <a href="{{ route('create.event') }}" class="btn btn-warning mt-3 mx-auto w-auto">
+            Buat Acara Sekarang 🚀
+        </a>
+    </div>
 </div>
 @endsection
 

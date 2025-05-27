@@ -6,10 +6,11 @@ use App\Models\Rsvp;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class GuestExport implements FromCollection, WithHeadings, WithMapping, WithStyles
+class GuestExport implements FromCollection, WithHeadings, WithMapping, WithStyles, WithTitle
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -24,6 +25,11 @@ class GuestExport implements FromCollection, WithHeadings, WithMapping, WithStyl
     public function collection()
     {
         return $this->data;
+    }
+
+    public function title(): string
+    {
+        return 'Data Tamu';
     }
 
     public function headings(): array
@@ -43,21 +49,54 @@ class GuestExport implements FromCollection, WithHeadings, WithMapping, WithStyl
 
     public function styles(Worksheet $sheet)
     {
-        return [
-            // Format Heading (Baris ke-1)
-            1 => [
-                'font' => [
-                    'bold' => true, // Tebal
-                    'color' => ['rgb' => 'FFFFFF'], // Warna teks putih
-                ],
-                'fill' => [
-                    'fillType' => 'solid',
-                    'startColor' => ['rgb' => '4F81BD'], // Warna latar belakang biru
-                ],
-                'alignment' => [
-                    'horizontal' => 'center', // Posisi teks di tengah
-                ],
+        // Auto-size tiap kolom
+        foreach (range('A', 'D') as $column) {
+            $sheet->getColumnDimension($column)->setAutoSize(true);
+        }
+
+        // Styling Heading
+        $sheet->getStyle('A1:D1')->applyFromArray([
+            'font' => [
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF'],
             ],
-        ];
+            'fill' => [
+                'fillType' => 'solid',
+                'startColor' => ['rgb' => '4F81BD'],
+            ],
+            'alignment' => [
+                'horizontal' => 'center',
+            ],
+        ]);
+
+        // Dapatkan jumlah baris (total data + heading)
+        $totalRows = count($this->data) + 1; // +1 karena ada heading di baris 1
+
+        // Atur warna latar belakang untuk "Hadir" dan "Tidak Hadir"
+        for ($row = 2; $row <= $totalRows; $row++) {
+            $cell = 'C' . $row; // Kolom konfirmasi ada di C
+
+            $status = $sheet->getCell($cell)->getValue();
+            if ($status == 'Hadir') {
+                // Warna hijau untuk Hadir
+                $sheet->getStyle($cell)->applyFromArray([
+                    'fill' => [
+                        'fillType' => 'solid',
+                        'startColor' => ['rgb' => 'C6EFCE'],
+                    ],
+                    'font' => ['bold' => true],
+                ]);
+            } elseif ($status == 'Tidak Hadir') {
+                // Warna merah untuk Tidak Hadir
+                $sheet->getStyle($cell)->applyFromArray([
+                    'fill' => [
+                        'fillType' => 'solid',
+                        'startColor' => ['rgb' => 'FFC7CE'],
+                    ],
+                    'font' => ['bold' => true],
+                ]);
+            }
+        }
     }
+
 }

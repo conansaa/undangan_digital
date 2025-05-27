@@ -7,6 +7,29 @@
         </div>
     @endif
 
+    <div class="container position-sticky z-index-sticky top-0">
+        <div class="row">
+            <div class="col-12">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+                    <div class="container-fluid pe-0">
+                        <img src="{{ asset('landingpage/media/logo.svg') }}" alt="logo" width="100px">
+                        <div class="">
+                            <ul class="navbar-nav mx-auto ms-xl-auto me-xl-7">
+                                <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center me-2 active text-dark fs-6" aria-current="page" href="{{ route('client.landingpage') }}">
+                                        Home
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+            </div>
+        </div>
+    </div>
+
     <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
         <div class="card card-plain mt-8">
             <div class="card-header pb-0 text-left bg-transparent">

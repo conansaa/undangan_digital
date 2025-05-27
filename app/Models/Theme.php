@@ -17,6 +17,9 @@ class Theme extends Model
         'tag',
         'theme_category_id',
         'color',
+        'preview_url',
+        'preview_image',
+        'package_id',
     ];
 
     public function event()
@@ -43,4 +46,10 @@ class Theme extends Model
     {
         return $this->belongsToMany(SectionRef::class, 'theme_section');
     }
+
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
+    }
+
 }

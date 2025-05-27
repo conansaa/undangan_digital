@@ -87,6 +87,28 @@
                     {{ $message }}
                 </div>
             @enderror
+        </div>   
+        
+        <!-- URL Field -->
+        <div class="mb-3">
+            <label for="preview_url" class="form-label fw-bold">Link Tema</label>
+            <input type="text" name="preview_url" class="bg-white form-control @error('preview_url') is-invalid @enderror" placeholder="Masukkan link tema">
+            @error('preview_url')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
+        </div>   
+        
+        <!-- Image Field -->
+        <div class="mb-3">
+            <label for="preview_image" class="form-label fw-bold">Preview Tema</label>
+            <input type="file" name="preview_image" class="form-control @error('preview_image') is-invalid @enderror">
+            @error('preview_image')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
         </div>
 
         <div class="mb-3">

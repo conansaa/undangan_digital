@@ -12,7 +12,6 @@
 <li class="nav-item">
     <a class="nav-link {{ Request::is('client*') ? 'active' : '' }}" href="/client">
         <div class="fa-solid fa-chart-simple icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            {{-- <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
             <title>dashboard </title>
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-1716.000000, -439.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -30,9 +29,26 @@
     </a>
 </li>
 <li class="nav-item">
+    <a class="nav-link {{ Request::is('manage-event*') ? 'active' : '' }}" href="/manage-event">
+        <div class="fa-solid fa-calendar-check icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            <title>Kelola Acara</title>
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <g transform="translate(1716.000000, 291.000000)">
+                        <g id="calendar" transform="translate(153.000000, 2.000000)">
+                            <path class="color-background opacity-6" d="M12 4h18v2H12V4zM3 8h36v30H3V8zm6 6h24v2H9v-2zm0 4h18v2H9v-2z"></path>
+                            <path class="color-background" d="M36 2h-6V0h-2v2H14V0h-2v2H6C4.35 2 3 3.35 3 5v35c0 1.65 1.35 3 3 3h30c1.65 0 3-1.35 3-3V5c0-1.65-1.35-3-3-3zM6 40V8h30v30H6zm8-26h18v2H14v-2zm0 4h12v2H14v-2zm18 10H14v-2h18v2zm0 4H14v-2h18v2zm0 4H14v-2h18v2z"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </div>
+        <span class="nav-link-text ms-1">Acara</span>
+    </a>
+</li>
+<li class="nav-item">
     <a class="nav-link  {{ Request::is('rsvpclient*') ? 'active' : '' }}" href="/rsvpclient">
         <div class="fa-solid fa-user-check icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            {{-- <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
             <title>tamu</title>
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -52,7 +68,6 @@
 <li class="nav-item">
     <a class="nav-link {{ Request::is('commentclient*') ? 'active' : '' }}" href="/commentclient">
         <div class="fa-solid fa-comments icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-            {{-- <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> --}}
             <title>ucapan</title>
             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
                 <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
@@ -69,6 +84,25 @@
         <span class="nav-link-text ms-1">Data Ucapan</span>
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link {{ Request::is('report*') ? 'active' : '' }}" href="/report">
+        <div class="fa-solid fa-file-alt icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+            <title>Laporan</title>
+            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g transform="translate(-1869.000000, -293.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                    <g transform="translate(1716.000000, 291.000000)">
+                        <g id="report" transform="translate(153.000000, 2.000000)">
+                            <path class="color-background opacity-6" d="M12 4h18v2H12V4zM3 8h36v30H3V8zm6 6h24v2H9v-2zm0 4h18v2H9v-2z"></path>
+                            <path class="color-background" d="M36 2h-6V0h-2v2H14V0h-2v2H6C4.35 2 3 3.35 3 5v35c0 1.65 1.35 3 3 3h30c1.65 0 3-1.35 3-3V5c0-1.65-1.35-3-3-3zM6 40V8h30v30H6zm8-26h18v2H14v-2zm0 4h12v2H14v-2zm18 10H14v-2h18v2zm0 4H14v-2h18v2zm0 4H14v-2h18v2z"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </div>
+        <span class="nav-link-text ms-1">Laporan</span>
+    </a>
+</li>
+
 
                     {{-- <a href="/client" class="text-decoration-none text-white">
                         <li class="list-unstyled fs-5 mb-3"><i class="fa-solid fa-chart-simple me-2"></i> Dashboard</li>

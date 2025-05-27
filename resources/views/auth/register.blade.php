@@ -1,6 +1,29 @@
 <x-guest-layout>
+    <div class="container position-sticky z-index-sticky top-0">
+        <div class="row">
+            <div class="col-12">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+                    <div class="container-fluid pe-0">
+                        <img src="{{ asset('landingpage/media/logo.svg') }}" alt="logo" width="100px">
+                        <div class="">
+                            <ul class="navbar-nav mx-auto ms-xl-auto me-xl-7">
+                                <li class="nav-item">
+                                <a class="nav-link d-flex align-items-center me-2 active text-dark fs-6" aria-current="page" href="{{ route('client.landingpage') }}">
+                                        Home
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+                <!-- End Navbar -->
+            </div>
+        </div>
+    </div>
+    
     <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
-        <div class="card card-plain mt-4">
+        <div class="card card-plain mt-6">
             <div class="card-header pb-0 text-left bg-transparent">
                 <h3 class="font-weight-bolder text-info text-gradient">Welcome</h3>
                 <p class="mb-0">Enter your name, email, and password to sign up</p>
@@ -11,28 +34,28 @@
 
                     <!-- Name -->
                     <label for="name">Name</label>
-                    <div class="mb-3">
+                    <div class="mb-1">
                         <input type="text" name="name" value="{{ old('name') }}" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="name-addon">
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
 
                     <!-- Email Address -->
                     <label for="email">Email</label>
-                    <div class="mb-3">
+                    <div class="mb-1">
                         <input type="email" name="email" value="{{ old('email') }}" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="email-addon">
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
                     <!-- Password -->
                     <label for="password">Password</label>
-                    <div class="mb-3">
+                    <div class="mb-1">
                         <input type="password" name="password" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="password-addon" required autocomplete="new-password">
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
                     <!-- Confirm Password -->
                     <label for="password_confirmation">Confirm Password</label>
-                    <div class="mb-3">
+                    <div class="mb-2">
                         <input type="password" name="password_confirmation" class="form-control" placeholder="Confirm Password" aria-label="Confirm Password" aria-describedby="confirm-password-addon" required autocomplete="new-password">
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                     </div>
