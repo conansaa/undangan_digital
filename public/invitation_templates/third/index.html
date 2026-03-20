@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <script src="index.js"></script>
+    <title>Kelompok 8</title>
+</head>
+<body>
+
+    <!-- Judul, countdown -->
+    <section id="section1">
+        <div class="abu"></div>
+        <h3>Wedding Of</h3>
+        <h1 class="outlined-text">Frieren & Himmel</h1>
+        <h4>24 Juni 2025</h4><br>
+        <div class="horizontal">
+            <h2 id="days"></h2>
+            <h2 id="hours"></h2>
+            <h2 id="minutes"></h2>
+            <h2 id="seconds"></h2> 
+        </div><br>
+        <button onclick="geser(1)">Lanjut</button>
+    </section>
+
+    <!-- Navbar -->
+    <section id="section2" class="short">
+        <p>Kelompok Eight</p>
+        <div class="horizontal">
+            <button onclick="geser(2)">Lokasi</button>
+            <button onclick="geser(5)">Galeri</button>
+            <button onclick="geser(6)">Kado Digital</button>
+            <button onclick="geser(7)">Form Kehadiran</button>
+        </div>
+    </section>
+
+    <!-- Identitas mempelai -->
+    <section id="section3">
+        <h1>Undangan Pernikahan</h1>
+        <div class="horizontal">
+            <div class="vertical">
+                <h2>Frieren Sang Penyihir</h2>
+                <div class="frame">
+                    <img src="static/img/Frieren.jpg" alt="">
+                </div>
+                <h3>Putri Ketiga Bpk. Budi dan Ibu Ani</h3>
+            </div>
+            <div class="vertical">
+                <h2 id="dan">&</h2>
+            </div>
+            <div class="vertical">
+                <h2>Himmel Sang Pahlawan</h2>
+                <div class="frame">
+                    <img src="static/img/Himmel.jpg" alt="">
+                </div>
+                <h3>Putra Ketiga Bpk. Andro dan Ibu Siti</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tanggal, alamat -->
+    <section id="section4">
+        <h1><br>Lokasi Acara</h1>
+        <p>Kami bermaksud mengundang saudara dalam acara pernikahan kami yang akan dilaksanakan pada:</p>
+        <p><strong>24 Juni 2025</strong></p>
+        <p><strong>Di Java Heritage Hotel Purwokerto,</strong></p>
+        <p class="keterangan">Jl. Dr. Angka No.71, Karangkobar, Sokanegara, Kec. Purwokerto Tim., Kabupaten Banyumas, Jawa Tengah 53115</p>
+        <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.4479757478566!2d109.2387397!3d-7.4155707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655e84ad3c0569%3A0x2cfa539df756942c!2sJava%20Heritage%20Hotel%20Purwokerto!5e0!3m2!1sid!2sid!4v1746772653516!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <br>
+        <a href="https://maps.app.goo.gl/HSX3envMvrzTSUXe9"><button>Lihat Peta Lebih Besar</button></a>
+    </section>
+
+    <!-- Quotes -->
+    <section id="section5" class="short">
+        <h1>Quote</h1>
+        <p>وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجاً لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً إِنَّ فِي ذَلِكَ لَآيَاتٍ لِّقَوْمٍ  يَتَفَكَّرُونَ</p>
+        <p>“Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir.” (QS. Ar-Ruum 30 : 21)</p>
+    </section>
+
+    <!-- Rundown -->
+    <section id="section6">
+        <h1>Susunan Acara</h1>
+        <div class="inv_frame">
+            <div class="vertical_line"></div>
+            <div class="horizontal">
+                <div class="vertical">
+                    <h2>Persiapan dan Kedatangan Tamu</h2>
+                    <div class="horizontal_line"></div>
+                    <p>Pengantin dan keluarga bersiap-siap</p>
+                </div>
+                <div class="vertical">
+                    <h2>06.00 WIB</h2>
+                </div>
+            </div>
+            <div class="horizontal">
+                <div class="vertical">
+                    <h2>08.00 WIB</h2>
+                </div>
+                <div class="vertical">
+                    <h2>Pembukaan Acara</h2>
+                    <div class="horizontal_line"></div>
+                    <p>Penerimaan tamu dan pelaksanaan acara</p>
+                </div>
+            </div>
+            <div class="horizontal">
+                <div class="vertical">
+                    <h2>Sesi Foto</h2>
+                    <div class="horizontal_line"></div>
+                    <p>Foto bersama kedua mempelai</p>
+                </div>
+                <div class="vertical">
+                    <h2>10.00 WIB</h2>
+                </div>
+            </div>
+        </div>
+        <br>
+        <p><strong>Besar harapan kami jika Bapak/Ibu/Sahabat/Saudara/i berkenan hadir pada acara ini. Atas perhatiannya kami ucapkan Terima kasih</strong></p>
+    </section>
+
+    <!-- Cerita mesra -->
+    <section id="section11">
+        <h1>Our Story</h1>
+        <div class="story">
+            <div class="vertical_line"></div>
+            <div class="horizontal">
+                <div class="vertical">
+                    <h2>Awal bertemu</h2>
+                    <div class="horizontal_line"></div>
+                    <p>Pertemuan yang sederhana, namun bermakna—Frieren dan Himmel pun berjalan berdampingan menjelajahi dunia.</p>
+                </div>
+                <div class="vertical">
+                    <img src="static/img/first.png">
+                </div>
+            </div>
+            <div class="horizontal">
+                <div class="vertical">
+                    <img src="static/img/sec.png">
+                </div>
+                <div class="vertical">
+                    <h2>Semakin dekat</h2>
+                    <div class="horizontal_line"></div>
+                    <p>Di sela kebersamaan, benih asmara diam-diam bersemi, tumbuh mengikuti irama kedekatan mereka</p>
+                </div>
+            </div>
+            <div class="horizontal">
+                <div class="vertical">
+                    <h2>Melamar</h2>
+                    <div class="horizontal_line"></div>
+                    <p>Dengan hati yang lebih mantap dari pedangnya, ia berlutut, menawarkan bukan sekadar cincin—tapi seluruh hidupnya</p>
+                </div>
+                <div class="vertical">
+                    <img src="static/img/third.png" >
+                </div>
+            </div>
+        </div>
+        
+        <p><strong></strong></p>
+    </section>
+
+    <!-- Gallery -->
+    <section id="section7" class="short">
+        <h1><br>Our Gallery</h1>
+        <div class="grid">
+            <div class="frame">
+                <img src="static\img\portrait3.jpg" alt="">
+            </div>
+            <div class="frame">
+                <img src="static\img\portrait2.jpg" alt="">
+            </div>
+            <div class="frame">
+                <img src="static\img\portrait1.jpg" alt="">
+            </div>
+            <div class="frame">
+                <img src="static\img\portrait4.jpg" alt=""> 
+            </div>  
+        </div>
+    </section>
+
+    <!-- Kado digital -->
+    <section id="section8" class="short">
+        <h1><br>Kado Digital</h1>
+        <h3>Doa restu Bapak/Ibu sekalian merupakan karunia yang sangat berarti bagi kami. Dan jika memberi merupakan ungkapan tanda kasih, Bapak/Ibu dapat memberi kado secara cashless. Terima kasih</h3>
+        <br>
+        <h2>Dana</h2>
+        <img src="static\img\QRW.jpg" alt="">
+        <br>
+        <h2>Bank Mandiri</h2>
+        <h2>1850006275223</h2>
+    </section>
+
+    <!-- Form -->
+    <section id="section9" class="short">
+        <h1>Form Kehadiran</h1><br>
+        <div class="box"> 
+            <form action="">
+                <p>Mohon isi form dibawah ini sebelum H-2</p><br>
+                <div class="horizontal">
+                    <label for="nama">Nama:</label>
+                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda">
+                </div><br>
+                <div class="horizontal">
+                    <label for="jumlah">Jumlah Orang:</label>
+                    <input type="text" id="jumlah" name="jumlah" maxlength="2" placeholder="Masukkan jumlah (maks 2 digit)">
+                </div><br>
+                <div class="horizontal">
+                    <label for="hadir">Kehadiran:</label>
+                    <input type="radio" id="html" name="fav_language" value="HTML">
+                    <label for="html">Ya</label><br>
+                    <input type="radio" id="css" name="fav_language" value="CSS">
+                    <label for="css">Tidak</label><br>
+                </div>
+                <input type="reset" value="Kirim" name="submit" id="submit" onclick="javascript:alert('Terimakasih atas konfirmasi Anda!')">
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="section10" class="short">
+        <div class="horizontal">
+            <div class="vertical">
+                <h3>Whatsapp</h3>
+                <p>+62 8123 4567 8910</p>
+            </div>
+            <div class="vertical">
+                <h3>Instagram</h3>
+                <p>@Kelompok 8</p>
+            </div>
+            <div class="vertical">
+                <h3>Facebook</h3>
+                <p>Kelompok 8</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mute lagu -->
+    <div class="mute">
+        <button id="muteButton" onclick="toggleMute()">🔊</button>
+    </div>
+
+</body>
+</html>  

@@ -70,8 +70,8 @@
     <div class="content">
         <table class="table w-150">
             <tr>
-                {{-- <td style="width: 50%"><span class="text-maroon fw-bold fs-4">DiikatJanji</span></td> --}}
-                <td style="width: 50%"><img src="{!!asset('landingpage/media/logo.svg')!!}"></td>
+                <td style="width: 50%"><span class="text-maroon fw-bold fs-4">DiikatJanji</span></td>
+                {{-- <td style="width: 50%"><img src="{!!asset('landingpage/media/logo.svg')!!}"></td> --}}
                 <td style="width: 20%"></td>
                 <td style="width: 15%"></td>
                 <th class="fs-4" style="width: 15%">Data Tamu</th>

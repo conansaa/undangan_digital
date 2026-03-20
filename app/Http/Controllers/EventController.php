@@ -65,13 +65,13 @@ class EventController extends Controller
         $eventDetail = EventDetails::create($validatedData);
 
         // Data untuk tabel event report
-        $eventType = $eventDetail->eventType;
+        $eventType = $eventDetail->event_type_id;
         $eventDate = Carbon::parse($eventDetail->event_date);
         $month = $eventDate->month;
         $year = $eventDate->year;
 
         // Cek apakah sudah ada laporan untuk tipe acara, bulan, dan tahun ini
-        $eventReport = EventReports::where('event_type_id', $eventType->id)
+        $eventReport = EventReports::where('event_type_id', $eventType)
             ->where('month', $month)
             ->where('year', $year)
             ->first();
@@ -83,8 +83,8 @@ class EventController extends Controller
             $eventReport->save();
         } else {
             // Buat laporan baru
-            EventReports::create([
-                'event_type_id' => $eventType->id,
+            $eventReport = EventReports::create([
+                'event_type_id' => $eventType,
                 'month' => $month,
                 'year' => $year,
                 'counter' => 1,

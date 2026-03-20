@@ -1,0 +1,82 @@
+* {
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body {
+    background-color: #f0f2f5;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiPjwvcmVjdD4KPC9zdmc+');
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+  }
+  
+  .card {
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-header {
+    background: linear-gradient(135deg, #1e5799 0%, #207cca 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom: none;
+  }
+  
+  .card-body {
+    padding: 40px 20px;
+  }
+  
+  .cyber-icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+    color: #1e5799;
+  }
+  
+  .btn-design {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    border: none;
+    border-radius: 30px;
+    padding: 12px 30px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+  }
+  
+  .btn-cyber:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(46, 204, 113, 0.4);
+    background: linear-gradient(135deg, #27ae60 0%, #219653 100%);
+  }
+  
+  .thank-you-text {
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 25px;
+  }
+  
+  .info-text {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .footer {
+    text-align: center;
+    margin-top: 30px;
+    color: #888;
+    font-size: 14px;
+  }
+  
+  .whatsapp-icon {
+    margin-right: 8px;
+    font-size: 18px;
+  }

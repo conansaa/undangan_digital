@@ -6,6 +6,7 @@ use App\Models\Rsvp;
 use App\Models\Comments;
 use App\Models\Payments;
 use App\Models\GenderRef;
+use App\Models\SectionRef;
 use App\Models\ThemePrice;
 use App\Models\EventDetails;
 use Illuminate\Http\Request;
@@ -155,13 +156,14 @@ class ClientController extends Controller
         ])->findOrFail($id);
         $genders = GenderRef::all();
         $payment = Payments::all();
+        $sections = SectionRef::all();
 
         // Optional: Pastikan hanya owner yang bisa akses
         if ($event->eventOwner->user_id !== Auth::id()) {
             abort(403, 'Kamu tidak memiliki akses ke event ini.');
         }
 
-        return view('client.manageevent-detail', compact('event', 'genders', 'payment'));
+        return view('client.manageevent-detail', compact('event', 'genders', 'payment', 'sections'));
     }
 
     public function showEventReport(Request $request)

@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Halal Bihalal - Keluarga Besar Informatika</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Dancing+Script:wght@700&family=Amiri:wght@400;700&family=Aref+Ruqaa:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="stylescp.css">
+  </head>
+
+  <body>
+  <!----------------NAV NAD HAMBURGER MENU-------------------NAV AND HAMBURGER MENU--------------------->
+    <button class="hamburger-menu" aria-label="Toggle Menu">
+      <i class="fas fa-bars"></i>
+    </button>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="#opening" class="active">Opening</a></li>
+        <li><a href="#acara">Events</a></li>
+        <li><a href="#rangkaian">Rundown</a></li>
+        <li><a href="#maps">Lokasi</a></li>
+        <li><a href="#gallery">Galeri</a></li>
+        <li><a href="#rsvp">RSVP</a></li>
+        <li><a href="#contact">Kontak</a></li>
+      </ul>
+    </nav>
+
+  <!----------------OPENING AWAL/COVER-------------------OPENING AWAL/COVER----------------------->
+    <div class="opening-screen" id="openingScreen">
+      <div class="opening-content">
+        <div class="frame-decoration"></div>
+        <h1>Undangan</h1>
+        <h3>Halal Bihalal</h3>
+        <h2 id="recipientName">Yth. Muhammad Ihsan Fawzi, S.Kom., M.Kom</h2>
+        <p class="guest-label"></p>
+        <h4>Keluarga Besar Informatika</h4>
+        <h4>Universitas Jenderal Soedirman</h4>
+        <br>
+        <button
+          class="btn-open"
+          onclick="openInvitation()"
+          title="Buka Undangan"
+        >Buka Undangan
+        </button>
+      </div>
+    </div>
+
+    <!---------------UTAMA---------------->
+    <div class="container" id="mainContent">
+      <!---------MUSIK--------->
+      <div class="music-player">
+        <div class="music-info">
+          <span id="songTitle">MAWLAYA MAHER ZAIN</span>
+          <div class="progress-container">
+            <div class="progress" id="progress-bar"></div>
+          </div>
+          <div class="time-info">
+            <span id="currentTime">0:00</span>
+            <span id="duration">0:00</span>
+          </div>
+        </div>
+
+        <div class="controls">
+          <button id="prevButton" class="control-button" title="Lagu Sebelumnya">
+            <i class="fas fa-step-backward"></i>
+          </button>
+          <button id="playButton" class="play-button" title="Putar/Mulai">
+            <i class="fas fa-play"></i>
+          </button>
+          <button id="nextButton" class="control-button" title="Lagu Selanjutnya">
+            <i class="fas fa-step-forward"></i>
+          </button>
+          <div class="volume-control">
+            <i class="fas fa-volume-up"></i>
+            <label for="volumeSlider" class="sr-only">Volume Control</label>
+            <input
+              type="range"
+              id="volumeSlider"
+              name="volumeSlider"
+              min="0"
+              max="100"
+              value="50">
+          </div>
+        </div>
+        <audio id="bgMusic"></audio>
+      </div>
+
+      <!-------------Opening Section------------>
+      <section id="opening" class="section">
+        <div class="frame-decoration"></div>
+        <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+        <h1>Halal Bihalal</h1>
+        <h2>1447 H</h2>
+        <div class="ornament"><i class="fas fa-star-and-crescent"></i></div>
+        <h3>Keluarga Besar Informatika</h3>
+      </section>
+
+      <!----------SALAM---------------->
+      <section id="salam" class="section">
+        <div class="frame-decoration"></div>
+        <p class="arabic">
+          السَّلاَمُ عَلَيْكُمْ وَرَحْمَةُ اللهِ وَبَرَكَاتُهُ</p>
+        <p>
+          Dengan memohon rahmat dan ridho Allah SWT, kami mengundang
+          Bapak/Ibu/Saudara/i untuk hadir dalam acara Halal Bihalal keluarga
+          besar Informatika. Mari kita pererat tali silaturahmi dan saling
+          memaafkan di bulan Syawal yang penuh berkah ini.
+        </p>
+      </section>
+
+      <!-------------COUNTDOWN------------>
+      <section id="acara" class="section">
+        <div class="frame-decoration"></div>
+        <h2>Halal Bihalal</h2>
+        <h3>Keluarga Besar Informatika</h3>
+        <div class="event-details">
+          <p class="date">Jumat, 29 Maret 2026</p>
+          <p class="time">08:30 - 12:00 WIB</p>
+          <div class="countdown">
+            <div class="countdown-item">
+              <span id="days">00</span>
+              <span>Hari</span>
+            </div>
+            <div class="countdown-item">
+              <span id="hours">00</span>
+              <span>Jam</span>
+            </div>
+            <div class="countdown-item">
+              <span id="minutes">00</span>
+              <span>Menit</span>
+            </div>
+            <div class="countdown-item">
+              <span id="seconds">00</span>
+              <span>Detik</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-------------RUNDOWN------------>
+      <section id="rangkaian" class="section">
+        <div class="schedule-container">
+          <h2>Rangkaian Acara</h2>
+          <div class="event">
+            <i class="fas fa-check-circle"></i>
+            <div class="event-details">
+              <p class="time">08:30 – 09:00</p>
+              <p class="title">Registrasi & Penyambutan Tamu</p>
+            </div>
+          </div>
+          <div class="event">
+            <i class="fas fa-bullhorn"></i>
+            <div class="event-details">
+              <p class="time">09:00 – 09:05</p>
+              <p class="title">Pembukaan</p>
+            </div>
+          </div>
+          <div class="event">
+            <i class="fas fa-book-open"></i>
+            <div class="event-details">
+              <p class="time">09:05 – 09:20</p>
+              <p class="title">Pembacaan Ayat Suci Al-Qur'an</p>
+            </div>
+          </div>
+          <div class="event">
+            <i class="fas fa-user-tie"></i>
+            <div class="event-details">
+              <p class="time">09:20 – 09:25</p>
+              <p class="title">Sambutan Kepala Jurusan Informatika</p>
+            </div>
+          </div>
+          <div class="event">
+            <i class="fas fa-user-tie"></i>
+            <div class="event-details">
+              <p class="time">09:25 – 09:30</p>
+              <p class="title">Sambutan Kepala Program Studi Informatika</p>
+            </div>
+          </div>
+          <div class="event">
+            <i class="fas fa-user-tie"></i>
+            <div class="event-details">
+              <p class="time">09:30 – 09:35</p>
+              <p class="title">Sambutan Kepala Program Studi Teknik Komputer</p>
+            </div>
+          </div>
+          <div class="event">
+            <i class="fas fa-praying-hands"></i>
+            <div class="event-details">
+              <p class="time">09:35 – 10:05</p>
+              <p class="title">Tausiyah dan Doa</p>
+            </div>
+          </div>
+          <div class="event">
+            <i class="fas fa-handshake"></i>
+            <div class="event-details">
+              <p class="time">10:05 – 10:50</p>
+              <p class="title">Halal Bihalal & Saling Memaafkan</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-------------MAPS------------>
+      <section id="maps" class="section">
+        <div class="frame-decoration"></div>
+        <h2>Lokasi Acara</h2>
+        <div class="location-details">
+          <p class="venue-name">PM Collaboration</p>
+          <p class="address"> Jl. Letjen S Parman No.47, Kedung Menjangan, Kec. Purbalingga</p>
+          <p class="city">Kabupaten Purbalingga, Jawa Tengah 53315</p>
+        </div>
+        <div class="map-container">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d989.1481278108898!2d109.3748971!3d-7.3994715!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6559cb5bec5fb7%3A0x95ea4b08b2f90bc!2sPM%20Collaboration!5e0!3m2!1sen!2sid!4v1749444241877!5m2!1sen!2sid"
+            width="100%"
+            height="300"
+            title="Lokasi PM Collaboration di Google Maps"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer">
+          </iframe>
+        </div>
+        <div class="location-actions">
+          <a
+            href="https://maps.app.goo.gl/M9g2KUmps5k89LgL7"
+            target="_blank"
+            rel="noopener"
+            class="btn-maps">
+            <i class="fas fa-map"></i> Petunjuk Ke Lokasi
+          </a>
+        </div>
+      </section>
+
+      <!----------GALERI----------GALERI----------GALERI----------GALERI----------GALERI----------GALERI----------GALERI----------GALERI----------GALERI----------GALERI---------->
+
+      <section id="gallery" class="section">
+         <!--gallery animate__animated animate__fadeIn animate__delay-1s">-->
+        <h2>Galeri Kami</h2>
+
+        <div class="gallery-grid">
+          <!------Gambar 1------>
+          <div
+            class="gallery-item" style="background-image: url('img/iftek24.jpg')"
+            data-title="Informatika dan Teknik Komputer'24"
+            data-date="15 Maret 2024">
+            <div class="overlay">
+              <div class="title">Informatika dan Teknik Komputer'24</div>
+              <div class="date">26 Oktober 2024</div>
+            </div>
+          </div>
+
+          <!-------Gambar 2------>
+          <div
+            class="gallery-item" style="background-image: url('img/tekkom24.jpg')"
+            data-title="Informatika 2024"
+            data-date="12 Oktober 2023">
+            <div class="overlay">
+              <div class="title">Informatika 2024</div>
+              <div class="date">17 Maret 2025</div>
+            </div>
+          </div>
+
+          <!--------Gambar 3--------->
+          <div
+            class="gallery-item" style="background-image: url('img/infor24.jpg')"
+            data-title="Teknik Komputer 2024"
+            data-date="10 April 2024">
+            <div class="overlay">
+              <div class="title">Teknik Komputer 2024</div>
+              <div class="date">5 Agustus 2024</div>
+            </div>
+          </div>
+
+          <!---------Gambar 4--------->
+          <div
+            class="gallery-item" style="background-image: url('img/infor23.jpg')"
+            data-title="Informatika 2023"
+            data-date="5 Januari 2024">
+            <div class="overlay">
+              <div class="title">Informatika 2023</div>
+              <div class="date">18 Maret 2025</div>
+            </div>
+          </div>
+
+          <!----------Gambar 5--------->
+          <div
+            class="gallery-item" style="background-image: url('img/infor22.jpg')"
+            data-title="Informatika 2022"
+            data-date="3 April 2024">
+            <div class="overlay">
+              <div class="title">Informatika 2022</div>
+              <div class="date">24 September 2022</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="decorative floating">
+          <i class="fas fa-mosque"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-moon"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-mosque"></i>
+        </div>
+
+        <div class="lightbox" id="lightbox">
+          <div class="lightbox-content">
+            <span class="lightbox-close" id="lightboxClose">&times;</span>
+            <img id="lightboxImg" src="" alt="Lightbox Image" />
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+          </div>
+          <div class="lightbox-nav">
+            <button id="prevBtn" class="control-button" aria-label="Previous image">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button id="nextBtn" class="control-button" aria-label="Next image">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!--------------RSVP----------->
+      <section id="rsvp" class="section">
+        <div class="frame-decoration"></div>
+        <h2>Konfirmasi Kehadiran</h2>
+        <p class="arabic">
+          اللَّهُمَّ بَارِكْ لَنَا فِي رَجَبَ وَ شَعْبَانَ وَ بَلِّغْنَا
+          رَمَضَان
+        </p>
+        <form id="rsvpForm" class="rsvp-form">
+          <div class="form-group">
+            <label for="nama">Nama Lengkap</label>
+            <input
+              type="text"
+              id="nama"
+              name="nama"
+              required
+              placeholder="Masukkan nama lengkap Anda"
+              title="Nama Lengkap">
+          </div>
+          <div class="form-group">
+            <label for="kehadiran">Konfirmasi Kehadiran</label>
+            <select
+              id="kehadiran"
+              name="kehadiran"
+              required
+              title="Konfirmasi Kehadiran">
+              <option value="">Pilih kehadiran</option>
+              <option value="hadir">Ya, Saya Akan Hadir</option>
+              <option value="tidak">Maaf, Saya Tidak Bisa Hadir</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="ucapan">Ucapan & Doa</label>
+            <textarea
+              id="ucapan"
+              name="ucapan"
+              rows="4"
+              placeholder="Tulis ucapan dan doa Anda di sini..."
+              title="Ucapan & Doa"></textarea>
+          </div>
+          <button type="submit" class="btn-submit" title="Kirim Konfirmasi">
+            <i class="fas fa-paper-plane"></i> Konfirmasi Kehadiran
+          </button>
+        </form>
+      </section>
+
+      <!-----------KONTAK------------->
+      <section id="contact" class="section">
+        <div class="frame-decoration"></div>
+        <h2>Contact Person</h2>
+        <p>Hubungi Contact Person kami jika ada hal yang ingin ditanyakan.</p>
+        <div class="contact-cards">
+          <div class="contact-card">
+            <img
+              src="https://th.bing.com/th/id/OIP.v6ezNoTSWw_olOqM9AcnMwHaHa?w=178&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+              alt="Contact Person 1">
+            <h3>Aulia</h3>
+            <a
+              href="https://wa.me/6283896200880"
+              class="btn-wa"
+              title="Hubungi Aulia via WhatsApp"
+              target="_blank">Hubungi
+            </a>
+          </div>
+          <div class="contact-card">
+            <img
+              src="https://th.bing.com/th/id/OIP.v6ezNoTSWw_olOqM9AcnMwHaHa?w=178&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3"
+              alt="Contact Person 2">
+            <h3>Zahwa</h3>
+            <a
+              href="https://wa.me/6281392854887"
+              class="btn-wa"
+              title="Hubungi Zahwa via WhatsApp"
+              target="_blank">Hubungi
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!---------CLOSING--------->
+      <section id="thanks" class="section">
+        <div class="frame-decoration"></div>
+        <p>
+          Merupakan suatu kebahagiaan dan kehormatan bagi kami, apabila
+          Bapak/Ibu/Saudara/i, berkenan hadir.
+        </p>
+        <p class="arabic">تَقَبَّلَ اللَّهُ مِنَّا وَمِنْكُمْ</p>
+        <p>Taqabbalallahu Minna Wa Minkum</p>
+        <p class="family-name">Keluarga Besar Informatika</p>
+      </section>
+
+      <!---------FOOTER----------->
+      <footer class="animate__animated animate__fadeIn animate__delay-4s">
+        <p class="copyright">
+          &copy; 2025 - Kelompok 6<br/>
+          Zahwa Nafiza Azzahra_H1D024015<br/>
+          Latifanika Nurafwi_H1D024099<br/>
+          Alifvia Putri Dewani_H1D024131<br/>
+          Siti Aulia Febriana_H1D0240134<br/>
+        </p>
+      </footer>
+    </div>
+
+    <!----------------SCRIPT-------------------SCRIPT----------------->
+    <script>
+      // OPENING AWAL/COVER==========OPENING AWAL/COVER
+      function openInvitation() {
+        document.getElementById("openingScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        document.getElementById("bgMusic").play();
+      }
+
+      //COUNTDOWN===========COUNTDOWN
+      function updateCountdown() {
+        const eventDate = new Date("2026-03-29T00:00:00").getTime();
+        const now = new Date().getTime();
+        const distance = eventDate - now;
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").textContent = String(days).padStart(2,"0");
+        document.getElementById("hours").textContent = String(hours).padStart(2,"0");
+        document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+        document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
+      }
+
+      setInterval(updateCountdown, 1000);
+      updateCountdown();
+
+      //MUSIC============MUSIC
+      const playlist = [
+        {
+          title: "Mawlaya - Maher Zain",
+          url: "audio/Maher Zain - Mawlaya (Arabic) _ ماهر زين - مولاي-yt.savetube.me.mp3",
+        },
+        {
+          title: "Ramadhan Tiba - Opick",
+          url: "audio/Opick - Ramadhan Tiba _ Official Lyric Video-yt.savetube.me.mp3",
+        },
+      ];
+
+      let currentTrackIndex = 0;
+      let isPlaying = false;
+      const playButton = document.getElementById("playButton");
+      const prevButton = document.getElementById("prevButton");
+      const nextButton = document.getElementById("nextButton");
+      const bgMusic = document.getElementById("bgMusic");
+      const volumeSlider = document.getElementById("volumeSlider");
+      const songTitle = document.getElementById("songTitle");
+      const progressBar = document.querySelector(".progress");
+      const currentTimeEl = document.getElementById("currentTime");
+      const durationEl = document.getElementById("duration");
+      const icon = playButton.querySelector("i");
+
+      // Initialize player
+      function initPlayer() {
+        //First music
+        loadTrack(currentTrackIndex);
+      //Volume
+        bgMusic.volume = volumeSlider.value / 100;
+      }
+      // Load music
+      function loadTrack(index) {
+        const track = playlist[index];
+        bgMusic.src = track.url;
+        songTitle.textContent = track.title;
+      // Reset progress bar
+        progressBar.style.width = "0%";
+        currentTimeEl.textContent = "0:00";
+        durationEl.textContent = "0:00";
+      }
+      // Play music
+      function playTrack() {
+        bgMusic
+          .play()
+          .then(() => {
+            isPlaying = true;
+            updatePlayButton();
+          })
+          .catch((error) => {
+            console.error("Error playing audio:", error);
+            alert("Klik tombol play untuk memulai pemutaran.");
+          });
+      }
+      // Update play button
+      function updatePlayButton() {
+        const icon = playButton.querySelector("i");
+        if (isPlaying) {
+          icon.classList.remove("fa-play");
+          icon.classList.add("fa-pause");
+        } else {
+          icon.classList.remove("fa-pause");
+          icon.classList.add("fa-play");
+        }
+      }
+      // Time display
+      function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
+      }
+
+      // Event listeners
+      playButton.addEventListener("click", () => {
+        if (isPlaying) {
+          bgMusic.pause();
+          isPlaying = false;
+        } else {
+          playTrack();
+        }
+        updatePlayButton();
+      });
+
+      prevButton.addEventListener("click", () => {
+        currentTrackIndex =
+          (currentTrackIndex - 1 + playlist.length) % playlist.length;
+        loadTrack(currentTrackIndex);
+        playTrack();
+      });
+
+      nextButton.addEventListener("click", () => {
+        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+        loadTrack(currentTrackIndex);
+        playTrack();
+      });
+
+      volumeSlider.addEventListener("input", (e) => {
+        bgMusic.volume = e.target.value / 100;
+      });
+
+      bgMusic.addEventListener("timeupdate", () => {
+        // Update progress bar
+        const progress = (bgMusic.currentTime / bgMusic.duration) * 100;
+        progressBar.style.width = `${progress}%`;
+
+        // Update time display
+        currentTimeEl.textContent = formatTime(bgMusic.currentTime);
+
+        // Update duration if available
+        if (!isNaN(bgMusic.duration)) {
+          durationEl.textContent = formatTime(bgMusic.duration);
+        }
+      });
+
+      bgMusic.addEventListener("ended", () => {
+        // Auto-play next music
+        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+        loadTrack(currentTrackIndex);
+        playTrack();
+      });
+      // Click on progress bark
+      const progressContainer = document.querySelector(".progress-container");
+      progressContainer.addEventListener("click", (e) => {
+        const width = progressContainer.clientWidth;
+        const clickX = e.offsetX;
+        const duration = bgMusic.duration;
+
+        bgMusic.currentTime = (clickX / width) * duration;
+      });
+      // Initialize the player
+      initPlayer();
+
+      //GALLERY===========GALLERY
+      // Lightbox functionality
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightboxImg");
+      const lightboxCaption = document.getElementById("lightboxCaption");
+      const lightboxClose = document.getElementById("lightboxClose");
+      const galleryItems = document.querySelectorAll(".gallery-item");
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      let currentIndex = 0;
+      // Open lightbox
+      galleryItems.forEach((item, index) => {
+        item.addEventListener("click", () => {
+          currentIndex = index;
+          updateLightbox();
+          lightbox.classList.add("active");
+          document.body.style.overflow = "hidden"; // STAY
+        });
+      });
+      // Close lightbox
+      lightboxClose.addEventListener("click", () => {
+        lightbox.classList.remove("active");
+        document.body.style.overflow = "auto"; // SCROLL
+      });
+      // Close lightbox when clicking outside
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          lightbox.classList.remove("active");
+          document.body.style.overflow = "auto";
+        }
+      });
+      // Nav Galeri
+      prevBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentIndex =
+          (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+        updateLightbox();
+      });
+
+      nextBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        currentIndex = (currentIndex + 1) % galleryItems.length;
+        updateLightbox();
+      });
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (lightbox.classList.contains("active")) {
+          if (e.key === "ArrowLeft") {
+            currentIndex =
+              (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+            updateLightbox();
+          } else if (e.key === "ArrowRight") {
+            currentIndex = (currentIndex + 1) % galleryItems.length;
+            updateLightbox();
+          } else if (e.key === "Escape") {
+            lightbox.classList.remove("active");
+            document.body.style.overflow = "auto";
+          }
+        }
+      });
+      // Update lightbox content
+      function updateLightbox() {
+        const item = galleryItems[currentIndex];
+        const imgSrc = item.style.backgroundImage
+          .replace('url("', "")
+          .replace('")', "");
+
+        lightboxImg.src = imgSrc;
+        lightboxCaption.textContent =
+          item.dataset.title + " - " + item.dataset.date;
+      }
+      // Preload images 
+      function preloadImages() {
+        galleryItems.forEach((item) => {
+          const imgSrc = item.style.backgroundImage
+            .replace('url("', "")
+            .replace('")', "");
+
+          const img = new Image();
+          img.src = imgSrc;
+        });
+      }
+      // Initialize
+      preloadImages();
+
+      //FORM RSVP===========FORM RSVP
+      document
+        .getElementById("rsvpForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          alert("Terima kasih atas konfirmasi kehadiran Anda!");
+          this.reset();
+        });
+        //RESPONDEN NAME
+      const urlParams = new URLSearchParams(window.location.search);
+      const recipient = urlParams.get("to");
+      if (recipient) {
+        document.getElementById("recipientName").textContent =
+          decodeURIComponent(recipient);
+      }
+      
+      //NAV MENU======NAVIGASI
+      const navLinks = document.querySelectorAll(".nav-menu a");
+      const sections = document.querySelectorAll("section[id]");
+
+      function setActiveLink() {
+        const scrollPosition = window.scrollY;
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop - 100;
+          const sectionHeight = section.offsetHeight;
+          const sectionId = section.getAttribute("id");
+
+          if (
+            scrollPosition >= sectionTop &&
+            scrollPosition < sectionTop + sectionHeight
+          ) {
+            navLinks.forEach((link) => {
+              link.classList.remove("active");
+              if (link.getAttribute("href") === `#${sectionId}`) {
+                link.classList.add("active");
+              }
+            });
+          }
+        });
+      }
+
+      window.addEventListener("scroll", setActiveLink);
+
+      //NAV SMOOTH
+      navLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute("href");
+          const targetSection = document.querySelector(targetId);
+
+          if (targetSection) {
+            targetSection.scrollIntoView({
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+      //HAMBURGER MENU
+      document
+        .querySelector(".hamburger-menu")
+        .addEventListener("click", function () {
+          document.querySelector(".nav-menu").classList.toggle("active");
+        });
+        // MENUTUP MENU KETIKA KLIK DI LUAR
+      document.addEventListener("click", function (event) {
+        const nav = document.querySelector(".nav-menu");
+        const hamburger = document.querySelector(".hamburger-menu");
+        if (!nav.contains(event.target) && !hamburger.contains(event.target)) {
+          nav.classList.remove("active");
+        }
+      });
+      // KETIKA LINK DIKLIK
+      document.querySelectorAll(".nav-menu a").forEach((link) => {
+        link.addEventListener("click", () => {
+          document.querySelector(".nav-menu").classList.remove("active");
+        });
+      });
+    </script>
+  </body>
+</html>

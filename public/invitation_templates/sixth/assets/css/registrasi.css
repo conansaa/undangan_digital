@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+body {
+    font-family: 'Oxygen', sans-serif;
+    font-size: 15px;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1IiBoZWlnaHQ9IjUiPgo8cmVjdCB3aWR0aD0iNSIgaGVpZ2h0PSI1IiBmaWxsPSIjZmZmIj48L3JlY3Q+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9IiNjY2MiPjwvcmVjdD4KPC9zdmc+');
+    color: #222831;
+}
+
+.fz-13 {
+    font-size: 13px;
+}
+
+a {
+    color: #F05454;
+    text-decoration: none;
+}
+
+.btn-primary {
+    color: #dddddd !important;
+    background-color: #30475E !important;
+    font-size: 15px;
+    border: none;
+
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:focus {
+    color: #dddddd !important;
+    background-color: #F05454 !important;
+}
+
+.bg-register {
+    background-image: url('../img/poster\ seminar.png');
+    background-size: cover;
+    
+}

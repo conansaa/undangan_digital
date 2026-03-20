@@ -1,0 +1,80 @@
+.countdown-full-page {
+    min-height: calc(100vh - 100px); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%);
+    color: white;
+    text-align: center;
+    padding: 6rem 1rem 4rem ;
+  }
+
+  .countdown-full-page h2 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: white;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  }
+
+  .countdown-grid-lg {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+    justify-content: center; /* mmenengahkan item grid di dalam grid container */
+    margin: 0 auto;
+  }
+
+  .countdown-item-lg {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2.5rem 1.5rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .countdown-item-lg:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px) scale(1.02);
+  }
+
+  .countdown-number-lg {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 1rem;
+    color: #93C5FD;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+
+  .countdown-label-lg {
+    font-size: 1.25rem;
+    opacity: 0.9;
+    font-weight: 600;
+  }
+
+  
+  @media (max-width: 992px) {
+    .countdown-grid-lg {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 576px) {
+    .countdown-grid-lg {
+      grid-template-columns: 1fr;
+    }
+    .countdown-number-lg {
+      font-size: 3rem;
+    }
+    .countdown-label-lg {
+      font-size: 1rem;
+    }
+    .countdown-full-page h2 {
+      font-size: 2.5rem;
+    }
+  }

@@ -1,0 +1,532 @@
+
+
+#home .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: transparent;
+    /* Atau: rgba(255,255,255,0) */
+    pointer-events: none;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url("bg\ fix.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center center;
+}
+
+.container {
+    width: 100%;
+    max-width: 100vw;
+    margin: 0 auto;
+    padding: 0;
+}
+
+
+
+
+section {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    box-sizing: border-box;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+section.active {
+    display: flex;
+    opacity: 1;
+}
+
+
+/* Heading */
+
+section h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.8rem;
+    margin-bottom: 20px;
+}
+
+section p,
+section form {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2rem;
+}
+
+
+/* Galeri */
+
+.gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.gallery img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+
+/* Form */
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    max-width: 500px;
+    padding: 10px;
+    font-family: 'Open Sans', sans-serif;
+    border-radius: 10px;
+    border: none;
+}
+
+
+/* Tombol */
+
+.btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #ff914d;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.lokasi-box {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fff8f1;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.btn:hover {
+    background-color: #dddddd;
+}
+
+iframe {
+    border: 0;
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    margin-bottom: 10px;
+}
+
+
+/* QRIS */
+
+#qris img {
+    width: 200px;
+    height: auto;
+    margin: 20px 0;
+}
+
+
+/* Navbar */
+
+nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    background-color: #222;
+    padding: 12px 16px;
+    border-radius: 24px;
+    z-index: 1000;
+    max-width: 98vw;
+    box-sizing: border-box;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+}
+
+nav button {
+    font-size: 24px;
+    width: 52px;
+    height: 52px;
+    border: none;
+    border-radius: 16px;
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    line-height: 1;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+nav button:hover {
+    transform: scale(1.1);
+}
+
+
+/* Responsive mobile */
+
+@media screen and (max-width: 600px) {
+    nav {
+        max-width: 85vw;
+        padding: 4px 6px;
+        gap: 6px;
+        justify-content: flex-start;
+    }
+    nav button {
+        width: 36px;
+        height: 36px;
+        font-size: 18px;
+        border-radius: 8px;
+    }
+}
+
+
+/* Hero di halaman home */
+
+#home {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('images/bg fix.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: white;
+    text-align: center;
+}
+
+#home h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+#home h2 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    margin: 5px 0;
+    color: #ffffff;
+}
+
+#home p {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.handwriting {
+    font-family: 'Great Vibes', cursive;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+.hero-names {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.nama-mempelai {
+    text-align: center;
+}
+
+.nama-mempelai h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 4rem;
+    margin: 0;
+}
+
+.nama-mempelai span {
+    font-size: 1.2rem;
+    color: #ddd;
+}
+
+.and-symbol {
+    font-size: 2.5rem;
+    font-family: 'Great Vibes', cursive;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+#profil {
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
+    padding: 40px 20px;
+    color: #ffffff;
+}
+
+#profil h2 {
+    text-align: center;
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    color: #ffffff;
+}
+
+#profil .pasangan {
+    margin-bottom: 20px;
+}
+
+#profil p {
+    margin: 0;
+    font-size: 1.1rem;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.6;
+}
+
+#profil .nama {
+    display: inline-block;
+    margin-bottom: 4px;
+}
+
+#acara {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff8f0;
+    padding: 40px 20px;
+    border-radius: 12px;
+    margin: 0 auto;
+    font-family: 'Segoe UI', sans-serif;
+    box-sizing: border-box;
+}
+
+#acara h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #d2691e;
+    text-align: center;
+}
+
+#acara p {
+    font-size: 0.9rem;
+    margin: 1rem 0 0.5rem;
+    color: #333;
+}
+
+#acara iframe {
+    max-width: 800px;
+    width: 100%;
+    height: 180px;
+    border-radius: 10px;
+    margin: 10px 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Tombol arah */
+
+#acara .btn {
+    display: inline-block;
+    background-color: #ff914d;
+    color: white;
+    padding: 8px 16px;
+    margin: 0.5rem 0.5rem 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    margin-bottom: 16px;
+}
+
+#acara .btn:hover {
+    background-color: #e36d2d;
+}
+
+@media (max-width: 400px) {
+    .gallery {
+        flex-direction: column;
+        align-items: center;
+        color: #ffffff;
+    }
+    .gallery img {
+        width: 100%;
+    }
+    #home h1 {
+        font-size: 2.2rem;
+    }
+    #home h2 {
+        font-size: 1.4rem;
+    }
+    .btn {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(128, 128, 128, 0.9);
+    z-index: 999;
+    pointer-events: none;
+}
+
+#lokasi {
+    padding-bottom: 150px;
+}
+
+@media screen and (max-width: 768px) {
+    #acara {
+        font-size: 0.9rem;
+        padding: 1rem;
+    }
+    #acara h2 {
+        font-size: 1.4rem;
+    }
+    #acara iframe {
+        height: 180px;
+    }
+    #acara button {
+        font-size: 0.85rem;
+        padding: 8px 16px;
+    }
+}
+
+
+/* Centering RSVP, Galeri, QRIS, dan Doa */
+
+#profil,
+#rsvp,
+#galeri,
+#qris,
+#doa {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    height: 100vh;
+    padding: 40px 20px;
+    box-sizing: border-box;
+    background-image: url("BST Studio ghibli");
+}
+
+.hero-content .btn {
+    margin-top: 40px;
+}
+
+
+/* Untuk layar kecil (HP) */
+
+@media only screen and (max-width: 600px) {
+    body {
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-attachment: scroll;
+    }
+}
+
+
+/* Untuk layar besar (default) */
+
+@media only screen and (min-width: 601px) {
+    body {
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center top;
+        background-attachment: scroll;
+    }
+}
+
+#galeri h2 {
+    color: white;
+}
+
+#rsvp h2 {
+    color: white;
+}
+
+#doa h2 {
+    color: white;
+}
+
+#doa,
+#doa p,
+#doa input,
+#doa textarea {
+    color: rgb(2, 2, 2);
+}
+
+#qris {
+    color: white;
+}
+
+#profil img.foto-profil {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Animasi muncul section dengan fade-in dan slide-up */
+section.hidden {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+section.show {
+    opacity: 1;
+    transform: translateY(0);
+}

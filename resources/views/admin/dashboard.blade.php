@@ -22,12 +22,12 @@
                                     <i class="fa-solid fa-clipboard-list text-dark text-gradient text-lg opacity-10" aria-hidden="true"></i>
                                 </div>
                                 <h5 class="text-white font-weight-bolder mb-0 mt-3">
-                                    {{ $eventReportCount }}
+                                    {{ $eventCount }}
                                 </h5>
                                 <span class="text-white text-sm">Total Acara</span>
                             </div>
                             <div class="col-4">
-                                <div class="dropdown text-end mb-6">
+                                {{-- <div class="dropdown text-end mb-6">
                                     <a href="javascript:;" class="cursor-pointer" id="dropdownUsers1" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="fa fa-ellipsis-h text-white"></i>
                                     </a>
@@ -36,7 +36,7 @@
                                         <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
                                         <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -63,9 +63,9 @@
                                         <i class="fa fa-ellipsis-h text-white"></i>
                                     </a>
                                     <ul class="dropdown-menu px-2 py-3" aria-labelledby="dropdownUsers2">
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Action</a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Another action</a></li>
-                                        <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="/event-type">Lihat Jenis Acara</a></li>
+                                        <li><a class="dropdown-item border-radius-md" href="/event-type/create">Tambah Jenis Acara</a></li>
+                                        {{-- <li><a class="dropdown-item border-radius-md" href="javascript:;">Something else here</a></li> --}}
                                     </ul>
                                 </div>
                             </div>

@@ -324,8 +324,8 @@
                 <div class="tab-pane fade" id="gallery">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h6 class="mb-0">Galeri</h6>
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addGiftModal">
-                            Tambah Hadiah
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addGalleryModal">
+                            Tambah Foto
                         </button>
                     </div>
                     <div class="row">
@@ -334,10 +334,10 @@
                                 <img src="{{ asset('galleries/' . $photo->photo) }}" class="img-fluid rounded">
                             
                                 <div class="position-absolute top-0 end-0 p-1 d-flex gap-2">
-                                    <a href="#" data-bs-toggle="modal" data-bs-target="#editGalleryModal{{ $photo->id }}">
+                                    <a href="#" data-bs-toggle="modal" data-bs-target="#editGaleriModal{{ $photo->id }}">
                                         <i class="fas fa-edit text-white bg-dark bg-opacity-75 rounded p-1"></i>
                                     </a>
-                                    <a  onclick="return confirm('Yakin hapus foto ini?')">
+                                    <a href="/manageevent/gallery/delete/{{ $photo->id }}" onclick="return confirm('Yakin hapus foto ini?')">
                                         <i class="fas fa-trash text-danger bg-white bg-opacity-75 rounded p-1"></i>
                                     </a>
                                 </div>
@@ -883,6 +883,94 @@
                         <div class="mb-3">
                             <label for="notes" class="form-label">Catatan</label>
                             <textarea class="form-control" id="notes" name="notes" rows="3">{{ old('notes', $gift->notes) }}</textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endforeach
+
+<!-- Modal Tambah Galeri -->
+<div class="modal fade" id="addGalleryModal" tabindex="-1" aria-labelledby="addGalleryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{{ route('gallery.storeGalleryClient', ['id' => $event->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addGalleryModalLabel">Tambah Galeri</h5>
+                    <button type="button" class="btn-close" style="filter: invert(1);" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="section_id">Section</label>
+                        <select class="form-select bg-white" name="section_id">
+                            <option value="">Pilih Section</option>
+                            @foreach($sections as $section)
+                                <option value="{{ $section->id }}">{{ $section->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">Foto</label>
+                        <input type="file" name="photo" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Deskripsi</label>
+                        <textarea name="description" class="form-control" placeholder="Tambahkan Deskripsi"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit Galeri -->
+@foreach ($event->galleries as $gallery)
+    <div class="modal fade" id="editGaleriModal{{ $gallery->id }}" tabindex="-1" aria-labelledby="editGaleriModalLabel{{ $gallery->id }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <form id="editGaleriForm{{ $gallery->id }}" action="{{ route('gallery.updateClient', ['id' => $gallery->id]) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editGaleriModalLabel{{ $gallery->id }}">Edit Galeri</h5>
+                        <button type="button" class="btn-close" style="filter: invert(1);" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Nama Section -->
+                        <div class="mb-3">
+                            <label for="section_id" class="form-label">Nama Section</label>
+                            <select class="form-select bg-white" name="section_id">
+                                @foreach($sections as $section)
+                                    <option value="{{ $section->id }}" {{ $gallery->section_id == $section->id ? 'selected' : '' }}>
+                                        {{ $section->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <!-- Foto -->
+                        <div class="mb-3">
+                            <label for="photo" class="form-label">Foto</label>
+                            <input type="file" id="photo" name="photo" class="form-control">
+                            @if ($gallery->photo)
+                                <div class="mt-2">
+                                    <img src="{{ asset('galleries/' . old('photo', $gallery->photo)) }}" alt="Foto Galeri" style="width: 100px;">
+                                </div>
+                            @endif
+                        </div>
+                        <!-- Deskripsi -->
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Deskripsi</label>
+                            <textarea class="form-control" id="description" name="description" rows="3">{{ old('description', $gallery->description) }}</textarea>
                         </div>
                     </div>
                     <div class="modal-footer">

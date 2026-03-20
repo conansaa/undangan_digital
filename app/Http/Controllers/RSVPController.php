@@ -359,11 +359,12 @@ class RsvpController extends Controller
     $eventCard = EventCards::where('event_id', $eventDetailId->id)->first();
     $quota = $eventCard ? $eventCard->quota : 0; // Default kuota 0 jika tidak ada
     $rsvpCount = $eventDetailId->rsvps()->count();
+    $sisa = $quota - $rsvpCount;
 
     // Hitung jumlah tamu yang sudah terdaftar
     $totalGuests = Rsvp::where('event_id', $eventDetailId->id)->count();
 
-    return view('client.createtamu', compact('eventDetails', 'quota', 'totalGuests', 'rsvpCount'));
+    return view('client.createtamu', compact('eventDetails', 'quota', 'totalGuests', 'rsvpCount', 'sisa'));
 }
 
 // public function storetamu(Request $request)

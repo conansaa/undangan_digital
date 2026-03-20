@@ -58,7 +58,7 @@
                                         @endif
                                     </td>
                                     <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $rsvp->total_guest }}</td>
-                                    <td class="align-middle text-center text-secondary text-xs font-weight-bold">
+                                    <td class="align-middle text-center text-secondary text-xs font-weight-bold text-truncate" style="max-width: 150px;" title="{{ $rsvp->comments->pluck('comment')->implode(', ') }}">
                                         @if ($rsvp->comments->isNotEmpty())
                                             <ul class="list-unstyled">
                                                 @foreach ($rsvp->comments as $comment)

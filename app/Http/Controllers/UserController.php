@@ -122,20 +122,26 @@ class UserController extends Controller
 
     public function changePassword(Request $request)
     {
-        $request->validate([
+        // dd('Masuk ke function changePassword');
+        $request->validate(rules: [
             'current_password' => 'required',
             'new_password' => 'required|min:6|confirmed',
         ]);
+        // dd('Lolos validasi');
 
+        /** @var \App\Models\User $user */
         $user = Auth::user();
 
         if (!Hash::check($request->current_password, $user->password)) {
             return back()->withErrors(['current_password' => 'Password lama salah.']);
+            // dd('Password lama salah');
         }
 
         // Ganti password
         $user->password = Hash::make($request->new_password);
         $user->save(); // Ini tidak error jika $user adalah model Eloquent
+        // dd('Berhasil ubah password ke:', $user->password);
+
 
         return back()->with('success', 'Password berhasil diubah.');
     }

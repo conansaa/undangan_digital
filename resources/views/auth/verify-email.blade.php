@@ -6,12 +6,12 @@
                     {{ __('Terima kasih telah mendaftar!') }}
                 </h2>
                 <p class="text-muted small">
-                    {{ __('Sebelum memulai, harap verifikasi alamat email Anda dengan mengeklik tautan yang baru saja kami kirimkan kepada Anda. Jika Anda tidak menerima email tersebut, Anda dapat meminta email lain di bawah ini.') }}
+                    {{ __('Sebelum memulai, harap melakukan verifikasi alamat email Anda, silakan klik tombol “Kirim Email Verifikasi” di bawah ini. Setelah itu, periksa kotak masuk Anda dan ikuti tautan yang kami kirimkan. Jika Anda belum menerima email, Anda dapat meminta pengiriman ulang setelah 1 menit.') }}
                 </p>
 
                 @if (session('status') == 'verification-link-sent')
                     <div class="alert alert-success mt-3">
-                        {{ __('Tautan verifikasi baru telah dikirim ke email Anda.') }}
+                        {{ __('Tautan verifikasi telah dikirim ke email Anda.') }}
                     </div>
                 @endif
 
@@ -19,7 +19,7 @@
                     <form method="POST" action="{{ route('verification.send') }}">
                         @csrf
                         <button type="submit" class="btn btn-primary">
-                            {{ __('Kirim Ulang Email Verifikasi') }}
+                            {{ __('Kirim Email Verifikasi') }}
                         </button>
                     </form>
 

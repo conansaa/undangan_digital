@@ -9,6 +9,7 @@
 
 @section('content')
 <div class="container mt-4">
+    <a href="/manage-event" class="btn btn-sm btn-outline-danger fw-bold me-2 mb-4">Kembali</a>
     <div class="card shadow">
         <div class="card-header bg-warning text-white">
             <h5 class="mb-0">Konfirmasi Pembayaran</h5>

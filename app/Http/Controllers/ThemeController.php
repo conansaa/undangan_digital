@@ -72,7 +72,7 @@ class ThemeController extends Controller
         //     'color' => $request->color,
         // ]);
 
-        return redirect('/themes')->with('success', 'Theme created successfully!');
+        return redirect('/admin/themes')->with('success', 'Theme created successfully!');
     }
 
     public function show(Theme $theme)
@@ -137,7 +137,7 @@ class ThemeController extends Controller
         $theme->save();
 
         // Redirect ke halaman daftar tema dengan pesan sukses
-        return redirect('/themes')->with('success', 'Tema berhasil diperbarui.');
+        return redirect('/admin/themes')->with('success', 'Tema berhasil diperbarui.');
     }
 
     public function destroy($id)
@@ -149,5 +149,15 @@ class ThemeController extends Controller
         }
         $theme->delete();
         return redirect('/themes')->with('success', 'Theme deleted successfully!');
+    }
+
+    public function showTemplate($id)
+    {
+        $theme = Theme::find($id);
+
+        if (!$theme) {
+            return response()->json(['message' => 'Template not found'], 404);
+        }
+        return view('template.floral', compact('theme'));
     }
 }

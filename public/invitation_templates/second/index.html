@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Birthday Party Wati</title>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Slide 0: Nama Tamu -->
+    <div class="section active gift-section" id="slide-0">
+      <h2>To: Nayla <span id="namaTamuTarget">[Nayla,]</span> 💌</h2>
+      <p style="text-align:center;">🍓Welcome to Wati's 19th birthday invitation!🍓<br><br>I'm so happy to have you as part of this celebration.</p>
+      <div class="nav-buttons" style="justify-content: flex-end;">
+        <button onclick="changeSlide(1)">Next</button>
+      </div>
+    </div>
+
+    <!-- Slide 1 -->
+    <div class="section gift-section" id="slide-1">
+      <h1><span class="emoji-anim">🍓🍓🍓</span><br>Welcome To<br>19th Wati Birthday Party</h1>
+      <p><strong>Theme:</strong> Sweet Strawberry Pink</p>
+      <p><strong>Dresscode:</strong> Couquette </p>
+      <p>October 12, 2025, 3:00 PM until the event ends.</p>
+      <div id="countdown">
+        <h3 class="countdown-title">The event will begin soon🎉</h3>
+        <table>
+          <tr>
+            <th>Days</th><th>Hours</th><th>Minutes</th><th>Second</th>
+          </tr>
+          <tr id="countdown-time">
+            <td><span id="days">00</span></td>
+            <td><span id="hours">00</span></td>
+            <td><span id="minutes">00</span></td>
+            <td><span id="seconds">00</span></td>
+          </tr>
+          <tr></tr>
+        </table>
+      </div>
+      <h3>Event Location:</h3>
+      <p><strong>Arasta Alpha Cafe</strong><br>
+      Ruko Widodo, Jl. Overste Isdiman, Jatiwinangun, Purwokerto Lor,<br>
+      Kec. Purwokerto Tim., Kabupaten Banyumas, Jawa Tengah 53114</p>
+      <button class="centered-button" onclick="window.open('https://maps.app.goo.gl/gpd4zvXfSWRZV84C8')">View on Google Maps</button>
+      <div class="nav-buttons" style="justify-content: space-between;">
+        <button onclick="changeSlide(-1)">Prev</button>
+        <button onclick="changeSlide(1)">Next</button>
+      </div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="section gift-section" id="slide-2">
+      <h2><span class="emoji-anim">🍓</span>Schedule<span class="emoji-anim">🍓</span></h2>
+      <h3>Birthday Party Schedule:</h3>
+      <ul>
+        <li>3:00 PM – 🎉 Grand Opening & Welcome Speech</li>
+        <li>3:30 PM – 🎲 Fun Games & Entertainment</li>
+        <li>4:30 PM – 🎂 Birthday Cake Cutting Ceremony</li>
+        <li>5:00 PM – 🍽️ Dinner & Mingling</li>
+        <li>6:00 PM – 🎊 Closing & Farewell</li>
+      </ul>
+      <div class="nav-buttons" style="justify-content: space-between;">
+        <button onclick="changeSlide(-1)">Prev</button>
+        <button onclick="changeSlide(1)">Next</button>
+      </div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="section gift-section" id="slide-3">
+      <h2><span class="emoji-anim">🍓💌🍓</span><br>Send Wishes and Confirm Attendance</h2>
+      <form id="rsvp-form">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" name="nama" required />
+        </div>
+        <div class="form-group">
+          <label>Username IG</label>
+          <input type="text" name="instagram" required />
+        </div>
+        <div class="form-group radio-group" style="text-align: center; margin-bottom: 15px;">
+          <label>
+            <input type="radio" id="Attending" name="Attendance" value="Attending" required />
+            Attending
+          </label>
+          <label>
+            <input type="radio" id="Not_Attending" name="Attendance" value="Not Attending" />
+            Not Attending
+          </label>
+        </div>
+        <div class="form-group">
+          <label>Message or Reason for not attending</label>
+          <textarea rows="4" name="Reason for not attending"></textarea>
+        </div>
+        <button type="submit">Send</button>
+      </form>
+      <div class="nav-buttons" style="justify-content: space-between;">
+        <button onclick="changeSlide(-1)">Prev</button>
+        <button onclick="changeSlide(1)">Next</button>
+      </div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="section gift-section" id="slide-4">
+      <h2>🎁 Token of Love 🎁</h2>
+      <p>Thank you for adding joy and excitement to the birthday celebration with your presence and lovely gift.</p>
+      <p><strong>🎁 Cashless 🍓 Send a Gift 🎁</strong></p>
+      <p>
+        🍓BRI: 1234 5678 9101 1121
+        <button class="copy-btn" onclick="copyText('1234567891011121')">Copy</button>
+      </p>
+      <p>
+        🍓BCA: 9876 5432 1098 7654
+        <button class="copy-btn" onclick="copyText('9876543210987654')">Copy</button>
+      </p>
+      <p><strong>🏡Home Address:</strong><br />H8CQ+7QH, Dusun 2, Blater, Kec. Kalimanah, Kabupaten Purbalingga, Jawa Tengah 53371</p>
+      <button class="centered-button" onclick="window.open('https://www.google.com/maps/search/?api=1&query=H8CQ%2B7QH,+Dusun+2,+Blater,+Kec.+Kalimanah,+Kabupaten+Purbalingga,+Jawa+Tengah+53371', '_blank')">View on Google Maps</button>
+      <div class="nav-buttons" style="justify-content: space-between;">
+        <button onclick="changeSlide(-1)">Prev</button>
+        <button onclick="changeSlide(1)">Next</button>
+      </div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="section gift-section" id="slide-5">
+      <h2><span class="emoji-anim">🌸</span><br><span class="emoji-anim">🍓</span>Thank you for your attention<span class="emoji-anim">🍓</span></h2>
+      <p style="text-align:center;">Hope to see you at the event. -Wati</p>
+      <div style="text-align:center; margin-top:20px;">
+        <button onclick="confirmClose()">Close</button>
+      </div>
+    </div>
+
+    <div class="button-container">
+      <button class="button" onclick="changeToSlide(0)">💌</button>
+      <button class="button" onclick="changeToSlide(1)">🏡</button>
+      <button class="button" onclick="changeToSlide(2)">🎉</button>
+      <button class="button" onclick="changeToSlide(3)">💬</button>
+      <button class="button" onclick="changeToSlide(4)">🎁</button>
+      <button class="button" onclick="changeToSlide(5)">📌</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>4

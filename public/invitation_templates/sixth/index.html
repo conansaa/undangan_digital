@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seminar AI UNSOED 2025 - Universitas Jenderal Soedirman</title>
+
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  
+</head>
+
+<body>
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="loading-content">
+      <div class="loading-spinner"></div>
+      <p>Loading Seminar AI 2025...</p>
+    </div>
+  </div>
+
+  <nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="#home" data-aos="fade-right">
+        <div class="brand-logo">
+          <img src="assets/img/Logo unseod.png" class="w-100" alt="">
+        </div>
+        <div class="brand-text">
+          <div class="brand-title">
+            Universitas Jenderal Soedirman
+          </div>
+          <div class="brand-subtitle">
+            Powered by <span class="brand-highlight">KELOMPOK-9</span>
+          </div>
+        </div>
+      </a>
+
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <i class="bi bi-list" style="font-size: 1.5rem; color: var(--text-primary);"></i>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about-section">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="speakers.html">Speakers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#schedule">Schedule</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="countdown.html">Countdown</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="#contact">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <section id="home" class="hero-wrapper">
+    <div class="hero-pattern"></div>
+    <div class="hero-content-wrapper">
+      <div class="container">
+        <div class="row align-items-center ">
+          <div class="col-lg-7">
+            <div class="hero-main" data-aos="fade-up" data-aos-duration="1000">
+              <div class="hero-badge">
+                <i class="bi bi-calendar-event me-2"></i>
+                12 Juni 2025 • Purwokerto
+              </div>
+              <h1 class="hero-title">
+                Seminar AI<br>
+                <span style="color: #93C5FD;">UNSOED 2025</span>
+              </h1>
+
+              <p class="hero-subtitle">
+                Bergabunglah dengan para ahli AI terkemuka untuk membahas masa depan kecerdasan buatan
+                dan dampaknya terhadap kehidupan sehari-hari di Indonesia.
+              </p>
+              <div class="hero-cta">
+                <button class="btn-hero-primary" onclick="scrollToSection('about-section')">
+                  <i class="bi bi-play-circle me-2"></i>Explore Seminar
+                </button>
+                <button class="btn-hero-secondary" onclick="scrollToSection('schedule')">
+                  <i class="bi bi-calendar me-2"></i>View Schedule
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4" data-aos="fade-left" data-aos-delay="300">
+            <div class="hero-stats">
+              <div class="hero-stat">
+                <div class="hero-stat-number">250+</div>
+                <div class="hero-stat-label">Peserta</div>
+              </div>
+              <div class="hero-stat">
+                <div class="hero-stat-number">3</div>
+                <div class="hero-stat-label">Pembicara</div>
+              </div>
+              <div class="hero-stat">
+                <div class="hero-stat-number">3</div>
+                <div class="hero-stat-label">Jam</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about-section" class="main-content">
+    <div class="container">
+      <div class="section-header" data-aos="fade-up">
+        <div class="section-badge">Tentang Event</div>
+        <h2 class="section-title">Seminar AI UNSOED 2025</h2>
+        <p class="section-description">
+          Konferensi yang mempertemukan para praktisi, peneliti, dan pengambil keputusan
+          untuk membahas perkembangan dan implementasi AI di Indonesia.
+        </p>
+      </div>
+
+      <div class="event-overview" data-aos="fade-up" data-aos-delay="200">
+        <div class="event-meta">
+          <div class="event-details">
+            <h2>Masa Depan Kecerdasan Buatan dalam Kehidupan Sehari-hari</h2>
+            <div class="event-organizer">
+              <i class="bi bi-building"></i>
+              Universitas Jenderal Soedirman
+            </div>
+          </div>
+          <div class="event-info">
+            <div class="info-item">
+              <span class="info-label">Status</span>
+              <div class="info-value" style="color: var(--warning-orange);">Pendaftaran Terbuka</div>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Pendaftaran Tutup</span>
+              <div class="info-value">12 Juni 2025</div>
+            </div>
+            <div class="info-item">
+              <span class="info-label">Kuota Tersisa</span>
+              <div class="info-value" style="color: var(--success-green);">21 Peserta</div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-8">
+            <p class="lead">
+              Seminar ini dirancang untuk memberikan wawasan mendalam tentang bagaimana AI mengubah
+              berbagai sektor kehidupan, mulai dari pendidikan, kesehatan, bisnis.
+              Kami menghadirkan para ahli terkemuka yang akan berbagi pengalaman dan visi mereka
+              tentang masa depan AI di Indonesia.
+            </p>
+          </div>
+          <div class="col-lg-4">
+            <div class="text-center">
+              <img
+                src="assets/img/logoseminar.png"
+                alt="AI Network" class="img-fluid" style="max-width: 200px;">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="sidebar-card" data-aos="fade-left" style="padding-left: 3.0rem;">
+            <div class="sidebar-header justify-content-center">
+              <div class="sidebar-icon">
+                <i class="bi bi-calendar-event"></i>
+              </div>
+              <h4 class="sidebar-title">Informasi Acara</h4>
+            </div>
+            <div class="row d-flex justify-content-between">
+
+              <div class="col-md-5">
+                <div class="mb-3">
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-calendar3 text-primary me-2"></i>
+                    <span><strong>Rabu, 11 Juni 2025</strong></span>
+                  </div>
+                  <div class="d-flex align-items-center mb-2">
+                    <i class="bi bi-clock text-primary me-2"></i>
+                    <span>08.30 - 12.00 WIB</span>
+                  </div>
+                  <div class="d-flex align-items-center ">
+                    <i class="bi bi-geo-alt text-primary me-2"></i>
+                    <span>Hotel Aston, Purwokerto</span>
+                  </div>
+                </div>
+                <div class="map">
+                  <span><iframe
+                      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4049.1614641747583!2d109.24490499999999!3d-7.4172839999999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655e8d2f347f67%3A0xea62bc175447bf91!2sASTON%20Purwokerto%20Hotel%20%26%20Convention%20Center!5e1!3m2!1sid!2sid!4v1748183991729!5m2!1sid!2sid"
+                      height="200" style="border:0; border-radius: 10px;width: 90%;" allowfullscreen="" loading="lazy"
+                      referrerpolicy="no-referrer-when-downgrade"></iframe></span>
+                </div>
+              </div>
+              <div class="col-md-5 d-flex align-items-center">
+                <div class="mb-3 w-100">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted">Status:</span>
+                    <span class="badge bg-success">Terbuka</span>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="text-muted">Kuota Total:</span>
+                    <span class="fw-bold">300 peserta</span>
+                  </div>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <span class="text-muted">Tersisa:</span>
+                    <span class="fw-bold text-success">21 peserta</span>
+                  </div>
+                   <div class="progress mb-3" style="height: 8px;">
+                  <div class="progress-bar bg-success" role="progressbar"></div>
+                </div>
+                <small class="text-muted">93% kuota telah terisi</small>
+                </div>
+               
+              </div>
+              
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+      
+      <div class="row mt-5">
+        <div class="col-md-12">
+          <div class="content-card" data-aos="fade-right" id="schedule">
+            <div class="card-header-custom justify-content-center">
+              <div class="card-icon">
+                <i class="bi bi-clock"></i>
+              </div>
+              <h3 class="card-title">Agenda Acara</h3>
+            </div>
+            <div class="row">
+              <div class="col-md-6 timeline-container">
+                <div class="timeline-track"></div>
+                <div class="timeline-item">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-time">08.30 - 09.00</div>
+                    <h5 class="timeline-title">Registrasi Peserta</h5>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-time">09.00 - 09.15</div>
+                    <h5 class="timeline-title">Pembukaan & Sambutan</h5>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-time">09.15 - 10.30</div>
+                    <h5 class="timeline-title">Masa Depan AI dalam Kehidupan Sehari-hari</h5>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col-md-6 timeline-container">
+                <div class="timeline-track"></div>
+
+                <div class="timeline-item">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-time">10.30 - 10.45</div>
+                    <h5 class="timeline-title">Break</h5>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-time">10.45 - 11.45</div>
+                    <h5 class="timeline-title">Panel Discussion & Q&A</h5>
+                  </div>
+                </div>
+                <div class="timeline-item">
+                  <div class="timeline-marker"></div>
+                  <div class="timeline-content">
+                    <div class="timeline-time">11.45 - 12.00</div>
+                    <h5 class="timeline-title">Penutupan</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          
+
+          <div class="content-card" data-aos="fade-right" data-aos-delay="100">
+            <div class="card-header-custom">
+              <div class="card-icon">
+                <i class="bi bi-lightbulb"></i>
+              </div>
+              <h3 class="card-title">Topik Pembahasan</h3>
+            </div>
+            <div class="topics-grid">
+              <div class="topic-item">
+                <div class="topic-icon">
+                  <i class="bi bi-robot"></i>
+                </div>
+                <h4 class="topic-title">AI dalam Kehidupan Sehari-hari</h4>
+                <p class="topic-description">Bagaimana AI mengubah cara kita bekerja, belajar, dan berinteraksi setiap
+                  hari.</p>
+              </div>
+              <div class="topic-item">
+                <div class="topic-icon">
+                  <i class="bi bi-shield-check"></i>
+                </div>
+                <h4 class="topic-title">Keamanan & Etika AI</h4>
+                <p class="topic-description">Tantangan keamanan data dan pertimbangan etis dalam implementasi AI.</p>
+              </div>
+              <div class="topic-item">
+                <div class="topic-icon">
+                  <i class="bi bi-graph-up"></i>
+                </div>
+                <h4 class="topic-title">AI untuk Bisnis</h4>
+                <p class="topic-description">Strategi implementasi AI untuk meningkatkan efisiensi dan inovasi bisnis.
+                </p>
+              </div>
+              <div class="topic-item">
+                <div class="topic-icon">
+                  <i class="bi bi-heart-pulse"></i>
+                </div>
+                <h4 class="topic-title">AI dalam Kesehatan</h4>
+                <p class="topic-description">Revolusi pelayanan kesehatan melalui teknologi AI dan machine learning.</p>
+              </div>
+              <div class="topic-item">
+                <div class="topic-icon">
+                  <i class="bi bi-book"></i>
+                </div>
+                <h4 class="topic-title">AI untuk Pendidikan</h4>
+                <p class="topic-description">Transformasi metode pembelajaran dengan bantuan kecerdasan buatan.</p>
+              </div>
+              <div class="topic-item">
+                <div class="topic-icon">
+                  <i class="bi bi-globe"></i>
+                </div>
+                <h4 class="topic-title">Masa Depan AI</h4>
+                <p class="topic-description">Prediksi dan tren perkembangan AI dalam 5-10 tahun ke depan.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="content-card" data-aos="fade-right" data-aos-delay="200">
+            <div class="card-header-custom">
+              <div class="card-icon">
+                <i class="bi bi-question-circle"></i>
+              </div>
+              <h3 class="card-title">Pertanyaan Umum</h3>
+            </div>
+            <div class="accordion" id="faqAccordion">
+              <div class="accordion-item border-0 mb-3" style="border-radius: 12px; overflow: hidden;">
+                <h2 class="accordion-header">
+                  <button class="accordion-button bg-light" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq1">
+                    <strong>Apakah event ini gratis?</strong>
+                  </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Ya, Seminar AI UNSOED 2025 sepenuhnya gratis untuk semua Mahasiswa Informatika Universitas Jenderal Soedirman
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 mb-3" style="border-radius: 12px; overflow: hidden;">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq2">
+                    <strong>Bagaimana cara mendapatkan sertifikat?</strong>
+                  </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Semua peserta yang hadir dari awal hingga akhir acara akan mendapatkan sertifikat digital yang dapat
+                    di download dalam 3-5 hari kerja setelah event.
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item border-0 mb-3" style="border-radius: 12px; overflow: hidden;">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#faq3">
+                    <strong>Apakah ada syarat khusus untuk mengikuti Seminar ini?</strong>
+                  </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                  <div class="accordion-body">
+                    Tidak ada syarat khusus. Seminar ini terbuka untuk semua kalangan mahasiswa informatika UNSOED 
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container" id="daftarr">
+      <div class="cta-content" data-aos="fade-up">
+        <h2 class="cta-title">Siap Bergabung dengan Seminar AI UNSOED 2025?</h2>
+        <p class="cta-description">
+          Jangan lewatkan kesempatan untuk menjadi bagian dari diskusi tentang masa depan AI di Indonesia.
+          Konfirmasi kehadiran anda dan dapatkan akses eksklusif ke semua sesi.
+        </p>
+        <a class="btn-cta text-decoration-none" href="daftar.html" id="mendaftar">
+          <i class="bi bi-person-plus me-2"></i>Konfirmasi Kehadiran
+        </a>
+        <div class="mt-3">
+
+          <small class="text-muted">
+            <i class="bi bi-shield-check me-1"></i>
+            100% gratis • Sertifikat digital disediakan
+          </small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" id="contact">
+    <div class="container">
+      <div class="footer-content" data-aos="fade-up">
+        <div class="footer-main">
+
+          <h3 class="footer-brand">Seminar AI 2025</h3>
+          <p class="footer-description">
+            Konferensi yang mempertemukan para ahli AI untuk membahas masa depan
+            kecerdasan buatan di Indonesia. Diselenggarakan oleh Universitas Jenderal Soedirman
+            bekerja sama dengan komunitas AI Indonesia.
+          </p>
+          <div class="social-links">
+            <a href="#" class="social-link">
+              <i class="bi bi-facebook"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="bi bi-twitter"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="bi bi-instagram"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="bi bi-linkedin"></i>
+            </a>
+            <a href="#" class="social-link">
+              <i class="bi bi-youtube"></i>
+            </a>
+          </div>
+        </div>
+        <div class="footer-section">
+          <h5>Kontak</h5>
+          <a href="mailto:info@unsoed.ac.id" class="footer-link">
+            <i class="bi bi-envelope me-2"></i>info@unsoed.ac.id
+          </a>
+          <a href="tel:+62281638956" class="footer-link">
+            <i class="bi bi-telephone me-2"></i>+62281638956
+          </a>
+          <div class="footer-link">
+            <i class="bi bi-geo-alt me-2"></i>Purwokerto, Jawa Tengah
+          </div>
+        </div>
+        <div class="footer-section">
+          <h5>Quick Links</h5>
+          <a href="#about-section" class="footer-link">Tentang Event</a>
+          <a href="speakers.html" class="footer-link">Pembicara</a>
+          <a href="#schedule" class="footer-link">Jadwal</a>
+          
+          <a href="daftar.html" class="footer-link">Konfirmasi</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center">
+          <p class="mb-2 mb-md-0">© 2025 Universitas Jenderal Soedirman. All rights reserved.</p>
+          <p class="mb-0">Dibuat dengan ❤️ oleh <strong>Kelompok 9</strong></p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-to-top" id="scrollToTop">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <script src="assets/js/script2.js"></script>
+  
+</body>
+
+</html>

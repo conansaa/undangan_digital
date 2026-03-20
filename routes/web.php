@@ -32,7 +32,7 @@ use App\Http\Controllers\ThemeCategoryController;
 use App\Http\Controllers\EventReportDetailController;
 
 
-Route::get('/carolline-hezron/to/{name}', [RsvpController::class, 'caroline'])->name('caroline.index');
+Route::get('/carolline-hezron/to/{name}', [RSVPController::class, 'caroline'])->name('caroline.index');
 // Route::get('/', function () {
 //     return view('admin.dashboard');
 // });
@@ -44,24 +44,24 @@ Route::get('/carolline-hezron/to/{name}', [RsvpController::class, 'caroline'])->
 Route::get('/', [ClientController::class, 'showLandingPage'])
         ->name('client.landingpage');
     
-Route::get('/invitation/{name}', [RsvpController::class, 'invitation'])->name('rsvp.invitation');
+Route::get('/invitation/{name}', [RSVPController::class, 'invitation'])->name('rsvp.invitation');
 
 //Shinta
-Route::get('/shinta-irfan/to/{name}', [RsvpController::class, 'index'])->name('rsvp.index');
-Route::post('/shinta-irfan/store/{name}', [RsvpController::class, 'store'])->name('rsvp.store');
-Route::get('/shinta-irfan/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
-Route::post('/shinta-irfan/confirm-update/{name}', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
-Route::post('/shinta-irfan/cancel-update/{name}', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
+Route::get('/shinta-irfan/to/{name}', [RSVPController::class, 'index'])->name('rsvp.index');
+Route::post('/shinta-irfan/store/{name}', [RSVPController::class, 'store'])->name('rsvp.store');
+Route::get('/shinta-irfan/{id}', [RSVPController::class, 'show'])->name('rsvp.show');
+Route::post('/shinta-irfan/confirm-update/{name}', [RSVPController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
+Route::post('/shinta-irfan/cancel-update/{name}', [RSVPController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
 Route::post('/clear-modal-session', function () {
     session()->forget('show_modal');
     return response()->json(['success' => true]);
 });
 
 //Carol
-Route::post('/caroline-hezron/store/{name}', [RsvpController::class, 'storeCaroline'])->name('rsvpp.store');
+Route::post('/caroline-hezron/store/{name}', [RSVPController::class, 'storeCaroline'])->name('rsvpp.store');
 // Route::get('/caroline-hezron/{id}', [RsvpController::class, 'show'])->name('rsvp.show');
-Route::post('/caroline-hezron/confirm-update/{name}', [RsvpController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
-Route::post('/caroline-hezron/cancel-update/{name}', [RsvpController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
+Route::post('/caroline-hezron/confirm-update/{name}', [RSVPController::class, 'confirmUpdate'])->name('rsvp.confirmUpdate');
+Route::post('/caroline-hezron/cancel-update/{name}', [RSVPController::class, 'cancelUpdate'])->name('rsvp.cancelUpdate');
 Route::post('/clear-modal-session', function () {
     session()->forget('show_modal');
     return response()->json(['success' => true]);
@@ -71,6 +71,9 @@ Route::post('/clear-modal-session', function () {
 Route::post('/comment/{name}', [CommentController::class, 'store'])->name('comment.store');
 Route::get('/comment', [CommentController::class, 'index'])->name('comment.index');
 Route::get('/comment/delete/{id}/{name}', [CommentController::class, 'hapus'])->name('comment.hapus');
+
+// Preview Tema
+Route::get('/template/{id}', [ThemeController::class, 'showTemplate']);
 
 //client
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -111,16 +114,20 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::put('/manageevent/gift/update/{id}', [GiftController::class, 'updateClient'])->name('gift.updateClient');
     Route::get('/manageevent/gift/delete/{id}', [GiftController::class, 'destroyClient'])->name('gift.destroyClient');
 
+    Route::post('/manageevent/gallery/store/{id}', [GalleryController::class, 'storeModalClient'])->name('gallery.storeGalleryClient');
+    Route::put('/manageevent/gallery/update/{id}', [GalleryController::class, 'updateClient'])->name('gallery.updateClient');
+    Route::get('/manageevent/gallery/delete/{id}', [GalleryController::class, 'destroyClient'])->name('gallery.destroyClient');
+
     Route::get('/create-event', [EventController::class, 'createevent'])->name('create.event');
     Route::post('/store-event', [EventController::class, 'storeevent'])->name('store.event');
 
     Route::get('/event/step2', [EventController::class, 'step2'])->name('event.step2');
 
-    Route::get('/rsvpclient', [RsvpController::class, 'viewclient'])->name('rsvpclient');
-    Route::get('/rsvpclient/createtamu', [RsvpController::class, 'createtamu'])->name('rsvpclient.createtamu');
-    Route::post('/rsvpclient/storeamu', [RsvpController::class, 'storetamu'])->name('rsvpclient.storetamu');
+    Route::get('/rsvpclient', [RSVPController::class, 'viewclient'])->name('rsvpclient');
+    Route::get('/rsvpclient/createtamu', [RSVPController::class, 'createtamu'])->name('rsvpclient.createtamu');
+    Route::post('/rsvpclient/storetamu', [RSVPController::class, 'storetamu'])->name('rsvpclient.storetamu');
     Route::get('/rsvpclient/increment-sending-track/{id}', [RSVPController::class, 'incrementSendingTrack'])->name('rsvp.incrementSendingTrack');
-    Route::get('/rsvpclient/delete/{id}', [RsvpController::class, 'destroytamu'])->name('rsvpclient.destroytamu');
+    Route::get('/rsvpclient/delete/{id}', [RSVPController::class, 'destroytamu'])->name('rsvpclient.destroytamu');
 
     // Route::get('/export-guests', [ExcelController::class, 'export'])->name('export.guests');
     Route::get('/export-guests/{format}', [ExcelController::class, 'export']);
@@ -213,7 +220,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/genders', [AdminController::class, 'showGenders']);
 
     // Routes untuk Event Owner
-    Route::get('/themes', [ThemeController::class, 'index'])->name('themes');
+    Route::get('/admin/themes', [ThemeController::class, 'index'])->name('themes');
     Route::get('/themes/create', [ThemeController::class, 'create'])->name('theme.create');
     Route::post('/themes/create', [ThemeController::class, 'store'])->name('theme.store');
     Route::get('/themes/delete/{id}', [ThemeController::class, 'destroy']);
@@ -295,13 +302,13 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/media/delete/{id}', [MediaAssetController::class, 'destroy'])->name('media.destroy');
 
     // Routes untuk RSVP
-    Route::get('/rsvps', [RsvpController::class, 'views'])->name('rsvps.views');
-    Route::get('/rsvps/create', [RsvpController::class, 'create'])->name('rsvps.create');
-    Route::post('/rsvps/store/{id}', [RsvpController::class, 'storeModal'])->name('rsvps.storeRsvp');
-    Route::get('/rsvps/create/{id}', [RsvpController::class, 'make'])->name('rsvps.make');
-    Route::get('/rsvps/edit/{id}', [RsvpController::class, 'edit'])->name('rsvps.edit');
-    Route::put('/rsvps/edit/{id}', [RsvpController::class, 'update'])->name('rsvps.update');
-    Route::get('/rsvps/delete/{id}', [RsvpController::class, 'destroy'])->name('rsvps.destroy');
+    Route::get('/rsvps', [RSVPController::class, 'views'])->name('rsvps.views');
+    Route::get('/rsvps/create', [RSVPController::class, 'create'])->name('rsvps.create');
+    Route::post('/rsvps/store/{id}', [RSVPController::class, 'storeModal'])->name('rsvps.storeRsvp');
+    Route::get('/rsvps/create/{id}', [RSVPController::class, 'make'])->name('rsvps.make');
+    Route::get('/rsvps/edit/{id}', [RSVPController::class, 'edit'])->name('rsvps.edit');
+    Route::put('/rsvps/edit/{id}', [RSVPController::class, 'update'])->name('rsvps.update');
+    Route::get('/rsvps/delete/{id}', [RSVPController::class, 'destroy'])->name('rsvps.destroy');
 
     // Routes untuk Comment
     Route::get('/comments', [CommentController::class, 'views']);

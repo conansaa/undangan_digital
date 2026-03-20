@@ -65,7 +65,7 @@
                             <tr>
                                 <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $loop->iteration }}</td>
                                 <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $comment->rsvp->name }}</td>
-                                <td class="align-middle text-center text-secondary text-xs font-weight-bold">{{ $comment->comment }}</td>
+                                <td class="align-middle text-center text-secondary text-xs font-weight-bold text-truncate" style="max-width: 150px;" title="{{ $comment->comment }}">{{ $comment->comment }}</td>
                                 <td class="align-middle">
                                     <a href="{{ route('commentclient.destroycomment', $comment->id) }}" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">
                                         <span class="text-danger ms-lg-3"><i class="fa-regular fa-trash-can"></i></span>

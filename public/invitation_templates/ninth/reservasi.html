@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Gathering Informatika 24</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body class="reservation-page">
+
+    <header class="main-header animate-slide-down">
+        <h1>Kumpul Bareng Informatika '24</h1>
+    </header>
+
+    <main class="container">
+        <section class="card animate-slide-up">
+            <h2>Menuju Hari Acara</h2>
+            <div id="countdown" class="countdown-container">
+                <div class="countdown-item">
+                    <span id="days">0</span>
+                    <p>Hari</p>
+                </div>
+                <div class="countdown-item">
+                    <span id="hours">0</span>
+                    <p>Jam</p>
+                </div>
+                <div class="countdown-item">
+                    <span id="minutes">0</span>
+                    <p>Menit</p>
+                </div>
+                <div class="countdown-item">
+                    <span id="seconds">0</span>
+                    <p>Detik</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="side-by-side-container">
+            <section class="card animate-slide-up">
+                <h2>📅 Tanggal & Waktu</h2>
+                <p>Senin, 18 Agustus 2025<br>10.00 WIB - Selesai</p>
+            </section>
+            <section class="card animate-slide-up">
+                <h2>🎽 Dresscode</h2>
+                <p>Nuansa Putih & Biru Langit</p>
+            </section>
+        </div>
+        
+        <section class="card animate-slide-up">
+            <h2>📍 Lokasi Acara</h2>
+            <p>Taman Andhang Pangrenan, Purwokerto</p>
+            <p style="font-size: 0.9em; opacity: 0.8;">Jalan Gerilya Purwokerto Selatan, Windusara, Karangklesem, Banyumas</p>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.34244243144!2d109.2411853153063!3d-7.440649094640167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e655c2b6b21a7cf%3A0xaf087e189c86422e!2sTaman%20Andhang%20Pangrenan%20Purwokerto!5e0!3m2!1sid!2sid!4v1710000000000!5m2!1sid!2sid" 
+                    width="100%" 
+                    height="450" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </section>
+
+        <section class="card animate-slide-up">
+            <h2>📸 A glimpse into our story</h2>
+            <div class="showcase-gallery">
+                <img src="foto maskrab.jpg" alt="Maskrab 2024">
+                <img src="foto bukber.jpg" alt="Makrab 2024">
+                <img src="foto angkatan.jpg" alt="Angkatan 2024">
+            </div>
+        </section>
+
+        <section class="card text-container animate-slide-up">
+            <h3>Partisipasi & Iuran</h3>
+            <p>Untuk kelancaran dan keseruan acara, kami mengajak teman-teman berpartisipasi dengan iuran sebesar:</p>
+            <h3 class="price">Rp 25.000,-</h3>
+            <p>Metode pembayaran:</p>
+            <p>📱 Dana: 08XX a.n Nafisah</p>
+            <p>🏦 Mandiri: 1591xx a.n Biladi</p>
+        </section>
+
+        <section class="card animate-slide-up">
+            <h2>🎵 Playlist Acara</h2>
+            <p>Dengarkan playlist yang akan diputar di acara kita!</p>
+            <div class="spotify-container">
+                <iframe 
+                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator" 
+                    width="100%" 
+                    height="352" 
+                    frameborder="0" 
+                    allowfullscreen="" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </section>
+
+        <section class="card animate-slide-up">
+            <h2>Formulir Reservasi</h2>
+            <form action="#" method="post"> <div class="form-group">
+                    <label for="nama">Nama Lengkap:</label>
+                    <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required />
+                </div>
+                
+                <div class="form-group">
+                    <label>Konfirmasi Kehadiran:</label>
+                    <div class="radio-group">
+                        <label><input type="radio" name="hadir" value="ya" required /> Ya, Saya akan hadir</label>
+                        <label><input type="radio" name="hadir" value="tidak" /> Maaf, belum bisa hadir</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="jumlah">Jumlah Orang (jika membawa partner):</label>
+                    <input type="number" id="jumlah" name="jumlah" min="1" value="1" />
+                </div>
+
+                <div class="form-group">
+                    <label for="alergi">Alergi Makanan (jika ada):</label>
+                    <input type="text" id="alergi" name="alergi" placeholder="Contoh: Udang, Kacang" />
+                </div>
+                
+                <div class="form-group">
+                    <label for="pesan">Pesan atau Saran:</label>
+                    <textarea id="pesan" name="pesan" rows="4" placeholder="Ada request lagu atau saran lain?"></textarea>
+                </div>
+
+                <button type="submit" class="button-primary">Kirim Reservasi</button>
+            </form>
+        </section>
+    </main>
+
+    <footer style="text-align: center; padding: 20px; font-size: 0.9em; opacity: 0.7;">
+        <p>&copy; 2024 Informatika Angkatan 24. Dibuat dengan kebersamaan.</p>
+    </footer>
+
+    <script>
+
+        const countdown = () => {
+            const countDate = new Date("August 18, 2025 10:00:00").getTime();
+            const now = new Date().getTime();
+            const gap = countDate - now;
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+            const days = Math.floor(gap / day);
+            const hours = Math.floor((gap % day) / hour);
+            const minutes = Math.floor((gap % hour) / minute);
+            const seconds = Math.floor((gap % minute) / second);
+            document.getElementById("days").innerText = days;
+            document.getElementById("hours").innerText = hours;
+            document.getElementById("minutes").innerText = minutes;
+            document.getElementById("seconds").innerText = seconds;
+        }
+        setInterval(countdown, 1000);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.querySelector('form');
+            if (form) {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const notif = document.createElement('div');
+                    notif.textContent = 'Reservasi anda terkonfirmasi!';
+                    notif.style.background = '#4caf50';
+                    notif.style.color = '#fff';
+                    notif.style.padding = '16px';
+                    notif.style.margin = '20px 0';
+                    notif.style.borderRadius = '10px';
+                    notif.style.textAlign = 'center';
+                    notif.style.fontSize = '1.2em';
+                    notif.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+                    form.parentNode.insertBefore(notif, form);
+                    setTimeout(() => notif.remove(), 4000);
+                    form.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

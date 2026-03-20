@@ -19,33 +19,38 @@
         
         <!-- Hidden input for event_id -->
         <input type="hidden" name="event_id" value="{{ $eventDetails }}">
+
+        @if ($sisa == 0)
+            <div class="text-center py-4">
+                <h6 class="text-secondary">Belum ada data kuota. Mohon tambahkan data pada bagian Detail Acara</h6>
+            </div>
+        @else
         
-        <div id="guestInputs">
-            @php
-                $sisa = $quota - $rsvpCount;
-            @endphp
-
-            @for ($i = 0; $i < min(3, $sisa); $i++)
-                <div class="row mb-3">
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold">Nama{!! $i == 0 ? '<span class="text-danger ms-1">*</span>' : '' !!}</label>
-                        <input type="text" name="name[]" class="bg-white form-control" placeholder="Contoh: Khansa Delphi. Pastikan nama berbeda." {!! $i == 0 ? 'required' : '' !!}>
+            <div id="guestInputs">
+                
+                @for ($i = 0; $i < min(3, $sisa); $i++)
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">Nama{!! $i == 0 ? '<span class="text-danger ms-1">*</span>' : '' !!}</label>
+                            <input type="text" name="name[]" class="bg-white form-control" placeholder="Contoh: Khansa Delphi. Pastikan nama berbeda." {!! $i == 0 ? 'required' : '' !!}>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label fw-bold">No Telp (Opsional)</label>
+                            <input type="text" name="phone_number[]" class="bg-white form-control phone-number" placeholder="Contoh: 081234567890">
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <label class="form-label fw-bold">No Telp (Opsional)</label>
-                        <input type="text" name="phone_number[]" class="bg-white form-control phone-number" placeholder="Contoh: 081234567890">
-                    </div>
-                </div>
-            @endfor
+                @endfor
 
-        </div>
+            </div>
 
-        <div class="mb-3">
-            <button type="button" class="btn btn-secondary" id="addGuestButton">Tambah Input</button>
-        </div>
-        <div class="mb-3">
-            <button id="submitBtn" name="submit" type="button" class="btn btn-info text-white">Tambah Tamu</button>
-        </div>
+            <div class="mb-3">
+                <button type="button" class="btn btn-secondary" id="addGuestButton">Tambah Input</button>
+            </div>
+            <div class="mb-3">
+                <button id="submitBtn" name="submit" type="button" class="btn btn-info text-white">Tambah Tamu</button>
+            </div>
+
+        @endif
         
     </form> 
 </div>

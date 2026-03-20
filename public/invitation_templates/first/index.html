@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Undangan Pernikahan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Orbitron&family=Open+Sans&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <audio id="musik" loop hidden muted>
+        <source src="audio/penjaga hati.mp3.mp3" type="audio/mpeg">
+        Browser Anda tidak mendukung audio.
+    </audio>
+
+    <!-- Halaman Awal -->
+    <section id="home" class="active">
+
+        <div class="hero">
+            <div class="hero-content">
+                <h2 class="handwriting">The Wedding Of</h2>
+
+                <div class="hero-names">
+                    <div class="nama-mempelai">
+                        <h1>Horikoshi Jirō</h1>
+                        <span>(堀越 次郎)</span>
+                    </div>
+
+                    <div class="and-symbol">&</div>
+
+                    <div class="nama-mempelai">
+                        <h1>Satomi Naoko</h1>
+                        <span>(里見 菜穂子)</span>
+                    </div>
+                </div>
+
+                <button class="btn" data-target="profil">Buka Undangan</button>
+            </div>
+        </div>
+
+    </section>
+    <!-- Profil Pasangan -->
+    <section id="profil">
+        <div class="container">
+            <h2 class="judul">Profil Pasangan</h2>
+            <img src="images/jiro.jpg" alt="Mempelai Pria" class="foto-profil">
+
+
+            <p><strong>堀越 次郎 Horikoshi Jirō</strong><br> Putra dari 堀越 正一 (Horikoshi Shōichi) dan 堀越 由美 (Horikoshi Yumi)</p>
+            <img src="images/naoko.jpg" alt="Mempelai Wanita" class="foto-profil">
+
+            <p><strong>里見 菜穂子 Satomi Naoko</strong><br> Putri dari 里見 昭雄 (Satomi Akio) dan 里見 綾子 (Satomi Ayako)</p>
+        </div>
+    </section>
+
+    <section id="acara">
+        <h2 style="text-align:center;">Tanggal & Lokasi</h2>
+
+        <!-- Akad -->
+        <div class="lokasi-box">
+            <p><strong>Akad Nikah:</strong><br> Sabtu, 21 Desember 2025 · 08.00 WIB<br> Masjid Agung Kroya</p>
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d253158.33796863104!2d109.1856221!3d-7.5094383!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e654108b2b761f5%3A0x32a12b305998e301!2sMASJID%20BESAR%20DARUSSALAM!5e0!3m2!1sid!2sid!4v1749375215366!5m2!1sid!2sid"
+                width="100%" height="300" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+
+            <a href="https://maps.app.goo.gl/e2BL6aGCSukRNhwn7" target="_blank" class="btn">
+                📍 Arah ke Akad
+            </a>
+        </div>
+
+        <!-- Resepsi -->
+        <div class="lokasi-box">
+            <p><strong>Resepsi:</strong><br> Sabtu, 21 Desember 2025 · 11.00 WIB<br> Gedung Serbaguna Mitra Jaya, Kroya</p>
+
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.4388686535613!2d109.24984189999999!3d-7.635861900000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6541fec3db7939%3A0x5456d1645ec7c153!2sSENA%20HALL!5e0!3m2!1sid!2sid!4v1749375299385!5m2!1sid!2sid"
+                width="100%" height="300" style="border:0;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+
+            <a href="https://maps.app.goo.gl/WygLYoEfgRPbf1He7" target="_blank" class="btn">
+                📍 Arah ke Resepsi
+            </a>
+        </div>
+    </section>
+
+    <!-- Galeri Foto -->
+    <section id="galeri">
+        <h2>Galeri Foto</h2>
+        <div class="gallery">
+            <img src="images/jn%201.jpg" alt="Foto 1">
+            <img src="images/jn%202.jpg" alt="Foto 2">
+            <img src="images/jn%203.jpg" alt="Foto 3">
+        </div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="rsvp">
+        <h2>RSVP</h2>
+        <form onsubmit="kirimRSVP(event)">
+            <div class="form-group">
+                <input type="text" placeholder="Nama Anda" required>
+            </div>
+            <div class="form-group">
+                <input type="number" placeholder="Jumlah Tamu" min="1" required>
+            </div>
+            <div class="form-group">
+                <select required>
+                    <option value="">Konfirmasi Kehadiran</option>
+                    <option value="Hadir">Hadir</option>
+                    <option value="Tidak Hadir">Tidak Hadir</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <textarea placeholder="Ucapan Tambahan"></textarea>
+            </div>
+            <button class="btn" type="submit">Kirim Konfirmasi</button>
+        </form>
+    </section>
+
+    <!-- Ucapan & Doa -->
+    <section id="doa">
+        <h2>Ucapan & Doa</h2>
+        <form onsubmit="kirimDoa(event)">
+            <div class="form-group">
+                <input type="text" id="namaDoa" placeholder="Nama Anda" required>
+            </div>
+            <div class="form-group">
+                <textarea id="pesanDoa" placeholder="Tulis ucapan dan doa..." required></textarea>
+            </div>
+            <button class="btn" type="submit">Kirim Ucapan</button>
+        </form>
+    </section>
+
+    <!-- QRIS -->
+    <section id="qris">
+        <h2>Angpau Digital</h2>
+        <p>Silakan scan QR berikut untuk memberi tanda kasih:</p>
+        <img src="images/qris%20undangann.jpg" alt="QRIS">
+        <p>Nama: 堀越 次郎 Horikoshi Jirō</p>
+    </section>
+
+    <!-- Navbar -->
+    <nav>
+        <button data-target="home">🏠</button>
+        <button data-target="profil">👩‍❤‍👨</button>
+        <button data-target="acara">📅</button>
+        <button data-target="galeri">📷</button>
+        <button data-target="rsvp">📨</button>
+        <button data-target="doa">💬</button>
+        <button data-target="qris">💳</button>
+    </nav>
+
+    <!-- Load JS eksternal -->
+    <script src="script.js"></script>
+</body>
+
+</html>

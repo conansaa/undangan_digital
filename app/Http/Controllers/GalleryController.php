@@ -181,4 +181,83 @@ class GalleryController extends Controller
 
         return redirect()->route('event.show', ['id' => $galleryItem->event_id])->with('success', 'Data berhasil dihapus.');
     }
+
+    public function storeModalClient(Request $request, $event_id)
+    {
+        $request->validate([
+            // 'event_id' => 'required|exists:event_details,id',
+            'section_id' => 'required|exists:section_ref,id',
+            'photo' => 'required|image|mimes:jpeg,png,jpg,webp|max:1200',
+            'description' => 'nullable|string',
+        ]);
+
+        $gallery = new Gallery();
+
+        // Upload photo
+        if ($request->hasFile('photo')) {
+            // Simpan file foto ke folder 'timelines' dengan nama unik
+            $photoName = time() . '_' . $request->file('photo')->getClientOriginalName();
+            $request->file('photo')->move(public_path('galleries'), $photoName);
+            
+            // Simpan nama file foto yang baru ke dalam timeline
+            $gallery->photo = $photoName;
+        }
+
+        // Simpan data timeline
+        $gallery->event_id = $event_id;
+        $gallery->section_id = $request->section_id;
+        $gallery->description = $request->description;
+
+        $gallery->save();
+
+        return redirect()->route('manageevent.detail', ['id' => $event_id])->with('success', 'Galeri berhasil ditambahkan!');
+    }
+
+    public function updateClient(Request $request, $id)
+    {
+        $request->validate([
+            'section_id' => 'required|exists:section_ref,id',
+            'photo' => 'image|mimes:jpeg,png,jpg,webp|max:1000',
+            'description' => 'required|string|max:255',
+        ]);
+        
+        $gallery = Gallery::find($id);
+    
+        // Cek dan hapus foto lama jika ada foto baru diunggah
+        if ($request->hasFile('photo')) {
+            // Simpan file foto ke folder 'timeline_photos'
+            $photoName = time() . '_' . $request->file('photo')->getClientOriginalName();
+            $request->file('photo')->move(public_path('galleries'), $photoName);
+
+            // Hapus foto lama jika ada
+            if ($gallery->photo) {
+                File::delete(public_path('galleries/' . $gallery->photo));
+            }
+
+            // Simpan nama file foto yang baru
+            $gallery->photo = $photoName;
+        }
+
+        // $gallery->event_id = $request->event_id;
+        $gallery->section_id = $request->section_id;
+        $gallery->description = $request->description;
+    
+        $gallery->save();
+    
+        return redirect()->route('manageevent.detail', ['id' => $gallery->event_id])->with('success', 'Data berhasil diperbarui.');
+    }
+
+    public function destroyClient($id)
+    {
+        // Find the gallery item by ID and delete it
+        $galleryItem = Gallery::findOrFail($id);
+
+        if ($galleryItem->photo && File::exists(public_path('galleries/' . $galleryItem->photo))) {
+            File::delete(public_path('galleries/' . $galleryItem->photo));
+        }
+
+        $galleryItem->delete();
+
+        return redirect()->route('manageevent.detail', ['id' => $galleryItem->event_id])->with('success', 'Data berhasil dihapus.');
+    }
 }

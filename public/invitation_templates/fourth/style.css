@@ -1,0 +1,695 @@
+:root {
+    --yellow:#fad819;
+    --bg: #a30000;
+    --shadow: 0 2px 2px rgb(0 0 0 / 1);
+    --shadow2: 0 2px 2px rgb(255, 255, 255);
+}
+
+body {
+    font-size: 1.2rem;
+    font-family: "Playpen Sans Deva", cursive;
+    min-height: 4000px;
+}
+
+.hero:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur();
+    background-position: center;
+    background-size: cover;
+    background-image: url(img/homepage.png);
+}
+
+.hero, .hero h1, .hero h2, .hero h4, .hero p {
+    text-shadow: var(--shadow);
+}
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+}
+
+.hero h1 {
+    font-family: "Bebas Neue", ITC motter corpus;
+    font-size: 6rem;
+}
+
+.hero h2 {
+    font-family: "Bebas Neue", ITC motter corpus;
+    font-size: 6rem;
+}
+
+.hero h4 {
+    font-family: "Playpen Sans Deva", cursive;
+    font-size: 2rem;
+}
+
+.hero p {
+    font-family: "Playpen Sans Deva", cursive;
+    font-size: 2rem;
+}
+
+.hero a {
+    color: var(--bg);
+    background-color: white;
+}
+
+.hero a:hover {
+    color: var(--bg);
+    background-color: var(--yellow);
+}
+
+.countdown-container {
+    margin: 2rem 0;
+}
+
+.countdown {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+
+.countdown-item {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    min-width: 100px;
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    text-align: center;
+}
+
+.countdown-item span {
+    display: block;
+}
+
+.countdown-item span:first-child {
+    font-size: 2.5rem;
+    font-weight: bold;
+    font-family: "Bebas Neue", sans-serif;
+    color: var(--yellow);
+    margin-bottom: 0.5rem;
+}
+
+.countdown-label {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: white;
+    text-transform: uppercase;
+}
+
+.countdown-item:not(:last-child)::after {
+    content: ':';
+    position: absolute;
+    right: -0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.mynavbar .navbar-brand, .mynavbar .offcanvas-title {
+    font-family: "Sansation", sans-serif;
+    font-size: 2rem;
+}
+
+.mynavbar .offcanvas-body .navbar-nav .nav-link.active {
+    color: var(--yellow);
+    font-weight: bold;
+}
+
+.about-vulcaneats {
+    background-color: #a30000;
+    background-image: url('img/about.jpg');
+    background-size: cover;
+    background-position: center left;
+    min-height: 100vh;
+    display: flex;
+    justify-content: flex-end; /* Biar konten ke kanan */
+    align-items: center;
+    padding: 60px 5%;
+    font-family: "Playpen Sans Deva", cursive;
+  }
+  
+  .about-text {
+    width: 50%; /* Setengah kanan */
+    background-color: rgba(0, 0, 0, 0.6); /* opsional: biar teks lebih terbaca */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .about-text h2,
+  .about-text h3,
+  .about-text p {
+    text-align: justify;
+    color: white;
+  }
+  
+  .about-text h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 3rem;
+    color: var(--yellow);
+    text-shadow: var(--shadow);
+    margin-bottom: 20px;
+  }
+  
+  .about-text h3 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 2rem;
+    color: #fa0606;
+    margin-bottom: 15px;
+  }
+  
+  .about-text p {
+    font-family: "Playpen Sans Deva", 'Times New Roman';
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+  
+
+.home {
+    color: white;
+    background-image: url(img/tempat.png);
+    background-size: cover;
+    min-height: 100vh;
+    padding-top: 5rem;
+    background-position: center;
+}
+
+.home h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 5rem;
+}
+
+.home h3 {
+    font-family: "Sansation", sans-serif;
+    font-size: 1.5rem;
+}
+
+.home h4 {
+    color: #a30000;
+    font-family: "Sansation", sans-serif;
+    font-size: 3.5rem;
+}
+
+.home p {
+    font-family: "Sansation", sans-serif;
+}
+
+.home a {
+    color: white;
+}
+
+.home a:hover {
+    background-color: var(--yellow);
+}
+
+.home .couple {
+    margin-top: 100px;
+}
+
+.home .tempat h3 {
+    font-family: "Sansation", sans-serif ;
+    font-size: 2.4rem;
+    color: var(--bg);
+}
+
+.home .tempat img {
+    width: 100%;
+}
+
+.rules-section {
+    background-color: #8b0000;
+    background-image: url(img/lokasi.jpg);
+    background-size: cover;
+    padding: 60px 20px;
+    color: white;
+    font-family: "Playpen Sans Deva", cursive;
+    min-height: 100vh;
+}
+  
+  .rules-container {
+    max-width: 1000px;
+    margin: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+  .rules-title {
+    font-size: 2em;
+    color: #ffe600;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .rules-benefit-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .rules-column,
+  .benefit-column {
+    flex: 1 1 45%;
+  }
+  
+  .rules-column h3,
+  .benefit-column h3 {
+    color: #ffe600;
+    margin-bottom: 5px;
+    font-size: 1.1em;
+  }
+  
+  .rules-list,
+  .benefit-list {
+    list-style-type: disc;
+    padding-left: 20px;
+    font-size: 1em;
+  }
+  
+  .rules-list li,
+  .benefit-list li {
+    margin-bottom: 10px;
+    font-size: 1em;
+  }
+  
+.tenant-form-section {
+  padding: 50px 20px;
+  background-image: url(img/daftar.jpg);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-position: center;
+  min-height: 100vh;
+
+}
+
+.form-container {
+  background: rgb(113, 4, 4);
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+.form-container h2 {
+  text-align: center;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.tenant-form label {
+  display: block;
+  margin-top: 20px;
+  margin-bottom: 5px;
+  font-weight: 300;
+}
+
+.tenant-form input,
+.tenant-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  box-sizing: border-box;
+  transition: border 0.3s;
+}
+
+.tenant-form input:focus,
+.tenant-form textarea:focus {
+  border-color: #ff7b54;
+  outline: none;
+}
+
+.tenant-form button {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: #d50000;
+  color: rgb(255, 255, 255);
+  font-size: 1.2rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.tenant-form button:hover {
+  background: #9e0404;
+}
+
+.spicy-contest {
+  background-image: url(img/lomba.jpg);
+  background-position: center;
+  background-size: cover;
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.contest-container {
+  max-width: 800px;
+  margin: auto;
+  background: rgba(179, 139, 139, 0.4);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.spicy-contest h2 {
+  font-size: 2.5em;
+  margin-bottom: 10px;
+}
+
+.slogan {
+  font-size: 1.3em;
+  margin-bottom: 30px;
+}
+
+.contest-info h3 {
+  font-size: 1.8em;
+  color: #ffe600;
+  margin-bottom: 20px;
+}
+
+.contest-info h3 span {
+  font-weight: bold;
+
+}
+
+.rules {
+  text-align: left;
+  list-style-type: disc;
+  margin: 20px 0 20px 20px; /* kasih indent kiri */
+  margin: 20px auto;
+  max-width: 500px;
+}
+
+.rules li {
+  margin-bottom: 10px;
+}
+
+.join-button {
+  background: #ffe600;
+  color: #000;
+  font-weight: bold;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.join-button:hover {
+  background: #990000;
+}
+
+.vulcaneats-footer {
+    display: block;
+    padding: 40px 20px 20px;
+    background-color: #111;
+    color: #fff;
+    font-family: "Playpen Sans Deva", cursive;
+    text-align: center;
+}
+
+.vulcaneats-footer .footer-container,
+.vulcaneats-footer .footer-actions,
+.vulcaneats-footer .footer-contact {
+    margin: 0 auto 30px auto;
+    max-width: 600px;
+}
+
+.vulcaneats-footer h3 {
+    color: #e63946;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.vulcaneats-footer p {
+    font-size: 1em;
+    line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.vulcaneats-footer .btn {
+    margin-top: 15px;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    background-color: var(--yellow);
+    color: var(--bg);
+    border: none;
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.vulcaneats-footer .btn:hover {
+    background-color: #fcea84;
+    color: var(--bg);
+}
+
+.footer-contact {
+    padding-top: 20px;
+    border-top: 1px solid #333;
+}
+
+.social-icons-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 15px;
+}
+
+.social-icon-link {
+    display: inline-block;
+    color: #fff;
+    font-size: 1.5em;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-icon-link i {
+    margin-right: 0;
+}
+
+.social-icon-link:hover {
+    color: var(--yellow);
+}
+
+.footer-bottom {
+    margin-top: 30px;
+    font-size: 0.9em;
+    color: #666;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+    text-align: center;
+}
+
+.img-responsive {
+    max-width: 100%;
+    height: auto;
+}
+
+.location-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.location-card:hover {
+    transform: translateY(-5px);
+}
+
+.location-card h3 {
+    margin-bottom: 1rem;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.location-card p {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    line-height: 1.5;
+}
+
+.location-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+}
+
+.map-preview {
+    width: 100%;
+    height: 200px;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border: 2px solid #ddd;
+}
+
+.location-button {
+    display: inline-block;
+    background-color: #333;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 2px solid #333;
+}
+
+.location-button:hover {
+    background-color: transparent;
+    color: #333;
+}
+
+/* Media Query */
+
+/*Desktop*/
+@media (max-width: 992px){
+    html{
+        font-size: 75%;
+    }
+}
+/*Tablet*/
+@media (max-width: 768px){
+    html{
+        font-size: 65%;
+    }
+    .mynavbar .nav-link{
+        font-size: 2rem;
+        text-align: center;
+    }
+    .hero {
+        min-height: 100vh;
+        padding: 2rem 1rem;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero h2 {
+        font-size: 2rem;
+    }
+
+    .about-vulcaneats h2 {
+    font-size: 2rem;
+    }
+
+    .about-vulcaneats p {
+    font-size: 1rem;
+    padding: 0 10px;
+    }
+    .about-text {
+        width: 100%
+    }
+    .countdown-container {
+        width: 100%;
+        max-width: 400px;
+        margin: 2rem auto;
+    }
+    .countdown {
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+    .countdown-item {
+        min-width: 60px;
+        padding: 0.5rem;
+    }
+    .countdown-item span:first-child {
+        font-size: 1.5rem;
+    }
+    .countdown-item .countdown-label {
+        font-size: 0.8rem;
+    }
+    .tenant-form-section {
+        padding: 2rem 1rem;
+    }
+    .form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 1rem;
+    }
+    .tenant-form input,
+    .tenant-form textarea {
+        margin-bottom: 1rem;
+        padding: 0.5rem;
+    }
+    .contest-container {
+        padding: 2rem 1rem;
+    }
+    .contest-info {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .footer-container {
+        padding: 2rem 1rem;
+    }
+    .location-card {
+        padding: 1rem;
+    }
+    .location-image, .map-preview {
+        height: 150px;
+    }
+}
+/*Phone*/
+@media (max-width: 576px){
+    html{
+        font-size: 60%;
+    }     
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+    .hero h2 {
+        font-size: 1.5rem;
+    }
+    .hero h4{
+        font-size: 1.2rem;
+    }
+    .hero p{
+        font-size: 1rem;
+    }
+    .about-vulcaneats {
+    padding: 30px 15px;
+    min-height: 100vh;
+  }
+
+  .about-vulcaneats h2 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-vulcaneats p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+    .countdown-item {
+        min-width: 60px;
+    }
+}

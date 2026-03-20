@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventDetails;
 use App\Models\GenderRef;
 use App\Models\EventReports;
 use App\Models\EventTypeRef;
@@ -13,7 +14,8 @@ class AdminController extends Controller
     {
         $eventReportCount = EventReports::sum('counter');
         $eventTypeCount = EventTypeRef::count();
-        return view('admin.dashboard', compact('eventReportCount', 'eventTypeCount')); 
+        $eventCount = EventDetails::count();
+        return view('admin.dashboard', compact('eventReportCount', 'eventTypeCount', 'eventCount')); 
     }
 
     public function showGenders()

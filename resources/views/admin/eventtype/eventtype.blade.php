@@ -9,6 +9,9 @@
 @endsection
 
 @section('content')
+<div class="mb-3">
+    <a href="/dashboard" class="btn btn-sm btn-outline-danger fw-bold me-2">Kembali</a>
+</div>
 <div class="card">
     <div class="card-header pb-0 mb-2">
         <div class="d-flex justify-content-between align-items-center">

@@ -1,0 +1,198 @@
+.speakers-section {
+    padding: 8rem 0 4rem;
+    background: var(--bg-primary);
+    min-height: 80vh;
+}
+
+.speaker-card-lg {
+    background: var(--bg-secondary);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    height: 100%; 
+}
+
+.speaker-card-lg:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-5px);
+}
+
+.speaker-avatar-lg {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: var(--gradient-primary); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    flex-shrink: 0;
+    border: 5px solid var(--light-blue);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden; 
+}
+
+.speaker-avatar-lg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.speaker-name-lg {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    cursor: pointer; /* Indikator  teks bisa diklik */
+    text-decoration: none; 
+    transition: color 0.3s ease;
+}
+
+.speaker-name-lg:hover {
+    color: var(--primary-blue); 
+    text-decoration: underline; 
+}
+
+.speaker-title-lg {
+    font-size: 1.1rem;
+    color: var(--primary-blue);
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.speaker-description-lg {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+
+@media (max-width: 768px) {
+    .speaker-card-lg {
+        padding: 2rem;
+    }
+    .speaker-avatar-lg {
+        width: 100px;
+        height: 100px;
+        font-size: 2rem;
+    }
+    .speaker-name-lg {
+        font-size: 1.5rem;
+    }
+    .speaker-title-lg {
+        font-size: 1rem;
+    }
+}
+
+
+.cv-preview {
+    display: none; 
+    position: fixed; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--bg-secondary);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    z-index: 1030; 
+    width: 90%; 
+    max-width: 100vh; 
+    max-height: 100vh; 
+    overflow-y: auto; 
+    border: 1px solid var(--border-light);
+    animation: fadeIn 0.3s ease-out;
+
+    
+}
+
+.gambar-cv{
+  max-width: 100%; 
+  height: auto;   
+  display: block; 
+  margin: 0 auto; 
+  margin-bottom: 20px;
+  
+}
+
+.cv-preview.visible {
+    display: block; 
+}
+
+.cv-preview h4 {
+    font-size: 2rem;
+    color: var(--text-primary);
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--primary-blue);
+    padding-bottom: 10px;
+}
+
+.cv-preview p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+.cv-preview strong {
+    color: var(--text-primary);
+}
+
+.cv-preview .close-cv {
+    background-color: var(--primary-blue);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    float: right; 
+    transition: background-color 0.3s ease;
+}
+
+.cv-preview .close-cv:hover {
+    background-color: #0056b3; 
+}
+
+/* Overlay saat CV dibuka */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 1000; 
+    animation: fadeInOverlay 0.3s ease-out; 
+}
+
+.overlay.visible {
+    display: block;
+}
+
+/* Keyframes animasi fade-in */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes fadeInOverlay {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
